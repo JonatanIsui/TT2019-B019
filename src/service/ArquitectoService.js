@@ -4,13 +4,15 @@ class ArquitectoService{
     constructor(){
         this.res = []
     }
-    addArquitecto(usuario){
-        axios.post(this.baseUrl+'registroArquitecto',usuario).then(resultado =>{
-            console.log(resultado.data)
-            this.res = resultado.data
-        }).catch(e =>{
+    addArquitecto = async (usuario) => {
+        try{
+            const resultado = await axios.post(this.baseUrl+'registroArquitecto',usuario)
+            const data = await resultado.data
+            console.log(data)
+            this.res = data
+        }catch(e) {
             console.log(e)
-        })
+        }
     }
 }
 

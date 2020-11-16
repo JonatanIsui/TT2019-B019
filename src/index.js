@@ -4,6 +4,8 @@ import Login from './pages/Login'
 import RegistroProveedor from './pages/RegistroProveedor'
 import RegistroUsuario from './pages/RegistroUsuario'
 import RecuperarPassword from './pages/RecuperarPassword'
+import CambioPassword from './pages/CambioPassword'
+import Arquitecto from './pages/Arquitecto'
 import 'bootstrap/dist/css/bootstrap.css'
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
@@ -13,12 +15,18 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 ReactDOM.render(
   <React.StrictMode>
       <BrowserRouter>
-          <Switch>
-              <Route component = {Login} exact path = '/'/>
-              <Route component = {RecuperarPassword} exact path = '/RecuperarContra' />
-              <Route component = {RegistroUsuario} exact path = '/RegistroArquitecto' />
-              <Route component = {RegistroProveedor} exact path = '/RegistroProveedor'/>
-          </Switch> 
+        <div className = ''>
+            <div>
+                <h1>Barra de navegacion</h1>
+            </div>
+            <Switch>
+                <Route component = {Login} exact path = '/'/>
+                <Route component = {RecuperarPassword} exact path = '/RecuperarContra' />
+                <Route component = {RegistroUsuario} exact path = '/RegistroArquitecto' />
+                <Route component = {RegistroProveedor} exact path = '/RegistroProveedor'/>
+                <Route component = {CambioPassword} exact path = '/CambioPassword/:id'/>
+            </Switch> 
+        </div>
       </BrowserRouter>
   </React.StrictMode>,document.getElementById('root')
 )

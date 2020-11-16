@@ -4,13 +4,15 @@ class SolicitudProveedorService{
     constructor(){
         this.res = []
     }
-    addSolicitudProveedor(usuario){
-        axios.post(this.baseUrl+'registroProveedor',usuario).then(resultado =>{
-            console.log(resultado.data)
-            this.res = resultado.data
-        }).catch(e =>{
+    addSolicitudProveedor = async (usuario) =>{
+        try{
+            const respuesta = await axios.post(this.baseUrl+'registroProveedor',usuario)
+            const data = await respuesta.data
+            console.log(data)
+            this.res = data
+        }catch(e){
             console.log(e)
-        })
+        }
         return this.res
     }
 }
