@@ -13,6 +13,7 @@ class ArquitectoService{
         }catch(e) {
             console.log(e)
         }
+        return this.res
     }
 }
 

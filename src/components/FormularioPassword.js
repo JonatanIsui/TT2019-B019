@@ -1,5 +1,5 @@
 import React from 'react'
-import {UsuarioService} from '../service/UsuarioService'
+import UsuarioService from '../service/UsuarioService'
 
 class FormularioPassword extends React.Component{
     state = {
@@ -9,16 +9,17 @@ class FormularioPassword extends React.Component{
     usuario = []
     UsuarioService = new UsuarioService()
 
+    //Este metodo agrega el correo al estado
     handleChange = e =>{
         this.setState({
             [e.target.name] : e.target.value
         })
     }
 
+    //Este metodo con el corre se encarga de invocar el metodo que conecta con el servidor
     handleSubmit = e =>{
         e.preventDefault();
         this.setState({sending:true})
-        console.log(this.state)
         try{
             this.usuario = this.UsuarioService.recuperarPassword(this.state.correo)
         }catch(errors){

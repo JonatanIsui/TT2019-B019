@@ -1,5 +1,5 @@
 import React from 'react'
-import {UsuarioService} from '../service/UsuarioService'
+import UsuarioService from '../service/UsuarioService'
 
 //No permite espacios en blanco en la contraseña
 const validate = values =>{
@@ -16,7 +16,7 @@ class FormularioLogin extends React.Component{
 la vida de un componente. El estado cambia con el tiempo*/     
     state = {
         errors : {},
-        sending : false,
+        sending : false
     }
     UsuarioService = new UsuarioService()
     usuario = []
@@ -27,7 +27,8 @@ la vida de un componente. El estado cambia con el tiempo*/
         })
     }
 
-    handleSubmit = e =>{
+    //Metodo que se encarga de llamar el servidor para ingresar al sistema
+    handleSubmit = async e =>{
         e.preventDefault()
         //Se manda el estado sin errores
         const {errors,...sinerrors} = this.state
@@ -36,21 +37,25 @@ la vida de un componente. El estado cambia con el tiempo*/
         this.setState({errors : result})
         //Object.keys.length retorna el numero de propiedades del objeto
         //Si el objeto esta vacio
-        console.log(this.state)
         if(!Object.keys(result).length){
             this.setState({sending : true})
             try{
                 this.usua = this.state;
-                this.usuario = this.UsuarioService.login(this.usua)
-                //Si no es nulo
+                this.usuario =await this.UsuarioService.login(this.usua)
+                const{password,...sinpassword} = this.usuario
+                //Cifrar y serializar
                 if(!!this.usuario.arquitecto){
-                    window.location = '/'
+                    const red = btoa(JSON.stringify(sinpassword.arquitecto))
+                    window.location = '/Arquitecto/'+red+''
                 }else if(!!this.usuario.proveedor){
-                    window.location = '/'
+                    const red = btoa(JSON.stringify(sinpassword.proveedor))
+                    window.location = '/Proveedor/'+red+''
                 }else if(!!this.usuario.administrador){
-                    window.location = '/'
+                    const red = btoa(JSON.stringify(sinpassword.administrador))
+                    window.location = '/Administrador/'+red+''
                 }
             }catch(errors){
+                console.log(e)
                 this.setState({errors:errors.message})
             }finally{
                 this.setState({sending : false})

@@ -1,5 +1,7 @@
 import React from 'react'
 import ArquitectoService from '../service/ArquitectoService'
+
+//Este metodo se encarga de evitar que solo se ingresen espacios
 const validate = values =>{
     const errors = {}
     const stateToString = JSON.stringify (values.password).replace(/ /g,'')
@@ -22,6 +24,7 @@ class FormularioUsuario extends React.Component{
     usuario = []
     arquitecto = {}
 
+    //Este metodo es el encargado de recupelar los datos del formulario
     handleChange = e =>{
         if(e.target.name === 'correo' || e.target.name === 'password' || e.target.name === 'password2'){
             this.setState({
@@ -33,6 +36,7 @@ class FormularioUsuario extends React.Component{
         }
     }
 
+    //Este metodo se encarga de mandar la informacion del arquitectos al servido
     handleSubmit = e =>{
         e.preventDefault()
         //Se manda el estado sin errores

@@ -6,8 +6,12 @@ import RegistroUsuario from './pages/RegistroUsuario'
 import RecuperarPassword from './pages/RecuperarPassword'
 import CambioPassword from './pages/CambioPassword'
 import Arquitecto from './pages/Arquitecto'
+import Proveedor from './pages/Proveedor'
+import Diccionario from './components/Diccionario'
+import Administrador from './pages/Administrador'
+import EspecificacionUsuario from './pages/EspecificacionUsuarios'
 import 'bootstrap/dist/css/bootstrap.css'
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Router, Switch } from 'react-router-dom';
 
 
 //const container = document.getElementById('root')
@@ -16,15 +20,17 @@ ReactDOM.render(
   <React.StrictMode>
       <BrowserRouter>
         <div className = ''>
-            <div>
-                <h1>Barra de navegacion</h1>
-            </div>
             <Switch>
                 <Route component = {Login} exact path = '/'/>
                 <Route component = {RecuperarPassword} exact path = '/RecuperarContra' />
-                <Route component = {RegistroUsuario} exact path = '/RegistroArquitecto' />
-                <Route component = {RegistroProveedor} exact path = '/RegistroProveedor'/>
-                <Route component = {CambioPassword} exact path = '/CambioPassword/:id'/>
+                <Route component = {RegistroUsuario} exact path = '/RegistroArquitecto'  />
+                <Route component = {RegistroProveedor} exact path = '/RegistroProveedor' />
+                <Route component = {CambioPassword} exact path = '/CambioPassword/:id' />
+                <Route component = {Arquitecto} exact path = '/Arquitecto/:id' />
+                <Route component = {Diccionario} exact path = '/Diccionario' />
+                <Route component = {Proveedor} exact path = '/Proveedor/:id' />
+                <Route component = {Administrador} exact path = '/Administrador/:id'/>
+                <Route component = {EspecificacionUsuario} exact path = '/masInformacion/:id' />
             </Switch> 
         </div>
       </BrowserRouter>

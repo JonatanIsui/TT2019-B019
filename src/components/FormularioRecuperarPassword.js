@@ -1,5 +1,5 @@
 import React from 'react'
-import {UsuarioService} from '../service/UsuarioService'
+import UsuarioService from '../service/UsuarioService'
 import { withRouter } from "react-router";
 const validate = values =>{
     const errors = {}
@@ -17,15 +17,16 @@ class FormularioRecuperarPassword extends React.Component{
     }
     UsuarioService = new UsuarioService()
     usuario = []
+    //Este metodo se encarga de recibir la el correo y agregar al estado la nueva contraseña
     handleChage = e =>{
         this.setState({
             [e.target.name] : e.target.value
         })
-        //Recuperar el parametro
+        //Recuperar el parametro(correo encriptado)
         const id = this.props.match.params.id;
         this.setState({"correo" : id}) 
     }
-
+    //Este metodo se encarga de mandar el correo y la nueva contraseña al servidor
     handleSubmit = e =>{
         e.preventDefault()
         //Se manda el estado sin errores

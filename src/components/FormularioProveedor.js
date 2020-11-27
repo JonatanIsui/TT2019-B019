@@ -1,5 +1,6 @@
 import React from 'react'
 import SolicitudProveedorService from '../service/SolicitudProveedorService'
+//Metodo para validar que no se ingresen espacios en blanco
 const validate = values =>{
     const errors = {}
     const stateToString = JSON.stringify (values.password).replace(/ /g,'')
@@ -19,12 +20,31 @@ class FormularioProveedor extends React.Component{
     usuario = []
     SolicitudProveedorService = new SolicitudProveedorService()
 
+    //Este metodo se encarga de cargar imagen al estado 
+    handleFile = async e =>{
+        e.preventDefault()
+        const reader = new FileReader();
+        if(Object.keys(e.target.files).length){
+            await this.setState({
+                [e.target.name] : e.target.files[0]
+            })
+            reader.readAsDataURL(this.state.identificacion)
+            reader.onload = async t =>{
+                await this.setState({
+                    [e.target.name] : t.target.result
+                })
+            }
+        }
+    }
+
+    //Este metodo se encarga de agregar la informacion del proveedor al estado
     handleChange = e =>{
         this.setState({
             [e.target.name] : e.target.value
         })
     }
 
+    //Este metodo se encarga de mandar el estado para mandar los datos del proveedor solicitante
     handleSubmit = e =>{
         e.preventDefault()
         //Se manda el estado sin errores
@@ -37,8 +57,8 @@ class FormularioProveedor extends React.Component{
         if(!Object.keys(result).length){
             this.setState({sending : true})
             try{
-                console.log('Se envio')
                 this.usua = this.state;
+                console.log(this.usua)
                 this.usuario = this.SolicitudProveedorService.addSolicitudProveedor(this.usua)
             }catch(errors){
                 this.setState({errors:errors.message})
@@ -75,6 +95,9 @@ class FormularioProveedor extends React.Component{
                         </div>
                         <div className = ''>
                             <input type = 'email' placeholder = 'Email de la empresa' className = '' name = 'correo' onChange = {this.handleChange} required/>
+                        </div>
+                        <div className = ''>
+                            <input type = 'file' accept=".png" name = 'identificacion' onChange = {this.handleFile}/> Identificacion en formato png
                         </div>                      
                         <div className = ''>
                             <input type = 'password' placeholder = 'Contraseña' className = '' name = 'password' onChange = {this.handleChange} required/>

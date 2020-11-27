@@ -3,13 +3,13 @@ import Boton from '../components/Boton'
 import { withRouter } from "react-router";
 
 class Arquitecto extends React.Component{
-
-
-
     render(){
+        const id = JSON.parse(atob(this.props.match.params.id))
+        console.log(id)
         return(
             <div className = ''>
                 <h1 className = ''>Nav Bar arquitecto</h1>
+                <h1 className = ''>Bienvenido {id.nombre}</h1>
                 <Boton
                     text = 'Nueva consulta'
                     url = '/'
@@ -20,7 +20,7 @@ class Arquitecto extends React.Component{
                 />
                 <Boton
                     text = 'Diccionario'
-                    url = '/'
+                    url = '/Diccionario'
                 />
             </div>
         )
