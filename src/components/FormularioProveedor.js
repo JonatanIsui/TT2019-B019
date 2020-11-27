@@ -1,3 +1,4 @@
+import { Alert } from 'bootstrap'
 import React from 'react'
 import SolicitudProveedorService from '../service/SolicitudProveedorService'
 //Metodo para validar que no se ingresen espacios en blanco
@@ -45,7 +46,7 @@ class FormularioProveedor extends React.Component{
     }
 
     //Este metodo se encarga de mandar el estado para mandar los datos del proveedor solicitante
-    handleSubmit = e =>{
+    handleSubmit = async e =>{
         e.preventDefault()
         //Se manda el estado sin errores
         const {errors,...sinerrors} = this.state
@@ -58,8 +59,13 @@ class FormularioProveedor extends React.Component{
             this.setState({sending : true})
             try{
                 this.usua = this.state;
-                console.log(this.usua)
-                this.usuario = this.SolicitudProveedorService.addSolicitudProveedor(this.usua)
+                this.usuario = await this.SolicitudProveedorService.addSolicitudProveedor(this.usua)
+                if(Object.keys(this.usuario).length !== 0){
+                    alert('Solicitud enviada con exito, espere respuesta al correo : '+this.usuario.correo)
+                    window.history.back()
+                }else{
+                    alert('Lo sentimos los datos porporcionados no son correctos o hay una solicitud pendiente')
+                }
             }catch(errors){
                 this.setState({errors:errors.message})
                 console.log(errors)

@@ -37,7 +37,7 @@ class FormularioUsuario extends React.Component{
     }
 
     //Este metodo se encarga de mandar la informacion del arquitectos al servido
-    handleSubmit = e =>{
+    handleSubmit = async e =>{
         e.preventDefault()
         //Se manda el estado sin errores
         const {errors,...sinerrors} = this.state
@@ -50,7 +50,8 @@ class FormularioUsuario extends React.Component{
             this.setState({sending : true})
             try{
                 this.usua = this.state;
-                this.usuario = this.ArquitectoService.addArquitecto(this.usua)
+                this.usuario = await this.ArquitectoService.addArquitecto(this.usua)
+                console.log(this.usuario)
             }catch(errors){
                 this.setState({errors:errors.message})
             }finally{

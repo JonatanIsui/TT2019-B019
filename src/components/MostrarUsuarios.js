@@ -46,8 +46,27 @@ class MostrarUsuarios extends React.Component{
         e.preventDefault()
         try{
             if(window.confirm("Esta seguro que deseas eliminar al usuario")){
+                this.proveedores = await this.AdmService.allProveedores()
                 this.resultado = await this.AdmService.eliminarUsuario(e.target.id)
-                window.location.reload()
+                console.log(e.target.id)
+                console.log(this.proveedores)
+                this.respuesta = true
+                if(Object.keys(this.proveedores).length !== 0){
+                    this.proveedores.forEach(item =>{
+                        if(item.id === parseInt(e.target.id)){
+                           this.handleProveedores()
+                            this.respuesta = false
+                            console.log("Son iguales")
+                            return false
+                        }else{
+                            this.respuesta = true
+                            console.log("Son difierentes")
+                        }
+                    })
+                }
+                if(this.respuesta){
+                    this.handleArquitectos()
+                }
             }
         }catch(e){
             console.log(e)
@@ -97,7 +116,7 @@ class MostrarUsuarios extends React.Component{
                                 <th className = ''>Apellido del encargado</th>
                                 <th className = ''>Direccion</th>
                                 <th className = ''>Telefono</th>
-                                <th>Identificacion</th>
+                                <th className = ''>Identificacion</th>
                                 <th className = ''></th>
                                 <th className = ''></th>
                             </tr>
