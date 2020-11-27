@@ -18,7 +18,12 @@ public class UsuarioBean implements UsuarioBeanInterfaz{
 	
 	@Override
 	public Usuario iniciarSesion(String correo,String password) {
-		return usuarioDao.findByCorreoAndPassword(correo, password);
+		try {
+			return usuarioDao.findByCorreoAndPassword(correo, password);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 	@Override
@@ -35,18 +40,28 @@ public class UsuarioBean implements UsuarioBeanInterfaz{
 
 	@Override
 	public boolean recuperarPassword(String correo) {
-		boolean res = false;
-		Usuario usuario = usuarioDao.findByCorreo(correo);
-		if(email.sendEmail(usuario))
-			res = true;
-		return res;
+		try {
+			boolean aux = false;
+			Usuario usuario = usuarioDao.findByCorreo(correo);
+			if(email.sendEmail(usuario))
+				aux = true;
+			return aux;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 	
 	@Override
 	public Usuario cambioPassword(Usuario usuario) {
-		Usuario aux = usuarioDao.findByCorreo(usuario.getCorreo());
-		aux.setPassword(usuario.getPassword());
-		return usuarioDao.save(aux);
+		try {
+			Usuario aux = usuarioDao.findByCorreo(usuario.getCorreo());
+			aux.setPassword(usuario.getPassword());
+			return usuarioDao.save(aux);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 }

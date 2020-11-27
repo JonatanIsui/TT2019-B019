@@ -3,6 +3,7 @@ package com.tt2.restcontroller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.web.servlet.error.ErrorController;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,12 +27,12 @@ public class SolicitudProveedorRest implements ErrorController{
 	private Imagenes imagenes;
 	
 	@PostMapping("/registroProveedor")
-	public String registrarProveedor(@RequestBody SolicitudProveedor solicitudProveedor){
-		String res = "El proveedor ya tiene una solicitud en curso";
+	public ResponseEntity<SolicitudProveedor> registrarProveedor(@RequestBody SolicitudProveedor solicitudProveedor){
+		ResponseEntity<SolicitudProveedor> res = ResponseEntity.noContent().build();
 		solicitudProveedor.setIdentificacion(imagenes.toFile(solicitudProveedor.getIdentificacion(),solicitudProveedor.getNombreEmpresa()));		
 		SolicitudProveedor usu = solicitudProveedorBean.nuevaSolicitud(solicitudProveedor);
 		if(usu != null)
-			res = "Solicitus enviada con exito";
+			res = ResponseEntity.ok(usu);
 		return res;
 	}
 	

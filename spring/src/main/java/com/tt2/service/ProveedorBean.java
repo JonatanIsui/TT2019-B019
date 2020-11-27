@@ -43,7 +43,12 @@ public class ProveedorBean extends UsuarioBean implements ProveedorBeanInterfaz{
 
 	@Override
 	public List<Material> catalogo(int id) {
-		Optional<Proveedor> proveedor = proveedorDao.findById(id);
-		return materialDao.findByProveedor(proveedor.get());
+		try {
+			Optional<Proveedor> proveedor = proveedorDao.findById(id);
+			return materialDao.findByProveedor(proveedor.get());
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }
