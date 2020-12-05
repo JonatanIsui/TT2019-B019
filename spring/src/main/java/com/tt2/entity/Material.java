@@ -37,10 +37,10 @@ public class Material implements Serializable{
 	@Column(name = "descripcion", nullable = false, columnDefinition = "VARCHAR(150)")
 	private String descripcion;
 	
-	@Column(name = "costo", nullable = false, columnDefinition = "FLOAT(6,2)")
+	@Column(name = "costo", nullable = false, columnDefinition = "FLOAT(8,2)")
 	private float costo;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_id_proveedor")
 	private Proveedor proveedor; 
 	
@@ -88,14 +88,6 @@ public class Material implements Serializable{
 
 	public void setProveedor(Proveedor proveedor) {
 		this.proveedor = proveedor;
-	}
-
-	public List<ListaMateriales> getListaMateriales() {
-		return listaMateriales;
-	}
-
-	public void setListaMateriales(List<ListaMateriales> listaMateriales) {
-		this.listaMateriales = listaMateriales;
 	}
 
 	public int getId() {

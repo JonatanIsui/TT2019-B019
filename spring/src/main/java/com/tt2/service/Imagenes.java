@@ -4,16 +4,14 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
-
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.stereotype.Service;
-
 import com.tt2.service.interfaz.ImagenesInterfaz;
 
 
 @Service("imagenesBean") 
 public class Imagenes implements ImagenesInterfaz{
-	private String url = "C:\\Users\\diego\\Documents\\workspace-spring-tool-suite-4-4.6.2.RELEASE\\TT2\\Imagenes";
+	private String url = System.getProperty("user.dir")+"\\Imagenes";
 	@Override
 	public String toFile(String imagen,String empresa){
 		String tipo = imagen.split(";")[0].split("/")[1];
