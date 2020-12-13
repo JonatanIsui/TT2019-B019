@@ -60,5 +60,16 @@ class ProveedorService{
         }
         return this.res
     }
+
+    formato = async(e) =>{
+        try{
+            const resultado = await axios.post(this.baseUrl+'formato')
+            const data = await resultado.data
+            this.res =data
+        }catch(e){
+            console.log(e)
+        }
+        return this.res
+    }
 }
 export default ProveedorService

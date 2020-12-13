@@ -3,29 +3,41 @@ import Boton from '../components/Boton'
 import MostrarUsuarios from '../components/MostrarUsuarios'
 import Diccionario from '../components/Diccionario'
 import { withRouter } from 'react-router'
+import FormularioLogin from '../components/FormularioLogin'
 
 class Administrador extends React.Component{
     state = {
         errors : {},
         sending : false
     }
+    logetOut = e =>{
+        localStorage.removeItem('administrador')
+        window.location ='/'
+    }
     render(){
+        if(localStorage.getItem('administrador')==='true'){
         //Se optiene el objeto con lo datos del login
-        const id = JSON.parse(atob(this.props.match.params.id))
-        return(
-            <div className = ''>
-                <h1 className = ''>Bienvenido {id.nombreAdministrador}</h1>
+            const id = JSON.parse(atob(this.props.match.params.id))
+            return(
                 <div className = ''>
-                    <MostrarUsuarios/>
-                    <Diccionario/>
-                    <Boton
-                        text = 'Cerrar sesion'
-                        url = '/'
-                    />
+                    <h1 className = ''>Bienvenido {id.nombreAdministrador}</h1>
+                    <div className = ''>
+                        <MostrarUsuarios/>
+                        <Diccionario/>
+                        <button className = '' onClick={this.logetOut}>Cerrar sesion</button>
+                    </div>
+                    <div id = 'div' className = ''>
+                    </div>
                 </div>
-                <div id = 'div' className = ''>
+            )
+        }else{
+            return(
+                <div className = ''>
+                    <div className = ''>Inicie sesion para ver esta pagina</div>
+                    <FormularioLogin/>
                 </div>
-            </div>
-        )}
+            )
+        }
+    }
     }
 export default withRouter(Administrador)

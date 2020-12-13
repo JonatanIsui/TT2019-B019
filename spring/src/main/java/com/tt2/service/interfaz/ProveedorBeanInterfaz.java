@@ -12,4 +12,5 @@ public interface ProveedorBeanInterfaz {
 	public List<Material> bajaMaterial(int id);
 	public List<Material> catalogo(int id);
 	public boolean agregarArchiv(ArchivoModel archivo);
+	public String getFormato();
 }

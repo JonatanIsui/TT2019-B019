@@ -1,4 +1,3 @@
-import { Alert } from 'bootstrap'
 import React from 'react'
 import SolicitudProveedorService from '../service/SolicitudProveedorService'
 //Metodo para validar que no se ingresen espacios en blanco

@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.tt2.entity.Diccionario;
 import com.tt2.entity.SolicitudProveedor;
 import com.tt2.entity.Usuario;
 import com.tt2.service.AdministradorBean;
 import com.tt2.service.Imagenes;
+
 
 @RestController
 @RequestMapping("/administrador")
@@ -62,29 +62,29 @@ public class AdministradorRest implements ErrorController{
 	}
 	
 	@DeleteMapping("/eliminar/{id}")
-	public String eliminarUsuario(@PathVariable("id") Integer id) {
+	public ResponseEntity<String> eliminarUsuario(@PathVariable("id") Integer id) {
 		String res = "El usuario no se pudo eliminar";
 		if(administradorBean.eliminarUsuario(id)) 
 			res = "Usuario eliminado con exito";
-		return res;
+		return ResponseEntity.ok(res);
 	}
 	
 	@DeleteMapping("/rechazarProveedor/{id}")
-	public String rechazarSolicitud(@PathVariable("id") Integer id) {
+	public ResponseEntity<String> rechazarSolicitud(@PathVariable("id") Integer id) {
 		String res = "En este momento estamos presentando problema para rechazar la solicitud, intete mas tarde";
 		if(administradorBean.rechazarSolicitudProveedor(id)) {
 			res = "Solicitud rechazada";
 		}
-		return res;
+		return ResponseEntity.ok(res);
 	}
 	
 	@PostMapping("/aceptarProveedor/{id}")
-	public String aceptarProveedor(@PathVariable ("id") Integer id) {
+	public ResponseEntity<String> aceptarProveedor(@PathVariable ("id") Integer id) {
 		String res = "No se puede agregar a este proveedor.";
 		System.out.print("LLEGO AQUI");
-		if(administradorBean.altaProveedor(id))
+		if(administradorBean.altaProveedor(id)) 
 			res = "Proveedor registrado";
-		return res;
+		return ResponseEntity.ok(res);
 	}
 	
 	@PostMapping("/diccionario")
@@ -97,28 +97,28 @@ public class AdministradorRest implements ErrorController{
 	}
 	
 	@DeleteMapping("/eliminarDefinicion/{id}")
-	public String eliminarDefinicion(@PathVariable("id") Integer id) {
+	public ResponseEntity<String> eliminarDefinicion(@PathVariable("id") Integer id) {
 		String res = "En este momento estamos presentando problema para resolver su peticion";
 		if(administradorBean.eliminarDefinicion(id))
 			res = "Definicion eliminada";
-		return res;
+		return ResponseEntity.ok(res);
 	}
 	
 	@PostMapping("/modeficarDefinicion")
-	public String modificarDefinicion(@RequestBody Diccionario definicion) {
+	public ResponseEntity<String> modificarDefinicion(@RequestBody Diccionario definicion) {
 		String res = "No se pudo modificar la definicion";
 		if(administradorBean.modificarDefinicion(definicion))
 			res = "Definicion modificada";
-		return res;
+		return ResponseEntity.ok(res);
 	}
 	
 	@PostMapping("/agregarDefinicion")
-	public String agregarDefinicion(@RequestBody Diccionario definicion) {
+	public ResponseEntity<String> agregarDefinicion(@RequestBody Diccionario definicion) {
 		String res = "En estos momentos no se pudo agregar la definicion";
 		System.out.println("LLega la peticion");
 		if(administradorBean.agregarDefinicion(definicion))
 			res = "Definicion agregada con exito";
-		return res;
+		return ResponseEntity.ok(res);
 	}
 	
 	@Override

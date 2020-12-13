@@ -59,11 +59,17 @@ public class ProveedorRest {
 	}
 	
 	@PostMapping("/archivo")
-	public String agregarArchivo(@RequestBody ArchivoModel archivo) {
+	public ResponseEntity<String> agregarArchivo(@RequestBody ArchivoModel archivo) {
 		String res = null;
 		if(proveedorBean.agregarArchiv(archivo));
 			res = "Catalogo agregado con exito";
-		return res;
+		return ResponseEntity.ok(res);
 	}
 	
+	@PostMapping("/formato")
+	public ResponseEntity<String> getFormato(){
+		String res = null;
+		res = proveedorBean.getFormato();
+		return ResponseEntity.ok(res);
+	}
 }

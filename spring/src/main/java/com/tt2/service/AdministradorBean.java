@@ -39,6 +39,10 @@ public class AdministradorBean extends UsuarioBean implements AdministradorBeanI
 	@Qualifier("diccionarioDao")
 	private DiccionarioDao diccionarioDao;
 	
+	@Autowired
+	@Qualifier("emailDao")
+	private Email email;
+	
 	@Override
 	public List<SolicitudProveedor> getSolicitudes() {
 		return solicitudProveedorDao.getPedientes();
@@ -63,6 +67,7 @@ public class AdministradorBean extends UsuarioBean implements AdministradorBeanI
 			proveedor.setTelefono(solicitudProveedor.getTelefono());
 			usuario.setProveedor(proveedor);
 			usuarioDao.save(usuario);
+			email.aceptarProveedor(usuario);
 			solicitudProveedorDao.delete(solicitudProveedor);
 			aux = true;
 		}

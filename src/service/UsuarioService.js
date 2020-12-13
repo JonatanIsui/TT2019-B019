@@ -9,7 +9,6 @@ export class UsuarioService{
         try{
             const respuesta = await axios.post(this.baseUrl+'login',usuario)
             const data = await respuesta.data
-            console.log(respuesta)
             this.res = data
         }catch(e){
             console.log(e)
@@ -21,7 +20,6 @@ export class UsuarioService{
         try{
             const respuesta = await axios.get(this.baseUrl+'recuperarPassword/'+email+'/')
             const data = await respuesta.data
-            console.log(respuesta)
             this.res = data
         }catch(e){
             console.log(e)  
@@ -33,7 +31,6 @@ export class UsuarioService{
         try{
             const respuesta = await axios.post(this.baseUrl+'cambioPassword',usuario)
             const data = await respuesta.data
-            console.log(respuesta)
             this.res = data
         }catch(e){
             console.log(e)

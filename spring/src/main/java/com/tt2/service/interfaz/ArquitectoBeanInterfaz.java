@@ -6,6 +6,7 @@ import com.tt2.entity.Diccionario;
 import com.tt2.entity.Estimacion;
 import com.tt2.entity.Proveedor;
 import com.tt2.entity.Usuario;
+import com.tt2.model.MedidasModel;
 import com.tt2.service.Medidas;
 
 
@@ -20,4 +21,6 @@ public interface ArquitectoBeanInterfaz {
 	List<Proveedor> verProveedores();
 
 	List<Diccionario> getDiccionario();
+	
+	List<Proveedor>consulta(MedidasModel medidas);
 }

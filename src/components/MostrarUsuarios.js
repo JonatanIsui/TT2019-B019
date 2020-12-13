@@ -48,15 +48,12 @@ class MostrarUsuarios extends React.Component{
             if(window.confirm("Esta seguro que deseas eliminar al usuario")){
                 this.proveedores = await this.AdmService.allProveedores()
                 this.resultado = await this.AdmService.eliminarUsuario(e.target.id)
-                console.log(e.target.id)
-                console.log(this.proveedores)
                 this.respuesta = true
                 if(Object.keys(this.proveedores).length !== 0){
                     this.proveedores.forEach(item =>{
                         if(item.id === parseInt(e.target.id)){
                            this.handleProveedores()
                             this.respuesta = false
-                            console.log("Son iguales")
                             return false
                         }else{
                             this.respuesta = true
@@ -105,7 +102,6 @@ class MostrarUsuarios extends React.Component{
     handleSolicitudes = async () =>{
         try{
             this.solicitudes = await this.AdmService.allSolicitudes()
-            console.log(this.solicitudes)
             if(Object.keys(this.solicitudes).length !==0){
                 ReactDOM.render(
                     <table className = ''>
@@ -131,7 +127,7 @@ class MostrarUsuarios extends React.Component{
                                             <td className = '' >{item.apellidoEncargado}</td>
                                             <td className = '' >{item.direccion}</td>
                                             <td className = '' >{item.telefono}</td>
-                                            <td className = '' ><a href={"data:application/pdf;base64,"+item.identificacion} download={item.nombreEmpresa+".png"}>Descargar identificacion</a></td>
+                                            <td className = '' ><a href={"data:application/png;base64,"+item.identificacion} download={item.nombreEmpresa+".png"}>Descargar identificacion</a></td>
                                             <td><button className = '' id = {item.id} onClick = {this.handleRechazar}>Rechazar</button></td>
                                             <td><button className = '' id = {item.id} onClick = {this.handleAceptar}>Aceptar</button></td>
                                         </tr>

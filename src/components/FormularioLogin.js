@@ -1,6 +1,6 @@
 import React from 'react'
 import UsuarioService from '../service/UsuarioService'
-
+import ReactDOM from 'react-dom'
 //No permite espacios en blanco en la contraseña
 const validate = values =>{
     const errors = {}
@@ -15,8 +15,7 @@ class FormularioLogin extends React.Component{
     /*Los prosp son definidas por el padre y son fijas durante 
 la vida de un componente. El estado cambia con el tiempo*/     
     state = {
-        errors : {},
-        sending : false
+        errors : {}
     }
     UsuarioService = new UsuarioService()
     usuario = []
@@ -43,22 +42,26 @@ la vida de un componente. El estado cambia con el tiempo*/
                 this.usua = this.state;
                 this.usuario =await this.UsuarioService.login(this.usua)
                 const{password,...sinpassword} = this.usuario
+                console.log(this.usuario)
                 //Cifrar y serializar
                 if(!!this.usuario.arquitecto){
+                    localStorage.setItem('arquitecto','true')
                     const red = btoa(JSON.stringify(sinpassword.arquitecto))
                     window.location = '/Arquitecto/'+red+''
                 }else if(!!this.usuario.proveedor){
+                    localStorage.setItem('proveedor','true')
                     const red = btoa(JSON.stringify(sinpassword.proveedor))
                     window.location = '/Proveedor/'+red+''
                 }else if(!!this.usuario.administrador){
+                    localStorage.setItem('administrador','true')
                     const red = btoa(JSON.stringify(sinpassword.administrador))
                     window.location = '/Administrador/'+red+''
+                }else{
+                    ReactDOM.render(<p className = ''>contraseña o correo incorrecto</p>,document.getElementById('usuario'))
                 }
             }catch(errors){
                 console.log(e)
                 this.setState({errors:errors.message})
-            }finally{
-                this.setState({sending : false})
             }
         }
     }
@@ -71,6 +74,8 @@ la vida de un componente. El estado cambia con el tiempo*/
                     <h1 className = ''>Iniciar sesión</h1>
                 </div>
                 <div className = ''>
+                    <div className = '' id='usuario'>
+                    </div>
                     <form className = '' onSubmit = {this.handleSubmit}>
                         <div className = ''>
                             <input type = 'email' placeholder = 'correo*' className = '' name = 'correo' onChange = {this.handleChage} required/>

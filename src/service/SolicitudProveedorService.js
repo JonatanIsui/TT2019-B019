@@ -8,7 +8,6 @@ class SolicitudProveedorService{
         try{
             const respuesta = await axios.post(this.baseUrl+'registroProveedor',usuario)
             const data = await respuesta.data
-            console.log(data)
             this.res = data
         }catch(e){
             console.log(e)

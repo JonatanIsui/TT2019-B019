@@ -40,7 +40,6 @@ class FormularioRecuperarPassword extends React.Component{
             this.setState({sending : true})
             try{
                 this.usua = this.state
-                console.log(this.state)
                 this.usuario = this.UsuarioService.cambioPassword(this.usua)
             }catch(errors){
                 this.setState({errors:errors.message})

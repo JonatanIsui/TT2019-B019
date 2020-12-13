@@ -1,6 +1,5 @@
 package com.tt2.service;
 import java.io.FileInputStream;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,6 +29,8 @@ public class ProveedorBean extends UsuarioBean implements ProveedorBeanInterfaz{
 	@Autowired
 	@Qualifier("archivoBean")
 	private Archivo archivo;
+
+	private Workbook workbook;
 	
 	@Override
 	public List<Material> modificarMaterial(Material material) {
@@ -98,8 +99,7 @@ public class ProveedorBean extends UsuarioBean implements ProveedorBeanInterfaz{
 		Proveedor proveedor = proveedorOpt.get();
 		try {
 			FileInputStream inputStream = new FileInputStream(archivo.toFile(archivoModel.getCatalogo(),proveedor.getNombreEmpresa()));
-			//Libro de excel
-			Workbook workbook = new XSSFWorkbook(inputStream);
+			workbook = new XSSFWorkbook(inputStream);
 			//Hoja de excel
 			Sheet sheet = workbook.getSheetAt(0);
 			Row row;
@@ -118,7 +118,18 @@ public class ProveedorBean extends UsuarioBean implements ProveedorBeanInterfaz{
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return false;
+		return res;
+	}
+
+	@Override
+	public String getFormato() {
+		String res = null;
+		try {
+			res = archivo.toString(); 
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return res;
 	}
 	
 	

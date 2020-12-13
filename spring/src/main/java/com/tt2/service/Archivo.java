@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.stereotype.Service;
 import com.tt2.service.interfaz.ArchivoInterfaz;
@@ -25,4 +26,21 @@ public class Archivo implements ArchivoInterfaz{
 		}
 		return file.getAbsolutePath();
 	}
+	
+	@Override
+	public String toString(){
+		String encodefile = null;
+		FileInputStream fileInputStreamReader;
+		try{
+			File file = new File(url+"\\Formato\\Formato.xlsx");
+			fileInputStreamReader = new FileInputStream(file);
+			byte[] bytes = new byte[(int)file.length()];
+			fileInputStreamReader.read(bytes);
+			encodefile = new String(Base64.encodeBase64(bytes),"UTF-8");
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return encodefile;
+	}
+
 }

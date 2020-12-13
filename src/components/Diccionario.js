@@ -3,10 +3,7 @@ import AdmService from '../service/AdmService'
 import ReactDOM from 'react-dom';
 
 class Diccionario extends React.Component{
-    state = {
-        errors : {},
-        sending : false
-    }
+    state = {}
     AdmService =  new AdmService()
     definiciones = {}
     res = {}
@@ -43,10 +40,9 @@ class Diccionario extends React.Component{
         try{
             this.definiciones = await this.AdmService.allDefiniciones()
             if(Object.keys(this.definiciones.length) !== 0 && typeof this.definiciones !== 'string'){
-                console.log(this.definiciones)
                 ReactDOM.render(this.actualizar(this.definiciones)       
                 ,document.getElementById("div")
-            )
+                )
             }else{
                 ReactDOM.render(<p>En este momento no hay definiciones agregadas</p>,document.getElementById("div"))
             }
@@ -76,6 +72,7 @@ class Diccionario extends React.Component{
     handleAdd = async (e) =>{
         e.preventDefault()
         try{
+            console.log(this.state)
             this.res = await this.AdmService.addDefinicion(this.state)
             alert("Desfinicon agregada correctamente")
             document.getElementById("nuevo").reset()

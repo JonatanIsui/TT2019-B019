@@ -1,7 +1,7 @@
 import React from 'react'
 import InformacionUsuario from '../components/InformacionUsuario'
 import { withRouter } from "react-router";
-
+import FormularioLogin from '../components/FormularioLogin'
 class EspecificacionUsuarios extends React.Component{
 
     state = {
@@ -9,11 +9,20 @@ class EspecificacionUsuarios extends React.Component{
         sending : false
     }
     render(){
-        return(
-            <div className = ''>
-                <InformacionUsuario/>
-            </div>
-        )
+        if(localStorage.getItem('administrador')==='true'){
+            return(
+                <div className = ''>
+                    <InformacionUsuario/>
+                </div>
+            )
+        }else{
+            return(
+                <div className = ''>
+                    <div className = ''>Inicie sesion para ver esta pagina</div>
+                    <FormularioLogin/>
+                </div>
+            )
+        }
     }
 
 }

@@ -51,7 +51,6 @@ class FormularioUsuario extends React.Component{
             try{
                 this.usua = this.state;
                 this.usuario = await this.ArquitectoService.addArquitecto(this.usua)
-                console.log(this.usuario)
             }catch(errors){
                 this.setState({errors:errors.message})
             }finally{
