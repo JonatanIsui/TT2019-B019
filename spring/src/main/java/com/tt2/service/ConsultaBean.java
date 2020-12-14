@@ -134,7 +134,20 @@ public class ConsultaBean {
         double numLadrillos;
         double numLadrillosA;
         double m2Mortero, m2MorteroA;
-        /*
+        double largoLadrillo = 0, anchoLadrillo = 0, espesorLadrillo = 0;
+        
+        if(ladrillo==1){
+            largoLadrillo = .10;
+            anchoLadrillo = .24;
+            espesorLadrillo = .12;
+        }else{
+            if(ladrillo==2){
+                largoLadrillo = .10;
+                anchoLadrillo = .24;
+                espesorLadrillo = .12;
+            }
+        }
+        
         //Calculo de ladrillos con mortero del frente y detras de la casa
         m2Largo=(altura-espesorMortero-(largoCastillo*4))*(largo-espesorMortero-(largoCastillo*3));
         m2LadrilloMortero=(largoLadrillo+espesorMortero)*(anchoLadrillo+espesorMortero);
@@ -164,7 +177,7 @@ public class ConsultaBean {
         arena = arena + (arenaC * m2MorteroA);
         grava = grava + (gravaC * m2MorteroA);
         sacoMortero = sacoMortero + (sacoMorteroC * m2MorteroA);
-        */
+        
     }
     
     public void cuartos(double anchoCuarto, double largoCuarto,  int pisos,int ladrillo){
