@@ -51,6 +51,8 @@ class FormularioUsuario extends React.Component{
             try{
                 this.usua = this.state;
                 this.usuario = await this.ArquitectoService.addArquitecto(this.usua)
+                alert('Ha sido aprovado inicie sesion para ingresar')
+                window.history.back()
             }catch(errors){
                 this.setState({errors:errors.message})
             }finally{

@@ -13,4 +13,5 @@ public interface AdministradorDao extends JpaRepository<Usuario, Integer>{
 	
 	@Query("FROM Usuario WHERE proveedor IS NOT NULL")
 	public abstract List<Usuario> getAllProveedores();
+	
 }

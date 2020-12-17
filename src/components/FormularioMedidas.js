@@ -9,9 +9,11 @@ class FormularioMedidas extends React.Component{
     ancho = 0
     largo = 0
     pisos = 0
-    ladrillo = ''
+    ladrillo = 0
+    arquitecto = 0
     ArquitectoService = new ArquitectoService()
     res={}
+    etiquetas = ['Botes de agua de 19L','Arena','Grava','Saco de cemento','Saco de Mortero','Varilla','Ladrillo Rojo','Ladrillo Block Ligero','Ladrillo Block Pesado']
 
     numHabitaciones = e =>{
         this.div = document.getElementById('habitacion')
@@ -26,6 +28,63 @@ class FormularioMedidas extends React.Component{
                 "</div>"
            )
         }
+    }
+    materia = () =>{
+        document.getElementById('0').insertAdjacentHTML("beforebegin",
+            "<td className = ''>"+this.etiquetas[0]+"</td>"+
+            "<td className = ''>"+this.res.agua+"</td>"+
+            "<td className = ''> de 0 a 15 mil son $44.94</td>"+
+            "<td className = ''>$44.94</td>"  
+        )
+        for(let i = 1;i<this.etiquetas.length;i++){
+            document.getElementById(i.toString()).insertAdjacentHTML("beforebegin",
+                "<td className = ''>"+this.etiquetas[i]+"</td>"+
+                "<td className = ''>"+Object.values(this.res)[i]+"</td>"+
+                "<td className = ''> $"+Object.values(this.res)[i+22]+"</td>"+
+                "<td className = ''>$"+Object.values(this.res)[i]*Object.values(this.res)[i+22]+"</td>"
+              
+        )}
+    }
+    consulta = () =>{
+        return(
+            <div className=''>
+            <table className = ''>
+                <thead className = ''>
+                    <tr className = ''>
+                        <th className = ''>Material</th>
+                        <th className = ''>Cantidad</th>
+                        <th className = ''>Costo promedio</th>
+                        <th className = ''>Total</th>
+                    </tr>
+                </thead>
+                <tbody className = '' >
+                    <tr className = '' id = '0'>
+                    </tr>
+                    <tr className = '' id = '1'>
+                    </tr>
+                    <tr className = '' id = '2'>
+                    </tr>
+                    <tr className = '' id = '3'>
+                    </tr>
+                    <tr className = '' id = '4'>
+                    </tr>
+                    <tr className = '' id = '5'>
+                    </tr>
+                    <tr className = '' id = '6'>
+                    </tr>
+                    <tr className = '' id = '7'>
+                    </tr>
+                    <tr className = '' id = '8'>
+                    </tr>
+                </tbody>
+            </table>
+            <div>
+                <button >Proveedor recomendado</button>
+                <button >Ver todos los proveedores</button>
+                <button >Eliminar consulta</button>
+            </div>    
+            </div>                  
+        )
     }
     habitacion = () =>{
         return(
@@ -64,7 +123,7 @@ class FormularioMedidas extends React.Component{
         this.largo = document.getElementById('largo').value
         this.pisos = document.getElementById('pisos').value
         this.num = document.getElementById('habitaciones').value
-        this.ladrillo = document.getElementById('ladrillo').value
+        this.ladrillo = document.getElementById('tipoladrillo').value
         await ReactDOM.render(
             this.habitacion(), document.getElementById('div')
         )
@@ -81,12 +140,22 @@ class FormularioMedidas extends React.Component{
         this.dim['anchoterreno']=this.ancho
         this.dim['largoterreno']=this.largo
         this.dim['pisos'] = this.pisos
-        this.dim['ladrillo'] = this.ladrillo
-        this.res = await this.ArquitectoService.consulta(this.dim)
-        console.log(this.res)
+        this.dim['tipoladrillo'] = this.ladrillo
+        this.dim['idArquitecto'] = this.arquitecto
+        let confirmar = prompt("Nombre de la consulta");
+        if(confirmar != null){
+            this.dim['nombre']=confirmar
+            this.res = await this.ArquitectoService.consulta(this.dim)
+            ReactDOM.render(this.consulta(),document.getElementById('div'))
+            this.materia()
+        }else{
+            window.location.reload()
+        }
     }
 
     render(){
+        const{arquitecto} = this.props
+        this.arquitecto = arquitecto
         return(<Fragment>
             <div id='medidasTerreno'>   
                 <form className = '' onSubmit = {this.handleSubmit}>
@@ -112,7 +181,7 @@ class FormularioMedidas extends React.Component{
                     </div>
                     <div>
                         <p className = '' >Tipo de ladrillo</p>
-                        <select className= '' id = 'ladrillo'>
+                        <select className= '' id = 'tipoladrillo'>
                             <option value = '1'>Rojo</option>
                             <option value = '2'>block</option>
                         </select>    

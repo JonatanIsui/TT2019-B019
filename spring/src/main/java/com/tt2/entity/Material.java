@@ -1,8 +1,7 @@
 package com.tt2.entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,8 +10,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
@@ -44,12 +41,6 @@ public class Material implements Serializable{
 	@JoinColumn(name = "fk_id_proveedor")
 	private Proveedor proveedor; 
 	
-	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinTable(name = "material_lista_material",
-				joinColumns = @JoinColumn(name = "id_material"),
-				inverseJoinColumns = @JoinColumn(name = "id_lista_Materiales"))
-	private List<ListaMateriales> listaMateriales=new ArrayList<>();
-
 	public String getNombre() {
 		return nombre;
 	}

@@ -1,6 +1,5 @@
 import React from 'react';
 import { withRouter } from "react-router";
-import Boton from '../components/Boton'
 import Material from '../components/Material'
 import ProveedorService from '../service/ProveedorService'
 import FormularioLogin from '../components/FormularioLogin'
@@ -34,6 +33,7 @@ class Proveedor extends React.Component{
                 id : e.target.id
             })
             this.res = await this.proveedorService.archivo(this.state)
+            alert('El archivo se subio con exito')
         }catch(e){
             console.log(e)
         }

@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.tt2.entity.Usuario;
+import com.tt2.model.ConsultaModel;
 import com.tt2.model.MedidasModel;
 import com.tt2.entity.Diccionario;
-import com.tt2.entity.Proveedor;
 import com.tt2.service.ArquitectoBean;
 
 @RestController
@@ -46,10 +46,10 @@ public class ArquitectoRest implements ErrorController{
 	}
 	
 	@PostMapping("/consulta")
-	public ResponseEntity<List<Proveedor>> consulta(@RequestBody MedidasModel model){
-		ResponseEntity<List<Proveedor>> res= ResponseEntity.noContent().build();
-		List<Proveedor> respuesta = arquitectoBean.consulta(model);
-		if(!respuesta.isEmpty())
+	public ResponseEntity<ConsultaModel> consulta(@RequestBody MedidasModel model){
+		ResponseEntity<ConsultaModel> res= ResponseEntity.noContent().build();
+		ConsultaModel respuesta = arquitectoBean.consulta(model);
+		if(respuesta != null)
 			res = ResponseEntity.ok(respuesta);
 		return res;
 	}

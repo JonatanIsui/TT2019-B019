@@ -10,6 +10,7 @@ class Arquitecto extends React.Component{
     //Este metodo tiene la tabla que se renderiza
     ArquitectoService = new ArquitectoService()
     res = []
+    idArquitecto = 0
     actualizar = values =>{
         return(
             <table className = ''>
@@ -56,12 +57,15 @@ class Arquitecto extends React.Component{
 
     handleFormularioMedidas = async (e) =>{
         e.preventDefault()
-        ReactDOM.render(<FormularioMedidas/>,document.getElementById("div"))
+        ReactDOM.render(<FormularioMedidas
+            arquitecto = {this.idArquitecto}
+        />,document.getElementById("div"))
 
     }
     render(){
         if(localStorage.getItem('arquitecto')==='true'){
             const id = JSON.parse(atob(this.props.match.params.id))
+            this.idArquitecto = id.id
             return(
                 <div className = ''>
                     <h1 className = ''>Nav Bar arquitecto</h1>

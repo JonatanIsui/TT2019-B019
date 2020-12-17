@@ -15,20 +15,27 @@ public class MedidasModel implements Serializable{
 	private double largobano;
 	private double largococina;
 	private double largoterreno;
+	private int tipoladrillo;
 	private int pisos;
-	private int ladrillo;
+	private int idArquitecto;
 	
+	public int getTipoladrillo() {
+		return tipoladrillo;
+	}
+	public void setTipoladrillo(int tipoladrillo) {
+		this.tipoladrillo = tipoladrillo;
+	}
 	public int getPisos() {
 		return pisos;
 	}
+	public int getIdArquitecto() {
+		return idArquitecto;
+	}
+	public void setIdArquitecto(int idArquitecto) {
+		this.idArquitecto = idArquitecto;
+	}
 	public void setPisos(int pisos) {
 		this.pisos = pisos;
-	}
-	public int getLadrillo() {
-		return ladrillo;
-	}
-	public void setLadrillo(int ladrillo) {
-		this.ladrillo = ladrillo;
 	}
 	public double getAnchoHabitacion1() {
 		return anchoHabitacion1;

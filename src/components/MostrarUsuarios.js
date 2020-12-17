@@ -159,8 +159,8 @@ class MostrarUsuarios extends React.Component{
 
     handleAceptar = async (e) =>{
         try{
-            this.res = await this.AdmService.aceptarSolicitud(e.target.id)
-            this.handleSolicitudes()
+            this.res = this.AdmService.aceptarSolicitud(e.target.id)
+            await this.handleSolicitudes()
         }catch(e){
             console.log(e)
         }

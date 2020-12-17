@@ -1,5 +1,4 @@
 import React from 'react'
-import Boton from '../components/Boton'
 import MostrarUsuarios from '../components/MostrarUsuarios'
 import Diccionario from '../components/Diccionario'
 import { withRouter } from 'react-router'

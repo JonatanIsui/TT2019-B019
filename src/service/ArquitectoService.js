@@ -34,7 +34,7 @@ class ArquitectoService{
         }catch(e){
             console.log(e)
         }
-        this.res
+        return this.res
     }
 }
 
