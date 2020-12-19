@@ -52,9 +52,11 @@ class FormularioRecuperarPassword extends React.Component{
     render(){
         const{errors} = this.state
         return(
-            <div className = ''>
-                <div className = ''>
-                    <h1 className = ''>Recupera tu contraseña</h1>
+            <div className = 'container-fluid p-3 my-3 bg-dark text-white'>
+                <div className='row justify-content-center'>
+                    <div className = 'col-4-lg'>
+                        <h1 className = ''>Recupera tu contraseña</h1>
+                    </div>
                 </div>
                 <div className = ''>
                     <form className = '' onSubmit = {this.handleSubmit}>

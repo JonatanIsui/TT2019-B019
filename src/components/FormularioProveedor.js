@@ -77,43 +77,108 @@ class FormularioProveedor extends React.Component{
     render(){
         const{errors} = this.state
         return (
-            <div className = ''>
-                <div className = ''>
+            <div className = 'container-fluid p-3 my-3 bg-dark text-white'>
+                <div className = 'row justify-content-center'>
                     <h1>Registro de proveedor</h1>
                 </div>
                 <div className = ''>
                     <form className = '' onSubmit = {this.handleSubmit}>
-                        <div className = ''>
-                            <input type = 'text' placeholder = 'Nombre(s) del representante' className = '' name = 'nombreEncargado' onChange = {this.handleChange} required/>
+
+
+                        <div className='row justify-content-center'>
+                            <div className='col-lg-4'>
+                	        Nombre(s) del representante:
+                            </div>
+                            <div className='col-lg-4'>
+                            Apellidos del respresentante:
+                            </div>
                         </div>
-                        <div className = ''>
-                            <input type = 'text' placeholder = 'Apellidos del respresentante' className = '' name = 'apellidoEncargado' onChange = {this.handleChange} required/>
+                        <div className='row justify-content-center'>
+                            <div className = 'col-lg-4'>
+                                <input type = 'text' placeholder = 'Nombre(s) del representante' className = 'form-control' name = 'nombreEncargado' onChange = {this.handleChange} required/>
+                            </div>
+                            <div className = 'col-lg-4'>
+                                <input type = 'text' placeholder = 'Apellidos del respresentante' className = 'form-control' name = 'apellidoEncargado' onChange = {this.handleChange} required/>
+                            </div>
                         </div>
-                        <div className = ''>
-                            <input type = 'text' placeholder = 'Direccion de la empresa' className = '' name = 'direccion' onChange = {this.handleChange} required/>
-                        </div> 
-                        <div className = ''>
-                            <input type = 'text' placeholder = 'Nombre de la empresa' className = '' name = 'nombreEmpresa' onChange = {this.handleChange} required/>
+                        <p></p>
+
+
+                        <div className='row justify-content-center'>
+                            <div className='col-lg-4'>
+                	        Direccion de la empresa:
+                            </div>
+                            <div className='col-lg-4'>
+                            Nombre de la empresa:
+                            </div>
                         </div>
-                        <div className = ''>
-                            <input type = 'tel' placeholder = 'telefono de la empresa' className = '' name = 'telefono' onChange = {this.handleChange} required/>
+
+                        <div className='row justify-content-center'>
+                            <div className = 'col-lg-4'>
+                                <input type = 'text' placeholder = 'Direccion de la empresa' className = 'form-control' name = 'direccion' onChange = {this.handleChange} required/>
+                            </div> 
+                            <div className = 'col-lg-4'>
+                                <input type = 'text' placeholder = 'Nombre de la empresa' className = 'form-control' name = 'nombreEmpresa' onChange = {this.handleChange} required/>
+                            </div>
                         </div>
-                        <div className = ''>
-                            <input type = 'email' placeholder = 'Email de la empresa' className = '' name = 'correo' onChange = {this.handleChange} required/>
+                        <p></p>
+                        <div className='row justify-content-center'>
+                            <div className='col-lg-4'>
+                	        Telefono de la empresa:
+                            </div>
+                            <div className='col-lg-4'>
+                            Email de la empresa:
+                            </div>
                         </div>
-                        <div className = ''>
-                            <input type = 'file' accept=".png" name = 'identificacion' onChange = {this.handleFile}/> Identificacion en formato png
-                        </div>                      
-                        <div className = ''>
-                            <input type = 'password' placeholder = 'Contraseña' className = '' name = 'password' onChange = {this.handleChange} required/>
-                            {errors.password && <p className = ''>{errors.password}</p>}
-                        </div> 
-                        <div className = ''>
-                            <input type = 'password' placeholder = 'Repite la contraseña' className = '' name = 'password2' onChange = {this.handleChange} required/>
-                            {errors.password2 && <p className = ''>{errors.password2}</p>}
+
+
+
+                        <div className='row justify-content-center'>
+                            <div className = 'col-lg-4'>
+                                <input type = 'tel' placeholder = 'telefono de la empresa' className = 'form-control' name = 'telefono' onChange = {this.handleChange} required/>
+                            </div>
+                            <div className = 'col-lg-4'>
+                                <input type = 'email' placeholder = 'Email de la empresa' className = 'c' name = 'correo' onChange = {this.handleChange} required/>
+                            </div>
+                          </div>
+                          <p></p>
+                          
+                        <div className='row justify-content-center'>
+                            <div className='col-lg-6 '>
+                                
+                                    <input type = 'file' accept=".png" className='' name = 'identificacion' onChange = {this.handleFile}/> <span className='text-nowrap'>Identificacion en formato png</span>
+                                  
+                            </div>                   
                         </div>
-                        <div className = ''>
-                            <input type = 'submit' value = 'Registrarse' className = ''/>
+                        <p></p>
+                        
+                        <div className='row justify-content-center'>
+                            <div className='col-lg-4'>
+                	        Contraseña:
+                            </div>
+                            <div className='col-lg-4'>
+                            <span className='text-nowrap'>Repita la contraseña</span>
+                            </div>
+                        </div>
+
+                        <div className='row justify-content-center'>
+                            <div className = 'col-lg-4 '>
+                                <input type = 'password' placeholder = 'Contraseña' className = 'form-control' name = 'password' onChange = {this.handleChange} required/>
+                                {errors.password && <p className = ''>{errors.password}</p>}
+                            </div> 
+                            <div className = 'col-lg-4 '>
+                                <input type = 'password' placeholder = 'Repite la contraseña' className = 'form-control' name = 'password2' onChange = {this.handleChange} required/>
+                                {errors.password2 && <p className = ''>{errors.password2}</p>}
+                            </div>
+                        </div>
+
+
+
+                        <p></p>
+                        <div className='row row justify-content-center'>
+                            <div className = 'col-lg-3 text-center'>
+                                <input type = 'submit' value = 'Registrase' className  = 'btn btn-light'/>
+                            </div>
                         </div>
                     </form>
                 </div>

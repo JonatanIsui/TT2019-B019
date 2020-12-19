@@ -8,11 +8,12 @@ class RecuperarPassword extends React.Component{
                 <div className = ''>  
                     <FormularioPassword/>
                 </div>
-                <div className = ''>
-                    <Boton
-                        text = 'Cancelar'
-                        url = '/'
-                    />
+                
+
+                <div className ='row row justify-content-center'>
+                    <div className = 'col-lg-4 text-center'>
+                        <a href="/"><button type="button" className='btn btn-light'>Cancelar</button></a>
+                    </div>
                 </div>
             </div>
         )

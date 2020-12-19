@@ -10,6 +10,7 @@ import Proveedor from './pages/Proveedor'
 import Administrador from './pages/Administrador'
 import EspecificacionUsuario from './pages/EspecificacionUsuarios'
 import 'bootstrap/dist/css/bootstrap.css'
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 
@@ -18,7 +19,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 ReactDOM.render(
   <React.StrictMode>
       <BrowserRouter>
-        <div className = ''>
+        <div className = 'bg-dark text-white'>
             <Switch>
                 <Route component = {Login} exact path = '/'/>
                 <Route component = {RecuperarPassword} exact path = '/RecuperarContra' />

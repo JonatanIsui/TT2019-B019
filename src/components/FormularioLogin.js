@@ -69,25 +69,49 @@ la vida de un componente. El estado cambia con el tiempo*/
         //&& si existe lo de la izquierda, retorna lo de la derecha del estado
         const{errors} = this.state
         return(
-            <div className = ''>
-                <div className = ''>
-                    <h1 className = ''>Iniciar sesión</h1>
+            <div className = 'container-fluid p-3 my-3 bg-dark text-white'>
+                <div className = 'row justify-content-center'>
+
+                    <div className='col-lg-4'><h1 className = ''>Iniciar sesión</h1></div>
+
                 </div>
                 <div className = ''>
                     <div className = '' id='usuario'>
                     </div>
+                    
                     <form className = '' onSubmit = {this.handleSubmit}>
-                        <div className = ''>
-                            <input type = 'email' placeholder = 'correo*' className = '' name = 'correo' onChange = {this.handleChage} required/>
-                            {errors.email && <p className =''>{errors.email}</p>}
+                        <div className='row'>
+                            <div className = 'input-group'>
+                                
+
+                            <div className='col-lg-4 text-right'>Correo:</div>
+                            <div className='col-lg-4'>
+                                <span className="input-group-addon"><i className="glyphicon glyphicon-user"></i></span>
+                                <input type = 'email' placeholder = 'correo*' className = 'form-control' name = 'correo' onChange = {this.handleChage} required/>
+                                {errors.email && <p className =''>{errors.email}</p>}
+                            </div>
+
+
+
+                            </div>
                         </div>
-                        <div className = ''>
-                            <input type = 'password' placeholder = 'contraseña*' className = '' name = 'password' onChange = {this.handleChage} required/>
-                            {errors.password && <p className =''>{errors.password}</p>}
+
+                        <p></p>
+
+                        <div className='row' >
+                            <div className='col-lg-4 text-right'>Contraseña:</div>
+                            <div className='col-lg-4'>
+                                <input type = 'password' placeholder = 'contraseña*' className = 'form-control' name = 'password' onChange = {this.handleChage} required/>
+                                {errors.password && <p className =''>{errors.password}</p>}</div>
+
                         </div>
-                        <div className = ''>
-                            <input type = 'submit' value = 'Iniciar sesión' className = ''/>
+                        <p></p>
+                        <div className='row justify-content-center'>
+                            <div className = 'col-lg-3'>
+                                <input type = 'submit' value = 'Iniciar sesión' className = 'btn btn-light '/>
+                            </div>
                         </div>
+
                     </form>
                 </div>
             </div>

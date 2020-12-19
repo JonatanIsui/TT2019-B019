@@ -64,37 +64,90 @@ class FormularioUsuario extends React.Component{
     render(){
         const{errors} = this.state
         return(
-            <div className = ''>
-                <div className = ''>
-                    <h1>Registro de arquitecto</h1>
+            <div className = 'container-fluid p-3 my-3 bg-dark text-white'>
+                <div className='row justify-content-center'>
+                    <div className = 'col-4-lg'>
+                        <h1>Registro de arquitecto</h1>
+                    </div>
                 </div>
+
                 <div className = ''>
+                    
                     <form className = '' onSubmit = {this.handleSubmit}>
-                        <div className = ''>
-                            <input type = 'text' placeholder = 'Nombre(s)*' className = '' name = 'nombre' onChange = {this.handleChange} required/>
+
+
+                        <div className='row justify-content-center'>
+                            <div className='col-lg-4'>
+                	        Nombres:
+                            </div>
+                            <div className='col-lg-4'>
+                            Apellidos:
+                            </div>
                         </div>
-                        <div className = ''>
-                            <input type = 'text' placeholder = 'Apellido(s)*' className = '' name = 'apellido' onChange = {this.handleChange} required/>
+
+
+                        <div className='row row justify-content-center'>
+                            <div className = 'col-lg-4'>
+                                <input type = 'text' placeholder = 'Nombre(s)*' className = 'form-control' name = 'nombre' onChange = {this.handleChange} required/>
+                            </div>
+                            <div className = 'col-lg-4'>
+                                <input type = 'text' placeholder = 'Apellido(s)*' className = 'form-control' name = 'apellido' onChange = {this.handleChange} required/>
+                            </div>
                         </div>
-                        <div className = ''>
-                            <input type = 'tel' placeholder = 'Telefono' className = '' name = 'telefono' onChange = {this.handleChange}/>
+                        <p></p>
+
+
+                        <div className='row justify-content-center'>
+                            <div className='col-lg-4'>
+                	        Telefono
+                            </div>
+                            <div className='col-lg-4'>
+                            Direccion:
+                            </div>
                         </div>
-                        <div className = ''>
-                            <input type = 'text' placeholder = 'Direccion' className = '' name = 'direccion' onChange = {this.handleChange}/>
+                        <div className='row row justify-content-center'>
+                            <div className = 'col-lg-4'>
+                                <input type = 'tel' placeholder = 'Telefono' className = 'form-control' name = 'telefono' onChange = {this.handleChange}/>
+                            </div>
+                            <div className = 'col-lg-4'>
+                                <input type = 'text' placeholder = 'Direccion' className = 'form-control' name = 'direccion' onChange = {this.handleChange}/>
+                            </div>
                         </div>
-                        <div className = ''>
-                            <input type = 'email' placeholder = 'Correo*' className = '' name = 'correo' onChange = {this.handleChange} required/>
+                        <p></p>
+                        <div className='row justify-content-center'>
+                            <div className='col-lg-8'>
+                	        Correo:
+                            </div>
                         </div>
-                        <div className = ''>
-                            <input type = 'password' placeholder = 'Contraseña*' className = '' name = 'password' onChange = {this.handleChange} required/>
-                            {errors.password && <p className = ''>{errors.password}</p>}
+                        <div className='row row justify-content-center'>
+                            <div className = 'col-lg-8'>
+                                <input type = 'email' placeholder = 'Correo*' className = 'form-control' name = 'correo' onChange = {this.handleChange} required/>
+                            </div>
                         </div>
-                        <div className = ''>
-                            <input type = 'password' placeholder = 'Repite la contraseña*' className = '' name = 'password2' onChange = {this.handleChange} required/>
-                            {errors.password2 && <p className = ''>{errors.password2}</p>}
+                        <p></p>
+                        <div className='row justify-content-center'>
+                            <div className='col-lg-4'>
+                	        Contrasena:
+                            </div>
+                            <div className='col-lg-4'>
+                            <span className='text-nowrap'>Repita la contrasena</span>
+                            </div>
                         </div>
-                        <div className = ''>
-                            <input type = 'submit' value = 'Registrase' className  = ''/>
+                        <div className='row row justify-content-center'>
+                            <div className = 'col-lg-4'>
+                                <input type = 'password' placeholder = 'Contraseña*' className = 'form-control' name = 'password' onChange = {this.handleChange} required/>
+                                {errors.password && <p className = ''>{errors.password}</p>}
+                            </div>
+                            <div className = 'col-lg-4'>
+                                <input type = 'password' placeholder = 'Repite la contraseña*' className = 'form-control' name = 'password2' onChange = {this.handleChange} required/>
+                                {errors.password2 && <p className = ''>{errors.password2}</p>}
+                            </div>
+                        </div>
+                        <p></p>
+                        <div className='row row justify-content-center'>
+                            <div className = 'col-lg-3 text-center'>
+                                <input type = 'submit' value = 'Registrase' className  = 'btn btn-light'/>
+                            </div>
                         </div>
                     </form>
                 </div>
