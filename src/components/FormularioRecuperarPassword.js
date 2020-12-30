@@ -58,21 +58,30 @@ class FormularioRecuperarPassword extends React.Component{
                         <h1 className = ''>Recupera tu contraseña</h1>
                     </div>
                 </div>
+
                 <div className = ''>
-                    <form className = '' onSubmit = {this.handleSubmit}>
-                        <div className = ''>
-                            <input type = 'password' placeholder = 'Contraseña*' className = '' name = 'password' onChange = {this.handleChage} required/>
-                            {errors.password && <p className =''>{errors.password}</p>}
-                        </div>
-                        <div className = ''>
-                            <input type = 'password' placeholder = 'Repite la contraseña*' className = '' name = 'password2' onChange = {this.handleChage} required/>
+                <form className = '' onSubmit = {this.handleSubmit}>
+                    <div className = 'row justify-content-center'>
+                            <div className = 'col-lg-4 text-center'>
+                                Introduce tu una contraseña nueva<input type = 'password' placeholder = 'Contraseña*' className = 'form-control' name = 'password' onChange = {this.handleChage} required/>
+                                {errors.password && <p className =''>{errors.password}</p>}
+                            </div>
+                    </div>
+                    <div className="row justify-content-center">
+                        <div className = 'col-lg-4 text-center'>
+                            Repite la contraseña<input type = 'password' placeholder = 'Repite la contraseña*' className = 'form-control' name = 'password2' onChange = {this.handleChage} required/>
                             {errors.password2 && <p className =''>{errors.password2}</p>}
                         </div>
-                        <div className = ''>
-                            <input type = 'submit' value = 'Recuperar contraseña' className = ''/>
+                    </div>
+                    <div className="row justify-content-center">
+                        <div className = 'col-lg-4 text-center'>
+                            <input type = 'submit' value = 'Recuperar contraseña' className = 'btn btn-light'/>
                         </div>
-                    </form>
+                    </div>
+                </form>
                 </div>
+
+
             </div>
         )
     }

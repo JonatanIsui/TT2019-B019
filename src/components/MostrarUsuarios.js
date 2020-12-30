@@ -14,7 +14,7 @@ class MostrarUsuarios extends React.Component{
     //Este metodo se encarga de generar el DOM para mostrar los proveedores o los arquitectos
     actualizar = values =>{
         return(
-            <table className = ''>
+            <table className = 'table table-hover table-dark'>
                 <thead className = ''>
                     <tr className = ''>
                         <th className = ''>Correo</th>
@@ -30,7 +30,7 @@ class MostrarUsuarios extends React.Component{
                             <tr className = '' key = {item.id}>
                                 <td className = '' >{item.correo}</td>
                                 <td className = ''>{item.fechaLogin}</td>
-                                <td className = ''><button className = '' onClick = {this.handleEliminar} id = {item.id}>Eliminar</button></td>
+                                <td className = 'btn btn-light'><button className = '' onClick = {this.handleEliminar} id = {item.id}>Eliminar</button></td>
                                 <td className = ''><a href = {this.urlUsuarios+btoa(JSON.stringify(item))} >Mas informacion</a></td>
                             </tr>
                         )                        
@@ -128,8 +128,8 @@ class MostrarUsuarios extends React.Component{
                                             <td className = '' >{item.direccion}</td>
                                             <td className = '' >{item.telefono}</td>
                                             <td className = '' ><a href={"data:application/png;base64,"+item.identificacion} download={item.nombreEmpresa+".png"}>Descargar identificacion</a></td>
-                                            <td><button className = '' id = {item.id} onClick = {this.handleRechazar}>Rechazar</button></td>
-                                            <td><button className = '' id = {item.id} onClick = {this.handleAceptar}>Aceptar</button></td>
+                                            <td><button className = 'btn btn-light' id = {item.id} onClick = {this.handleRechazar}>Rechazar</button></td>
+                                            <td><button className = 'btn btn-light' id = {item.id} onClick = {this.handleAceptar}>Aceptar</button></td>
                                         </tr>
                                     )                        
                                 })
@@ -169,9 +169,9 @@ class MostrarUsuarios extends React.Component{
     render(){
         return(   
             <Fragment>
-                <button className = '' onClick = {this.handleArquitectos}>Ver arquitectos</button>
-                <button className = '' onClick = {this.handleProveedores}>Ver proveedores</button>
-                <button className = '' onClick = {this.handleSolicitudes}>Solicitudes de proveedores</button>
+                <button className = 'btn btn-light' onClick = {this.handleArquitectos}>Ver arquitectos</button>
+                <button className = 'btn btn-light' onClick = {this.handleProveedores}>Ver proveedores</button>
+                <button className = 'btn btn-light' onClick = {this.handleSolicitudes}>Solicitudes de proveedores</button>
             </Fragment>
         )
     }

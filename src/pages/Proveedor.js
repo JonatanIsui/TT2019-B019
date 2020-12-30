@@ -60,26 +60,42 @@ class Proveedor extends React.Component{
     const id = JSON.parse(atob(this.props.match.params.id))
     if(localStorage.getItem('proveedor')==='true'){
         return(
-            <div className = ''>
-                <h1 className = ''>Bienvenido {id.nombreEncargado}</h1>
-                <div>
-                    <Material
-                        id = {id.id}
-                    />
-                    <button className = '' onClick={this.handleFormato}>Formato excel</button>
-                    <button className = '' onClick={this.logetOut}>Cerrar sesion</button>
+            <div class = 'container-fluid p-3 my-3 bg-dark text-white'>
+        
+                <div class="row justify-content-center">
+                    <h1 className = ''>Bienvenido {id.nombreEncargado}</h1>
                 </div>
-                <div id = 'div'>
-                </div>  
-                <div className = ''>
-                    <div className = ''>
-                        <form  id = {id.id} className = '' onSubmit={this.handleSubmit}>
-                            <h1 className = ''>Subir catalogo, solo formato .xlsx</h1>
-                            <input type="file" name = 'catalogo' className = '' onChange={this.handleFile} accept=".xlsx" required/>
-                            <input type="submit" className = '' value = 'Cargar'/>
-                        </form>
+                <div class="row justify-content-center">
+                    <Material
+                            id = {id.id}
+                        />
+                </div>
+                <div class="row justify-content-center">
+                    <div class='col-lg-4 text-center'>
+                        <button class = 'btn btn-light' onClick={this.handleFormato}>Formato excel</button>
                     </div>
-                </div>  
+                    <div class='col-lg-4 text-center'>
+                        <button class = 'btn btn-light' onClick={this.logetOut}>Cerrar sesion</button>
+                    </div>
+                </div>
+                <form  id = {id.id} className = '' onSubmit={this.handleSubmit}>
+                    <div class="row justify-content-center">
+                        
+                            <h1 className = ''>Subir catalogo, solo formato .xlsx</h1>
+                        
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class='col-lg-4 text-center'>
+                            <input type="file" name = 'catalogo' class = 'btn btn-light' onChange={this.handleFile} accept=".xlsx" required/>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class='col-lg-4 text-center'>
+                            <p></p>
+                            <input type="submit" class = 'btn btn-light' value = 'Cargar'/>
+                        </div>
+                    </div>
+                </form>
             </div>
         )
     }else{

@@ -12,7 +12,7 @@ class Material extends React.Component{
 
     actualizar = values =>{
         return(
-            <table className = ''>
+            <table className = 'table table-hover table-dark'>
                 <thead className = ''>
                     <tr className = ''>
                         <th className = ''>Nombre</th>
@@ -32,8 +32,8 @@ class Material extends React.Component{
                                 <td className = ''>{item.categoria}</td>
                                 <td className = ''>{item.descripcion}</td>
                                 <td className = ''>{item.costo}</td>
-                                <td className = ''><button className = '' onClick = {this.handleEliminarMaterial} name = {item.id}>Eliminar</button></td>
-                                <td className = ''><button className = '' onClick ={this.handleChageMaterial}  name = {item.id} >Modificar material</button></td>
+                                <td className = 'btn btn-light'><button className = '' onClick = {this.handleEliminarMaterial} name = {item.id}>Eliminar</button></td>
+                                <td className = 'btn btn-light'><button className = '' onClick ={this.handleChageMaterial}  name = {item.id} >Modificar material</button></td>
                             </tr>
                         )                        
                     })
@@ -46,23 +46,29 @@ class Material extends React.Component{
     formulario = (proveedor) =>{
         return(
             <Fragment>
-                <form className = '' onSubmit = {this.handleSubmit} id = {proveedor}>
-                    <div className = ''>
-                        <input className = '' type = 'text' name = 'nombre' placeholder = 'nombre' onChange = {this.handleChage} required/>
+            <form className = '' onSubmit = {this.handleSubmit} id = {proveedor}>
+                <div className="row">
+                    <div className="col-lg-6 text-center">
+                        Nombre:<input className = 'form-control' type = 'text' name = 'nombre' placeholder = 'nombre' onChange = {this.handleChage} required/>
                     </div>
-                    <div className = ''>
-                        <input className = '' type = 'text' name = 'categoria' placeholder = 'categoria' onChange = {this.handleChage} required/>
+                    <div className="col-lg-6 text-center">
+                        Categoria:<input className = 'form-control' type = 'text' name = 'categoria' placeholder = 'categoria' onChange = {this.handleChage} required/>
                     </div>
-                    <div className = ''>
-                        <input className = '' type = 'text' name = 'descripcion' placeholder = 'descripcion' onChange = {this.handleChage} required/>
+                </div>
+                <div className="row">
+                        <div className="col-lg-6 text-center">
+                            Descripcion:<input className = 'form-control' type = 'text' name = 'descripcion' placeholder = 'descripcion' onChange = {this.handleChage} required/>
+                        </div>
+                        <div className="col-lg-6 text-center">
+                            Costo:<input className = 'form-control' type = 'text' name = 'costo' placeholder = 'costo' onChange = {this.handleChage} required/>
+                        </div>
+                </div>
+                <div className="row justify-content-center">
+                    <div className="col-lg-3 text-center">
+                        <input className = 'btn btn-light' type = 'submit'/>
                     </div>
-                    <div className = ''>
-                        <input className = '' type = 'text' name = 'costo' placeholder = 'costo' onChange = {this.handleChage} required/>
-                    </div>
-                    <div className = ''>
-                        <input className = '' type = 'submit'/>
-                    </div>
-                </form>
+                </div>
+            </form>
             </Fragment>
         )
     }
@@ -72,20 +78,26 @@ class Material extends React.Component{
             <Fragment>
                 <div className = '' id = 'alerta'></div>
                 <form className = '' onSubmit = {this.handleSubmitChage} id = {material.id} name = 'actualizar'>
-                    <div className = ''>
-                        <input className = '' type = 'text' id = 'nombre' name = 'nombre' placeholder = {material.nombre}/>
+                    <div className="row">
+                        <div className="col-lg-6 text-center">
+                            Nombre:<input className = 'form-control' type = 'text' name = 'nombre' placeholder = {material.nombre}/>
+                        </div>
+                        <div className="col-lg-6 text-center">
+                            Categoria:<input className = 'form-control' type = 'text' name = 'categoria' placeholder = {material.categoria}/>
+                        </div>
                     </div>
-                    <div className = ''>
-                        <input className = '' type = 'text' id = 'categoria' name = 'categoria' placeholder = {material.categoria}/>
+                    <div className="row">
+                            <div className="col-lg-6 text-center">
+                                Descripcion:<input className = 'form-control' type = 'text' name = 'descripcion' placeholder = {material.descripcion}/>
+                            </div>
+                            <div className="col-lg-6 text-center">
+                                Costo:<input className = 'form-control' type = 'text' name = 'costo' placeholder = {material.costo}/>
+                            </div>
                     </div>
-                    <div className = ''>
-                        <input className = '' type = 'text' id = 'descripcion' name = 'descripcion' placeholder = {material.descripcion}/>
-                    </div>
-                    <div className = ''>
-                        <input className = '' type = 'text' id = 'costo' name = 'costo' placeholder = {material.costo}/>
-                    </div>
-                    <div className = ''>
-                        <input className = '' type = 'submit' value='Cambiar'/>
+                    <div className="row justify-content-center">
+                        <div className="col-lg-3 text-center">
+                            <input className = 'btn btn-light' type = 'submit' value='Cambiar'/>
+                        </div>
                     </div>
                 </form>
             </Fragment>
@@ -208,8 +220,8 @@ class Material extends React.Component{
         const {id} = this.props
         return(
             <Fragment>
-                <button name = {id} onClick ={this.handleCatalogo} className = ''>Ver catalogo</button>
-                <button name = {id} onClick ={this.handleAddMaterial} className = ''>Agregar material</button>
+                <button name = {id} onClick ={this.handleCatalogo} className = 'btn btn-light'>Ver catalogo</button>
+                <button name = {id} onClick ={this.handleAddMaterial} className = 'btn btn-light'>Agregar material</button>
             </Fragment>
         )
     }

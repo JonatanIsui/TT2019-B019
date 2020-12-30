@@ -13,7 +13,7 @@ class Arquitecto extends React.Component{
     idArquitecto = 0
     actualizar = values =>{
         return(
-            <table className = ''>
+            <table className = 'table table-hover table-dark'>
                 <thead className = ''>
                     <tr className = ''>
                         <th className = ''>Articulo</th>
@@ -67,20 +67,25 @@ class Arquitecto extends React.Component{
             const id = JSON.parse(atob(this.props.match.params.id))
             this.idArquitecto = id.id
             return(
-                <div className = ''>
-                    <h1 className = ''>Nav Bar arquitecto</h1>
-                    <h1 className = ''>Bienvenido {id.nombre}</h1>
-                    <button className = '' onClick={this.handleFormularioMedidas}>Nueva medidas</button> 
-                    <Boton
-                        text = 'Consultas guardadas'
-                        url = '/'
-                    />
-                    <button className = '' onClick={this.handleDiccionario}>Diccionario</button>
-                    <button className = '' onClick={this.logetOut}>Cerrar sesion</button>
-                    <div className='' id = 'div'>
-
-                    </div>
-                </div>
+                <nav className="navbar navbar-expand-sm bg-light">
+                    <ul className="navbar-nav">
+                        <li className="nav-item">
+                            <button className = 'btn btn-light' onClick={this.handleFormularioMedidas}>Nueva medidas</button>
+                        </li>
+                        <li className="nav-item">
+                            <Boton
+                                text = 'Consultas guardadas'
+                                url = '/'
+                            />
+                        </li>
+                        <li className="nav-item">
+                            <button className = 'btn btn-light' onClick={this.handleDiccionario}>Diccionario</button>
+                        </li>
+                        <li className="nav-item">
+                            <button className = 'btn btn-light' onClick={this.logetOut}>Cerrar sesion</button>
+                        </li>
+                    </ul>
+                </nav>
             )
         }else{
             return(

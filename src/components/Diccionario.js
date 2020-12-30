@@ -26,7 +26,7 @@ class Diccionario extends React.Component{
                             <tr className = '' key = {item.id}>
                                 <td className = '' >{item.nombre}</td>
                                     <td className = '' >{item.definicion}</td>
-                                    <td className = '' ><button className = '' id = {item.id} onClick = {this.handleEliminar}>Eliminar</button></td>
+                                    <td className = 'btn btn-light' ><button className = '' id = {item.id} onClick = {this.handleEliminar}>Eliminar</button></td>
                             </tr>
                         )                        
                     })
@@ -56,13 +56,13 @@ class Diccionario extends React.Component{
         <Fragment>
             <form id = 'nuevo' onSubmit = {this.handleAdd}>
                 <div className = ''>
-                    <input type = 'text' placeholder = 'Palabra*' className = '' name = 'nombre' onChange = {this.handleChage} required/>
+                    <input type = 'text' placeholder = 'Palabra*' className = 'form-control' name = 'nombre' onChange = {this.handleChage} required/>
                 </div>
                 <div className = ''>
-                    <input type = 'text' placeholder = 'Definicion*' className = '' name = 'definicion' onChange = {this.handleChage} required/>
+                    <input type = 'text' placeholder = 'Definicion*' className = 'form-control' name = 'definicion' onChange = {this.handleChage} required/>
                 </div>
                 <div className = ''>
-                    <input type = 'submit' value = 'Agregar definicion' className = ''/>
+                    <input type = 'submit' value = 'Agregar definicion' className = 'btn btn-light'/>
                 </div>
             </form>
         </Fragment>,document.getElementById("div"))
@@ -100,8 +100,8 @@ class Diccionario extends React.Component{
     render(){
         return(
             <Fragment>
-                <button className = '' onClick = {this.handleVer}>Ver diccionario</button>
-                <button className = '' onClick = {this.handleNuevo}>Agregar definicion</button>
+                <button className = 'btn btn-light' onClick = {this.handleVer}>Ver diccionario</button>
+                <button className = 'btn btn-light' onClick = {this.handleNuevo}>Agregar definicion</button>
             </Fragment>
         )
     }

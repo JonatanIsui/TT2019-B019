@@ -53,8 +53,8 @@ class InformacionUsuario extends React.Component{
             {this.parametros}
             <p className = ''>Correo: {this.id.correo}</p>
             <p className = ''>Ultima conexion: {this.id.fechaLogin}</p>
-            <button className = '' onClick = {this.handleRegresar}>Cancelar</button>
-            <button id ={this.id.id} className = '' onClick = {this.handleEliminarUsuario}>Eliminar</button>
+            <button className = 'btn btn-light' onClick = {this.handleRegresar}>Cancelar</button>
+            <button id ={this.id.id} className = 'btn btn-dark' onClick = {this.handleEliminarUsuario}>Eliminar</button>
         </div>
         )
     }
