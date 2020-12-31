@@ -138,15 +138,15 @@ class FormularioProveedor extends React.Component{
                                 <input type = 'tel' placeholder = 'telefono de la empresa' className = 'form-control' name = 'telefono' onChange = {this.handleChange} required/>
                             </div>
                             <div className = 'col-lg-4'>
-                                <input type = 'email' placeholder = 'Email de la empresa' className = 'c' name = 'correo' onChange = {this.handleChange} required/>
+                                <input type = 'email' placeholder = 'Email de la empresa' className = 'form-control' name = 'correo' onChange = {this.handleChange} required/>
                             </div>
                           </div>
                           <p></p>
                           
                         <div className='row justify-content-center'>
-                            <div className='col-lg-6 '>
+                            <div className='col-lg-6 text-center '>
                                 
-                                    <input type = 'file' accept=".png" className='' name = 'identificacion' onChange = {this.handleFile}/> <span className='text-nowrap'>Identificacion en formato png</span>
+                                    <input type = 'file' accept=".png" className='form-control-file border' name = 'identificacion' onChange = {this.handleFile}/> <span className='text-nowrap'>Identificacion en formato png</span>
                                   
                             </div>                   
                         </div>

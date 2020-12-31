@@ -11,6 +11,7 @@ class FormularioMedidas extends React.Component{
     pisos = 0
     ladrillo = 0
     arquitecto = 0
+    totalpromedio=0
     ArquitectoService = new ArquitectoService()
     res={}
     etiquetas = ['Botes de agua de 19L','Arena','Grava','Saco de cemento','Saco de Mortero','Varilla','Ladrillo Rojo','Ladrillo Block Ligero','Ladrillo Block Pesado']
@@ -19,12 +20,19 @@ class FormularioMedidas extends React.Component{
         this.div = document.getElementById('habitacion')
         for(let i = 0; i<e; i++){
             document.getElementById('habitacion').insertAdjacentHTML("beforebegin",
-                "<div>"+
-                "Habitacion "+(i+1)+""+
+                "<div className='row justify-content-center'>"+
+                    "<div className = 'col-lg-8 text-center'>"+
+                        "<h3>Habitacion "+(i+1)+"</h3>"+
+                    "</div>"+
                 "</div>"+
-                "<div>"+
-                    "<input name = 'anchoHabitacion"+(i+1)+"' type = 'number' min='1' max='4' placeholder = 'ancho en metros de la habitacion*' step = '0.01' required/>"+
-                    "<input name = 'largoHabitacion"+(i+1)+"' className = '' type = 'number' min='1' max='2.8' placeholder = 'largo en metros de la habitacion*' step = '0.01' required/>"+
+
+                "<div className='row justify-content-center'>"+
+                    "<div className = 'col-lg-4 text-center'>"+
+                        "Ancho en metros de la habitacion*:<input name = 'anchoHabitacion"+(i+1)+"' type = 'number' min='1' max='4' placeholder = 'ancho en metros de la habitacion*' step = '0.01' required className = 'form-control'/>"+
+                    "</div>"+
+                    "<div className = 'col-lg-4 text-center'>"+
+                        "Largo en metros de la habitacion*:<input name = 'largoHabitacion"+(i+1)+"'  type = 'number' min='1' max='2.8' placeholder = 'largo en metros de la habitacion*' step = '0.01' required className = 'form-control'/>"+
+                    "</div>"+
                 "</div>"
            )
         }
@@ -42,47 +50,67 @@ class FormularioMedidas extends React.Component{
                 "<td className = ''>"+Object.values(this.res)[i]+"</td>"+
                 "<td className = ''> $"+Object.values(this.res)[i+22]+"</td>"+
                 "<td className = ''>$"+Object.values(this.res)[i]*Object.values(this.res)[i+22]+"</td>"
-              
         )}
+
+        for(let i = 1;i<this.etiquetas.length;i++){
+            this.totalpromedio = this.totalpromedio+(Object.values(this.res)[i]*Object.values(this.res)[i+22])
+        }
+        document.getElementById('total').insertAdjacentHTML("beforebegin",
+            "<td className = '' colspan='3'>Promedio costo de construcion</td>"+
+            "<td className = ''>$"+this.totalpromedio+"</td>"
+        )
+        this.totalpromedio = 0 
     }
     consulta = () =>{
         return(
-            <div className=''>
-            <table className = ''>
-                <thead className = ''>
-                    <tr className = ''>
-                        <th className = ''>Material</th>
-                        <th className = ''>Cantidad</th>
-                        <th className = ''>Costo promedio</th>
-                        <th className = ''>Total</th>
-                    </tr>
-                </thead>
-                <tbody className = '' >
-                    <tr className = '' id = '0'>
-                    </tr>
-                    <tr className = '' id = '1'>
-                    </tr>
-                    <tr className = '' id = '2'>
-                    </tr>
-                    <tr className = '' id = '3'>
-                    </tr>
-                    <tr className = '' id = '4'>
-                    </tr>
-                    <tr className = '' id = '5'>
-                    </tr>
-                    <tr className = '' id = '6'>
-                    </tr>
-                    <tr className = '' id = '7'>
-                    </tr>
-                    <tr className = '' id = '8'>
-                    </tr>
-                </tbody>
-            </table>
-            <div>
-                <button >Proveedor recomendado</button>
-                <button >Ver todos los proveedores</button>
-                <button >Eliminar consulta</button>
-            </div>    
+            <div className='row justify-content-center'>  
+                <div className = 'col-lg-10 text-center'>
+                <table className = 'table table-hover table-dark'>
+                    <thead className = ''>
+                        <tr className = ''>
+                            <th className = ''>Material</th>
+                            <th className = ''>Cantidad</th>
+                            <th className = ''>Costo promedio</th>
+                            <th className = ''>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody className = '' >
+                        <tr className = '' id = '0'>
+                        </tr>
+                        <tr className = '' id = '1'>
+                        </tr>
+                        <tr className = '' id = '2'>
+                        </tr>
+                        <tr className = '' id = '3'>
+                        </tr>
+                        <tr className = '' id = '4'>
+                        </tr>
+                        <tr className = '' id = '5'>
+                        </tr>
+                        <tr className = '' id = '6'>
+                        </tr>
+                        <tr className = '' id = '7'>
+                        </tr>
+                        <tr className = '' id = '8'>
+                        </tr>
+                        <tr className = '' id = 'total'>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+                <div className='container-fluid'>
+                    <div className='row justify-content-center'>
+                        <div className = 'col-lg-4 text-center'>
+                            <button className = 'btn btn-light'>Proveedor recomendado</button>
+                        </div>
+                        <div className = 'col-lg-4 text-center'> 
+                            <button className = 'btn btn-light'>Ver todos los proveedores</button>
+                        </div>
+                        <div className = 'col-lg-4 text-center'>
+                            <button className = 'btn btn-light'>Eliminar consulta</button>
+                        </div>
+                    </div>
+                </div>
             </div>                  
         )
     }
@@ -90,25 +118,62 @@ class FormularioMedidas extends React.Component{
         return(
             <Fragment>
                 <form onSubmit = {this.handleNumHabitaciones}>
-                    <div id = 'habitacion'>
-                    </div>
-                        Cocina
-                        <div className = ''>
-                            <input name = 'anchococina' className = '' type = 'number' min='1' max='4' placeholder = 'ancho en metros de la cocina*' step = '0.01' required />
-                            <input name = 'largococina' className = '' type = 'number' min='1' max='4' placeholder = 'largo en metros de la cocina*' step = '0.1' required/>
+                            
+                            <div id = 'habitacion'>
+                            </div>
+
+
+                        <div className='row justify-content-center'>
+                            <div className = 'col-lg-8 text-center'>
+                                <h3>Cocina</h3>
+                            </div>
                         </div>
-                        Cuarto de lavado
-                        <div className = ''>
-                            <input name = 'ancholavado' className = '' type = 'number' min='1' max='3' placeholder = 'ancho en metros del cuarto del lavado*' step = '0.01' required/>
-                            <input name = 'largolavado' className = '' type = 'number' min='1' max='3' placeholder = 'largo en metros del cuarto del lavado*' step = '0.01' required/>
+                        <div className='row justify-content-center'>
+            	            <div className = 'col-lg-4 text-center'>
+                                Ancho en metros de la cocina*:<input name = 'anchococina' className = 'form-control' type = 'number' min='1' max='4' placeholder = 'ancho en metros de la cocina*' step = '0.01' required />
+                            </div>
+                            <div className = 'col-lg-4 text-center'>
+                                Largo en metros de la cocina*:<input name = 'largococina' className = 'form-control' type = 'number' min='1' max='4' placeholder = 'largo en metros de la cocina*' step = '0.1' required/>
+                            </div>
                         </div>
-                        Baño
-                        <div className = ''>
-                            <input name = 'anchobano' className = '' type = 'number' min='1' max='2.5' placeholder = 'ancho en metros del baño*' step = '0.01' required/>
-                            <input name = 'largobano' className = '' type = 'number' min='1' max='2' placeholder = 'largo en metros del baño*' step = '0.01' required/>
+
+
+                        <div className='row justify-content-center'>
+                            <div className = 'col-lg-8 text-center'>
+                                <h3>Cuarto de lavado</h3>
+                            </div>
                         </div>
-                    <div>
-                        <input type='submit' value='confirmar'/>
+
+                        <div className = 'row justify-content-center'>
+                            <div className = 'col-lg-4 text-center'>
+                                Ancho en metros del cuarto del lavado*:<input name = 'ancholavado' className = 'form-control' type = 'number' min='1' max='3' placeholder = 'ancho en metros del cuarto del lavado*' step = '0.01' required/>
+                            </div>
+                            <div className = 'col-lg-4 text-center'>
+                                Largo en metros del cuarto del lavado*:<input name = 'largolavado' className = 'form-control' type = 'number' min='1' max='3' placeholder = 'largo en metros del cuarto del lavado*' step = '0.01' required/>
+                            </div>
+                        </div>
+
+
+                        <div className='row justify-content-center'>
+                            <div className = 'col-lg-8 text-center'>
+                                <h3>Baño</h3>
+                            </div>
+                        </div>
+
+                        <div className = 'row justify-content-center'>
+                            <div className = 'col-lg-4 text-center'>
+                                Ancho en metros del baño*:<input name = 'anchobano' className = 'form-control' type = 'number' min='1' max='2.5' placeholder = 'ancho en metros del baño*' step = '0.01' required/>
+                            </div>
+                            <div className = 'col-lg-4 text-center'>
+                                Largo en metros del baño*:<input name = 'largobano' className = 'form-control' type = 'number' min='1' max='2' placeholder = 'largo en metros del baño*' step = '0.01' required/>
+                            </div>
+                        </div>
+                    
+                    <div className='row justify-content-center'>
+                        <div className = 'col-lg-3 text-center'>
+                            <p></p>
+                            <input type='submit' className = 'btn btn-light' value='confirmar'/>
+                        </div>
                     </div>
                 </form>
             </Fragment>
@@ -144,6 +209,7 @@ class FormularioMedidas extends React.Component{
         this.dim['idArquitecto'] = this.arquitecto
         let confirmar = prompt("Nombre de la consulta");
         if(confirmar != null){
+            console.log(confirmar.length)
             this.dim['nombre']=confirmar
             this.res = await this.ArquitectoService.consulta(this.dim)
             ReactDOM.render(this.consulta(),document.getElementById('div'))
@@ -157,38 +223,52 @@ class FormularioMedidas extends React.Component{
         const{arquitecto} = this.props
         this.arquitecto = arquitecto
         return(<Fragment>
+            
             <div id='medidasTerreno'>   
                 <form className = '' onSubmit = {this.handleSubmit}>
-                    <div className = ''>
-                        <input id = 'ancho' className = '' type = 'number' min='4' max='18' step = '0.01' placeholder = 'ancho en metros en metros del terreno*' required/>
+
+
+                    <div className='row justify-content-center'>
+                        <div className = 'col-lg-4 text-center'>
+                            Ancho en metros en metros del terreno*:<input id = 'ancho' className = 'form-control' type = 'number' min='4' max='18' step = '0.01' placeholder = 'ancho en metros en metros del terreno*' required/>
+                        </div>
+                        <div className = 'col-lg-4 text-center'>
+                            Largo en metros en metros del terreno*<input id = 'largo' className = 'form-control' type = 'number' min='4' max='18' step = '0.01' placeholder = 'largo en metros en metros del terreno*' required/>
+                        </div>
                     </div>
-                    <div className = ''>
-                        <input id = 'largo' className = '' type = 'number' min='4' max='18' step = '0.01' placeholder = 'largo en metros en metros del terreno*' required/>
+                    <p></p>
+
+                    <div className='row justify-content-center'>
+                        <div className = 'col-lg-3 text-center'>
+                            <p className =''>Número de cuartos</p>
+                            <select className= 'custom-select' id = 'habitaciones'>
+                                <option value = '1'>1</option>
+                                <option value = '2'>2</option>
+                            </select>
+                        </div>
+                        <div className='col-lg-3 text-center'>
+                            <p className = '' >Número de pisos</p>
+                            <select className= 'custom-select' id = 'pisos'>
+                                <option value = '1'>1</option>
+                                <option value = '2'>2</option>
+                            </select>    
+                        </div>
+                        <div className='col-lg-3 text-center'>
+                            <p className = '' >Tipo de ladrillo</p>
+                            <select className= 'custom-select' id = 'tipoladrillo'>
+                                <option value = '1'>Rojo</option>
+                                <option value = '2'>block</option>
+                            </select>    
+                        </div>
                     </div>
-                    <div className = ''>
-                        <p className =''>Número de cuartos</p>
-                        <select className= '' id = 'habitaciones'>
-                            <option value = '1'>1</option>
-                            <option value = '2'>2</option>
-                        </select>
+
+                    <p></p>
+                    <div className='row justify-content-center'>
+                        <div className = 'col-lg-3 text-center'>
+                            <input className = 'btn btn-light' type = 'submit' value = 'confirmar'/>
+                        </div>
                     </div>
-                    <div>
-                        <p className = '' >Número de pisos</p>
-                        <select className= '' id = 'pisos'>
-                            <option value = '1'>1</option>
-                            <option value = '2'>2</option>
-                        </select>    
-                    </div>
-                    <div>
-                        <p className = '' >Tipo de ladrillo</p>
-                        <select className= '' id = 'tipoladrillo'>
-                            <option value = '1'>Rojo</option>
-                            <option value = '2'>block</option>
-                        </select>    
-                    </div>
-                    <div className = ''>
-                        <input className = '' type = 'submit' value = 'confirmar'/>
-                    </div>
+                    <p> </p>
                 </form>
             </div>
             <div className = '' id ='medidas'>

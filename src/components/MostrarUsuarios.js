@@ -30,7 +30,7 @@ class MostrarUsuarios extends React.Component{
                             <tr className = '' key = {item.id}>
                                 <td className = '' >{item.correo}</td>
                                 <td className = ''>{item.fechaLogin}</td>
-                                <td className = 'btn btn-light'><button className = '' onClick = {this.handleEliminar} id = {item.id}>Eliminar</button></td>
+                                <td className = ''><button className = 'btn btn-light' onClick = {this.handleEliminar} id = {item.id}>Eliminar</button></td>
                                 <td className = ''><a href = {this.urlUsuarios+btoa(JSON.stringify(item))} >Mas informacion</a></td>
                             </tr>
                         )                        
@@ -104,7 +104,7 @@ class MostrarUsuarios extends React.Component{
             this.solicitudes = await this.AdmService.allSolicitudes()
             if(Object.keys(this.solicitudes).length !==0){
                 ReactDOM.render(
-                    <table className = ''>
+                    <table className = 'table table-hover table-dark'>
                         <thead className = ''>
                             <tr className = ''>
                                 <th className = ''>Nombre de la empresa</th>

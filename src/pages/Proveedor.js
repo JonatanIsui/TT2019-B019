@@ -60,39 +60,40 @@ class Proveedor extends React.Component{
     const id = JSON.parse(atob(this.props.match.params.id))
     if(localStorage.getItem('proveedor')==='true'){
         return(
-            <div class = 'container-fluid p-3 my-3 bg-dark text-white'>
+            <div className = 'container-fluid p-3 my-3 bg-dark text-white'>
         
-                <div class="row justify-content-center">
+                <div className="row justify-content-center">
                     <h1 className = ''>Bienvenido {id.nombreEncargado}</h1>
                 </div>
-                <div class="row justify-content-center">
+                <div className="row justify-content-center">
                     <Material
                             id = {id.id}
                         />
                 </div>
-                <div class="row justify-content-center">
-                    <div class='col-lg-4 text-center'>
-                        <button class = 'btn btn-light' onClick={this.handleFormato}>Formato excel</button>
+                <div className="row justify-content-center">
+                    <div className='col-lg-4 text-center'>
+                        <button className = 'btn btn-light' onClick={this.handleFormato}>Formato excel</button>
                     </div>
-                    <div class='col-lg-4 text-center'>
-                        <button class = 'btn btn-light' onClick={this.logetOut}>Cerrar sesion</button>
+                    <div className='col-lg-4 text-center'>
+                        <button className = 'btn btn-light' onClick={this.logetOut}>Cerrar sesion</button>
                     </div>
                 </div>
+                <div id = 'div'></div>
                 <form  id = {id.id} className = '' onSubmit={this.handleSubmit}>
-                    <div class="row justify-content-center">
+                    <div className="row justify-content-center">
                         
                             <h1 className = ''>Subir catalogo, solo formato .xlsx</h1>
                         
                     </div>
-                    <div class="row justify-content-center">
-                        <div class='col-lg-4 text-center'>
-                            <input type="file" name = 'catalogo' class = 'btn btn-light' onChange={this.handleFile} accept=".xlsx" required/>
+                    <div className="row justify-content-center">
+                        <div className='col-lg-4 text-center'>
+                            <input type="file" name = 'catalogo' className = 'btn btn-light' onChange={this.handleFile} accept=".xlsx" required/>
                         </div>
                     </div>
-                    <div class="row justify-content-center">
-                        <div class='col-lg-4 text-center'>
+                    <div className="row justify-content-center">
+                        <div className='col-lg-4 text-center'>
                             <p></p>
-                            <input type="submit" class = 'btn btn-light' value = 'Cargar'/>
+                            <input type="submit" className = 'btn btn-light' value = 'Cargar'/>
                         </div>
                     </div>
                 </form>

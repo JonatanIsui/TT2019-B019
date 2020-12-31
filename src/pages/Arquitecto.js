@@ -67,25 +67,37 @@ class Arquitecto extends React.Component{
             const id = JSON.parse(atob(this.props.match.params.id))
             this.idArquitecto = id.id
             return(
+                <div>
                 <nav className="navbar navbar-expand-sm bg-light">
+                    <div className='container-fluid'>
                     <ul className="navbar-nav">
+
                         <li className="nav-item">
                             <button className = 'btn btn-light' onClick={this.handleFormularioMedidas}>Nueva medidas</button>
                         </li>
+
                         <li className="nav-item">
                             <Boton
                                 text = 'Consultas guardadas'
                                 url = '/'
                             />
                         </li>
+
                         <li className="nav-item">
                             <button className = 'btn btn-light' onClick={this.handleDiccionario}>Diccionario</button>
                         </li>
+                        
                         <li className="nav-item">
                             <button className = 'btn btn-light' onClick={this.logetOut}>Cerrar sesion</button>
                         </li>
                     </ul>
-                </nav>
+                    </div>
+                </nav> 
+                
+                <div className=''>
+                <div className='' id = 'div'></div>
+                </div>
+                </div>
             )
         }else{
             return(

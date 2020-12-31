@@ -31,6 +31,11 @@ class Administrador extends React.Component{
                         </div>
                     </div>
                     <div className = 'row justify-content-center'>
+                         <div className = 'col-lg-8 text-center'>
+                         <div className='' id = 'div'></div>
+                         </div>
+                    </div>
+                    <div className = 'row justify-content-center'>
                         <div className = 'col-lg-4 text-center'>
                             <button className = 'btn btn-light' onClick={this.logetOut}>Cerrar sesion</button>
                         </div>

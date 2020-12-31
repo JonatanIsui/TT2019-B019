@@ -11,7 +11,7 @@ class Diccionario extends React.Component{
     //Este metodo tiene la tabla que se renderiza
     actualizar = values =>{
         return(
-            <table className = ''>
+            <table className = 'table table-hover table-dark'>
                 <thead className = ''>
                     <tr className = ''>
                         <th className = ''>Articulo</th>
@@ -26,7 +26,7 @@ class Diccionario extends React.Component{
                             <tr className = '' key = {item.id}>
                                 <td className = '' >{item.nombre}</td>
                                     <td className = '' >{item.definicion}</td>
-                                    <td className = 'btn btn-light' ><button className = '' id = {item.id} onClick = {this.handleEliminar}>Eliminar</button></td>
+                                    <td className = '' ><button className = 'btn btn-light' id = {item.id} onClick = {this.handleEliminar}>Eliminar</button></td>
                             </tr>
                         )                        
                     })
@@ -54,17 +54,29 @@ class Diccionario extends React.Component{
     handleNuevo = async () =>{
         ReactDOM.render(
         <Fragment>
-            <form id = 'nuevo' onSubmit = {this.handleAdd}>
-                <div className = ''>
-                    <input type = 'text' placeholder = 'Palabra*' className = 'form-control' name = 'nombre' onChange = {this.handleChage} required/>
-                </div>
-                <div className = ''>
-                    <input type = 'text' placeholder = 'Definicion*' className = 'form-control' name = 'definicion' onChange = {this.handleChage} required/>
-                </div>
-                <div className = ''>
-                    <input type = 'submit' value = 'Agregar definicion' className = 'btn btn-light'/>
-                </div>
-            </form>
+            <div className = 'container-fluid'>
+                <form id = 'nuevo' onSubmit = {this.handleAdd}>
+                    <p></p>
+                    <div className = 'row justify-content-center'>
+                        <div className = 'col-lg-8 text-center'>
+                            Palabra:<input type = 'text' placeholder = 'Palabra*' className = 'form-control' name = 'nombre' onChange = {this.handleChage} required/>
+                        </div>
+                    </div>
+                    <p></p>
+                    <div className = 'row justify-content-center'>
+                        <div className = 'col-lg-8 text-center'>
+                            Definición:<input type = 'text' placeholder = 'Definicion*' className = 'form-control' name = 'definicion' onChange = {this.handleChage} required/>
+                        </div>
+                    </div>
+                    <p></p>
+                    <div className = 'row justify-content-center'>
+                        <div className = 'col-lg-8 text-center'>
+                            <input type = 'submit' value = 'Agregar definicion' className = 'btn btn-light'/>
+                            <p></p>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </Fragment>,document.getElementById("div"))
     }
 
