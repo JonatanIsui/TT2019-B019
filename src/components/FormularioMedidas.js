@@ -20,18 +20,18 @@ class FormularioMedidas extends React.Component{
         this.div = document.getElementById('habitacion')
         for(let i = 0; i<e; i++){
             document.getElementById('habitacion').insertAdjacentHTML("beforebegin",
-                "<div className='row justify-content-center'>"+
-                    "<div className = 'col-lg-8 text-center'>"+
+                "<div class='row justify-content-center'>"+
+                    "<div class = 'col-lg-8 text-center'>"+
                         "<h3>Habitacion "+(i+1)+"</h3>"+
                     "</div>"+
                 "</div>"+
 
-                "<div className='row justify-content-center'>"+
-                    "<div className = 'col-lg-4 text-center'>"+
-                        "Ancho en metros de la habitacion*:<input name = 'anchoHabitacion"+(i+1)+"' type = 'number' min='1' max='4' placeholder = 'ancho en metros de la habitacion*' step = '0.01' required className = 'form-control'/>"+
+                "<div class='row justify-content-center'>"+
+                    "<div class = 'col-lg-4 text-center'>"+
+                        "Ancho en metros de la habitacion*:<input name = 'anchoHabitacion"+(i+1)+"' type = 'number' min='1' max='4' placeholder = 'ancho en metros de la habitacion*' step = '0.01' required class = 'form-control'/>"+
                     "</div>"+
-                    "<div className = 'col-lg-4 text-center'>"+
-                        "Largo en metros de la habitacion*:<input name = 'largoHabitacion"+(i+1)+"'  type = 'number' min='1' max='2.8' placeholder = 'largo en metros de la habitacion*' step = '0.01' required className = 'form-control'/>"+
+                    "<div class = 'col-lg-4 text-center'>"+
+                        "Largo en metros de la habitacion*:<input name = 'largoHabitacion"+(i+1)+"'  type = 'number' min='1' max='2.8' placeholder = 'largo en metros de la habitacion*' step = '0.01' required class = 'form-control'/>"+
                     "</div>"+
                 "</div>"
            )
