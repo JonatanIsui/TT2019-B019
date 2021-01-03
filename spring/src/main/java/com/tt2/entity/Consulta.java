@@ -23,6 +23,9 @@ public class Consulta implements Serializable{
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private int id;
 	
+	@Column(name = "nombre" ,nullable = false, columnDefinition = "VARCHAR(300)")
+	private String nombre;
+	
 	@Column(name = "agua",nullable = false, columnDefinition = "FLOAT(6,2)")
 	private double agua;
 	
@@ -41,8 +44,14 @@ public class Consulta implements Serializable{
 	@Column(name = "varilla",nullable = false, columnDefinition = "FLOAT(6,2)")
 	private double varilla;
 	
-	@Column(name = "ladrillos",nullable = false, columnDefinition = "FLOAT(8,2)")
-	private double ladrillos;
+	@Column(name = "ladrillo_rojo",nullable = false, columnDefinition = "FLOAT(8,2)")	
+	private double ladrilloRojo;
+	
+	@Column(name = "ladrillo_block_ligero",nullable = false, columnDefinition = "FLOAT(8,2)")
+	private double ladrilloBlockLigero;
+	
+	@Column(name = "ladrillo_block_pesado",nullable = false, columnDefinition = "FLOAT(8,2)")
+	private double ladrilloBloackPesado;
 	
 	@Column(name = "excel",nullable = false, columnDefinition = "VARCHAR(300)")
 	private String excel;
@@ -87,8 +96,110 @@ public class Consulta implements Serializable{
 	@Column(name = "tipoladrillo",nullable = false, columnDefinition = "int(1)")
 	private int tipoladrillo;
 	
+	@Column(name = "costo_arena",nullable = false, columnDefinition = "FLOAT(6,2)")
+	private double arenaCosto;
+	
+	@Column(name = "costo_grava",nullable = false, columnDefinition = "FLOAT(6,2)")
+	private double gravaCosto;
+	
+	@Column(name = "costo_saco",nullable = false, columnDefinition = "FLOAT(6,2)")
+	private double sacoCosto;
+	
+	@Column(name = "costo_mortero",nullable = false, columnDefinition = "FLOAT(6,2)")
+	private double sacoMorteroCosto;
+	
+	@Column(name = "costo_varilla",nullable = false, columnDefinition = "FLOAT(6,2)")
+	private double varillaCosto;
+	
+	@Column(name = "costo_ladrillo_rojo",nullable = false, columnDefinition = "FLOAT(6,2)")
+	private double ladrilloRojoCosto;
+	
+	@Column(name = "costo_ladrillo_ligero",nullable = false, columnDefinition = "FLOAT(6,2)")
+	private double ladrilloBlockLigeroCosto;
+	
+	@Column(name = "costo_ladrillo_pesado",nullable = false, columnDefinition = "FLOAT(6,2)")
+	private double ladrilloBloackPesadoCosto;
+	
 	public int getId() {
 		return id;
+	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public double getLadrilloRojo() {
+		return ladrilloRojo;
+	}
+	public void setLadrilloRojo(double ladrilloRojo) {
+		this.ladrilloRojo = ladrilloRojo;
+	}
+	public double getLadrilloBlockLigero() {
+		return ladrilloBlockLigero;
+	}
+	public void setLadrilloBlockLigero(double ladrilloBlockLigero) {
+		this.ladrilloBlockLigero = ladrilloBlockLigero;
+	}
+	public double getLadrilloBloackPesado() {
+		return ladrilloBloackPesado;
+	}
+	public void setLadrilloBloackPesado(double ladrilloBloackPesado) {
+		this.ladrilloBloackPesado = ladrilloBloackPesado;
+	}
+	public int getTipoladrillo() {
+		return tipoladrillo;
+	}
+	public void setTipoladrillo(int tipoladrillo) {
+		this.tipoladrillo = tipoladrillo;
+	}
+	public double getArenaCosto() {
+		return arenaCosto;
+	}
+	public void setArenaCosto(double arenaCosto) {
+		this.arenaCosto = arenaCosto;
+	}
+	public double getGravaCosto() {
+		return gravaCosto;
+	}
+	public void setGravaCosto(double gravaCosto) {
+		this.gravaCosto = gravaCosto;
+	}
+	public double getSacoCosto() {
+		return sacoCosto;
+	}
+	public void setSacoCosto(double sacoCosto) {
+		this.sacoCosto = sacoCosto;
+	}
+	public double getSacoMorteroCosto() {
+		return sacoMorteroCosto;
+	}
+	public void setSacoMorteroCosto(double sacoMorteroCosto) {
+		this.sacoMorteroCosto = sacoMorteroCosto;
+	}
+	public double getVarillaCosto() {
+		return varillaCosto;
+	}
+	public void setVarillaCosto(double varillaCosto) {
+		this.varillaCosto = varillaCosto;
+	}
+	public double getLadrilloRojoCosto() {
+		return ladrilloRojoCosto;
+	}
+	public void setLadrilloRojoCosto(double ladrilloRojoCosto) {
+		this.ladrilloRojoCosto = ladrilloRojoCosto;
+	}
+	public double getLadrilloBlockLigeroCosto() {
+		return ladrilloBlockLigeroCosto;
+	}
+	public void setLadrilloBlockLigeroCosto(double ladrilloBlockLigeroCosto) {
+		this.ladrilloBlockLigeroCosto = ladrilloBlockLigeroCosto;
+	}
+	public double getLadrilloBloackPesadoCosto() {
+		return ladrilloBloackPesadoCosto;
+	}
+	public void setLadrilloBloackPesadoCosto(double ladrilloBloackPesadoCosto) {
+		this.ladrilloBloackPesadoCosto = ladrilloBloackPesadoCosto;
 	}
 	public void setId(int id) {
 		this.id = id;
@@ -137,12 +248,6 @@ public class Consulta implements Serializable{
 	}
 	public void setVarilla(double varilla) {
 		this.varilla = varilla;
-	}
-	public double getLadrillos() {
-		return ladrillos;
-	}
-	public void setLadrillos(double ladrillos) {
-		this.ladrillos = ladrillos;
 	}
 	public double getAnchoHabitacion1() {
 		return anchoHabitacion1;

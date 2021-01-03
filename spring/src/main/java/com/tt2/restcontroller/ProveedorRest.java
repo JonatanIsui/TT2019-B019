@@ -61,8 +61,11 @@ public class ProveedorRest {
 	@PostMapping("/archivo")
 	public ResponseEntity<String> agregarArchivo(@RequestBody ArchivoModel archivo) {
 		String res = null;
-		if(proveedorBean.agregarArchiv(archivo));
+		if(proveedorBean.agregarArchiv(archivo))
 			res = "Catalogo agregado con exito";
+		else {
+			res = "El catalogo no se puede agregar verifique que los campos no esten vacios o el nombre del material no este registrado ya";
+		}
 		return ResponseEntity.ok(res);
 	}
 	

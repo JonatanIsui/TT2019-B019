@@ -269,8 +269,15 @@ public class ConsultaBean {
                 + "\nSacos de mortero: "+Math.ceil(sacoMortero)
                 + "\nVarillas: "+Math.ceil(varillas)
                 + "\nLadrillos: "+Math.ceil(ladrillos));
+        agua = 0;
+        arena=0;
+        grava=0;
+        saco=0;
+        sacoMortero=0;
+        varillas=0;
+        ladrillos=0;
     }
-
+    
 	public ConsultaModel getConsulta() {
 		return consulta;
 	}

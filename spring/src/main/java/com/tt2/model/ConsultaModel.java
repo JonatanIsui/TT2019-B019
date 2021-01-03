@@ -4,7 +4,8 @@ import java.io.Serializable;
 import com.tt2.entity.Arquitecto;
 
 public class ConsultaModel implements Serializable{
-private static final long serialVersionUID = 1L;	
+private static final long serialVersionUID = 1L;
+	private String nombre;
 	private double agua;
 	private double arena;
 	private double grava;
@@ -36,8 +37,11 @@ private static final long serialVersionUID = 1L;
 	private double ladrilloRojoCosto;
 	private double ladrilloBlockLigeroCosto;
 	private double ladrilloBloackPesadoCosto;
-	
-	
+	private String nombreProveedor;
+	private String telefonoProveedor;
+	private String correoProveedor;
+	private String direccionProveedor;
+	private double total;
 	
 	public int getTipoladrillo() {
 		return tipoladrillo;
@@ -231,6 +235,40 @@ private static final long serialVersionUID = 1L;
 	public void setLadrilloBloackPesadoCosto(double ladrilloBloackPesadoCosto) {
 		this.ladrilloBloackPesadoCosto = ladrilloBloackPesadoCosto;
 	}
-	
-	
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public String getNombreProveedor() {
+		return nombreProveedor;
+	}
+	public void setNombreProveedor(String nombreProveedor) {
+		this.nombreProveedor = nombreProveedor;
+	}
+	public String getTelefonoProveedor() {
+		return telefonoProveedor;
+	}
+	public void setTelefonoProveedor(String telefonoProveedor) {
+		this.telefonoProveedor = telefonoProveedor;
+	}
+	public String getCorreoProveedor() {
+		return correoProveedor;
+	}
+	public void setCorreoProveedor(String correoProveedor) {
+		this.correoProveedor = correoProveedor;
+	}
+	public String getDireccionProveedor() {
+		return direccionProveedor;
+	}
+	public void setDireccionProveedor(String direccionProveedor) {
+		this.direccionProveedor = direccionProveedor;
+	}
+	public double getTotal() {
+		return total;
+	}
+	public void setTotal(double total) {
+		this.total = total;
+	}
 }

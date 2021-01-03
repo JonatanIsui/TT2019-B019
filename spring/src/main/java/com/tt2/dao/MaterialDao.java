@@ -27,4 +27,7 @@ public interface MaterialDao extends JpaRepository <Material, Integer>{
 	public abstract float promedioCostoladrilloLigero();
 	@Query("select AVG(costo) from Material where nombre='Ladrillo Block Pesado'")
 	public abstract float promedioCostoladrilloPesado();
+	public abstract Material findByClave(String clave);
+	public abstract Material findByProveedorAndNombre(Proveedor proveedor,String nombre);
+	
 }

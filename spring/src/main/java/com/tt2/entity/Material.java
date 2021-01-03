@@ -37,6 +37,17 @@ public class Material implements Serializable{
 	@Column(name = "costo", nullable = false, columnDefinition = "FLOAT(8,2)")
 	private float costo;
 	
+	@Column(name = "clave", nullable = false, columnDefinition = "VARCHAR(30)", unique=true)
+	private String clave;
+	
+	public String getClave() {
+		return clave;
+	}
+
+	public void setClave(String clave) {
+		this.clave = clave;
+	}
+
 	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_id_proveedor")
 	private Proveedor proveedor; 

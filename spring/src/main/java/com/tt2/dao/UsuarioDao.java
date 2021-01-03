@@ -2,6 +2,7 @@ package com.tt2.dao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.tt2.entity.Proveedor;
 import com.tt2.entity.Usuario;
 
 @Repository("usuarioDao")
@@ -20,4 +21,5 @@ public interface UsuarioDao extends JpaRepository<Usuario,Integer>{
 	 * recuperacion de contraseña
 	 */
 	public abstract Usuario findByCorreo(String correo);
+	public abstract Usuario findByProveedor(Proveedor proveedor);
 }

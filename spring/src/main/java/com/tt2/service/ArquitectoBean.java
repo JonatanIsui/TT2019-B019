@@ -12,7 +12,6 @@ import com.tt2.dao.MaterialDao;
 import com.tt2.dao.UsuarioDao;
 import com.tt2.entity.Arquitecto;
 import com.tt2.entity.Diccionario;
-import com.tt2.entity.Estimacion;
 import com.tt2.entity.Proveedor;
 import com.tt2.entity.Usuario;
 import com.tt2.model.ConsultaModel;
@@ -46,6 +45,10 @@ public class ArquitectoBean extends UsuarioBean implements ArquitectoBeanInterfa
 	@Qualifier("materialDao")
 	private MaterialDao materialDao;
 	
+	@Autowired
+	@Qualifier("proveedorConsulta")
+	private ProveedorConsulta proveedorConsulta;
+	
 	@Override
 	public Usuario registroArquitecto(Usuario usuario) {
 		Usuario aux = null;
@@ -53,18 +56,6 @@ public class ArquitectoBean extends UsuarioBean implements ArquitectoBeanInterfa
 			aux = usuarioDao.save(usuario);
 		}
 		return aux;
-	}
-
-	@Override
-	public Estimacion ingresarMedidas(Medidas medidas) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Estimacion> verConsultasAnteriores() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
@@ -91,6 +82,9 @@ public class ArquitectoBean extends UsuarioBean implements ArquitectoBeanInterfa
 			consultaBean.imprimir();
 			ConsultaModel consulta = consultaBean.getConsulta();
 			consulta.setArquitecto(arquitectoOption.get());
+			System.out.println("------------");
+			System.out.println(medidas.getAnchoHabitacion1());
+			System.out.println("------------");
 			consulta.setAnchoHabitacion1(medidas.getAnchoHabitacion1());
 			consulta.setAnchoHabitacion2(medidas.getAnchoHabitacion2());
 			consulta.setAnchobano(medidas.getAnchobano());
@@ -112,6 +106,7 @@ public class ArquitectoBean extends UsuarioBean implements ArquitectoBeanInterfa
 			consulta.setLadrilloRojoCosto(materialDao.promedioCostoladrilloRojo());
 			consulta.setLadrilloBlockLigeroCosto(materialDao.promedioCostoladrilloLigero());
 			consulta.setLadrilloBloackPesadoCosto(materialDao.promedioCostoladrilloPesado());
+			consulta=proveedorConsulta.selectProveedor(consulta);
 			return consulta;
 		}catch(Exception e) {
 			e.printStackTrace();
