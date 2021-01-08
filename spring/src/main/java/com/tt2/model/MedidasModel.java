@@ -18,7 +18,14 @@ public class MedidasModel implements Serializable{
 	private int tipoladrillo;
 	private int pisos;
 	private int idArquitecto;
+	private String nombre;
 	
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 	public int getTipoladrillo() {
 		return tipoladrillo;
 	}

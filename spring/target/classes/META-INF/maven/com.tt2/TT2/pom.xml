@@ -43,7 +43,7 @@
     		<groupId>javax.validation</groupId>
     		<artifactId>validation-api</artifactId>
 		</dependency>
-		<!-- Hibernate -->
+<!--Hibernate dependencias-->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>

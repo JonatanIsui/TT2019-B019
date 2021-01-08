@@ -41,52 +41,64 @@ public class ProveedorConsulta {
 		double promedioaux=0;
 		int provedorSugerido=0;
 		double totalConstrucion = 0;
-		Proveedor proveedorSugerido=new Proveedor();
-		double promedio = consulta.getArena()*consulta.getArenaCosto() 
-				+consulta.getGrava()*consulta.getGravaCosto()
-				+consulta.getSaco()*consulta.getSacoCosto()
-				+consulta.getSacoMortero()*consulta.getSacoMorteroCosto()
-				+consulta.getVarilla()*consulta.getVarillaCosto()
-				+consulta.getLadrilloRojo()*consulta.getLadrilloRojoCosto()
-				+consulta.getLadrilloBlockLigero()*consulta.getLadrilloBlockLigeroCosto()
-				+consulta.getLadrilloBloackPesado()*consulta.getLadrilloBloackPesadoCosto();
-		List<Proveedor> proveedores = proveedorDao.findAll();
-		for(Proveedor proveedor:proveedores) {
-			notNull= true;
-			for(int i = 0;i<nombreMaterial.length;i++) {
-				if(materialDao.findByProveedorAndNombre(proveedor, nombreMaterial[i])==null) {
-					notNull= false;
+		try {
+			consulta.setArenaCosto(materialDao.promedioCostoArena());
+			consulta.setGravaCosto(materialDao.promedioCostoGrava());
+			consulta.setSacoCosto(materialDao.promedioCostoCemento());
+			consulta.setSacoMorteroCosto(materialDao.promedioCostoMortero());
+			consulta.setVarillaCosto(materialDao.promedioCostoVarilla());
+			consulta.setLadrilloRojoCosto(materialDao.promedioCostoladrilloRojo());
+			consulta.setLadrilloBlockLigeroCosto(materialDao.promedioCostoladrilloLigero());
+			consulta.setLadrilloBloackPesadoCosto(materialDao.promedioCostoladrilloPesado());
+			Proveedor proveedorSugerido=new Proveedor();
+			double promedio = consulta.getArena()*consulta.getArenaCosto() 
+					+consulta.getGrava()*consulta.getGravaCosto()
+					+consulta.getSaco()*consulta.getSacoCosto()
+					+consulta.getSacoMortero()*consulta.getSacoMorteroCosto()
+					+consulta.getVarilla()*consulta.getVarillaCosto()
+					+consulta.getLadrilloRojo()*consulta.getLadrilloRojoCosto()
+					+consulta.getLadrilloBlockLigero()*consulta.getLadrilloBlockLigeroCosto()
+					+consulta.getLadrilloBloackPesado()*consulta.getLadrilloBloackPesadoCosto();
+			List<Proveedor> proveedores = proveedorDao.findAll();
+			for(Proveedor proveedor:proveedores) {
+				notNull= true;
+				for(int i = 0;i<nombreMaterial.length;i++) {
+					if(materialDao.findByProveedorAndNombre(proveedor, nombreMaterial[i])==null) {
+						notNull= false;
+					}
+				}
+				if(notNull) {
+					for(int j = 0;j<nombreMaterial.length;j++) {
+						totalConstrucion=materialDao.findByProveedorAndNombre(proveedor, "grava").getCosto()*consulta.getGravaCosto()
+								+materialDao.findByProveedorAndNombre(proveedor, "arena").getCosto()*consulta.getArena()
+								+materialDao.findByProveedorAndNombre(proveedor, "cemento").getCosto()*consulta.getSaco()
+								+materialDao.findByProveedorAndNombre(proveedor, "mortero").getCosto()*consulta.getSacoMortero()
+								+materialDao.findByProveedorAndNombre(proveedor, "varilla").getCosto()*consulta.getVarilla()
+								+materialDao.findByProveedorAndNombre(proveedor, "ladrillo rojo").getCosto()*consulta.getLadrilloRojo()
+								+materialDao.findByProveedorAndNombre(proveedor, "ladrillo block ligero").getCosto()*consulta.getLadrilloBlockLigero()
+								+materialDao.findByProveedorAndNombre(proveedor, "ladrillo block pesado").getCosto()*consulta.getLadrilloBloackPesado();
+					}
+					if(Math.pow((totalConstrucion-promedio),2)<promedioaux){
+						provedorSugerido=aux;
+						promedioaux=totalConstrucion-promedio;
+					}
+					aux++;
 				}
 			}
-			if(notNull) {
-				for(int j = 0;j<nombreMaterial.length;j++) {
-					totalConstrucion=materialDao.findByProveedorAndNombre(proveedor, "grava").getCosto()*consulta.getGravaCosto()
-							+materialDao.findByProveedorAndNombre(proveedor, "arena").getCosto()*consulta.getArena()
-							+materialDao.findByProveedorAndNombre(proveedor, "cemento").getCosto()*consulta.getSaco()
-							+materialDao.findByProveedorAndNombre(proveedor, "mortero").getCosto()*consulta.getSacoMortero()
-							+materialDao.findByProveedorAndNombre(proveedor, "varilla").getCosto()*consulta.getVarilla()
-							+materialDao.findByProveedorAndNombre(proveedor, "ladrillo rojo").getCosto()*consulta.getLadrilloRojo()
-							+materialDao.findByProveedorAndNombre(proveedor, "ladrillo block ligero").getCosto()*consulta.getLadrilloBlockLigero()
-							+materialDao.findByProveedorAndNombre(proveedor, "ladrillo block pesado").getCosto()*consulta.getLadrilloBloackPesado();
-
-				}
-				if(Math.pow((totalConstrucion-promedio),2)<promedioaux){
-					provedorSugerido=aux;
-					promedioaux=totalConstrucion-promedio;
-				}
-				aux++;
-			}
+			proveedorSugerido=proveedores.get(provedorSugerido);
+			consulta.setNombreProveedor(proveedorSugerido.getNombreEmpresa());
+			consulta.setTelefonoProveedor(proveedorSugerido.getTelefono());
+			consulta.setCorreoProveedor(usuarioDao.findByProveedor(proveedorSugerido).getCorreo());
+			consulta.setDireccionProveedor(proveedorSugerido.getDireccion());
+			consulta.setNombreProveedor(proveedorSugerido.getNombreEmpresa());
+			consulta.setTelefonoProveedor(proveedorSugerido.getTelefono());
+			consulta.setCorreoProveedor(usuarioDao.findByProveedor(proveedorSugerido).getCorreo());
+			consulta.setDireccionProveedor(proveedorSugerido.getDireccion());
+			consulta.setTotal(promedio);
+			return consulta;
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
 		}
-		proveedorSugerido=proveedores.get(provedorSugerido);
-		consulta.setNombreProveedor(proveedorSugerido.getNombreEmpresa());
-		consulta.setTelefonoProveedor(proveedorSugerido.getTelefono());
-		consulta.setCorreoProveedor(usuarioDao.findByProveedor(proveedorSugerido).getCorreo());
-		consulta.setDireccionProveedor(proveedorSugerido.getDireccion());
-		consulta.setNombreProveedor(proveedorSugerido.getNombreEmpresa());
-		consulta.setTelefonoProveedor(proveedorSugerido.getTelefono());
-		consulta.setCorreoProveedor(usuarioDao.findByProveedor(proveedorSugerido).getCorreo());
-		consulta.setDireccionProveedor(proveedorSugerido.getDireccion());
-		consulta.setTotal(promedio);
-		return consulta;
 	}
 }

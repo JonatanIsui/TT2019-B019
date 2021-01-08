@@ -43,8 +43,10 @@ public class UsuarioBean implements UsuarioBeanInterfaz{
 		try {
 			boolean aux = false;
 			Usuario usuario = usuarioDao.findByCorreo(correo);
-			if(email.sendEmail(usuario))
-				aux = true;
+			if(usuario!=null) {
+				if(email.sendEmail(usuario)) {
+					aux = true;}
+			}
 			return aux;
 		}catch(Exception e) {
 			e.printStackTrace();

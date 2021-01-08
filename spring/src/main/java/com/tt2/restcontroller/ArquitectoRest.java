@@ -17,6 +17,7 @@ import com.tt2.model.ConsultaModel;
 import com.tt2.model.MedidasModel;
 import com.tt2.entity.Diccionario;
 import com.tt2.service.ArquitectoBean;
+import com.tt2.service.ConsulBean;
 
 @RestController
 @RequestMapping("/arquitecto")
@@ -26,6 +27,10 @@ public class ArquitectoRest implements ErrorController{
 	@Autowired
 	@Qualifier("arquitectoBean")
 	private ArquitectoBean arquitectoBean;
+	
+	@Autowired
+	@Qualifier("consulBean")
+	private ConsulBean consulBean;
 	
 	@PostMapping("/registroArquitecto")
 	public ResponseEntity <Usuario> registrarArquitecto(@RequestBody Usuario usuario){
@@ -48,9 +53,13 @@ public class ArquitectoRest implements ErrorController{
 	@PostMapping("/consulta")
 	public ResponseEntity<ConsultaModel> consulta(@RequestBody MedidasModel model){
 		ResponseEntity<ConsultaModel> res= ResponseEntity.noContent().build();
-		ConsultaModel respuesta = arquitectoBean.consulta(model);
-		if(respuesta != null)
-			res = ResponseEntity.ok(respuesta);
+		if(consulBean.existeConsulta(model.getIdArquitecto(), model.getNombre())){
+			ConsultaModel respuesta = arquitectoBean.consulta(model);
+			if(respuesta != null)
+				if(arquitectoBean.saveConsulta(respuesta)) {
+					res = ResponseEntity.ok(respuesta);
+				}
+		}
 		return res;
 	}
 	@Override

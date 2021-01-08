@@ -55,8 +55,6 @@ public class AdministradorBean extends UsuarioBean implements AdministradorBeanI
 		Optional<SolicitudProveedor> solicitud = solicitudProveedorDao.findById(id);
 		SolicitudProveedor solicitudProveedor = solicitud.get();
 		boolean aux = false;
-		System.out.println(usuarioDao.findByCorreo(solicitudProveedor.getCorreo()));
-		System.out.println(usuarioDao.findByCorreo(proveedorDao.findByNombreEmpresa(solicitudProveedor.getNombreEmpresa())));
 		if(usuarioDao.findByCorreo(solicitudProveedor.getCorreo()) == null && proveedorDao.findByNombreEmpresa(solicitudProveedor.getNombreEmpresa()) == null) {
 			usuario.setCorreo(solicitudProveedor.getCorreo());
 			usuario.setPassword(solicitudProveedor.getPassword());

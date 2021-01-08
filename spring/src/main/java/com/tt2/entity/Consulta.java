@@ -93,8 +93,8 @@ public class Consulta implements Serializable{
 	@Column(name = "pisos",nullable = false, columnDefinition = "int(1)")
 	private int pisos;
 	
-	@Column(name = "tipoladrillo",nullable = false, columnDefinition = "int(1)")
-	private int tipoladrillo;
+	@Column(name = "tipoladrillo",nullable = false, columnDefinition = "VARCHAR(50)")
+	private String tipoladrillo;
 	
 	@Column(name = "costo_arena",nullable = false, columnDefinition = "FLOAT(6,2)")
 	private double arenaCosto;
@@ -120,6 +120,51 @@ public class Consulta implements Serializable{
 	@Column(name = "costo_ladrillo_pesado",nullable = false, columnDefinition = "FLOAT(6,2)")
 	private double ladrilloBloackPesadoCosto;
 	
+	@Column(name="nombre_proveedor",nullable= false, columnDefinition="VARCHAR(250)")
+	private String nombreProveedor;
+	
+	@Column(name="telefono_proveedor",nullable= false, columnDefinition="VARCHAR(10)")
+	private String telefonoProveedor;
+	
+	@Column(name="correo_proveedor",nullable= false, columnDefinition="VARCHAR(10)")
+	private String correoProveedor;
+	
+	@Column(name="direccion_proveedor",nullable= false, columnDefinition="VARCHAR(10)")
+	private String direccionProveedor;
+	
+	@Column(name="total_consulta",nullable= false, columnDefinition="FLOAT(8,2)")
+	private double totalConsulta;
+	
+	public String getNombreProveedor() {
+		return nombreProveedor;
+	}
+	public void setNombreProveedor(String nombreProveedor) {
+		this.nombreProveedor = nombreProveedor;
+	}
+	public String getTelefonoProveedor() {
+		return telefonoProveedor;
+	}
+	public void setTelefonoProveedor(String telefonoProveedor) {
+		this.telefonoProveedor = telefonoProveedor;
+	}
+	public String getCorreoProveedor() {
+		return correoProveedor;
+	}
+	public void setCorreoProveedor(String correoProveedor) {
+		this.correoProveedor = correoProveedor;
+	}
+	public String getDireccionProveedor() {
+		return direccionProveedor;
+	}
+	public void setDireccionProveedor(String direccionProveedor) {
+		this.direccionProveedor = direccionProveedor;
+	}
+	public double getTotalConsulta() {
+		return totalConsulta;
+	}
+	public void setTotalConsulta(double totalConsulta) {
+		this.totalConsulta = totalConsulta;
+	}
 	public int getId() {
 		return id;
 	}
@@ -147,10 +192,10 @@ public class Consulta implements Serializable{
 	public void setLadrilloBloackPesado(double ladrilloBloackPesado) {
 		this.ladrilloBloackPesado = ladrilloBloackPesado;
 	}
-	public int getTipoladrillo() {
+	public String getTipoladrillo() {
 		return tipoladrillo;
 	}
-	public void setTipoladrillo(int tipoladrillo) {
+	public void setTipoladrillo(String tipoladrillo) {
 		this.tipoladrillo = tipoladrillo;
 	}
 	public double getArenaCosto() {
@@ -315,10 +360,10 @@ public class Consulta implements Serializable{
 	public void setPisos(int pisos) {
 		this.pisos = pisos;
 	}
-	public int getTipoLadrillo() {
+	public String getTipoLadrillo() {
 		return tipoladrillo;
 	}
-	public void setTipoLadrillo(int tipoladrillo) {
+	public void setTipoLadrillo(String tipoladrillo) {
 		this.tipoladrillo = tipoladrillo;
 	}
 	public Arquitecto getArquitecto() {

@@ -17,4 +17,6 @@ public interface ArquitectoBeanInterfaz {
 	List<Diccionario> getDiccionario();
 	
 	ConsultaModel consulta(MedidasModel medidas);
+	
+	boolean saveConsulta(ConsultaModel consultaModel);
 }

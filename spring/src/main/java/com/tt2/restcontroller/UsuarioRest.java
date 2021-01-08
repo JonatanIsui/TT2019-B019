@@ -35,9 +35,9 @@ public class UsuarioRest implements ErrorController{
 	
 	@GetMapping(value = "/recuperarPassword/{email}/")
 	public ResponseEntity<String> recuperarPassword(@PathVariable("email") String email) {
-		String res = "El correo ingresado no se encuentra segistrado";
+		String res = "El correo ingresado no se encuentra registrado";
 		if(usuarioBean.recuperarPassword(email))
-			res = "Se a enviado el link a su correo";
+			res = "Se ha enviado correo para restablecer su contraseña";
 		return ResponseEntity.ok(res);
 	}
 	

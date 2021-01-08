@@ -19,7 +19,7 @@ public class Diccionario implements Serializable{
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private int id;
 	
-	@Column(name = "Nombre", nullable = false, columnDefinition = "VARCHAR(60)")
+	@Column(name = "Nombre", unique=true  ,nullable = false, columnDefinition = "VARCHAR(60)")
 	private String nombre;
 	
 	@Column(name = "definicion", nullable = false, columnDefinition = "VARCHAR(1000)")

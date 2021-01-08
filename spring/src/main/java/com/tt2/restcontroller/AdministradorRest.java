@@ -81,7 +81,6 @@ public class AdministradorRest implements ErrorController{
 	@PostMapping("/aceptarProveedor/{id}")
 	public ResponseEntity<String> aceptarProveedor(@PathVariable ("id") Integer id) {
 		String res = "No se puede agregar a este proveedor.";
-		System.out.print("LLEGO AQUI");
 		if(administradorBean.altaProveedor(id)) 
 			res = "Proveedor registrado";
 		return ResponseEntity.ok(res);
@@ -114,8 +113,7 @@ public class AdministradorRest implements ErrorController{
 	
 	@PostMapping("/agregarDefinicion")
 	public ResponseEntity<String> agregarDefinicion(@RequestBody Diccionario definicion) {
-		String res = "En estos momentos no se pudo agregar la definicion";
-		System.out.println("LLega la peticion");
+		String res = "En estos momentos no se pudo agregar la definicion o ya exite";
 		if(administradorBean.agregarDefinicion(definicion))
 			res = "Definicion agregada con exito";
 		return ResponseEntity.ok(res);
