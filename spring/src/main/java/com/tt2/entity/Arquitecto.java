@@ -2,6 +2,8 @@ package com.tt2.entity;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -15,13 +17,14 @@ import javax.persistence.GenerationType;
  * */
 @Entity
 @Table(name = "arquitecto")
+@SequenceGenerator(name = "S_arquitecto", sequenceName = "S_arquitecto")
 public class Arquitecto implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name = "id_arquitecto")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "S_arquitecto")
 	private int id;
 	
 	@Column(name = "nombre",nullable = false, columnDefinition = "VARCHAR(20)")

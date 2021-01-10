@@ -11,18 +11,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "material")
+@SequenceGenerator(name = "S_material", sequenceName = "S_material")
 public class Material implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name = "id_material")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "S_material")
 	private int id;
 	
 	@Column(name = "nombre", nullable = false, columnDefinition = "VARCHAR(30)")

@@ -50,7 +50,7 @@ public class ProveedorBean extends UsuarioBean implements ProveedorBeanInterfaz{
 			Material aux = materialOpt.get();
 			if(nombreMaterial.contains(material.getNombre().toLowerCase())) {
 				if(materialDao.findByProveedorAndNombre(material.getProveedor(),material.getNombre().toLowerCase())==null){
-					aux.setNombre(material.getNombre());
+					aux.setNombre(material.getNombre().toLowerCase());
 				}
 			}
 			aux.setCategoria(material.getCategoria());
@@ -73,7 +73,7 @@ public class ProveedorBean extends UsuarioBean implements ProveedorBeanInterfaz{
 			if(materialDao.findByClave(material.getClave()) == null) {
 				if(materialDao.findByProveedorAndNombre(proveedor.get(),material.getNombre().toLowerCase())==null){
 					aux.setClave(material.getClave());
-					aux.setNombre(material.getNombre());
+					aux.setNombre(material.getNombre().toLowerCase());
 					aux.setCategoria(material.getCategoria());
 					aux.setDescripcion(material.getDescripcion());
 					aux.setCosto(material.getCosto());

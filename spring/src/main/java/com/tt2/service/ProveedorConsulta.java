@@ -50,6 +50,7 @@ public class ProveedorConsulta {
 			consulta.setLadrilloRojoCosto(materialDao.promedioCostoladrilloRojo());
 			consulta.setLadrilloBlockLigeroCosto(materialDao.promedioCostoladrilloLigero());
 			consulta.setLadrilloBloackPesadoCosto(materialDao.promedioCostoladrilloPesado());
+			consulta.setAlambreCosto(materialDao.promedioCostoAlambre());
 			Proveedor proveedorSugerido=new Proveedor();
 			double promedio = consulta.getArena()*consulta.getArenaCosto() 
 					+consulta.getGrava()*consulta.getGravaCosto()
@@ -58,7 +59,9 @@ public class ProveedorConsulta {
 					+consulta.getVarilla()*consulta.getVarillaCosto()
 					+consulta.getLadrilloRojo()*consulta.getLadrilloRojoCosto()
 					+consulta.getLadrilloBlockLigero()*consulta.getLadrilloBlockLigeroCosto()
-					+consulta.getLadrilloBloackPesado()*consulta.getLadrilloBloackPesadoCosto();
+					+consulta.getLadrilloBloackPesado()*consulta.getLadrilloBloackPesadoCosto()
+					+consulta.getAlambre()*consulta.getAlambreCosto()
+					+44.94;
 			List<Proveedor> proveedores = proveedorDao.findAll();
 			for(Proveedor proveedor:proveedores) {
 				notNull= true;
@@ -76,7 +79,9 @@ public class ProveedorConsulta {
 								+materialDao.findByProveedorAndNombre(proveedor, "varilla").getCosto()*consulta.getVarilla()
 								+materialDao.findByProveedorAndNombre(proveedor, "ladrillo rojo").getCosto()*consulta.getLadrilloRojo()
 								+materialDao.findByProveedorAndNombre(proveedor, "ladrillo block ligero").getCosto()*consulta.getLadrilloBlockLigero()
-								+materialDao.findByProveedorAndNombre(proveedor, "ladrillo block pesado").getCosto()*consulta.getLadrilloBloackPesado();
+								+materialDao.findByProveedorAndNombre(proveedor, "ladrillo block pesado").getCosto()*consulta.getLadrilloBloackPesado()
+								+materialDao.findByProveedorAndNombre(proveedor, "alambre").getCosto()*consulta.getAlambre()
+								+44.94;
 					}
 					if(Math.pow((totalConstrucion-promedio),2)<promedioaux){
 						provedorSugerido=aux;
@@ -95,6 +100,7 @@ public class ProveedorConsulta {
 			consulta.setCorreoProveedor(usuarioDao.findByProveedor(proveedorSugerido).getCorreo());
 			consulta.setDireccionProveedor(proveedorSugerido.getDireccion());
 			consulta.setTotal(promedio);
+			consulta.setIdProveedor(proveedorSugerido.getId());
 			return consulta;
 		}catch(Exception e){
 			e.printStackTrace();

@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -19,11 +20,12 @@ import javax.persistence.TemporalType;
  * en esta ocasion se uso notaciones
  * */
 @Table(name = "usuario")
+@SequenceGenerator(name = "S_usuario", sequenceName = "S_usuario")
 public class Usuario implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@Id
 	@Column(name = "id_usuario")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "S_usuario")
 	private int id;
 	/*
 	 * nullabel indica que el campo no puede ser nulo

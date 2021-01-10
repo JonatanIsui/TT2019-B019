@@ -9,17 +9,32 @@ public class MedidasModel implements Serializable{
 	private double anchoHabitacion2;
 	private double anchobano;
 	private double anchococina;
+	private double ancholavado;
 	private double anchoterreno;
 	private double largoHabitacion1;
 	private double largoHabitacion2;
 	private double largobano;
 	private double largococina;
+	private double largolavado;
 	private double largoterreno;
 	private int tipoladrillo;
 	private int pisos;
 	private int idArquitecto;
 	private String nombre;
+
 	
+	public double getAncholavado() {
+		return ancholavado;
+	}
+	public void setAncholavado(double ancholavado) {
+		this.ancholavado = ancholavado;
+	}
+	public double getLargolavado() {
+		return largolavado;
+	}
+	public void setLargolavado(double largolavado) {
+		this.largolavado = largolavado;
+	}
 	public String getNombre() {
 		return nombre;
 	}

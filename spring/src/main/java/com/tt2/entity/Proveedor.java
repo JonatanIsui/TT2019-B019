@@ -7,16 +7,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 
 @Entity
 @Table(name = "proveedor")
+@SequenceGenerator(name = "S_proveedor", sequenceName = "S_proveedor")
 public class Proveedor implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name="id_proveedor")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="S_proveedor")
 	private int id;
 	
 	@Column(name = "nombre_empresa", nullable = false, unique = true, columnDefinition="VARCHAR(30)" )

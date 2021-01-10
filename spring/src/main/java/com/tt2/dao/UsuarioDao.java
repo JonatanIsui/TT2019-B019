@@ -1,5 +1,8 @@
 package com.tt2.dao;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.tt2.entity.Proveedor;
@@ -22,4 +25,6 @@ public interface UsuarioDao extends JpaRepository<Usuario,Integer>{
 	 */
 	public abstract Usuario findByCorreo(String correo);
 	public abstract Usuario findByProveedor(Proveedor proveedor);
+	@Query("FROM Usuario WHERE proveedor IS NOT NULL")
+	public abstract List<Usuario> findAllProveedor();
 }

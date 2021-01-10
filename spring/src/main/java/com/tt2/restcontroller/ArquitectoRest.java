@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.tt2.entity.Usuario;
 import com.tt2.model.ConsultaModel;
+import com.tt2.model.EliminarConsulta;
 import com.tt2.model.MedidasModel;
+import com.tt2.entity.Consulta;
 import com.tt2.entity.Diccionario;
 import com.tt2.service.ArquitectoBean;
 import com.tt2.service.ConsulBean;
@@ -62,10 +64,39 @@ public class ArquitectoRest implements ErrorController{
 		}
 		return res;
 	}
+	
+	@PostMapping("/proveedores")
+	public ResponseEntity<List<Usuario>> proveedores(){
+		ResponseEntity<List<Usuario>> res= ResponseEntity.noContent().build();
+		List<Usuario> proveedores = arquitectoBean.verProveedores();
+		if(!proveedores.isEmpty()) {
+			res = ResponseEntity.ok(proveedores);
+		}
+		return res;
+	}
+	
+	@PostMapping("/elimarConsulta")
+	public ResponseEntity<String> eliminaConsulta(@RequestBody EliminarConsulta consulta){
+		ResponseEntity<String> res= ResponseEntity.noContent().build();
+		if(arquitectoBean.eliminarConsulta(consulta)) {
+			res = ResponseEntity.ok("true");
+		} 
+		return res;
+	}
+	
+	@PostMapping("/consultasGuardas")
+	public ResponseEntity<List<Consulta>> allConsultas(@RequestBody EliminarConsulta consulta){
+		ResponseEntity<List<Consulta>> res= ResponseEntity.noContent().build();
+		List<Consulta> consultas=arquitectoBean.getAllConsultas(consulta.getArquitecto());
+		if(!consultas.isEmpty()) {
+			res = ResponseEntity.ok(consultas);
+		}
+		return res;
+	}
+	
 	@Override
 	@GetMapping("/error")
 	public String getErrorPath() {
 		return "No Mapping Found";
 	}
-	
 }

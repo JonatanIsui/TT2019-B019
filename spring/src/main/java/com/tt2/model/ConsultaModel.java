@@ -21,9 +21,11 @@ private static final long serialVersionUID = 1L;
 	private double anchoHabitacion2;
 	private double anchobano;
 	private double anchococina;
+	private double anchoLavado;
 	private double anchoterreno;
 	private double largoHabitacion1;
 	private double largoHabitacion2;
+	private double largoLavado;
 	private double largobano;
 	private double largococina;
 	private double largoterreno;
@@ -37,12 +39,108 @@ private static final long serialVersionUID = 1L;
 	private double ladrilloRojoCosto;
 	private double ladrilloBlockLigeroCosto;
 	private double ladrilloBloackPesadoCosto;
+	private double alambreCosto;
+	private double alambre;
+	private String arenaDesc;
+	private String gravaDesc;
+	private String sacoDesc;
+	private String sacoMorteroDesc;
+	private String varillaDesc;
+	private String alambreDesc;
+	private String ladrilloRojoDesc;
+	private String ladrilloBlockLigeroDesc;
+	private String ladrilloBloackPesadoDesc;
 	private String nombreProveedor;
 	private String telefonoProveedor;
 	private String correoProveedor;
 	private String direccionProveedor;
+	private int idProveedor;
 	private double total;
 	
+	public double getAlambreCosto() {
+		return alambreCosto;
+	}
+	public void setAlambreCosto(double alambreCosto) {
+		this.alambreCosto = alambreCosto;
+	}
+	public String getAlambreDesc() {
+		return alambreDesc;
+	}
+	public void setAlambreDesc(String alambreDesc) {
+		this.alambreDesc = alambreDesc;
+	}
+	public double getAlambre() {
+		return alambre;
+	}
+	public void setAlambre(double alambre) {
+		this.alambre = alambre;
+	}
+	public double getAnchoLavado() {
+		return anchoLavado;
+	}
+	public void setAnchoLavado(double anchoLavado) {
+		this.anchoLavado = anchoLavado;
+	}
+	public double getLargoLavado() {
+		return largoLavado;
+	}
+	public void setLargoLavado(double largoLavado) {
+		this.largoLavado = largoLavado;
+	}
+	public String getArenaDesc() {
+		return arenaDesc;
+	}
+	public void setArenaDesc(String arenaDesc) {
+		this.arenaDesc = arenaDesc;
+	}
+	public String getGravaDesc() {
+		return gravaDesc;
+	}
+	public void setGravaDesc(String gravaDesc) {
+		this.gravaDesc = gravaDesc;
+	}
+	public String getSacoDesc() {
+		return sacoDesc;
+	}
+	public void setSacoDesc(String sacoDesc) {
+		this.sacoDesc = sacoDesc;
+	}
+	public String getSacoMorteroDesc() {
+		return sacoMorteroDesc;
+	}
+	public void setSacoMorteroDesc(String sacoMorteroDesc) {
+		this.sacoMorteroDesc = sacoMorteroDesc;
+	}
+	public String getVarillaDesc() {
+		return varillaDesc;
+	}
+	public void setVarillaDesc(String varillaDesc) {
+		this.varillaDesc = varillaDesc;
+	}
+	public String getLadrilloRojoDesc() {
+		return ladrilloRojoDesc;
+	}
+	public void setLadrilloRojoDesc(String ladrilloRojoDesc) {
+		this.ladrilloRojoDesc = ladrilloRojoDesc;
+	}
+	public String getLadrilloBlockLigeroDesc() {
+		return ladrilloBlockLigeroDesc;
+	}
+	public void setLadrilloBlockLigeroDesc(String ladrilloBlockLigeroDesc) {
+		this.ladrilloBlockLigeroDesc = ladrilloBlockLigeroDesc;
+	}
+	public String getLadrilloBloackPesadoDesc() {
+		return ladrilloBloackPesadoDesc;
+	}
+	public void setLadrilloBloackPesadoDesc(String ladrilloBloackPesadoDesc) {
+		this.ladrilloBloackPesadoDesc = ladrilloBloackPesadoDesc;
+	}
+	public int getIdProveedor() {
+		return idProveedor;
+	}
+	public void setIdProveedor(int idProveedor) {
+		this.idProveedor = idProveedor;
+	}
 	public int getTipoladrillo() {
 		return tipoladrillo;
 	}
