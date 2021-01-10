@@ -3,7 +3,7 @@ import UsuarioService from '../service/UsuarioService'
 
 class FormularioPassword extends React.Component{
     state = {
-        errors : {},
+        errors: {},
         sending : false
     }
     usuario = []
@@ -17,11 +17,16 @@ class FormularioPassword extends React.Component{
     }
 
     //Este metodo con el corre se encarga de invocar el metodo que conecta con el servidor
-    handleSubmit = e =>{
+    handleSubmit = async e =>{
         e.preventDefault();
         this.setState({sending:true})
         try{
-            this.usuario = this.UsuarioService.recuperarPassword(this.state.correo)
+            if(document.getElementById('correoRecuperarPassword').value.replace(/ /g,'').length>2){
+                this.usuario = await this.UsuarioService.recuperarPassword(document.getElementById('correoRecuperarPassword').value)
+                alert(this.usuario)
+            }else{
+                alert("No se permiten espacios en blanco")
+            }
         }catch(errors){
             this.setState({errors:errors.message})   
         }finally{
@@ -50,7 +55,7 @@ class FormularioPassword extends React.Component{
                 <div className='row justify-content-center'>
                             
                                 <div className='col-lg-4'>
-                                    <input type = 'email' placeholder = 'correo*' className = 'form-control' name = 'correo' onChange = {this.handleChange} required/>
+                                    <input type = 'email' placeholder = 'correo*' className = 'form-control' name = 'correo' id = 'correoRecuperarPassword' required/>
                                 </div>
 
                         </div>

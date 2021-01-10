@@ -20,15 +20,15 @@ la vida de un componente. El estado cambia con el tiempo*/
     UsuarioService = new UsuarioService()
     usuario = []
     
-    handleChage = e =>{
-        this.setState({
-            [e.target.name] : e.target.value
-        })
-    }
-
     //Metodo que se encarga de llamar el servidor para ingresar al sistema
     handleSubmit = async e =>{
         e.preventDefault()
+        await this.setState(
+            {
+                "correo" : document.getElementById('correoLogin').value,
+                "password" : document.getElementById('passwordLogin').value
+            }
+        )
         //Se manda el estado sin errores
         const {errors,...sinerrors} = this.state
         //Retorna los errores que se encuentra en los campos
@@ -42,7 +42,6 @@ la vida de un componente. El estado cambia con el tiempo*/
                 this.usua = this.state;
                 this.usuario =await this.UsuarioService.login(this.usua)
                 const{password,...sinpassword} = this.usuario
-                console.log(this.usuario)
                 //Cifrar y serializar
                 if(!!this.usuario.arquitecto){
                     localStorage.setItem('arquitecto','true')
@@ -87,7 +86,7 @@ la vida de un componente. El estado cambia con el tiempo*/
                             <div className='col-lg-4 text-right'>Correo:</div>
                             <div className='col-lg-4'>
                                 <span className="input-group-addon"><i className="glyphicon glyphicon-user"></i></span>
-                                <input type = 'email' placeholder = 'correo*' className = 'form-control' name = 'correo' onChange = {this.handleChage} required/>
+                                <input type = 'email' placeholder = 'correo*' className = 'form-control' id='correoLogin' name = 'correo' required/>
                                 {errors.email && <p className =''>{errors.email}</p>}
                             </div>
 
@@ -101,7 +100,7 @@ la vida de un componente. El estado cambia con el tiempo*/
                         <div className='row' >
                             <div className='col-lg-4 text-right'>Contraseña:</div>
                             <div className='col-lg-4'>
-                                <input type = 'password' placeholder = 'contraseña*' className = 'form-control' name = 'password' onChange = {this.handleChage} required/>
+                                <input type = 'password' placeholder = 'contraseña*' className = 'form-control' id='passwordLogin' name = 'password' required/>
                                 {errors.password && <p className =''>{errors.password}</p>}</div>
 
                         </div>

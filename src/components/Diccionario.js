@@ -17,6 +17,7 @@ class Diccionario extends React.Component{
                         <th className = ''>Articulo</th>
                         <th className = ' '>Definicion</th>
                         <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody className = '' >
@@ -27,6 +28,7 @@ class Diccionario extends React.Component{
                                 <td className = '' >{item.nombre}</td>
                                     <td className = '' >{item.definicion}</td>
                                     <td className = '' ><button className = 'btn btn-light' id = {item.id} onClick = {this.handleEliminar}>Eliminar</button></td>
+                                    <td className = '' ><button className = 'btn btn-light' id = {item.id} onClick = {this.handleModificar}>Modificar</button></td>
                             </tr>
                         )                        
                     })
@@ -50,6 +52,10 @@ class Diccionario extends React.Component{
             console.log(e)
         }
     }
+
+    /*handleModificar=()={
+
+    }*/
     //Este metodo renderiza el formulario para agregar una nueva definicion
     handleNuevo = async () =>{
         ReactDOM.render(
@@ -59,13 +65,13 @@ class Diccionario extends React.Component{
                     <p></p>
                     <div className = 'row justify-content-center'>
                         <div className = 'col-lg-8 text-center'>
-                            Palabra:<input type = 'text' placeholder = 'Palabra*' className = 'form-control' name = 'nombre' onChange = {this.handleChage} required/>
+                            Palabra:<input type = 'text' placeholder = 'Palabra*' className = 'form-control' id = 'nombreDiccionario' name = 'nombre' required/>
                         </div>
                     </div>
                     <p></p>
                     <div className = 'row justify-content-center'>
                         <div className = 'col-lg-8 text-center'>
-                            Definición:<input type = 'text' placeholder = 'Definicion*' className = 'form-control' name = 'definicion' onChange = {this.handleChage} required/>
+                            Definición:<input type = 'text' placeholder = 'Definicion*' className = 'form-control' id = 'definicionDiccionario' name = 'definicion' required/>
                         </div>
                     </div>
                     <p></p>
@@ -83,21 +89,21 @@ class Diccionario extends React.Component{
     //Este metodo envia el state a spring
     handleAdd = async (e) =>{
         e.preventDefault()
+        let nombre1 = document.getElementById('nombreDiccionario').value
+        let definicion1 = document.getElementById('definicionDiccionario').value 
         try{
-            console.log(this.state)
-            this.res = await this.AdmService.addDefinicion(this.state)
-            alert("Desfinicon agregada correctamente")
-            document.getElementById("nuevo").reset()
+            if(JSON.stringify (nombre1).replace(/ /g,'').length>2 && JSON.stringify (definicion1).replace(/ /g,'').length>2){
+                await this.setState({
+                    "nombre":nombre1,
+                    "definicion":definicion1
+                })
+                this.res = await this.AdmService.addDefinicion(this.state)
+                alert(this.res)
+                document.getElementById("nuevo").reset()
+            }
         }catch(e){
             console.log(e)
         }
-    }
-
-    //Este metodo agrega lo ingresado en los input al state
-    handleChage = (e) =>{
-        this.setState({
-            [e.target.name] : e.target.value
-        })
     }
     //Este metodo elimina una definicion
     handleEliminar = async (e) =>{

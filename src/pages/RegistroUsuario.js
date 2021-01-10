@@ -1,6 +1,6 @@
 import React from 'react'
 import FormularioUsuario from '../components/FormularioUsuario'
-import Boton from '../components/Boton'
+
 
 class RegistroUsuario extends React.Component{
     render(){

@@ -1,6 +1,5 @@
 import React from 'react'
 import FormularioPassword from '../components/FormularioPassword'
-import Boton from '../components/Boton'
 class RecuperarPassword extends React.Component{
     render(){
         return(

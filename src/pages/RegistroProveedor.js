@@ -1,6 +1,5 @@
 import React from 'react'
 import FormularioProveedor from '../components/FormularioProveedor'
-import Boton from '../components/Boton'
 
 class RegistroProveedor extends React.Component{
 

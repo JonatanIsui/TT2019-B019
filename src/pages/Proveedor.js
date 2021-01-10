@@ -2,7 +2,8 @@ import React from 'react';
 import { withRouter } from "react-router";
 import Material from '../components/Material'
 import ProveedorService from '../service/ProveedorService'
-import FormularioLogin from '../components/FormularioLogin'
+import Login from '../pages/Login'
+
 class Proveedor extends React.Component{
     state = {
         errors : {},
@@ -33,7 +34,7 @@ class Proveedor extends React.Component{
                 id : e.target.id
             })
             this.res = await this.proveedorService.archivo(this.state)
-            alert('El archivo se subio con exito')
+            alert(this.res+'. Puedes ver tu catalogo actual dando clic en ver catalogo')
         }catch(e){
             console.log(e)
         }
@@ -63,7 +64,7 @@ class Proveedor extends React.Component{
             <div className = 'container-fluid p-3 my-3 bg-dark text-white'>
         
                 <div className="row justify-content-center">
-                    <h1 className = ''>Bienvenido {id.nombreEncargado}</h1>
+                    <h1 className = ''>Bienvenido {id.nombreEmpresa}</h1>
                 </div>
                 <div className="row justify-content-center">
                     <Material
@@ -103,7 +104,7 @@ class Proveedor extends React.Component{
         return(
             <div className = ''>
                 <div className = ''>Inicie sesion para ver esta pagina</div>
-                <FormularioLogin/>
+                <Login/>
             </div>
         )
     }

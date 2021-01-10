@@ -57,7 +57,6 @@ class MostrarUsuarios extends React.Component{
                             return false
                         }else{
                             this.respuesta = true
-                            console.log("Son difierentes")
                         }
                     })
                 }
@@ -158,9 +157,11 @@ class MostrarUsuarios extends React.Component{
     }
 
     handleAceptar = async (e) =>{
+        e.preventDefault()
         try{
-            this.res = this.AdmService.aceptarSolicitud(e.target.id)
-            await this.handleSolicitudes()
+            this.res = await this.AdmService.aceptarSolicitud(e.target.id)
+            alert("La solicitud a sido aceptada con exito")
+            this.handleSolicitudes()
         }catch(e){
             console.log(e)
         }

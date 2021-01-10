@@ -37,17 +37,20 @@ class FormularioProveedor extends React.Component{
         }
     }
 
-    //Este metodo se encarga de agregar la informacion del proveedor al estado
-    handleChange = e =>{
-        this.setState({
-            [e.target.name] : e.target.value
-        })
-    }
-
     //Este metodo se encarga de mandar el estado para mandar los datos del proveedor solicitante
     handleSubmit = async e =>{
         e.preventDefault()
         //Se manda el estado sin errores
+        await this.setState({
+            nombreEncargado:document.getElementById('nombreEncargadoProveedor').value,
+            apellidoEncargado:document.getElementById('apellidoEncargadoProveedor').value,
+            direccion:document.getElementById('direccionProveedor').value,
+            nombreEmpresa:document.getElementById('nombreEmpresaProveedor').value,
+            telefono:document.getElementById('telefonoProveedor').value,
+            correo:document.getElementById('correoProveedor').value,
+            password:document.getElementById('passwordProveedor').value,
+            password2:document.getElementById('password2Proveedor').value
+        })
         const {errors,...sinerrors} = this.state
         //Retorna los errores que se encuentra en los campos
         const result = validate(sinerrors)
@@ -95,10 +98,10 @@ class FormularioProveedor extends React.Component{
                         </div>
                         <div className='row justify-content-center'>
                             <div className = 'col-lg-4'>
-                                <input type = 'text' placeholder = 'Nombre(s) del representante' className = 'form-control' name = 'nombreEncargado' onChange = {this.handleChange} required/>
+                                <input type = 'text' placeholder = 'Nombre(s) del representante' className = 'form-control' name = 'nombreEncargado' id='nombreEncargadoProveedor' required/>
                             </div>
                             <div className = 'col-lg-4'>
-                                <input type = 'text' placeholder = 'Apellidos del respresentante' className = 'form-control' name = 'apellidoEncargado' onChange = {this.handleChange} required/>
+                                <input type = 'text' placeholder = 'Apellidos del respresentante' className = 'form-control' name = 'apellidoEncargado' id='apellidoEncargadoProveedor' required/>
                             </div>
                         </div>
                         <p></p>
@@ -115,10 +118,10 @@ class FormularioProveedor extends React.Component{
 
                         <div className='row justify-content-center'>
                             <div className = 'col-lg-4'>
-                                <input type = 'text' placeholder = 'Direccion de la empresa' className = 'form-control' name = 'direccion' onChange = {this.handleChange} required/>
+                                <input type = 'text' placeholder = 'Direccion de la empresa' className = 'form-control' name = 'direccion' id='direccionProveedor' required/>
                             </div> 
                             <div className = 'col-lg-4'>
-                                <input type = 'text' placeholder = 'Nombre de la empresa' className = 'form-control' name = 'nombreEmpresa' onChange = {this.handleChange} required/>
+                                <input type = 'text' placeholder = 'Nombre de la empresa' className = 'form-control' name = 'nombreEmpresa' id='nombreEmpresaProveedor' required/>
                             </div>
                         </div>
                         <p></p>
@@ -135,19 +138,17 @@ class FormularioProveedor extends React.Component{
 
                         <div className='row justify-content-center'>
                             <div className = 'col-lg-4'>
-                                <input type = 'tel' placeholder = 'telefono de la empresa' className = 'form-control' name = 'telefono' onChange = {this.handleChange} required/>
+                                <input type = 'tel' placeholder = 'telefono de la empresa' className = 'form-control' name = 'telefono' id='telefonoProveedor' required/>
                             </div>
                             <div className = 'col-lg-4'>
-                                <input type = 'email' placeholder = 'Email de la empresa' className = 'form-control' name = 'correo' onChange = {this.handleChange} required/>
+                                <input type = 'email' placeholder = 'Email de la empresa' className = 'form-control' name = 'correo' id='correoProveedor' required/>
                             </div>
                           </div>
                           <p></p>
                           
                         <div className='row justify-content-center'>
                             <div className='col-lg-6 text-center '>
-                                
-                                    <input type = 'file' accept=".png" className='form-control-file border' name = 'identificacion' onChange = {this.handleFile}/> <span className='text-nowrap'>Identificacion en formato png</span>
-                                  
+                                    <input type = 'file' accept=".png" className='form-control-file border' name = 'identificacion' onChange = {this.handleFile} required/> <span className='text-nowrap'>Identificacion en formato png</span>
                             </div>                   
                         </div>
                         <p></p>
@@ -163,11 +164,11 @@ class FormularioProveedor extends React.Component{
 
                         <div className='row justify-content-center'>
                             <div className = 'col-lg-4 '>
-                                <input type = 'password' placeholder = 'Contraseña' className = 'form-control' name = 'password' onChange = {this.handleChange} required/>
+                                <input type = 'password' placeholder = 'Contraseña' className = 'form-control' name = 'password' id='passwordProveedor' required/>
                                 {errors.password && <p className = ''>{errors.password}</p>}
                             </div> 
                             <div className = 'col-lg-4 '>
-                                <input type = 'password' placeholder = 'Repite la contraseña' className = 'form-control' name = 'password2' onChange = {this.handleChange} required/>
+                                <input type = 'password' placeholder = 'Repite la contraseña' className = 'form-control' name = 'password2' id='password2Proveedor' required/>
                                 {errors.password2 && <p className = ''>{errors.password2}</p>}
                             </div>
                         </div>

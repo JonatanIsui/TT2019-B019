@@ -17,18 +17,17 @@ class FormularioRecuperarPassword extends React.Component{
     }
     UsuarioService = new UsuarioService()
     usuario = []
-    //Este metodo se encarga de recibir la el correo y agregar al estado la nueva contraseña
-    handleChage = e =>{
-        this.setState({
-            [e.target.name] : e.target.value
-        })
-        //Recuperar el parametro(correo encriptado)
+
+    //Este metodo se encarga de mandar el correo y la nueva contraseña al servidor
+    handleSubmit = async e =>{
+        e.preventDefault()
         const id = this.props.match.params.id;
         this.setState({"correo" : id}) 
-    }
-    //Este metodo se encarga de mandar el correo y la nueva contraseña al servidor
-    handleSubmit = e =>{
-        e.preventDefault()
+        await this.setState({
+            password:document.getElementById('passwordRecuperar').value,
+            password2:document.getElementById('password2Recuperar').value,
+            "correo" : id
+        })
         //Se manda el estado sin errores
         const {errors,...sinerrors} = this.state
         //Retorna los errores que se encuentra en los campos
@@ -40,7 +39,30 @@ class FormularioRecuperarPassword extends React.Component{
             this.setState({sending : true})
             try{
                 this.usua = this.state
-                this.usuario = this.UsuarioService.cambioPassword(this.usua)
+                this.usuario = await this.UsuarioService.cambioPassword(this.usua)
+                const{password,...sinpassword} = this.usuario
+                //Cifrar y serializar
+                if(!!this.usuario.arquitecto){
+                    localStorage.setItem('arquitecto','true')
+                    const red = btoa(JSON.stringify(sinpassword.arquitecto))
+                    this.props.match.params.id=null
+                    alert("La contraseña se restablecio con exito")
+                    window.location = '/Arquitecto/'+red+''
+                }else if(!!this.usuario.proveedor){
+                    localStorage.setItem('proveedor','true')
+                    const red = btoa(JSON.stringify(sinpassword.proveedor))
+                    this.props.match.params.id=null
+                    alert("La contraseña se restablecio con exito")
+                    window.location = '/Proveedor/'+red+''
+                }else if(!!this.usuario.administrador){
+                    localStorage.setItem('administrador','true')
+                    const red = btoa(JSON.stringify(sinpassword.administrador))
+                    this.props.match.params.id=null
+                    alert("La contraseña se restablecio con exito")
+                    window.location = '/Administrador/'+red+''
+                }else{
+                    alert("En estos momento no se puede restablecer tu contraseña, intente mas tarde")
+                }
             }catch(errors){
                 this.setState({errors:errors.message})
             }finally{
@@ -63,13 +85,13 @@ class FormularioRecuperarPassword extends React.Component{
                 <form className = '' onSubmit = {this.handleSubmit}>
                     <div className = 'row justify-content-center'>
                             <div className = 'col-lg-4 text-center'>
-                                Introduce tu una contraseña nueva<input type = 'password' placeholder = 'Contraseña*' className = 'form-control' name = 'password' onChange = {this.handleChage} required/>
+                                Introduce tu una contraseña nueva<input type = 'password' placeholder = 'Contraseña*' className = 'form-control' name = 'password' id='passwordRecuperar' onChange = {this.handleChage} required/>
                                 {errors.password && <p className =''>{errors.password}</p>}
                             </div>
                     </div>
                     <div className="row justify-content-center">
                         <div className = 'col-lg-4 text-center'>
-                            Repite la contraseña<input type = 'password' placeholder = 'Repite la contraseña*' className = 'form-control' name = 'password2' onChange = {this.handleChage} required/>
+                            Repite la contraseña<input type = 'password' placeholder = 'Repite la contraseña*' className = 'form-control' name = 'password2' id='password2Recuperar' onChange = {this.handleChage} required/>
                             {errors.password2 && <p className =''>{errors.password2}</p>}
                         </div>
                     </div>

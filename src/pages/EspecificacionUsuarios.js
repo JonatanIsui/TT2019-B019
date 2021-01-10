@@ -1,7 +1,7 @@
 import React from 'react'
 import InformacionUsuario from '../components/InformacionUsuario'
 import { withRouter } from "react-router";
-import FormularioLogin from '../components/FormularioLogin'
+import Login from '../pages/Login'
 class EspecificacionUsuarios extends React.Component{
 
     state = {
@@ -19,7 +19,7 @@ class EspecificacionUsuarios extends React.Component{
             return(
                 <div className = ''>
                     <div className = ''>Inicie sesion para ver esta pagina</div>
-                    <FormularioLogin/>
+                    <Login/>
                 </div>
             )
         }

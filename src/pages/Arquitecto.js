@@ -1,16 +1,19 @@
 import React from 'react'
 import Boton from '../components/Boton'
 import { withRouter } from "react-router";
-import FormularioLogin from '../components/FormularioLogin'
+import Login from '../pages/Login'
 import ArquitectoService from '../service/ArquitectoService'
 import ReactDOM from 'react-dom';
 import FormularioMedidas from '../components/FormularioMedidas'
+import MostrarProveedores from '../components/MostrarProveedores'
 
 class Arquitecto extends React.Component{
     //Este metodo tiene la tabla que se renderiza
     ArquitectoService = new ArquitectoService()
     res = []
     idArquitecto = 0
+    proveedores={}
+    consultas={}
     actualizar = values =>{
         return(
             <table className = 'table table-hover table-dark'>
@@ -62,6 +65,27 @@ class Arquitecto extends React.Component{
         />,document.getElementById("div"))
 
     }
+
+    handleProveedores=async (e) =>{
+        e.preventDefault()
+        this.proveedores = await this.ArquitectoService.allProveedores()
+        if(this.proveedores.length!==0){
+            ReactDOM.render(<MostrarProveedores
+                proveedores = {this.proveedores}
+            />,document.getElementById("div"))
+        }else{
+            ReactDOM.render(<p>En este momento no se pueden mostrar los proveedores</p>,document.getElementById("div"))
+        }
+    }
+
+    handleVerConsultaGuardada=async(e)=>{
+        e.preventDefault()
+        let aux={}
+        aux["arquitecto"]=this.idArquitecto
+        this.consultas=await this.ArquitectoService.consultasGuardas(aux)
+        console.log(this.consultas)
+    }
+
     render(){
         if(localStorage.getItem('arquitecto')==='true'){
             const id = JSON.parse(atob(this.props.match.params.id))
@@ -70,17 +94,19 @@ class Arquitecto extends React.Component{
                 <div>
                 <nav className="navbar navbar-expand-sm bg-light">
                     <div className='container-fluid'>
+                    <h1 className = ''>Bienvenido {id.nombre}</h1>
                     <ul className="navbar-nav">
 
                         <li className="nav-item">
-                            <button className = 'btn btn-light' onClick={this.handleFormularioMedidas}>Nueva medidas</button>
+                            <button className = 'btn btn-light' onClick={this.handleFormularioMedidas}>Nueva consulta</button>
                         </li>
 
                         <li className="nav-item">
-                            <Boton
-                                text = 'Consultas guardadas'
-                                url = '/'
-                            />
+                        <button className = 'btn btn-light' onClick={this.handleVerConsultaGuardada}>Consultas guardadas</button>
+                        </li>
+
+                        <li className="nav-item">
+                            <button className = 'btn btn-light' onClick={this.handleProveedores}>Proveedores</button>
                         </li>
 
                         <li className="nav-item">
@@ -103,7 +129,7 @@ class Arquitecto extends React.Component{
             return(
                 <div className = ''>
                     <div className = ''>Inicie sesion para ver esta pagina</div>
-                    <FormularioLogin/>
+                    <Login/>
                 </div>
             )
         }

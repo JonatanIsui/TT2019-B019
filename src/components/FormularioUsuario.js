@@ -4,6 +4,7 @@ import ArquitectoService from '../service/ArquitectoService'
 //Este metodo se encarga de evitar que solo se ingresen espacios
 const validate = values =>{
     const errors = {}
+    console.log(values)
     const stateToString = JSON.stringify (values.password).replace(/ /g,'')
     if(stateToString.length === 2){
         errors.password = 'No se permiten espacios en blanco'
@@ -24,24 +25,24 @@ class FormularioUsuario extends React.Component{
     usuario = []
     arquitecto = {}
 
-    //Este metodo es el encargado de recupelar los datos del formulario
-    handleChange = e =>{
-        if(e.target.name === 'correo' || e.target.name === 'password' || e.target.name === 'password2'){
-            this.setState({
-                [e.target.name] : e.target.value
-            })
-        }else{
-            this.arquitecto[e.target.name] = e.target.value        
-            this.setState({arquitecto : this.arquitecto})
-        }
-    }
-
     //Este metodo se encarga de mandar la informacion del arquitectos al servido
     handleSubmit = async e =>{
         e.preventDefault()
+        //Retorna los errores que se encuentra en los campos
+        this.arquitecto['nombre']=document.getElementById('nombreArquitecto').value
+        this.arquitecto['apellido']=document.getElementById('apellidoArquitecto').value
+        this.arquitecto['telefono']=document.getElementById('telefonoArquitecto').value
+        this.arquitecto['direccion']=document.getElementById('direccionArquitecto').value
+        await this.setState({
+            arquitecto : this.arquitecto,
+            correo : document.getElementById('correoArquitecto').value,
+            password : document.getElementById('passwordArquitecto').value,
+            password2 : document.getElementById('password2Arquitecto').value    
+        })
+        console.log(this.state)
+        console.log(typeof(this.state.password2))
         //Se manda el estado sin errores
         const {errors,...sinerrors} = this.state
-        //Retorna los errores que se encuentra en los campos
         const result = validate(sinerrors)
         this.setState({errors : result})
         //Object.keys.length retorna el numero de propiedades del objeto
@@ -51,8 +52,12 @@ class FormularioUsuario extends React.Component{
             try{
                 this.usua = this.state;
                 this.usuario = await this.ArquitectoService.addArquitecto(this.usua)
-                alert('Ha sido aprovado inicie sesion para ingresar')
-                window.history.back()
+                if(this.usuario.length !== 0){
+                    alert('Ha sido aprovado inicie sesion para ingresar')
+                    window.history.back()
+                }else{
+                    alert('El correo ingresado ya se encuentra registrado')
+                }
             }catch(errors){
                 this.setState({errors:errors.message})
             }finally{
@@ -78,20 +83,20 @@ class FormularioUsuario extends React.Component{
 
                         <div className='row justify-content-center'>
                             <div className='col-lg-4'>
-                	        Nombres:
+                	        Nombre(s):
                             </div>
                             <div className='col-lg-4'>
-                            Apellidos:
+                            Apellido(s):
                             </div>
                         </div>
 
 
                         <div className='row row justify-content-center'>
                             <div className = 'col-lg-4'>
-                                <input type = 'text' placeholder = 'Nombre(s)*' className = 'form-control' name = 'nombre' onChange = {this.handleChange} required/>
+                                <input type = 'text' placeholder = 'Nombre(s)*' className = 'form-control' name = 'nombre' id='nombreArquitecto' required/>
                             </div>
                             <div className = 'col-lg-4'>
-                                <input type = 'text' placeholder = 'Apellido(s)*' className = 'form-control' name = 'apellido' onChange = {this.handleChange} required/>
+                                <input type = 'text' placeholder = 'Apellido(s)*' className = 'form-control' name = 'apellido' id='apellidoArquitecto' required/>
                             </div>
                         </div>
                         <p></p>
@@ -107,10 +112,10 @@ class FormularioUsuario extends React.Component{
                         </div>
                         <div className='row row justify-content-center'>
                             <div className = 'col-lg-4'>
-                                <input type = 'tel' placeholder = 'Telefono' className = 'form-control' name = 'telefono' onChange = {this.handleChange}/>
+                                <input type = 'tel' placeholder = 'Telefono' className = 'form-control' name = 'telefono' id='telefonoArquitecto'/>
                             </div>
                             <div className = 'col-lg-4'>
-                                <input type = 'text' placeholder = 'Direccion' className = 'form-control' name = 'direccion' onChange = {this.handleChange}/>
+                                <input type = 'text' placeholder = 'Direccion' className = 'form-control' name = 'direccion' id='direccionArquitecto'/>
                             </div>
                         </div>
                         <p></p>
@@ -121,7 +126,7 @@ class FormularioUsuario extends React.Component{
                         </div>
                         <div className='row row justify-content-center'>
                             <div className = 'col-lg-8'>
-                                <input type = 'email' placeholder = 'Correo*' className = 'form-control' name = 'correo' onChange = {this.handleChange} required/>
+                                <input type = 'email' placeholder = 'Correo*' className = 'form-control' name = 'correo' id='correoArquitecto' required/>
                             </div>
                         </div>
                         <p></p>
@@ -135,11 +140,11 @@ class FormularioUsuario extends React.Component{
                         </div>
                         <div className='row row justify-content-center'>
                             <div className = 'col-lg-4'>
-                                <input type = 'password' placeholder = 'Contraseña*' className = 'form-control' name = 'password' onChange = {this.handleChange} required/>
+                                <input type = 'password' placeholder = 'Contraseña*' className = 'form-control' name = 'password' id='passwordArquitecto' required/>
                                 {errors.password && <p className = ''>{errors.password}</p>}
                             </div>
                             <div className = 'col-lg-4'>
-                                <input type = 'password' placeholder = 'Repite la contraseña*' className = 'form-control' name = 'password2' onChange = {this.handleChange} required/>
+                                <input type = 'password' placeholder = 'Repite la contraseña*' className = 'form-control' name = 'password2' id='password2Arquitecto' required/>
                                 {errors.password2 && <p className = ''>{errors.password2}</p>}
                             </div>
                         </div>
@@ -152,7 +157,6 @@ class FormularioUsuario extends React.Component{
                     </form>
                 </div>
             </div>
-        
         )
     }
 }

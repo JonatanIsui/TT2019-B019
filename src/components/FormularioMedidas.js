@@ -6,16 +6,18 @@ class FormularioMedidas extends React.Component{
     state = {}
     num=0
     dim = {}
+    delConsulta={}
     ancho = 0
     largo = 0
     pisos = 0
     ladrillo = 0
     arquitecto = 0
-    totalpromedio=0
+    totalpromedio=44.94
     ArquitectoService = new ArquitectoService()
     res={}
-    etiquetas = ['Botes de agua de 19L','Arena','Grava','Saco de cemento','Saco de Mortero','Varilla','Ladrillo Rojo','Ladrillo Block Ligero','Ladrillo Block Pesado']
-
+    etiquetas = ['Botes de agua de 19L','Arena','Grava','Saco de cemento','Saco de Mortero','Varilla','Ladrillo Rojo','Ladrillo Block Ligero','Ladrillo Block Pesado','Alambre']
+    nombresObjeto=["",'arena','grava','saco','sacoMortero','varilla','ladrilloRojo','ladrilloBlockLigero','ladrilloBloackPesado','alambre']
+    nombresObjetoCosto=["",'arenaCosto','gravaCosto','sacoCosto','sacoMorteroCosto','varillaCosto','ladrilloRojoCosto','ladrilloBlockLigeroCosto','ladrilloBloackPesadoCosto','alambreCosto']
     numHabitaciones = e =>{
         this.div = document.getElementById('habitacion')
         for(let i = 0; i<e; i++){
@@ -28,40 +30,39 @@ class FormularioMedidas extends React.Component{
 
                 "<div class='row justify-content-center'>"+
                     "<div class = 'col-lg-4 text-center'>"+
-                        "Ancho en metros de la habitacion*:<input name = 'anchoHabitacion"+(i+1)+"' type = 'number' min='1' max='4' placeholder = 'ancho en metros de la habitacion*' step = '0.01' required class = 'form-control'/>"+
+                        "Ancho en metros de la habitacion*:<input name = 'anchoHabitacion"+(i+1)+"' type = 'number' min='2' max='4' placeholder = 'ancho en metros de la habitacion*' step = '0.01' required class = 'form-control'/>"+
                     "</div>"+
                     "<div class = 'col-lg-4 text-center'>"+
-                        "Largo en metros de la habitacion*:<input name = 'largoHabitacion"+(i+1)+"'  type = 'number' min='1' max='2.8' placeholder = 'largo en metros de la habitacion*' step = '0.01' required class = 'form-control'/>"+
+                        "Largo en metros de la habitacion*:<input name = 'largoHabitacion"+(i+1)+"'  type = 'number' min='2' max='2.8' placeholder = 'largo en metros de la habitacion*' step = '0.01' required class = 'form-control'/>"+
                     "</div>"+
                 "</div>"
            )
         }
     }
-    materia = () =>{
+    materia = (consulta) =>{
+        this.totalpromedio=44.94
         document.getElementById('0').insertAdjacentHTML("beforebegin",
             "<td className = ''>"+this.etiquetas[0]+"</td>"+
-            "<td className = ''>"+this.res.agua+"</td>"+
-            "<td className = ''> de 0 a 15 mil son $44.94</td>"+
+            "<td className = ''>"+consulta.agua+"</td>"+
+            "<td className = ''> de 0 a 15 mil litros de agua son $44.94</td>"+
             "<td className = ''>$44.94</td>"  
         )
-        for(let i = 1;i<this.etiquetas.length;i++){
+        for(let i = 1;i<this.nombresObjeto.length;i++){
             document.getElementById(i.toString()).insertAdjacentHTML("beforebegin",
                 "<td className = ''>"+this.etiquetas[i]+"</td>"+
-                "<td className = ''>"+Object.values(this.res)[i]+"</td>"+
-                "<td className = ''> $"+Object.values(this.res)[i+22]+"</td>"+
-                "<td className = ''>$"+Object.values(this.res)[i]*Object.values(this.res)[i+22]+"</td>"
+                "<td className = ''>"+consulta[this.nombresObjeto[i]]+
+                "<td className = ''> $"+consulta[this.nombresObjetoCosto[i]]+"</td>"+
+                "<td className = ''>$"+consulta[this.nombresObjeto[i]]*consulta[this.nombresObjetoCosto[i]]+"</td>"
         )}
-
-        for(let i = 1;i<this.etiquetas.length;i++){
-            this.totalpromedio = this.totalpromedio+(Object.values(this.res)[i]*Object.values(this.res)[i+22])
-        }
+        this.totalpromedio = consulta["total"]
         document.getElementById('total').insertAdjacentHTML("beforebegin",
             "<td className = '' colspan='3'>Promedio costo de construcion</td>"+
-            "<td className = ''>$"+this.totalpromedio+"</td>"
+            "<td className = ''>$"+this.totalpromedio.toFixed(2)+"</td>"
         )
+        ReactDOM.render(this.mostrarProveedor(consulta),document.getElementById('datosProveedor'))
         this.totalpromedio = 0 
     }
-    consulta = () =>{
+    consulta = (nombre) =>{
         return(
             <div className='row justify-content-center'>  
                 <div className = 'col-lg-10 text-center'>
@@ -93,27 +94,49 @@ class FormularioMedidas extends React.Component{
                         </tr>
                         <tr className = '' id = '8'>
                         </tr>
+                        <tr className = '' id = '9'>
+                        </tr>
                         <tr className = '' id = 'total'>
                         </tr>
                     </tbody>
                 </table>
                 </div>
+                <div className = 'col-lg-10 text-center' id='datosProveedor'>
+                </div>
                 <div className='container-fluid'>
                     <div className='row justify-content-center'>
                         <div className = 'col-lg-4 text-center'>
-                            <button className = 'btn btn-light'>Proveedor recomendado</button>
-                        </div>
-                        <div className = 'col-lg-4 text-center'> 
-                            <button className = 'btn btn-light'>Ver todos los proveedores</button>
-                        </div>
-                        <div className = 'col-lg-4 text-center'>
-                            <button className = 'btn btn-light'>Eliminar consulta</button>
+                            <button className = 'btn btn-light' name={nombre} onClick={this.handleEliminarConsulta}>Eliminar consulta</button>
                         </div>
                     </div>
                 </div>
             </div>                  
         )
     }
+    mostrarProveedor=(proveedor)=>{
+        return(
+        <Fragment>
+            <table className = 'table table-hover table-dark'>
+                <thead className = ''>
+                    <tr className = ''>
+                        <th className = ''>Proveedor recomendado</th>
+                        <th className = ''>Correo</th>
+                        <th className = ''>Telefono</th>
+                        <th className = ''>Direccion</th>
+                    </tr>
+                </thead>
+                <tbody className = '' >
+                    <tr className = ''>
+                        <td>{proveedor.nombreProveedor}</td>
+                        <td>{proveedor.correoProveedor}</td>
+                        <td>{proveedor.telefonoProveedor}</td>
+                        <td>{proveedor.direccionProveedor}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </Fragment>)
+    }
+
     habitacion = () =>{
         return(
             <Fragment>
@@ -122,7 +145,6 @@ class FormularioMedidas extends React.Component{
                             <div id = 'habitacion'>
                             </div>
 
-
                         <div className='row justify-content-center'>
                             <div className = 'col-lg-8 text-center'>
                                 <h3>Cocina</h3>
@@ -130,10 +152,10 @@ class FormularioMedidas extends React.Component{
                         </div>
                         <div className='row justify-content-center'>
             	            <div className = 'col-lg-4 text-center'>
-                                Ancho en metros de la cocina*:<input name = 'anchococina' className = 'form-control' type = 'number' min='1' max='4' placeholder = 'ancho en metros de la cocina*' step = '0.01' required />
+                                Ancho en metros de la cocina*:<input name = 'anchococina' className = 'form-control' type = 'number' min='2' max='4' placeholder = 'ancho en metros de la cocina*' step = '0.01' required />
                             </div>
                             <div className = 'col-lg-4 text-center'>
-                                Largo en metros de la cocina*:<input name = 'largococina' className = 'form-control' type = 'number' min='1' max='4' placeholder = 'largo en metros de la cocina*' step = '0.1' required/>
+                                Largo en metros de la cocina*:<input name = 'largococina' className = 'form-control' type = 'number' min='2' max='4' placeholder = 'largo en metros de la cocina*' step = '0.1' required/>
                             </div>
                         </div>
 
@@ -162,10 +184,10 @@ class FormularioMedidas extends React.Component{
 
                         <div className = 'row justify-content-center'>
                             <div className = 'col-lg-4 text-center'>
-                                Ancho en metros del baño*:<input name = 'anchobano' className = 'form-control' type = 'number' min='1' max='2.5' placeholder = 'ancho en metros del baño*' step = '0.01' required/>
+                                Ancho en metros del baño*:<input name = 'anchobano' className = 'form-control' type = 'number' min='2' max='2.5' placeholder = 'ancho en metros del baño*' step = '0.01' required/>
                             </div>
                             <div className = 'col-lg-4 text-center'>
-                                Largo en metros del baño*:<input name = 'largobano' className = 'form-control' type = 'number' min='1' max='2' placeholder = 'largo en metros del baño*' step = '0.01' required/>
+                                Largo en metros del baño*:<input name = 'largobano' className = 'form-control' type = 'number' min='2' max='2.5' placeholder = 'largo en metros del baño*' step = '0.01' required/>
                             </div>
                         </div>
                     
@@ -197,37 +219,53 @@ class FormularioMedidas extends React.Component{
 
     handleNumHabitaciones = async (e) =>{
         e.preventDefault()
-        for(let i = 1; i< e.target.children.length;i=i+2){
-            for(let j = 0; j< e.target.children[i].children.length;j++){
-                this.dim[e.target.children[i].children[j].name]=e.target.children[i].children[j].value
-            }
+        let tam=document.getElementsByTagName('input').length
+        for(let i=0;i<tam-1;i++){
+            this.dim[document.getElementsByTagName('input')[i].name]=document.getElementsByTagName('input')[i].value
         }
         this.dim['anchoterreno']=this.ancho
         this.dim['largoterreno']=this.largo
         this.dim['pisos'] = this.pisos
         this.dim['tipoladrillo'] = this.ladrillo
         this.dim['idArquitecto'] = this.arquitecto
-        let confirmar = prompt("Nombre de la consulta");
-        if(confirmar != null){
-            console.log(confirmar.length)
-            this.dim['nombre']=confirmar
-            this.res = await this.ArquitectoService.consulta(this.dim)
-            ReactDOM.render(this.consulta(),document.getElementById('div'))
-            this.materia()
-        }else{
-            window.location.reload()
-        }
+        let cancelar = true
+        do{
+            let confirmar = prompt("Por favor ingrese el nombre de la consulta");
+            if(confirmar != null){
+                if(confirmar.trim()!==""){
+                    this.dim['nombre']=confirmar
+                    this.res = await this.ArquitectoService.consulta(this.dim)
+                    console.log(this.res)
+                    console.log(this.res["alambre"])
+                    if(this.res.length!==0){
+                        cancelar=false
+                        ReactDOM.render(this.consulta(this.res.nombre),document.getElementById('div'))
+                        this.materia(this.res)
+                    }else{
+                        alert("Estamos teniendo problemas para generar tu consulta, el nombre de la consulta ya existe")   
+                    }
+                }else{
+                    alert("No se permiten espacios en blanco.")
+                }
+            }else{
+                cancelar = false
+                window.location.reload()
+            }
+        }while(cancelar)
     }
-
+    handleEliminarConsulta= async (e)=>{
+        e.preventDefault()
+        this.delConsulta["arquitecto"]=this.props.arquitecto
+        this.delConsulta["nombre"]=e.target.name
+        this.res = await this.ArquitectoService.eliminarConsulta(this.delConsulta)
+        window.location.reload()
+    }
     render(){
         const{arquitecto} = this.props
         this.arquitecto = arquitecto
         return(<Fragment>
-            
             <div id='medidasTerreno'>   
                 <form className = '' onSubmit = {this.handleSubmit}>
-
-
                     <div className='row justify-content-center'>
                         <div className = 'col-lg-4 text-center'>
                             Ancho en metros en metros del terreno*:<input id = 'ancho' className = 'form-control' type = 'number' min='4' max='18' step = '0.01' placeholder = 'ancho en metros en metros del terreno*' required/>

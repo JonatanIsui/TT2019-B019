@@ -1,6 +1,5 @@
 import React from 'react'
 import FormularioLogin from '../components/FormularioLogin'
-import Boton from '../components/Boton'
 
 class Login extends React.Component{
     constructor(props){
