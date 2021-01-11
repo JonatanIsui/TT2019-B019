@@ -23,6 +23,8 @@ public interface ArquitectoBeanInterfaz {
 	
 	ConsultaModel consulta(MedidasModel medidas);
 	
+	boolean bajaPerfil(Usuario arquitecto);
+	
 	boolean saveConsulta(ConsultaModel consultaModel);
 	
 	boolean enviarCorreo(ConsultaAux consulta);

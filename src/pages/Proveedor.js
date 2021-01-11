@@ -3,6 +3,8 @@ import { withRouter } from "react-router";
 import Material from '../components/Material'
 import ProveedorService from '../service/ProveedorService'
 import Login from '../pages/Login'
+import PerfilProveedor from '../components/PerfilProveedor'
+import ReactDOM from 'react-dom';
 
 class Proveedor extends React.Component{
     state = {
@@ -57,6 +59,18 @@ class Proveedor extends React.Component{
         localStorage.removeItem('proveedor')
         window.location ='/'
     }
+
+    perfilProveedor=(id)=>async e=>{
+        e.preventDefault()
+        let perfil={}
+        let aux={}
+        aux["id"]=id.id
+        perfil=await this.proveedorService.perfilUsuario(aux)
+        ReactDOM.render(<PerfilProveedor
+            usuario={perfil}
+        />,document.getElementById("div"))
+        console.log(perfil)
+    }
     render(){
     const id = JSON.parse(atob(this.props.match.params.id))
     if(localStorage.getItem('proveedor')==='true'){
@@ -74,6 +88,9 @@ class Proveedor extends React.Component{
                 <div className="row justify-content-center">
                     <div className='col-lg-4 text-center'>
                         <button className = 'btn btn-light' onClick={this.handleFormato}>Formato excel</button>
+                    </div>
+                    <div className='col-lg-4 text-center'>
+                        <button className = 'btn btn-light' onClick={this.perfilProveedor(id)}>Mi perfil</button>
                     </div>
                     <div className='col-lg-4 text-center'>
                         <button className = 'btn btn-light' onClick={this.logetOut}>Cerrar sesion</button>

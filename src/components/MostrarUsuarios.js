@@ -73,6 +73,7 @@ class MostrarUsuarios extends React.Component{
     handleArquitectos = async() =>{
         try{
             this.arquitectos = await this.AdmService.allArquitectos()
+            console.log(this.arquitectos)
             if(Object.keys(this.arquitectos).length !== 0){
                 ReactDOM.render(this.actualizar(this.arquitectos),document.getElementById("div"))
             }else{

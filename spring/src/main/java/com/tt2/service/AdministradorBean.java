@@ -7,11 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import com.tt2.dao.AdministradorDao;
+import com.tt2.dao.ConsultaDao;
 import com.tt2.dao.DiccionarioDao;
+import com.tt2.dao.MaterialDao;
 import com.tt2.dao.ProveedorDao;
 import com.tt2.dao.SolicitudProveedorDao;
 import com.tt2.dao.UsuarioDao;
+import com.tt2.entity.Consulta;
 import com.tt2.entity.Diccionario;
+import com.tt2.entity.Material;
 import com.tt2.entity.Proveedor;
 import com.tt2.entity.SolicitudProveedor;
 import com.tt2.entity.Usuario;
@@ -42,6 +46,14 @@ public class AdministradorBean extends UsuarioBean implements AdministradorBeanI
 	@Autowired
 	@Qualifier("emailDao")
 	private Email email;
+	
+	@Autowired
+	@Qualifier("consultaDao")
+	private ConsultaDao consultaDao;
+	
+	@Autowired
+	@Qualifier("materialDao")
+	private MaterialDao materialDao;
 	
 	@Override
 	public List<SolicitudProveedor> getSolicitudes() {
@@ -88,7 +100,19 @@ public class AdministradorBean extends UsuarioBean implements AdministradorBeanI
 	@Override
 	public boolean eliminarUsuario(Integer id) {
 		try {
-			administradorDao.deleteById(id);
+			Optional <Usuario> usuario=usuarioDao.findById(id);
+			if(usuario.get().getProveedor()!=null) {
+				List<Material> materiales=materialDao.findByProveedor(usuario.get().getProveedor());
+				for(Material material:materiales) {
+					materialDao.delete(material);
+				}
+			}else {
+				List<Consulta> consultas=consultaDao.findByArquitecto(usuario.get().getArquitecto());
+				for(Consulta consulta:consultas) {
+					consultaDao.delete(consulta);
+				}
+			}
+			usuarioDao.delete(usuario.get());
 			return true;
 		}catch(Exception e) {
 			e.printStackTrace();

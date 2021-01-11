@@ -10,8 +10,10 @@ import org.springframework.stereotype.Service;
 
 import com.tt2.dao.MaterialDao;
 import com.tt2.dao.ProveedorDao;
+import com.tt2.dao.UsuarioDao;
 import com.tt2.entity.Material;
 import com.tt2.entity.Proveedor;
+import com.tt2.entity.Usuario;
 import com.tt2.model.ArchivoModel;
 import com.tt2.service.interfaz.ProveedorBeanInterfaz;
 import org.apache.poi.ss.usermodel.*;
@@ -30,6 +32,10 @@ public class ProveedorBean extends UsuarioBean implements ProveedorBeanInterfaz{
 	@Autowired
 	@Qualifier("archivoBean")
 	private Archivo archivo;
+	
+	@Autowired
+	@Qualifier("usuarioDao")
+	private UsuarioDao usuarioDao;
 	
 	private Workbook workbook;
 	List<String> nombreMaterial = Arrays.asList(
@@ -188,6 +194,31 @@ public class ProveedorBean extends UsuarioBean implements ProveedorBeanInterfaz{
 			e.printStackTrace();
 		}
 		return res;
+	}
+
+	@Override
+	public Usuario perfilUsuario(int id) {
+		try {
+			return usuarioDao.findByProveedor(proveedorDao.findById(id).get());
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@Override
+	public boolean bajaPerfil(Usuario proveedor) {
+		try {
+			List<Material> materiales=materialDao.findByProveedor(proveedor.getProveedor());
+			for(Material material:materiales) {
+				materialDao.delete(material);
+			}
+			usuarioDao.delete(proveedor);
+			return true;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 	
 	

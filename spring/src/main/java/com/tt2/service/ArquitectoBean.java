@@ -433,5 +433,20 @@ public class ArquitectoBean extends UsuarioBean implements ArquitectoBeanInterfa
 		}
 	}
 
+	@Override
+	public boolean bajaPerfil(Usuario arquitecto) {
+		try {
+			List<Consulta> consultas=consultaDao.findByArquitecto(arquitecto.getArquitecto());
+			for(Consulta consulta:consultas) {
+				consultaDao.delete(consulta);
+			}
+			usuarioDao.delete(arquitecto);
+			return true;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
 
 }

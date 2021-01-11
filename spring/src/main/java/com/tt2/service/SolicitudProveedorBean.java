@@ -24,8 +24,9 @@ public class SolicitudProveedorBean implements SolicitudProveedorBeanInterfaz{
 	public SolicitudProveedor nuevaSolicitud(SolicitudProveedor solicitud) {
 		try {
 			SolicitudProveedor aux = null;
-			if(solicitudProveedorDao.findByCorreo(solicitud.getNombreEmpresa()) == null && usuarioDao.findByCorreo(solicitud.getCorreo()) == null)
+			if(solicitudProveedorDao.findByCorreo(solicitud.getNombreEmpresa()) == null && usuarioDao.findByCorreo(solicitud.getCorreo()) == null) {
 				aux =solicitudProveedorDao.save(solicitud); 
+			}
 			return aux;
 		}catch(Exception e) {
 			return null;

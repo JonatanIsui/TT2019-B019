@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.tt2.entity.Material;
 import com.tt2.entity.Proveedor;
+import com.tt2.entity.Usuario;
 import com.tt2.model.ArchivoModel;
 import com.tt2.service.ProveedorBean;
 
@@ -68,6 +68,25 @@ public class ProveedorRest {
 			res = "El catalogo no se puede agregar verifique que los campos no esten vacios o el nombre del material no este registrado ya";
 		}
 		return ResponseEntity.ok(res);
+	}
+	
+	@PostMapping("/perfilUsuario")
+	public ResponseEntity<Usuario> perfilUsuario(@RequestBody Proveedor proveedor){
+		ResponseEntity<Usuario> res= ResponseEntity.noContent().build();
+		Usuario aux= proveedorBean.perfilUsuario(proveedor.getId());
+		if(aux!=null) {
+			res=ResponseEntity.ok(aux);
+		}
+		return res;
+	}
+	
+	@PostMapping("/eliminarPerfil")
+	public ResponseEntity<String> eliminarPerfil(@RequestBody Usuario proveedor){
+		ResponseEntity<String> res = ResponseEntity.noContent().build();
+		if(proveedorBean.bajaPerfil(proveedor)) {
+			res = ResponseEntity.ok("Su perfil ha sido eliminado correctamente");
+		}
+		return res;
 	}
 	
 	@PostMapping("/formato")

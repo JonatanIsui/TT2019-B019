@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom';
 import FormularioMedidas from '../components/FormularioMedidas'
 import MostrarProveedores from '../components/MostrarProveedores'
 import MostartConsulta from '../components/MostrarConsulta'
+import PerfilArquitecto from '../components/PerfilArquitecto'
 
 class Arquitecto extends React.Component{
     //Este metodo tiene la tabla que se renderiza
@@ -98,7 +99,9 @@ class Arquitecto extends React.Component{
         let aux={}
         aux["id"]=this.idArquitecto
         perfil=await this.ArquitectoService.perfilUsuario(aux)
-        console.log(perfil)
+        ReactDOM.render(<PerfilArquitecto
+            usuario={perfil}
+        />,document.getElementById("div"))
     }
 
     render(){

@@ -105,9 +105,21 @@ public class ArquitectoRest implements ErrorController{
 	}
 	
 	@PostMapping("/perfilUsuario")
-	public ResponseEntity<String> perfilUsuario(@RequestBody Arquitecto arquitecto){
-		ResponseEntity<String> res= ResponseEntity.noContent().build();
+	public ResponseEntity<Usuario> perfilUsuario(@RequestBody Arquitecto arquitecto){
+		ResponseEntity<Usuario> res= ResponseEntity.noContent().build();
 		Usuario aux= arquitectoBean.perfilUsuario(arquitecto.getId());
+		if(aux!=null) {
+			res=ResponseEntity.ok(aux);
+		}
+		return res;
+	}
+	
+	@PostMapping("/eliminarPerfil")
+	public ResponseEntity<String> eliminarPerfil(@RequestBody Usuario arquitecto){
+		ResponseEntity<String> res = ResponseEntity.noContent().build();
+		if(arquitectoBean.bajaPerfil(arquitecto)) {
+			res = ResponseEntity.ok("Su perfil ha sido eliminado correctamente");
+		}
 		return res;
 	}
 	

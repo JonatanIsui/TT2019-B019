@@ -91,6 +91,17 @@ class ArquitectoService{
         }
         return this.res
     }
+
+    eliminarPerfil=async(e)=>{
+        try{
+            const resultado = await axios.post(this.baseUrl+'eliminarPerfil',e)
+            const data = await resultado.data
+            this.res = data
+        }catch(e){
+            console.log(e)
+        }
+        return this.res
+    }
 }
 
 export default ArquitectoService
