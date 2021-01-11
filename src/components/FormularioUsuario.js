@@ -4,7 +4,6 @@ import ArquitectoService from '../service/ArquitectoService'
 //Este metodo se encarga de evitar que solo se ingresen espacios
 const validate = values =>{
     const errors = {}
-    console.log(values)
     const stateToString = JSON.stringify (values.password).replace(/ /g,'')
     if(stateToString.length === 2){
         errors.password = 'No se permiten espacios en blanco'
@@ -39,8 +38,6 @@ class FormularioUsuario extends React.Component{
             password : document.getElementById('passwordArquitecto').value,
             password2 : document.getElementById('password2Arquitecto').value    
         })
-        console.log(this.state)
-        console.log(typeof(this.state.password2))
         //Se manda el estado sin errores
         const {errors,...sinerrors} = this.state
         const result = validate(sinerrors)

@@ -6,13 +6,11 @@ class FormularioMedidas extends React.Component{
     state = {}
     num=0
     dim = {}
-    delConsulta={}
     ancho = 0
     largo = 0
     pisos = 0
     ladrillo = 0
     arquitecto = 0
-    totalpromedio=44.94
     ArquitectoService = new ArquitectoService()
     res={}
     etiquetas = ['Botes de agua de 19L','Arena','Grava','Saco de cemento','Saco de Mortero','Varilla','Ladrillo Rojo','Ladrillo Block Ligero','Ladrillo Block Pesado','Alambre']
@@ -40,7 +38,6 @@ class FormularioMedidas extends React.Component{
         }
     }
     materia = (consulta) =>{
-        this.totalpromedio=44.94
         document.getElementById('0').insertAdjacentHTML("beforebegin",
             "<td className = ''>"+this.etiquetas[0]+"</td>"+
             "<td className = ''>"+consulta.agua+"</td>"+
@@ -54,13 +51,12 @@ class FormularioMedidas extends React.Component{
                 "<td className = ''> $"+consulta[this.nombresObjetoCosto[i]]+"</td>"+
                 "<td className = ''>$"+consulta[this.nombresObjeto[i]]*consulta[this.nombresObjetoCosto[i]]+"</td>"
         )}
-        this.totalpromedio = consulta["total"]
+        let totalpromedio = consulta["total"]
         document.getElementById('total').insertAdjacentHTML("beforebegin",
             "<td className = '' colspan='3'>Promedio costo de construcion</td>"+
-            "<td className = ''>$"+this.totalpromedio.toFixed(2)+"</td>"
+            "<td className = ''>$"+totalpromedio.toFixed(2)+"</td>"
         )
         ReactDOM.render(this.mostrarProveedor(consulta),document.getElementById('datosProveedor'))
-        this.totalpromedio = 0 
     }
     consulta = (nombre) =>{
         return(
@@ -235,8 +231,6 @@ class FormularioMedidas extends React.Component{
                 if(confirmar.trim()!==""){
                     this.dim['nombre']=confirmar
                     this.res = await this.ArquitectoService.consulta(this.dim)
-                    console.log(this.res)
-                    console.log(this.res["alambre"])
                     if(this.res.length!==0){
                         cancelar=false
                         ReactDOM.render(this.consulta(this.res.nombre),document.getElementById('div'))
@@ -255,10 +249,17 @@ class FormularioMedidas extends React.Component{
     }
     handleEliminarConsulta= async (e)=>{
         e.preventDefault()
-        this.delConsulta["arquitecto"]=this.props.arquitecto
-        this.delConsulta["nombre"]=e.target.name
-        this.res = await this.ArquitectoService.eliminarConsulta(this.delConsulta)
-        window.location.reload()
+        let delConsulta={}
+        delConsulta["arquitecto"]=this.props.arquitecto
+        delConsulta["nombre"]=e.target.name
+        if(window.confirm("Esta seguro que deseas eliminar la consulta")){
+            this.res = await this.ArquitectoService.eliminarConsulta(delConsulta)
+            if(this.res==="True"){
+                window.location.reload()
+            }else{
+                alert("En este momento estamos teniendo problemas para eliminar tu consulta")
+            }
+        }
     }
     render(){
         const{arquitecto} = this.props

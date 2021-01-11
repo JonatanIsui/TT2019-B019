@@ -56,6 +56,7 @@ class ArquitectoService{
         }catch(e){
             console.log(e)
         }
+        return this.res
     }
 
     consultasGuardas = async (e) =>{
@@ -66,6 +67,29 @@ class ArquitectoService{
         }catch(e){
             console.log(e)
         }
+        return this.res
+    }
+
+    consultaPorCorreo= async(e)=>{
+        try{
+            const resultado = await axios.post(this.baseUrl+'enviarConsulta',e)
+            const data = await resultado.data
+            this.res = data
+        }catch(e){
+            console.log(e)
+        }
+        return this.res
+    }
+
+    perfilUsuario=async(e)=>{
+        try{
+            const resultado = await axios.post(this.baseUrl+'perfilUsuario',e)
+            const data = await resultado.data
+            this.res = data
+        }catch(e){
+            console.log(e)
+        }
+        return this.res
     }
 }
 

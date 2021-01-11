@@ -17,7 +17,7 @@ import com.tt2.entity.Diccionario;
 import com.tt2.entity.Proveedor;
 import com.tt2.entity.Usuario;
 import com.tt2.model.ConsultaModel;
-import com.tt2.model.EliminarConsulta;
+import com.tt2.model.ConsultaAux;
 import com.tt2.model.MedidasModel;
 import com.tt2.service.interfaz.ArquitectoBeanInterfaz;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -57,6 +57,10 @@ public class ArquitectoBean extends UsuarioBean implements ArquitectoBeanInterfa
 	@Autowired
 	@Qualifier("proveedorConsulta")
 	private ProveedorConsulta proveedorConsulta;
+	
+	@Autowired
+	@Qualifier("emailDao")
+	private Email emailDao;
 	
 	@Override
 	public Usuario registroArquitecto(Usuario usuario) {
@@ -383,7 +387,7 @@ public class ArquitectoBean extends UsuarioBean implements ArquitectoBeanInterfa
 	}
 
 	@Override
-	public boolean eliminarConsulta(EliminarConsulta consulta) {
+	public boolean eliminarConsulta(ConsultaAux consulta) {
 		try {
 			Optional<Arquitecto> arquitecto=arquitectoDao.findById(consulta.getArquitecto());
 			consultaDao.delete(consultaDao.findByNombreAndArquitecto(consulta.getNombre(), arquitecto.get()));
@@ -400,6 +404,29 @@ public class ArquitectoBean extends UsuarioBean implements ArquitectoBeanInterfa
 			Optional<Arquitecto> arquitecto=arquitectoDao.findById(id);
 			List<Consulta> consultas = consultaDao.findByArquitecto(arquitecto.get());
 			return consultas;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@Override
+	public boolean enviarCorreo(ConsultaAux consulta) {
+		try {
+			Optional<Arquitecto>arquitecto= arquitectoDao.findById(consulta.getArquitecto());
+			Usuario usuario=usuarioDao.findByArquitecto(arquitecto.get());
+			emailDao.enviarConsulta(usuario, consulta.getNombre());
+			return true;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	@Override
+	public Usuario perfilUsuario(int id) {
+		try {
+			return usuarioDao.findByArquitecto(arquitectoDao.findById(id).get());
 		}catch(Exception e) {
 			e.printStackTrace();
 			return null;

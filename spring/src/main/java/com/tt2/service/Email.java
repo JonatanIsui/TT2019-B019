@@ -1,10 +1,16 @@
 package com.tt2.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Base64;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
 
 import com.tt2.entity.Usuario;
@@ -54,5 +60,25 @@ public class Email implements EmailInterfaz{
     		e.printStackTrace();
     	}
         return res;
+    }
+    
+    public boolean enviarConsulta(Usuario usuario,String dirExcel) throws MessagingException, IOException {
+    	boolean res = false;
+    	String subject = "Solicitud de consulta";
+    	String urlBase = "Agradecemos su preferencia.";
+    	try {
+    		MimeMessage msg = mailSender.createMimeMessage();
+    		MimeMessageHelper helper = new MimeMessageHelper(msg, true);
+    		helper.setTo(usuario.getCorreo());
+    		helper.setText(urlBase);
+    		helper.setSubject(subject);
+    		FileSystemResource file = new FileSystemResource(new File(dirExcel));
+    		helper.addAttachment(dirExcel.split("Archivos")[1], file);
+    		mailSender.send(msg);
+    		res =true;
+    	}catch(Exception e) {
+    		e.printStackTrace();
+    	}
+    	return res;
     }
 }

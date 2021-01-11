@@ -95,7 +95,7 @@ class Material extends React.Component{
                 <form className = '' onSubmit = {this.handleSubmitChage} id = {material.id} name = 'actualizar'>
                     <div className="row">
                         <div className="col-lg-6 text-center">
-                            Nombre:<input className = 'form-control' type = 'text' name = 'nombre' placeholder = {material.nombre}/>
+                            Nombre:<p className='' id='nombreMaterial'>Nombre del material : {material.nombre}</p>
                         </div>
                         <div className="col-lg-6 text-center">
                             Categoria:<input className = 'form-control' type = 'text' name = 'categoria' placeholder = {material.categoria}/>
@@ -128,17 +128,19 @@ class Material extends React.Component{
                 id : e.target.id,
                 nombre: this.aux.substr(1,this.aux.length)
             })
+            console.log(this.state)
             for(this.i=0;this.i<(this.elements.length)-1;this.i++){
                 if(this.elements[this.i].value.replace(/\s/g,'').length === 0){
                     await this.setState(
-                        {[this.elements[this.i].id] : this.elements[this.i].placeholder}
+                        {[this.elements[this.i].name] : this.elements[this.i].placeholder}
                     )
                 }else{
                     await this.setState({
-                        [this.elements[this.i].id] : this.elements[this.i].value  
+                        [this.elements[this.i].name] : this.elements[this.i].value  
                     })
                 }
             }
+            console.log(this.state)
             this.res = await this.ProveedorService.modificar(this.state)
             if(Object.keys(this.res).length !== 0){
                 ReactDOM.render(this.actualizar(this.res),document.getElementById("div"))

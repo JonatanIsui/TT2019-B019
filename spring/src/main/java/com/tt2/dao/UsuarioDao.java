@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import com.tt2.entity.Arquitecto;
 import com.tt2.entity.Proveedor;
 import com.tt2.entity.Usuario;
 
@@ -27,4 +28,5 @@ public interface UsuarioDao extends JpaRepository<Usuario,Integer>{
 	public abstract Usuario findByProveedor(Proveedor proveedor);
 	@Query("FROM Usuario WHERE proveedor IS NOT NULL")
 	public abstract List<Usuario> findAllProveedor();
+	public abstract Usuario findByArquitecto(Arquitecto arquitecto);
 }

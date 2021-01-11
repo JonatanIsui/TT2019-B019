@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tt2.entity.Material;
+import com.tt2.entity.Proveedor;
 import com.tt2.model.ArchivoModel;
 import com.tt2.service.ProveedorBean;
 
@@ -23,9 +24,9 @@ public class ProveedorRest {
 	private ProveedorBean proveedorBean;
 	
 	@PostMapping("/catalogo")
-	public ResponseEntity<List<Material>> getCatalogo(@RequestBody Material material){
+	public ResponseEntity<List<Material>> getCatalogo(@RequestBody Proveedor proveedor){
 		ResponseEntity<List<Material>> res = ResponseEntity.noContent().build();
-		List<Material> catalogo = proveedorBean.catalogo(material.getId());
+		List<Material> catalogo = proveedorBean.catalogo(proveedor.getId());
 		if(!catalogo.isEmpty())
 			res = ResponseEntity.ok(catalogo);
 		return res;

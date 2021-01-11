@@ -14,8 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.tt2.entity.Usuario;
 import com.tt2.model.ConsultaModel;
-import com.tt2.model.EliminarConsulta;
+import com.tt2.model.ConsultaAux;
 import com.tt2.model.MedidasModel;
+import com.tt2.entity.Arquitecto;
 import com.tt2.entity.Consulta;
 import com.tt2.entity.Diccionario;
 import com.tt2.service.ArquitectoBean;
@@ -76,21 +77,37 @@ public class ArquitectoRest implements ErrorController{
 	}
 	
 	@PostMapping("/elimarConsulta")
-	public ResponseEntity<String> eliminaConsulta(@RequestBody EliminarConsulta consulta){
+	public ResponseEntity<String> eliminaConsulta(@RequestBody ConsultaAux consulta){
 		ResponseEntity<String> res= ResponseEntity.noContent().build();
 		if(arquitectoBean.eliminarConsulta(consulta)) {
-			res = ResponseEntity.ok("true");
+			res = ResponseEntity.ok("True");
 		} 
 		return res;
 	}
 	
 	@PostMapping("/consultasGuardas")
-	public ResponseEntity<List<Consulta>> allConsultas(@RequestBody EliminarConsulta consulta){
+	public ResponseEntity<List<Consulta>> allConsultas(@RequestBody ConsultaAux consulta){
 		ResponseEntity<List<Consulta>> res= ResponseEntity.noContent().build();
 		List<Consulta> consultas=arquitectoBean.getAllConsultas(consulta.getArquitecto());
 		if(!consultas.isEmpty()) {
 			res = ResponseEntity.ok(consultas);
 		}
+		return res;
+	}
+	
+	@PostMapping("/enviarConsulta")
+	public ResponseEntity<String> enviarConsulta(@RequestBody ConsultaAux consulta){
+		ResponseEntity<String> res= ResponseEntity.noContent().build();
+		if(arquitectoBean.enviarCorreo(consulta)){
+			res = ResponseEntity.ok("True");
+		}
+		return res;
+	}
+	
+	@PostMapping("/perfilUsuario")
+	public ResponseEntity<String> perfilUsuario(@RequestBody Arquitecto arquitecto){
+		ResponseEntity<String> res= ResponseEntity.noContent().build();
+		Usuario aux= arquitectoBean.perfilUsuario(arquitecto.getId());
 		return res;
 	}
 	

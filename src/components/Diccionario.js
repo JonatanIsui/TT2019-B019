@@ -28,7 +28,6 @@ class Diccionario extends React.Component{
                                 <td className = '' >{item.nombre}</td>
                                     <td className = '' >{item.definicion}</td>
                                     <td className = '' ><button className = 'btn btn-light' id = {item.id} onClick = {this.handleEliminar}>Eliminar</button></td>
-                                    <td className = '' ><button className = 'btn btn-light' id = {item.id} onClick = {this.handleModificar}>Modificar</button></td>
                             </tr>
                         )                        
                     })
@@ -52,10 +51,6 @@ class Diccionario extends React.Component{
             console.log(e)
         }
     }
-
-    /*handleModificar=()={
-
-    }*/
     //Este metodo renderiza el formulario para agregar una nueva definicion
     handleNuevo = async () =>{
         ReactDOM.render(
