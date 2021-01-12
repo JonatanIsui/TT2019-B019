@@ -6,7 +6,6 @@ class PerfilProveedor extends React.Component{
         e.preventDefault()
         let aux={}
         let confirmar = prompt("Por favor ingrese su contraseña para dar de baja el perfil");
-        console.log(typeof(aux))
         if(confirmar===usuario.password){
             aux = await this.ProveedorService.eliminarPerfil(usuario)
             if(Object.keys(aux).length>0){
@@ -23,7 +22,6 @@ class PerfilProveedor extends React.Component{
 
     render(){
         const usuario=this.props.usuario
-        console.log(usuario)
         return(<div>
             <ul className="navbar-nav">
                 <li className="nav-item">

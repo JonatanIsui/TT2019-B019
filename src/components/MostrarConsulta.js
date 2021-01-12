@@ -17,7 +17,6 @@ class MostartConsulta extends React.Component{
         delConsulta["nombre"]=consulta.nombre
         if(window.confirm("Esta seguro que deseas eliminar la consulta")){
             res = await this.ArquitectoService.eliminarConsulta(delConsulta)
-            console.log(res)
             if(res==="True"){
                 consultas=await this.ArquitectoService.consultasGuardas(aux)
                 if(consultas.length!==0){
@@ -213,7 +212,6 @@ class MostartConsulta extends React.Component{
         e.preventDefault()
         let res={}
         let aux={}
-        console.log(consulta)
         aux["nombre"]=consulta.excel
         aux["arquitecto"]=consulta.arquitecto.id
         res = await this.ArquitectoService.consultaPorCorreo(aux)

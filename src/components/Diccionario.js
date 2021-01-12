@@ -37,7 +37,8 @@ class Diccionario extends React.Component{
         )
     }
     //Este metodo muestra las definiciones
-    handleVer = async () =>{
+    handleVer = async (e) =>{
+        e.preventDefault()
         try{
             this.definiciones = await this.AdmService.allDefiniciones()
             if(Object.keys(this.definiciones.length) !== 0 && typeof this.definiciones !== 'string'){

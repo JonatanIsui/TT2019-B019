@@ -89,6 +89,11 @@ public class ProveedorRest {
 		return res;
 	}
 	
+	@PostMapping("/eliminarCatalogo")
+	public ResponseEntity<String>eliminarCatalogo(@RequestBody Proveedor proveedor){
+		return ResponseEntity.ok(proveedorBean.eliminarCatalogo(proveedor));
+	}
+	
 	@PostMapping("/formato")
 	public ResponseEntity<String> getFormato(){
 		String res = null;

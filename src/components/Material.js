@@ -128,7 +128,6 @@ class Material extends React.Component{
                 id : e.target.id,
                 nombre: this.aux.substr(1,this.aux.length)
             })
-            console.log(this.state)
             for(this.i=0;this.i<(this.elements.length)-1;this.i++){
                 if(this.elements[this.i].value.replace(/\s/g,'').length === 0){
                     await this.setState(
@@ -140,7 +139,6 @@ class Material extends React.Component{
                     })
                 }
             }
-            console.log(this.state)
             this.res = await this.ProveedorService.modificar(this.state)
             if(Object.keys(this.res).length !== 0){
                 ReactDOM.render(this.actualizar(this.res),document.getElementById("div"))
@@ -152,10 +150,10 @@ class Material extends React.Component{
         }
     }
 
-    handleCatalogo = async (e) =>{
+    handleCatalogo =(idMaterial)=> async (e) =>{
         try{
             this.material = {
-                id : e.target.name
+                id : idMaterial
             }
             this.res = await this.ProveedorService.catalogo(this.material)
             if(Object.keys(this.res).length !== 0){
@@ -168,10 +166,10 @@ class Material extends React.Component{
         }
     } 
     
-    handleAddMaterial = (e) =>{
+    handleAddMaterial = (id)=>(e) =>{
         try{
             e.preventDefault()
-            ReactDOM.render(this.formulario(e.target.name),document.getElementById("div"))
+            ReactDOM.render(this.formulario(id),document.getElementById("div"))
         }catch(e){
             console.log(e)
         }
@@ -239,13 +237,26 @@ class Material extends React.Component{
             console.log(e)
         }
     }
-
+    handleEliminarCatalogo=(id)=>async (e)=>{
+        try{
+            let aux={}
+            aux["id"]=id
+            let res={}
+            if(window.confirm("Esta seguro de eliminar su catalogo")){
+                res = await this.ProveedorService.eliminarCatalogo(aux)
+                alert(res)
+            }
+        }catch(e){
+            console.log(e)
+        }
+    }
     render(){
         const {id} = this.props
         return(
             <Fragment>
-                <button name = {id} onClick ={this.handleCatalogo} className = 'btn btn-light'>Ver catalogo</button>
-                <button name = {id} onClick ={this.handleAddMaterial} className = 'btn btn-light'>Agregar material</button>
+                <button onClick ={this.handleCatalogo(id)} className = 'btn btn-light'>Ver catalogo</button>
+                <button onClick ={this.handleAddMaterial(id)} className = 'btn btn-light'>Agregar material</button>
+                <button onClick ={this.handleEliminarCatalogo(id)} className = 'btn btn-light'>Eliminar catalogo</button>
             </Fragment>
         )
     }

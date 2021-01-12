@@ -71,9 +71,6 @@ public class ProveedorConsulta {
 						notNull= false;
 					}
 				}
-				System.out.println("-----------------------------------");
-				System.out.println(notNull);
-				System.out.println("-------------------------------------");
 				if(notNull) {
 					for(int j = 0;j<nombreMaterial.length;j++) {
 						totalConstrucion=materialDao.findByProveedorAndNombre(proveedor, "grava").getCosto()*consulta.getGravaCosto()
@@ -100,9 +97,6 @@ public class ProveedorConsulta {
 					}
 				}
 			}
-			System.out.println("-----------------------------------");
-			System.out.println(provedorSugerido);
-			System.out.println("-------------------------------------");
 			Optional<Proveedor> proveedorSugerido=proveedorDao.findById(provedorSugerido);
 			consulta.setNombreProveedor(proveedorSugerido.get().getNombreEmpresa());
 			consulta.setTelefonoProveedor(proveedorSugerido.get().getTelefono());

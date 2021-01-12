@@ -220,6 +220,22 @@ public class ProveedorBean extends UsuarioBean implements ProveedorBeanInterfaz{
 			return false;
 		}
 	}
+
+	@Override
+	public String eliminarCatalogo(Proveedor proveedor) {
+		try {
+			List<Material> materiales=materialDao.findByProveedor(proveedor);
+			if(!materiales.isEmpty()) {
+				for(Material material:materiales) {
+					materialDao.delete(material);
+				}
+			}
+			return "Su catalogo ha sido eliminado";
+		}catch(Exception e) {
+			e.printStackTrace();
+			return "No se pudo eliminar su catalogo de material";
+		}
+	}
 	
 	
 }

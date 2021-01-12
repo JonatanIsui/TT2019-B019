@@ -7,7 +7,6 @@ class SolicitudProveedorService{
     addSolicitudProveedor = async (usuario) =>{
         try{
             const respuesta = await axios.post(this.baseUrl+'registroProveedor',usuario)
-            console.log(respuesta)
             const data = await respuesta.data
             this.res = data
         }catch(e){
