@@ -23,3 +23,6 @@ yarn-debug.log*
 yarn-error.log*
 /nbproject/private/
 *.xls
+*.xlsx
+src/components/Diccionario.js
+src/pages/Proveedor.js
