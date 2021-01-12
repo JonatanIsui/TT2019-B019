@@ -27,6 +27,10 @@ public class Usuario implements Serializable{
 	@Column(name = "id_usuario")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "S_usuario")
 	private int id;
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	/*
 	 * nullabel indica que el campo no puede ser nulo
 	 * unique indica que el campo no se puede repetir en la base
