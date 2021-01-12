@@ -39,7 +39,7 @@ public class Material implements Serializable{
 	@Column(name = "costo", nullable = false, columnDefinition = "FLOAT(8,2)")
 	private float costo;
 	
-	@Column(name = "clave", nullable = false, columnDefinition = "VARCHAR(30)", unique=true)
+	@Column(name = "clave", nullable = false, columnDefinition = "VARCHAR(30)")
 	private String clave;
 	
 	public String getClave() {

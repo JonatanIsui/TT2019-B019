@@ -1,5 +1,6 @@
 package com.tt2.service;
 import java.util.List;
+import java.util.Optional;
 import java.lang.Math;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -36,9 +37,9 @@ public class ProveedorConsulta {
 			"alambre"};
 	
 	public ConsultaModel selectProveedor(ConsultaModel consulta) {
-		int aux= 0;
 		boolean notNull=true;
-		double promedioaux=0;
+		double promedioaux=1000000;
+		double totalConstrucionaux=1000000;
 		int provedorSugerido=0;
 		double totalConstrucion = 0;
 		try {
@@ -51,7 +52,6 @@ public class ProveedorConsulta {
 			consulta.setLadrilloBlockLigeroCosto(materialDao.promedioCostoladrilloLigero());
 			consulta.setLadrilloBloackPesadoCosto(materialDao.promedioCostoladrilloPesado());
 			consulta.setAlambreCosto(materialDao.promedioCostoAlambre());
-			Proveedor proveedorSugerido=new Proveedor();
 			double promedio = consulta.getArena()*consulta.getArenaCosto() 
 					+consulta.getGrava()*consulta.getGravaCosto()
 					+consulta.getSaco()*consulta.getSacoCosto()
@@ -62,6 +62,7 @@ public class ProveedorConsulta {
 					+consulta.getLadrilloBloackPesado()*consulta.getLadrilloBloackPesadoCosto()
 					+consulta.getAlambre()*consulta.getAlambreCosto()
 					+44.94;
+			promedioaux=promedio;
 			List<Proveedor> proveedores = proveedorDao.findAll();
 			for(Proveedor proveedor:proveedores) {
 				notNull= true;
@@ -70,6 +71,9 @@ public class ProveedorConsulta {
 						notNull= false;
 					}
 				}
+				System.out.println("-----------------------------------");
+				System.out.println(notNull);
+				System.out.println("-------------------------------------");
 				if(notNull) {
 					for(int j = 0;j<nombreMaterial.length;j++) {
 						totalConstrucion=materialDao.findByProveedorAndNombre(proveedor, "grava").getCosto()*consulta.getGravaCosto()
@@ -83,24 +87,33 @@ public class ProveedorConsulta {
 								+materialDao.findByProveedorAndNombre(proveedor, "alambre").getCosto()*consulta.getAlambre()
 								+44.94;
 					}
-					if(Math.pow((totalConstrucion-promedio),2)<promedioaux){
-						provedorSugerido=aux;
-						promedioaux=totalConstrucion-promedio;
+					if(totalConstrucion-promedio==0){
+						provedorSugerido=proveedor.getId();
+					}else {
+						if(Math.abs(totalConstrucion-promedio)<=totalConstrucionaux) {
+							if(totalConstrucion<promedioaux) {
+								provedorSugerido=proveedor.getId();
+								promedioaux=totalConstrucion;
+								totalConstrucionaux=Math.abs(totalConstrucion-promedio);
+							}
+						}
 					}
-					aux++;
 				}
 			}
-			proveedorSugerido=proveedores.get(provedorSugerido);
-			consulta.setNombreProveedor(proveedorSugerido.getNombreEmpresa());
-			consulta.setTelefonoProveedor(proveedorSugerido.getTelefono());
-			consulta.setCorreoProveedor(usuarioDao.findByProveedor(proveedorSugerido).getCorreo());
-			consulta.setDireccionProveedor(proveedorSugerido.getDireccion());
-			consulta.setNombreProveedor(proveedorSugerido.getNombreEmpresa());
-			consulta.setTelefonoProveedor(proveedorSugerido.getTelefono());
-			consulta.setCorreoProveedor(usuarioDao.findByProveedor(proveedorSugerido).getCorreo());
-			consulta.setDireccionProveedor(proveedorSugerido.getDireccion());
+			System.out.println("-----------------------------------");
+			System.out.println(provedorSugerido);
+			System.out.println("-------------------------------------");
+			Optional<Proveedor> proveedorSugerido=proveedorDao.findById(provedorSugerido);
+			consulta.setNombreProveedor(proveedorSugerido.get().getNombreEmpresa());
+			consulta.setTelefonoProveedor(proveedorSugerido.get().getTelefono());
+			consulta.setCorreoProveedor(usuarioDao.findByProveedor(proveedorSugerido.get()).getCorreo());
+			consulta.setDireccionProveedor(proveedorSugerido.get().getDireccion());
+			consulta.setNombreProveedor(proveedorSugerido.get().getNombreEmpresa());
+			consulta.setTelefonoProveedor(proveedorSugerido.get().getTelefono());
+			consulta.setCorreoProveedor(usuarioDao.findByProveedor(proveedorSugerido.get()).getCorreo());
+			consulta.setDireccionProveedor(proveedorSugerido.get().getDireccion());
 			consulta.setTotal(promedio);
-			consulta.setIdProveedor(proveedorSugerido.getId());
+			consulta.setIdProveedor(proveedorSugerido.get().getId());
 			return consulta;
 		}catch(Exception e){
 			e.printStackTrace();

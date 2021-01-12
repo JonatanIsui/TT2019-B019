@@ -76,7 +76,7 @@ public class ProveedorBean extends UsuarioBean implements ProveedorBeanInterfaz{
 			Material aux = new Material();
 			Optional<Proveedor> proveedor = proveedorDao.findById(material.getProveedor().getId());
 			System.out.println(materialDao.findByProveedorAndNombre(proveedor.get(),material.getNombre().toLowerCase()));
-			if(materialDao.findByClave(material.getClave()) == null) {
+			if(materialDao.findByClaveAndProveedor(material.getClave(),proveedor.get()) == null) {
 				if(materialDao.findByProveedorAndNombre(proveedor.get(),material.getNombre().toLowerCase())==null){
 					aux.setClave(material.getClave());
 					aux.setNombre(material.getNombre().toLowerCase());
@@ -162,8 +162,8 @@ public class ProveedorBean extends UsuarioBean implements ProveedorBeanInterfaz{
 				for(int i=1;i<=sheet.getLastRowNum();i++) {
 					row = (Row) sheet.getRow(i);
 					Material auxMaterial = new Material();
-					if(materialDao.findByClave(row.getCell(0).getStringCellValue()) != null) {
-						auxMaterial = materialDao.findByClave(row.getCell(0).getStringCellValue());
+					if(materialDao.findByClaveAndProveedor(row.getCell(0).getStringCellValue(),proveedor) != null) {
+						auxMaterial = materialDao.findByClaveAndProveedor(row.getCell(0).getStringCellValue(),proveedor);
 					}else {
 						auxMaterial.setClave(row.getCell(0).getStringCellValue());
 					}
