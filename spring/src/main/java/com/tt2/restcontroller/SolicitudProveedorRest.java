@@ -27,12 +27,13 @@ public class SolicitudProveedorRest implements ErrorController{
 	private Imagenes imagenes;
 	
 	@PostMapping("/registroProveedor")
-	public ResponseEntity<SolicitudProveedor> registrarProveedor(@RequestBody SolicitudProveedor solicitudProveedor){
-		ResponseEntity<SolicitudProveedor> res = ResponseEntity.noContent().build();
+	public ResponseEntity<String> registrarProveedor(@RequestBody SolicitudProveedor solicitudProveedor){
+		ResponseEntity<String> res = ResponseEntity.noContent().build();
 		solicitudProveedor.setIdentificacion(imagenes.toFile(solicitudProveedor.getIdentificacion(),solicitudProveedor.getNombreEmpresa()));		
 		SolicitudProveedor usu = solicitudProveedorBean.nuevaSolicitud(solicitudProveedor);
-		if(usu != null)
-			res = ResponseEntity.ok(usu);
+		if(usu != null) {
+			res = ResponseEntity.ok(usu.getCorreo());
+		}
 		return res;
 	}
 	
