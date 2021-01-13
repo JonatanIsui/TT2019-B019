@@ -115,7 +115,7 @@ class Diccionario extends React.Component{
         return(
             <Fragment>
                 <button className = 'btn btn-light' onClick = {this.handleVer}>Ver diccionario</button>
-                <button className = 'btn btn-light' onClick = {this.handleNuevo}>Agregar definicion</button>
+                <button className = 'btn btn-light' onClick = {this.handleNuevo}>Agregar definici&oacute;n</button>
             </Fragment>
         )
     }

@@ -37,7 +37,7 @@ class Administrador extends React.Component{
                     </div>
                     <div className = 'row justify-content-center'>
                         <div className = 'col-lg-4 text-center'>
-                            <button className = 'btn btn-light' onClick={this.logetOut}>Cerrar sesion</button>
+                            <button className = 'btn btn-light' onClick={this.logetOut}>Cerrar sesi&oacute;n</button>
                         </div>
                     </div>
                 </div>
@@ -45,7 +45,7 @@ class Administrador extends React.Component{
         }else{
             return(
                 <div className = ''>
-                    <div className = ''>Inicie sesion para ver esta pagina</div>
+                    <div className = ''>Inicie sesi&oacute;n para ver esta pagina</div>
                     <Login/>
                 </div>
             )
