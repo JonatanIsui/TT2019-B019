@@ -17,6 +17,7 @@ class MostrarUsuarios extends React.Component{
             <table className = 'table table-hover table-dark'>
                 <thead className = ''>
                     <tr className = ''>
+                        <th className = ''>Nombre del usuario</th>
                         <th className = ''>Correo</th>
                         <th className = ''>Fecha de login</th>
                         <th className = ''></th>
@@ -28,10 +29,44 @@ class MostrarUsuarios extends React.Component{
                     values.map((item)=>{                                                
                         return(
                             <tr className = '' key = {item.id}>
+                                <td className = '' >{item.arquitecto.nombre} {item.arquitecto.apellido}</td>
                                 <td className = '' >{item.correo}</td>
                                 <td className = ''>{item.fechaLogin}</td>
                                 <td className = ''><button className = 'btn btn-light' onClick = {this.handleEliminar} id = {item.id}>Eliminar</button></td>
-                                <td className = ''><a href = {this.urlUsuarios+btoa(JSON.stringify(item))} className="text-white">Mas informacion</a></td>
+                                <td className = ''><a href = {this.urlUsuarios+btoa(JSON.stringify(item))} >Mas informacion</a></td>
+                            </tr>
+                        )                        
+                    })
+                }
+                </tbody>
+            </table>                             
+        )
+    }
+
+    actualizarProveedores = values =>{
+        return(
+            <table className = 'table table-hover table-dark'>
+                <thead className = ''>
+                    <tr className = ''>
+                        <th className = ''>Nombre de la empresa</th>
+                        <th className = ''>Nombre del representante</th>
+                        <th className = ''>Correo</th>
+                        <th className = ''>Fecha de login</th>
+                        <th className = ''></th>
+                        <th className = ''></th>
+                    </tr>
+                </thead>
+                <tbody className = '' >
+                {
+                    values.map((item)=>{                                                
+                        return(
+                            <tr className = '' key = {item.id}>
+                                <td className = '' >{item.proveedor.nombreEmpresa}</td>
+                                <td className = '' >{item.proveedor.nombreEncargado} {item.proveedor.apellidoEncargado}</td>
+                                <td className = '' >{item.correo}</td>
+                                <td className = ''>{item.fechaLogin}</td>
+                                <td className = ''><button className = 'btn btn-light' onClick = {this.handleEliminar} id = {item.id}>Eliminar</button></td>
+                                <td className = ''><a href = {this.urlUsuarios+btoa(JSON.stringify(item))} >Mas informacion</a></td>
                             </tr>
                         )                        
                     })
@@ -88,7 +123,7 @@ class MostrarUsuarios extends React.Component{
         try{
             this.proveedores = await this.AdmService.allProveedores()
             if(Object.keys(this.proveedores).length !== 0){
-                ReactDOM.render(this.actualizar(this.proveedores),document.getElementById("div"))
+                ReactDOM.render(this.actualizarProveedores(this.proveedores),document.getElementById("div"))
             }else{
                 ReactDOM.render(<p>En este momento no hay proveedores registrados</p>,document.getElementById("div"))
             }

@@ -230,6 +230,7 @@ class MostartConsulta extends React.Component{
             <table className = 'table table-hover table-dark table-responsive'>
                 <thead className = ''>
                     <tr className = ''>
+                        <th className = 'text-center align-middle'>Fecha de la consulta</th>
                         <th className = 'text-center align-middle'>Nombre de la consulta</th>
                         <th className = 'text-center align-middle'>Proveedor recomendado</th>
                         <th className = 'text-center align-middle'>Tel&eacute;fono del proveedor</th>
@@ -244,6 +245,7 @@ class MostartConsulta extends React.Component{
                         this.props.consultas.map((consulta)=>{
                             return(
                                 <tr className = 'text-center' key = {consulta.id}>
+                                    <td className = 'text-center align-middle' >{consulta.fechaConsulta}</td>
                                     <td className = 'text-center align-middle' >{consulta.nombre}</td>
                                     <td className = 'text-center align-middle'>{consulta.nombreProveedor}</td>
                                     <td className = 'text-center align-middle'>{consulta.telefonoProveedor}</td>
