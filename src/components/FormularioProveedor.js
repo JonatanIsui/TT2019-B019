@@ -89,18 +89,18 @@ class FormularioProveedor extends React.Component{
 
 
                         <div className='row justify-content-center'>
-                            <div className='col-lg-4'>
+                            <div className='col-lg-4 col-md-6 col-sm-6 col-6'>
                 	        Nombre(s) del representante:
                             </div>
-                            <div className='col-lg-4'>
+                            <div className='col-lg-4 col-md-6 col-sm-6 col-6'>
                             Apellidos del respresentante:
                             </div>
                         </div>
                         <div className='row justify-content-center'>
-                            <div className = 'col-lg-4'>
+                            <div className = 'col-lg-4 col-md-6 col-sm-6 col-6'>
                                 <input type = 'text' placeholder = 'Nombre(s) del representante' className = 'form-control' name = 'nombreEncargado' id='nombreEncargadoProveedor' required/>
                             </div>
-                            <div className = 'col-lg-4'>
+                            <div className = 'col-lg-4 col-md-6 col-sm-6 col-6'>
                                 <input type = 'text' placeholder = 'Apellidos del respresentante' className = 'form-control' name = 'apellidoEncargado' id='apellidoEncargadoProveedor' required/>
                             </div>
                         </div>
@@ -108,28 +108,28 @@ class FormularioProveedor extends React.Component{
 
 
                         <div className='row justify-content-center'>
-                            <div className='col-lg-4'>
-                	        Direccion de la empresa:
+                            <div className='col-lg-4 col-md-6 col-sm-6 col-6'>
+                	        Direcci&oacute;n de la empresa:
                             </div>
-                            <div className='col-lg-4'>
+                            <div className='col-lg-4 col-md-6 col-sm-6 col-6'>
                             Nombre de la empresa:
                             </div>
                         </div>
 
                         <div className='row justify-content-center'>
-                            <div className = 'col-lg-4'>
-                                <input type = 'text' placeholder = 'Direccion de la empresa' className = 'form-control' name = 'direccion' id='direccionProveedor' required/>
+                            <div className = 'col-lg-4 col-md-6 col-sm-6 col-6'>
+                                <input type = 'text' placeholder = 'Direcci&oacute;n de la empresa' className = 'form-control' name = 'direccion' id='direccionProveedor' required/>
                             </div> 
-                            <div className = 'col-lg-4'>
+                            <div className = 'col-lg-4 col-md-6 col-sm-6 col-6'>
                                 <input type = 'text' placeholder = 'Nombre de la empresa' className = 'form-control' name = 'nombreEmpresa' id='nombreEmpresaProveedor' required/>
                             </div>
                         </div>
                         <p></p>
                         <div className='row justify-content-center'>
-                            <div className='col-lg-4'>
-                	        Telefono de la empresa:
+                            <div className='col-lg-4 col-md-6 col-sm-6 col-6'>
+                	        Tel&eacute;fono de la empresa:
                             </div>
-                            <div className='col-lg-4'>
+                            <div className='col-lg-4 col-md-6 col-sm-6 col-6'>
                             Email de la empresa:
                             </div>
                         </div>
@@ -137,10 +137,10 @@ class FormularioProveedor extends React.Component{
 
 
                         <div className='row justify-content-center'>
-                            <div className = 'col-lg-4'>
-                                <input type = 'tel' placeholder = 'telefono de la empresa' className = 'form-control' name = 'telefono' id='telefonoProveedor' required/>
+                            <div className = 'col-lg-4 col-md-6 col-sm-6 col-6'>
+                                <input type = 'tel' placeholder = 'tel&eacute;fono de la empresa' className = 'form-control' name = 'telefono' id='telefonoProveedor' required/>
                             </div>
-                            <div className = 'col-lg-4'>
+                            <div className = 'col-lg-4 col-md-6 col-sm-6 col-6'>
                                 <input type = 'email' placeholder = 'Email de la empresa' className = 'form-control' name = 'correo' id='correoProveedor' required/>
                             </div>
                           </div>
@@ -148,27 +148,27 @@ class FormularioProveedor extends React.Component{
                           
                         <div className='row justify-content-center'>
                             <div className='col-lg-6 text-center '>
-                                    <input type = 'file' accept=".png" className='form-control-file border' name = 'identificacion' onChange = {this.handleFile} required/> <span className='text-nowrap'>Identificacion en formato png</span>
+                                    <input type = 'file' accept=".png" className='form-control-file border' name = 'identificacion' onChange = {this.handleFile} required/> <span className='text-nowrap'>Identificaci&oacute;n en formato png</span>
                             </div>                   
                         </div>
                         <p></p>
                         
                         <div className='row justify-content-center'>
                             <div className='col-lg-4'>
-                	        Contraseña:
+                	        Contrase&ntilde;a:
                             </div>
                             <div className='col-lg-4'>
-                            <span className='text-nowrap'>Repita la contraseña</span>
+                            <span className='text-nowrap'>Repita la contrase&ntilde;a</span>
                             </div>
                         </div>
 
                         <div className='row justify-content-center'>
-                            <div className = 'col-lg-4 '>
-                                <input type = 'password' placeholder = 'Contraseña' className = 'form-control' name = 'password' id='passwordProveedor' required/>
+                            <div className = 'col-lg-4 col-md-6 col-sm-6 col-6 '>
+                                <input type = 'password' placeholder = 'Contrase&ntilde;a' className = 'form-control' name = 'password' id='passwordProveedor' required/>
                                 {errors.password && <p className = ''>{errors.password}</p>}
                             </div> 
-                            <div className = 'col-lg-4 '>
-                                <input type = 'password' placeholder = 'Repite la contraseña' className = 'form-control' name = 'password2' id='password2Proveedor' required/>
+                            <div className = 'col-lg-4 col-md-6 col-sm-6 col-6 '>
+                                <input type = 'password' placeholder = 'Repita la contrase&ntilde;a' className = 'form-control' name = 'password2' id='password2Proveedor' required/>
                                 {errors.password2 && <p className = ''>{errors.password2}</p>}
                             </div>
                         </div>
@@ -178,7 +178,7 @@ class FormularioProveedor extends React.Component{
                         <p></p>
                         <div className='row row justify-content-center'>
                             <div className = 'col-lg-3 text-center'>
-                                <input type = 'submit' value = 'Registrase' className  = 'btn btn-light'/>
+                                <input type = 'submit' value = 'Registrarse' className  = 'btn btn-light'/>
                             </div>
                         </div>
                     </form>

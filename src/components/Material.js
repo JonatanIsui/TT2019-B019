@@ -12,36 +12,40 @@ class Material extends React.Component{
 
     actualizar = values =>{
         return(
-            <table className = 'table table-hover table-dark'>
-                <thead className = ''>
-                    <tr className = ''>
-                        <th className = ''>Nombre</th>
-                        <th className = ''>Categoria</th>
-                        <th className = ''>Descripcion</th>
-                        <th className = ''>Costo</th>
-                        <th className =''>Clave del pruducto</th>
-                        <th className = ''></th>
-                        <th className = ''></th>
-                    </tr>
-                </thead>
-                <tbody className = '' >
-                {
-                    values.map((item)=>{                                                
-                        return(
-                            <tr className = '' key = {item.id}>
-                                <td className = '' >{item.nombre}</td>
-                                <td className = ''>{item.categoria}</td>
-                                <td className = ''>{item.descripcion}</td>
-                                <td className = ''>{item.costo}</td>
-                                <td className = ''>{item.clave}</td>
-                                <td className = 'btn btn-light'><button className = '' onClick = {this.handleEliminarMaterial} name = {item.id}>Eliminar</button></td>
-                                <td className = 'btn btn-light'><button className = '' onClick ={this.handleChageMaterial}  name = {item.id} >Modificar material</button></td>
+            <div className="row justify-content-center">
+                <div className="text-center">
+                    <table className = 'table table-hover table-dark table-responsive'>
+                        <thead className = ''>
+                            <tr className = ''>
+                                <th className = ''>Nombre</th>
+                                <th className = ''>Categor&iacute;a</th>
+                                <th className = ''>Descripci&oacute;n</th>
+                                <th className = ''>Costo</th>
+                                <th className =''>Clave del pruducto</th>
+                                <th className = ''></th>
+                                <th className = ''></th>
                             </tr>
-                        )                        
-                    })
-                }
-                </tbody>
-            </table>                             
+                        </thead>
+                        <tbody className = '' >
+                        {
+                            values.map((item)=>{                                                
+                                return(
+                                    <tr className = '' key = {item.id}>
+                                        <td className = '' >{item.nombre}</td>
+                                        <td className = ''>{item.categoria}</td>
+                                        <td className = ''>{item.descripcion}</td>
+                                        <td className = ''>{item.costo}</td>
+                                        <td className = ''>{item.clave}</td>
+                                        <td className = 'btn btn-light'><button className = '' onClick = {this.handleEliminarMaterial} name = {item.id}>Eliminar</button></td>
+                                        <td className = 'btn btn-light'><button className = '' onClick ={this.handleChageMaterial}  name = {item.id} >Modificar material</button></td>
+                                    </tr>
+                                )                        
+                            })
+                        }
+                        </tbody>
+                    </table>  
+                </div>
+            </div>                           
         )
     }
 
@@ -49,34 +53,42 @@ class Material extends React.Component{
         return(
             <Fragment>
             <form className = '' onSubmit = {this.handleSubmit} id = {proveedor}>
-                <div className="row">
-                    <div className="col-lg-6 text-center">
-                        Nombre:<select className= '' name = 'nombre' id = 'nombre'>
+                <div className="row justify-content-center">
+                    <div className="col-lg-6 col-md-6 col-sm-6 col-6">
+                        Nombre:
+                        <div class="input-group mb-3 ">
+                            <select class="custom-select" name = 'nombre' id="nombre">
                             <option value = 'ladrillo rojo'>Ladrillo rojo</option>
-                            <option value = 'ladrillo block ligero'>Ladrillo block ligero</option>
-                            <option value = 'ladrillo block pesado'>Ladrillo block pesado</option>
-                            <option value = 'cemento'>Cemento</option>
-                            <option value = 'mortero'>Mortero</option>
-                            <option value = 'grava'>Grava</option>
-                            <option value = 'arena'>Arena</option>
-                            <option value = 'varilla'>Varilla</option>
-                            <option value = 'alambre'>Alambre</option>
+                                <option value = 'ladrillo block ligero'>Ladrillo block ligero</option>
+                                <option value = 'ladrillo block pesado'>Ladrillo block pesado</option>
+                                <option value = 'cemento'>Cemento</option>
+                                <option value = 'mortero'>Mortero</option>
+                                <option value = 'grava'>Grava</option>
+                                <option value = 'arena'>Arena</option>
+                                <option value = 'varilla'>Varilla</option>
+                                <option value = 'alambre'>Alambre</option>
                             </select>
+                        </div>
+
+
                     </div>
-                    <div className="col-lg-6 text-center">
-                        Categoria:<input className = 'form-control' type = 'text' name = 'categoria' id='categoriaAddMaterial' placeholder = 'categoria' required/>
+                    <div className="col-lg-6 col-md-6 col-sm-6 col-6">
+                        Categor&iacute;a:<input className = 'form-control' type = 'text' name = 'categoria' id='categoriaAddMaterial' placeholder = 'categoria' required/>
                     </div>
                 </div>
-                <div className="row">
-                        <div className="col-lg-6 text-center">
+                <div className="row justify-content-center">
+                        <div className="col-lg-6 col-md-6 col-sm-6 col-6">
                             Descripcion:<input className = 'form-control' type = 'text' name = 'descripcion' id='descripcionAddMaterial' placeholder = 'descripcion' required/>
                         </div>
-                        <div className="col-lg-6 text-center">
+                        <div className="col-lg-6 col-md-6 col-sm-6 col-6">
                             Costo:<input className = 'form-control' type = 'text' name = 'costo' id='costoAddMaterial' placeholder = 'costo' required/>
                         </div>
                 </div>
-                <div className = ''>
-                    <input className = '' type = 'text' name = 'clave' id='claveAddMaterial' placeholder = 'clave del producto' required/>
+                <div className = "row justify-content-center">
+                    <div className="col-lg-6 text-center">
+                        <p></p>
+                        <input className = 'form-control' type = 'text' name = 'clave' id='claveAddMaterial' placeholder = 'clave del producto' required/>
+                    </div>   
                 </div>
                 <div className="row justify-content-center">
                     <div className="col-lg-3 text-center">
@@ -98,7 +110,7 @@ class Material extends React.Component{
                             Nombre:<p className='' id='nombreMaterial'>Nombre del material : {material.nombre}</p>
                         </div>
                         <div className="col-lg-6 text-center">
-                            Categoria:<input className = 'form-control' type = 'text' name = 'categoria' placeholder = {material.categoria}/>
+                            Categor&iacute;a:<input className = 'form-control' type = 'text' name = 'categoria' placeholder = {material.categoria}/>
                         </div>
                     </div>
                     <div className="row">
@@ -242,7 +254,7 @@ class Material extends React.Component{
             let aux={}
             aux["id"]=id
             let res={}
-            if(window.confirm("Esta seguro de eliminar su catalogo")){
+            if(window.confirm("Esta seguro de eliminar su catalogo?")){
                 res = await this.ProveedorService.eliminarCatalogo(aux)
                 alert(res)
             }

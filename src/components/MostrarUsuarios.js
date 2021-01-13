@@ -31,7 +31,7 @@ class MostrarUsuarios extends React.Component{
                                 <td className = '' >{item.correo}</td>
                                 <td className = ''>{item.fechaLogin}</td>
                                 <td className = ''><button className = 'btn btn-light' onClick = {this.handleEliminar} id = {item.id}>Eliminar</button></td>
-                                <td className = ''><a href = {this.urlUsuarios+btoa(JSON.stringify(item))} >Mas informacion</a></td>
+                                <td className = ''><a href = {this.urlUsuarios+btoa(JSON.stringify(item))} className="text-white">Mas informacion</a></td>
                             </tr>
                         )                        
                     })
@@ -103,15 +103,15 @@ class MostrarUsuarios extends React.Component{
             this.solicitudes = await this.AdmService.allSolicitudes()
             if(Object.keys(this.solicitudes).length !==0){
                 ReactDOM.render(
-                    <table className = 'table table-hover table-dark'>
+                    <table className = 'table table-hover table-dark table-responsive'>
                         <thead className = ''>
                             <tr className = ''>
-                                <th className = ''>Nombre de la empresa</th>
-                                <th className = ''>Nombre del encargado</th>
-                                <th className = ''>Apellido del encargado</th>
-                                <th className = ''>Direccion</th>
-                                <th className = ''>Telefono</th>
-                                <th className = ''>Identificacion</th>
+                                <th className = 'align-middle text-center'>Nombre de la empresa</th>
+                                <th className = 'align-middle text-center'>Nombre del encargado</th>
+                                <th className = 'align-middle text-center'>Apellido del encargado</th>
+                                <th className = 'align-middle text-center'>Direcci&oacute;n</th>
+                                <th className = 'align-middle text-center'>Tel&eacute;fono</th>
+                                <th className = 'align-middle text-center'>Identificaci&oacute;n</th>
                                 <th className = ''></th>
                                 <th className = ''></th>
                             </tr>
@@ -121,12 +121,12 @@ class MostrarUsuarios extends React.Component{
                                 this.solicitudes.map((item)=>{                                                
                                     return(
                                         <tr className = '' key = {item.id}>
-                                            <td className = '' >{item.nombreEmpresa}</td>
-                                            <td className = '' >{item.nombreEncargado}</td>
-                                            <td className = '' >{item.apellidoEncargado}</td>
-                                            <td className = '' >{item.direccion}</td>
-                                            <td className = '' >{item.telefono}</td>
-                                            <td className = '' ><a href={"data:application/png;base64,"+item.identificacion} download={item.nombreEmpresa+".png"}>Descargar identificacion</a></td>
+                                            <td className = 'align-middle text-center' >{item.nombreEmpresa}</td>
+                                            <td className = 'align-middle text-center' >{item.nombreEncargado}</td>
+                                            <td className = 'align-middle text-center' >{item.apellidoEncargado}</td>
+                                            <td className = 'align-middle text-center' >{item.direccion}</td>
+                                            <td className = 'align-middle text-center' >{item.telefono}</td>
+                                            <td className = 'align-middle text-center' ><a href={"data:application/png;base64,"+item.identificacion} download={item.nombreEmpresa+".png"} className="text-white">Descargar identificacion</a></td>
                                             <td><button className = 'btn btn-light' id = {item.id} onClick = {this.handleRechazar}>Rechazar</button></td>
                                             <td><button className = 'btn btn-light' id = {item.id} onClick = {this.handleAceptar}>Aceptar</button></td>
                                         </tr>
@@ -147,7 +147,7 @@ class MostrarUsuarios extends React.Component{
 
     handleRechazar = async (e) =>{
         try{
-            if(window.confirm("Esta seguro que deseas rechazar esta solicitud")){
+            if(window.confirm("Esta seguro que deseas rechazar esta solicitud?")){
                 this.res = await this.AdmService.rechazarSolicitud(e.target.id)
                 this.handleSolicitudes()
             }
@@ -160,7 +160,7 @@ class MostrarUsuarios extends React.Component{
         e.preventDefault()
         try{
             this.res = await this.AdmService.aceptarSolicitud(e.target.id)
-            alert("La solicitud a sido aceptada con exito")
+            alert("La solicitud a sido aceptada con éxito")
             this.handleSolicitudes()
         }catch(e){
             console.log(e)

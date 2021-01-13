@@ -118,7 +118,7 @@ class MostartConsulta extends React.Component{
         )}
         let totalpromedio = consulta.totalConsulta
         document.getElementById('total').insertAdjacentHTML("beforebegin",
-            "<td className = '' colspan='3'>Promedio costo de construcion</td>"+
+            "<td className = '' colspan='3'>Promedio costo de construci&oacute;n</td>"+
             "<td className = ''>$"+totalpromedio.toFixed(2)+"</td>"
         )
         await ReactDOM.render(this.datosHabitaciones(consulta),document.getElementById("medidasHabitacion"))
@@ -130,20 +130,20 @@ class MostartConsulta extends React.Component{
                <table className = 'table table-hover table-dark'>
                     <thead className = ''>
                         <tr className = ''>
-                            <th className = ''>Nombre de la habitacion</th>
-                            <th className = ''>Ancho de la habitacion</th>
-                            <th className = ''>Largo de la habitacion</th>
+                            <th className = ''>Nombre de la habitaci&oacute;n</th>
+                            <th className = ''>Ancho de la habitaci&oacute;n</th>
+                            <th className = ''>Largo de la habitaci&oacute;n</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Habitacion 1</td>
+                            <td>Habitaci&oacute;n 1</td>
                             <td>{consulta.anchoHabitacion1}</td>
                             <td>{consulta.largoHabitacion1}</td>
                         </tr>
                         {consulta.anchoHabitacion2!==0 &&
                             <tr>
-                                <td>Habitacion 2</td>
+                                <td>Habitaci&oacute;n 2</td>
                                 <td>{consulta.anchoHabitacion2}</td>
                                 <td>{consulta.largoHabitacion2}</td>
                             </tr>
@@ -189,13 +189,13 @@ class MostartConsulta extends React.Component{
                             <td>Largo del terreno: {consulta.largoterreno} m</td>
                         </tr>
                         <tr>
-                            <td>Numero de cuartos:</td>
+                            <td>N&uacute;mero de cuartos:</td>
                             {consulta.anchoHabitacion2!==0 ?
                                 <td>2</td>:<td>1</td>
                             }
                         </tr>
                         <tr>
-                            <td>Numero de pisos:</td>
+                            <td>N&uacute;mero de pisos:</td>
                             <td>{consulta.pisos}</td>
                         </tr>
                         <tr>
@@ -216,7 +216,7 @@ class MostartConsulta extends React.Component{
         aux["arquitecto"]=consulta.arquitecto.id
         res = await this.ArquitectoService.consultaPorCorreo(aux)
         if(res==="True"){
-            alert("Recibira un correo con su consulta")
+            alert("Recibirá un correo con su consulta")
         }
     }
     handleMostarConsulta=(consulta)=>async e=>{
@@ -227,30 +227,30 @@ class MostartConsulta extends React.Component{
     
     render(){
         return(<Fragment>
-            <table className = 'table table-hover table-dark'>
+            <table className = 'table table-hover table-dark table-responsive'>
                 <thead className = ''>
                     <tr className = ''>
-                        <th className = ''>Nombre de la consulta</th>
-                        <th className = ''>Proveedor recomendado</th>
-                        <th className = ''>Telefono del proveedor</th>
-                        <th className = ''>Correo electronico del proveedor</th>
-                        <th className = ''>Direccion del proveedor</th>
-                        <th className = ''></th>
-                        <th className = ''></th>
+                        <th className = 'text-center align-middle'>Nombre de la consulta</th>
+                        <th className = 'text-center align-middle'>Proveedor recomendado</th>
+                        <th className = 'text-center align-middle'>Tel&eacute;fono del proveedor</th>
+                        <th className = 'text-center align-middle'>Correo electronico del proveedor</th>
+                        <th className = 'text-center align-middle'>Direcci&oacute;n del proveedor</th>
+                        <th className = 'text-center align-middle'></th>
+                        <th className = 'text-center align-middle'></th>
                     </tr>
                 </thead>
                 <tbody className = '' >
                     {
                         this.props.consultas.map((consulta)=>{
                             return(
-                                <tr className = '' key = {consulta.id}>
-                                    <td className = '' >{consulta.nombre}</td>
-                                    <td className = ''>{consulta.nombreProveedor}</td>
-                                    <td className = ''>{consulta.telefonoProveedor}</td>
-                                    <td className = ''>{consulta.correoProveedor}</td>
-                                    <td className = ''>{consulta.direccionProveedor}</td>
-                                    <td className = ''><button className = 'btn btn-light' onClick = {this.handleEliminarConsulta(consulta)} >Eliminar</button></td>
-                                    <td className = ''><button className = 'btn btn-light' onClick = {this.handleMostarConsulta(consulta)} >Mas informacion</button></td>
+                                <tr className = 'text-center' key = {consulta.id}>
+                                    <td className = 'text-center align-middle' >{consulta.nombre}</td>
+                                    <td className = 'text-center align-middle'>{consulta.nombreProveedor}</td>
+                                    <td className = 'text-center align-middle'>{consulta.telefonoProveedor}</td>
+                                    <td className = 'text-center align-middle'>{consulta.correoProveedor}</td>
+                                    <td className = 'text-center align-middle'>{consulta.direccionProveedor}</td>
+                                    <td className = 'text-center align-middle'><button className = 'btn btn-light' onClick = {this.handleEliminarConsulta(consulta)} >Eliminar</button></td>
+                                    <td className = 'text-center align-middle'><button className = 'btn btn-light' onClick = {this.handleMostarConsulta(consulta)} >Mas informaci&oacute;n</button></td>
                                 </tr>
                             )
                         })

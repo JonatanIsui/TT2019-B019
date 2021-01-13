@@ -23,26 +23,35 @@ class PerfilProveedor extends React.Component{
     render(){
         const usuario=this.props.usuario
         return(<div>
-            <ul className="navbar-nav">
-                <li className="nav-item">
-                    Nombre de la empresa: {usuario.proveedor.nombreEmpresa}
-                </li>
-                <li className="nav-item">
-                    Nombre del encargado: {usuario.proveedor.nombreEncargado} {usuario.proveedor.apellidoEncargado}
-                </li>
-                <li className="nav-item">
-                    Correo: {usuario.correo}
-                </li>
-                <li className="nav-item">
-                    Telefono: {usuario.proveedor.telefono}
-                </li>
-                <li className="nav-item">
-                    Direccion: {usuario.proveedor.direccion}
-                </li>
-                <li className="nav-item">
-                <button className = 'btn btn-light' onClick={this.handleBaja(usuario)}>Baja de cuenta</button>
-                </li>
-            </ul>
+
+
+                <div className="container-fluid">
+                <div className="row justify-content-center">
+                        <div className = 'col-lg-10 text-center'><h3>Nombre de la empresa: {usuario.proveedor.nombreEmpresa}</h3>
+                        </div>
+                    </div>
+                    <div className="row justify-content-center">
+                        <div className = 'col-lg-10 text-center'><h3>Nombre del encargado: {usuario.proveedor.nombreEncargado} </h3>
+                        </div>
+                    </div>
+                    <div className="row justify-content-center">
+                        <div className = 'col-lg-10 text-center'><h3>Correo: {usuario.correo}</h3></div>
+                    </div>
+                    {usuario.proveedor.telefono!=="" &&
+                        <div className="row justify-content-center">
+                            <div className = 'col-lg-10 text-center'><h3>Tel&eacute;fono: {usuario.proveedor.telefono}</h3></div>
+                        </div>
+                    }
+                    {usuario.proveedor.direccion!=="" &&
+                        <div className="row justify-content-center">
+                            <div className = 'col-lg-10 text-center'><h3>Direcci&oacute;n: {usuario.proveedor.direccion}</h3></div>
+                        </div>
+                    }
+                    <div className="row justify-content-center">
+                        <button className = 'btn btn-light' onClick={this.handleBaja(usuario)}>Baja de cuenta</button>
+                    </div>
+                </div>
+
         </div>)
     }
 }

@@ -18,8 +18,8 @@ class Arquitecto extends React.Component{
             <table className = 'table table-hover table-dark'>
                 <thead className = ''>
                     <tr className = ''>
-                        <th className = ''>Articulo</th>
-                        <th className = ' '>Definicion</th>
+                        <th className = ''>Art&iacute;culo</th>
+                        <th className = ' '>Definici&oacute;n</th>
                     </tr>
                 </thead>
                 <tbody className = '' >
@@ -50,7 +50,7 @@ class Arquitecto extends React.Component{
                 ,document.getElementById("div")
                 )
             }else{
-                ReactDOM.render(<p>En este momento no hay definiciones agregadas</p>,document.getElementById("div"))
+                ReactDOM.render(<div class="text-center"><h2><p>En este momento no hay definiciones agregadas</p></h2></div>,document.getElementById("div"))
             }
         }catch(e){
             console.log(e)
@@ -89,7 +89,7 @@ class Arquitecto extends React.Component{
                 consultas={consultas}
             />,document.getElementById("div"))
         }else{
-            ReactDOM.render(<p>No se a encontrado ninguna consulta</p>,document.getElementById("div"))
+            ReactDOM.render(<div class="text-center"><h2><p>No se a encontrado ninguna consulta</p></h2></div>,document.getElementById("div"))
         }
     }
 
@@ -110,45 +110,44 @@ class Arquitecto extends React.Component{
             this.idArquitecto = id.id
             return(
                 <div>
-                <nav className="navbar navbar-expand-sm bg-light">
-                    <div className='container-fluid'>
-                    <h1 className = ''>Bienvenido {id.nombre}</h1>
-                    <ul className="navbar-nav">
+                    <nav className="navbar navbar navbar-expand-md bg-light text-muted">
+                        <div className='container-fluid'>
+                            <h1 className = ''>Bienvenido {id.nombre}</h1>
+                            <ul className="navbar-nav ">
 
-                        <li className="nav-item">
-                            <button className = 'btn btn-light' onClick={this.handleFormularioMedidas}>Nueva consulta</button>
-                        </li>
+                                <li className="nav-item">
+                                    <button className = 'btn btn-light' onClick={this.handleFormularioMedidas}>Nueva consulta</button>
+                                </li>
 
-                        <li className="nav-item">
-                        <button className = 'btn btn-light' onClick={this.handleVerConsultaGuardada}>Consultas guardadas</button>
-                        </li>
+                                <li className="nav-item">
+                                <button className = 'btn btn-light' onClick={this.handleVerConsultaGuardada}>Consultas guardadas</button>
+                                </li>
 
-                        <li className="nav-item">
-                            <button className = 'btn btn-light' onClick={this.handleProveedores}>Proveedores</button>
-                        </li>
+                                <li className="nav-item">
+                                    <button className = 'btn btn-light' onClick={this.handleProveedores}>Proveedores</button>
+                                </li>
 
-                        <li className="nav-item">
-                            <button className = 'btn btn-light' onClick={this.handleDiccionario}>Diccionario</button>
-                        </li>
-                        <li className="nav-item">
-                            <button className = 'btn btn-light' onClick={this.perfil}>Perfil</button>
-                        </li>
-                        <li className="nav-item">
-                            <button className = 'btn btn-light' onClick={this.logetOut}>Cerrar sesion</button>
-                        </li>
-                    </ul>
+                                <li className="nav-item">
+                                    <button className = 'btn btn-light' onClick={this.handleDiccionario}>Diccionario</button>
+                                </li>
+                                <li className="nav-item">
+                                    <button className = 'btn btn-light' onClick={this.perfil}>Perfil</button>
+                                </li>
+                                <li className="nav-item">
+                                    <button className = 'btn btn-light' onClick={this.logetOut}>Cerrar sesi&oacute;n</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav> 
+                    <div className=''>
+                        <div className='' id = 'div'></div>
                     </div>
-                </nav> 
-                
-                <div className=''>
-                <div className='' id = 'div'></div>
-                </div>
                 </div>
             )
         }else{
             return(
                 <div className = ''>
-                    <div className = ''>Inicie sesion para ver esta pagina</div>
+                    <div className = ''>Inicie sesi&oacute;n para ver esta pagina</div>
                     <Login/>
                 </div>
             )

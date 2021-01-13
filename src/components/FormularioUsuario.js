@@ -50,7 +50,7 @@ class FormularioUsuario extends React.Component{
                 this.usua = this.state;
                 this.usuario = await this.ArquitectoService.addArquitecto(this.usua)
                 if(this.usuario.length !== 0){
-                    alert('Ha sido aprovado inicie sesion para ingresar')
+                    alert('Ha sido aprobado inicie sesión para ingresar')
                     window.history.back()
                 }else{
                     alert('El correo ingresado ya se encuentra registrado')
@@ -79,20 +79,20 @@ class FormularioUsuario extends React.Component{
 
 
                         <div className='row justify-content-center'>
-                            <div className='col-lg-4'>
+                            <div className='col-lg-4 col-md-6 col-sm-6 col-6'>
                 	        Nombre(s):
                             </div>
-                            <div className='col-lg-4'>
+                            <div className='col-lg-4 col-md-6 col-sm-6 col-6'>
                             Apellido(s):
                             </div>
                         </div>
 
 
                         <div className='row row justify-content-center'>
-                            <div className = 'col-lg-4'>
+                            <div className = 'col-lg-4 col-md-6 col-sm-6 col-6'>
                                 <input type = 'text' placeholder = 'Nombre(s)*' className = 'form-control' name = 'nombre' id='nombreArquitecto' required/>
                             </div>
-                            <div className = 'col-lg-4'>
+                            <div className = 'col-lg-4 col-md-6 col-sm-6 col-6'>
                                 <input type = 'text' placeholder = 'Apellido(s)*' className = 'form-control' name = 'apellido' id='apellidoArquitecto' required/>
                             </div>
                         </div>
@@ -100,19 +100,19 @@ class FormularioUsuario extends React.Component{
 
 
                         <div className='row justify-content-center'>
-                            <div className='col-lg-4'>
-                	        Telefono
+                            <div className='col-lg-4 col-md-6 col-sm-6 col-6'>
+                	        Tel&eacute;fono
                             </div>
-                            <div className='col-lg-4'>
-                            Direccion:
+                            <div className='col-lg-4 col-md-6 col-sm-6 col-6'>
+                            Direcci&oacute;n:
                             </div>
                         </div>
                         <div className='row row justify-content-center'>
-                            <div className = 'col-lg-4'>
-                                <input type = 'tel' placeholder = 'Telefono' className = 'form-control' name = 'telefono' id='telefonoArquitecto'/>
+                            <div className = 'col-lg-4 col-md-6 col-sm-6 col-6'>
+                                <input type = 'tel' placeholder = 'Tel&eacute;fono' className = 'form-control' name = 'telefono' id='telefonoArquitecto'/>
                             </div>
-                            <div className = 'col-lg-4'>
-                                <input type = 'text' placeholder = 'Direccion' className = 'form-control' name = 'direccion' id='direccionArquitecto'/>
+                            <div className = 'col-lg-4 col-md-6 col-sm-6 col-6'>
+                                <input type = 'text' placeholder = 'Direcci&oacute;n' className = 'form-control' name = 'direccion' id='direccionArquitecto'/>
                             </div>
                         </div>
                         <p></p>
@@ -128,27 +128,27 @@ class FormularioUsuario extends React.Component{
                         </div>
                         <p></p>
                         <div className='row justify-content-center'>
-                            <div className='col-lg-4'>
-                	        Contrasena:
+                            <div className='col-lg-4 col-md-6 col-sm-6 col-6'>
+                	        Contrase&ntilde;a:
                             </div>
-                            <div className='col-lg-4'>
-                            <span className='text-nowrap'>Repita la contrasena</span>
+                            <div className='col-lg-4 col-md-6 col-sm-6 col-6'>
+                            <span className='text-nowrap'>Repita la contrase&ntilde;a</span>
                             </div>
                         </div>
                         <div className='row row justify-content-center'>
-                            <div className = 'col-lg-4'>
-                                <input type = 'password' placeholder = 'Contraseña*' className = 'form-control' name = 'password' id='passwordArquitecto' required/>
+                            <div className = 'col-lg-4 col-md-6 col-sm-6 col-6'>
+                                <input type = 'password' placeholder = 'Contrase&ntilde;a*' className = 'form-control' name = 'password' id='passwordArquitecto' required/>
                                 {errors.password && <p className = ''>{errors.password}</p>}
                             </div>
-                            <div className = 'col-lg-4'>
-                                <input type = 'password' placeholder = 'Repite la contraseña*' className = 'form-control' name = 'password2' id='password2Arquitecto' required/>
+                            <div className = 'col-lg-4 col-md-6 col-sm-6 col-6'>
+                                <input type = 'password' placeholder = 'Repite la contrase&ntilde;a*' className = 'form-control' name = 'password2' id='password2Arquitecto' required/>
                                 {errors.password2 && <p className = ''>{errors.password2}</p>}
                             </div>
                         </div>
                         <p></p>
                         <div className='row row justify-content-center'>
                             <div className = 'col-lg-3 text-center'>
-                                <input type = 'submit' value = 'Registrase' className  = 'btn btn-light'/>
+                                <input type = 'submit' value = 'Registrarse' className  = 'btn btn-light'/>
                             </div>
                         </div>
                     </form>

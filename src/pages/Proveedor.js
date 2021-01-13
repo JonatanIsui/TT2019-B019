@@ -80,7 +80,7 @@ class Proveedor extends React.Component{
                 <div className="row justify-content-center">
                     <h1 className = ''>Bienvenido {id.nombreEmpresa}</h1>
                 </div>
-                <div className="row justify-content-center">
+                <div className="row justify-content-center ">
                     <Material
                             id = {id.id}
                         />
@@ -98,7 +98,7 @@ class Proveedor extends React.Component{
                 </div>
                 <div id = 'div'></div>
                 <form  id = {id.id} className = '' onSubmit={this.handleSubmit}>
-                    <div className="row justify-content-center">
+                    <div className="row justify-content-center text-center">
                         
                             <h1 className = ''>Subir catalogo, solo formato .xlsx</h1>
                         

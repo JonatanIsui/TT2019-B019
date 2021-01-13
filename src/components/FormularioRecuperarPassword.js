@@ -46,19 +46,19 @@ class FormularioRecuperarPassword extends React.Component{
                     localStorage.setItem('arquitecto','true')
                     const red = btoa(JSON.stringify(sinpassword.arquitecto))
                     this.props.match.params.id=null
-                    alert("La contraseña se restablecio con exito")
+                    alert("La contraseña se restablecio con éxito")
                     window.location = '/Arquitecto/'+red+''
                 }else if(!!this.usuario.proveedor){
                     localStorage.setItem('proveedor','true')
                     const red = btoa(JSON.stringify(sinpassword.proveedor))
                     this.props.match.params.id=null
-                    alert("La contraseña se restablecio con exito")
+                    alert("La contraseña se restablecio con éxito")
                     window.location = '/Proveedor/'+red+''
                 }else if(!!this.usuario.administrador){
                     localStorage.setItem('administrador','true')
                     const red = btoa(JSON.stringify(sinpassword.administrador))
                     this.props.match.params.id=null
-                    alert("La contraseña se restablecio con exito")
+                    alert("La contraseña se restablecio con éxito")
                     window.location = '/Administrador/'+red+''
                 }else{
                     alert("En estos momento no se puede restablecer tu contraseña, intente mas tarde")
@@ -77,7 +77,7 @@ class FormularioRecuperarPassword extends React.Component{
             <div className = 'container-fluid p-3 my-3 bg-dark text-white'>
                 <div className='row justify-content-center'>
                     <div className = 'col-4-lg'>
-                        <h1 className = ''>Recupera tu contraseña</h1>
+                        <h1 className = ''>Recupera tu contrase&ntilde;a</h1>
                     </div>
                 </div>
 
@@ -85,13 +85,13 @@ class FormularioRecuperarPassword extends React.Component{
                 <form className = '' onSubmit = {this.handleSubmit}>
                     <div className = 'row justify-content-center'>
                             <div className = 'col-lg-4 text-center'>
-                                Introduce tu una contraseña nueva<input type = 'password' placeholder = 'Contraseña*' className = 'form-control' name = 'password' id='passwordRecuperar' onChange = {this.handleChage} required/>
+                                Introduce una contrase&ntilde;a nueva<input type = 'password' placeholder = 'Contrase&ntilde;a*' className = 'form-control' name = 'password' id='passwordRecuperar' onChange = {this.handleChage} required/>
                                 {errors.password && <p className =''>{errors.password}</p>}
                             </div>
                     </div>
                     <div className="row justify-content-center">
                         <div className = 'col-lg-4 text-center'>
-                            Repite la contraseña<input type = 'password' placeholder = 'Repite la contraseña*' className = 'form-control' name = 'password2' id='password2Recuperar' onChange = {this.handleChage} required/>
+                            Repite la contrase&ntilde;a<input type = 'password' placeholder = 'Repite la contrase&ntilde;a*' className = 'form-control' name = 'password2' id='password2Recuperar' onChange = {this.handleChage} required/>
                             {errors.password2 && <p className =''>{errors.password2}</p>}
                         </div>
                     </div>

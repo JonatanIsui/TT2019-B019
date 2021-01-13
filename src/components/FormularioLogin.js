@@ -71,7 +71,7 @@ la vida de un componente. El estado cambia con el tiempo*/
             <div className = 'container-fluid p-3 my-3 bg-dark text-white'>
                 <div className = 'row justify-content-center'>
 
-                    <div className='col-lg-4'><h1 className = ''>Iniciar sesión</h1></div>
+                    <div className='col-lg-4 col-md-6 text-center'><h1 className = ''>Iniciar sesión</h1></div>
 
                 </div>
                 <div className = ''>
@@ -79,12 +79,12 @@ la vida de un componente. El estado cambia con el tiempo*/
                     </div>
                     
                     <form className = '' onSubmit = {this.handleSubmit}>
-                        <div className='row'>
+                        <div className='row justify-content-center'>
                             <div className = 'input-group'>
                                 
 
-                            <div className='col-lg-4 text-right'>Correo:</div>
-                            <div className='col-lg-4'>
+                            <div className='col-lg-4 col-md-4 col-sm-2 text-right col-2'>Correo:</div>
+                            <div className='col-lg-4 col-md-6 col-sm-10 col-10'>
                                 <span className="input-group-addon"><i className="glyphicon glyphicon-user"></i></span>
                                 <input type = 'email' placeholder = 'correo*' className = 'form-control' id='correoLogin' name = 'correo' required/>
                                 {errors.email && <p className =''>{errors.email}</p>}
@@ -98,15 +98,15 @@ la vida de un componente. El estado cambia con el tiempo*/
                         <p></p>
 
                         <div className='row' >
-                            <div className='col-lg-4 text-right'>Contraseña:</div>
-                            <div className='col-lg-4'>
+                            <div className='col-lg-4 col-md-4 text-right col-sm-2 col-2'>Contraseña:</div>
+                            <div className='col-lg-4 col-md-6 col-sm-10 col-10'>
                                 <input type = 'password' placeholder = 'contraseña*' className = 'form-control' id='passwordLogin' name = 'password' required/>
                                 {errors.password && <p className =''>{errors.password}</p>}</div>
 
                         </div>
                         <p></p>
                         <div className='row justify-content-center'>
-                            <div className = 'col-lg-3'>
+                            <div className = 'col-lg-3 col-md-12 text-center'>
                                 <input type = 'submit' value = 'Iniciar sesión' className = 'btn btn-light '/>
                             </div>
                         </div>

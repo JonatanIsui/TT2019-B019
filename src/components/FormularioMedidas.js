@@ -22,16 +22,16 @@ class FormularioMedidas extends React.Component{
             document.getElementById('habitacion').insertAdjacentHTML("beforebegin",
                 "<div class='row justify-content-center'>"+
                     "<div class = 'col-lg-8 text-center'>"+
-                        "<h3>Habitacion "+(i+1)+"</h3>"+
+                        "<h3>Habitaci&oacute;n "+(i+1)+"</h3>"+
                     "</div>"+
                 "</div>"+
 
                 "<div class='row justify-content-center'>"+
-                    "<div class = 'col-lg-4 text-center'>"+
-                        "Ancho en metros de la habitacion*:<input name = 'anchoHabitacion"+(i+1)+"' type = 'number' min='2' max='4' placeholder = 'ancho en metros de la habitacion*' step = '0.01' required class = 'form-control'/>"+
+                    "<div class = 'col-lg-4 col-md-6 col-sm-6 col-6 text-center'>"+
+                        "Ancho en metros de la habitaci&oacute;n*:<input name = 'anchoHabitaci&oacute;n"+(i+1)+"' type = 'number' min='2' max='4' placeholder = 'ancho en metros de la habitacion*' step = '0.01' required class = 'form-control'/>"+
                     "</div>"+
-                    "<div class = 'col-lg-4 text-center'>"+
-                        "Largo en metros de la habitacion*:<input name = 'largoHabitacion"+(i+1)+"'  type = 'number' min='2' max='2.8' placeholder = 'largo en metros de la habitacion*' step = '0.01' required class = 'form-control'/>"+
+                    "<div class = 'col-lg-4 col-md-6 col-sm-6 col-6 text-center'>"+
+                        "Largo en metros de la habitaci&oacute;n*:<input name = 'largoHabitaci&oacute;n"+(i+1)+"'  type = 'number' min='2' max='2.8' placeholder = 'largo en metros de la habitacion*' step = '0.01' required class = 'form-control'/>"+
                     "</div>"+
                 "</div>"
            )
@@ -147,10 +147,10 @@ class FormularioMedidas extends React.Component{
                             </div>
                         </div>
                         <div className='row justify-content-center'>
-            	            <div className = 'col-lg-4 text-center'>
+            	            <div className = 'col-lg-4 col-md-6 col-sm-6 col-6 text-center'>
                                 Ancho en metros de la cocina*:<input name = 'anchococina' className = 'form-control' type = 'number' min='2' max='4' placeholder = 'ancho en metros de la cocina*' step = '0.01' required />
                             </div>
-                            <div className = 'col-lg-4 text-center'>
+                            <div className = 'col-lg-4 col-md-6 col-sm-6 col-6 text-center'>
                                 Largo en metros de la cocina*:<input name = 'largococina' className = 'form-control' type = 'number' min='2' max='4' placeholder = 'largo en metros de la cocina*' step = '0.1' required/>
                             </div>
                         </div>
@@ -163,10 +163,10 @@ class FormularioMedidas extends React.Component{
                         </div>
 
                         <div className = 'row justify-content-center'>
-                            <div className = 'col-lg-4 text-center'>
+                            <div className = 'col-lg-4 col-md-6 col-sm-6 col-6 text-center'>
                                 Ancho en metros del cuarto del lavado*:<input name = 'ancholavado' className = 'form-control' type = 'number' min='1' max='3' placeholder = 'ancho en metros del cuarto del lavado*' step = '0.01' required/>
                             </div>
-                            <div className = 'col-lg-4 text-center'>
+                            <div className = 'col-lg-4 col-md-6 col-sm-6 col-6 text-center'>
                                 Largo en metros del cuarto del lavado*:<input name = 'largolavado' className = 'form-control' type = 'number' min='1' max='3' placeholder = 'largo en metros del cuarto del lavado*' step = '0.01' required/>
                             </div>
                         </div>
@@ -174,16 +174,16 @@ class FormularioMedidas extends React.Component{
 
                         <div className='row justify-content-center'>
                             <div className = 'col-lg-8 text-center'>
-                                <h3>Baño</h3>
+                                <h3>Ba&ntilde;o</h3>
                             </div>
                         </div>
 
                         <div className = 'row justify-content-center'>
-                            <div className = 'col-lg-4 text-center'>
-                                Ancho en metros del baño*:<input name = 'anchobano' className = 'form-control' type = 'number' min='2' max='2.5' placeholder = 'ancho en metros del baño*' step = '0.01' required/>
+                            <div className = 'col-lg-4 col-md-6 col-sm-6 col-6 text-center'>
+                                Ancho en metros del ba&ntilde;o*:<input name = 'anchobano' className = 'form-control' type = 'number' min='2' max='2.5' placeholder = 'ancho en metros del baño*' step = '0.01' required/>
                             </div>
-                            <div className = 'col-lg-4 text-center'>
-                                Largo en metros del baño*:<input name = 'largobano' className = 'form-control' type = 'number' min='2' max='2.5' placeholder = 'largo en metros del baño*' step = '0.01' required/>
+                            <div className = 'col-lg-4 col-md-6 col-sm-6 col-6 text-center'>
+                                Largo en metros del ba&ntilde;o*:<input name = 'largobano' className = 'form-control' type = 'number' min='2' max='2.5' placeholder = 'largo en metros del baño*' step = '0.01' required/>
                             </div>
                         </div>
                     
@@ -268,31 +268,31 @@ class FormularioMedidas extends React.Component{
             <div id='medidasTerreno'>   
                 <form className = '' onSubmit = {this.handleSubmit}>
                     <div className='row justify-content-center'>
-                        <div className = 'col-lg-4 text-center'>
+                        <div className = 'col-lg-4 col-md-6 col-sm-6 col-6 text-center'>
                             Ancho en metros en metros del terreno*:<input id = 'ancho' className = 'form-control' type = 'number' min='4' max='18' step = '0.01' placeholder = 'ancho en metros en metros del terreno*' required/>
                         </div>
-                        <div className = 'col-lg-4 text-center'>
+                        <div className = 'col-lg-4 col-md-6 col-sm-6 col-6 text-center'>
                             Largo en metros en metros del terreno*<input id = 'largo' className = 'form-control' type = 'number' min='4' max='18' step = '0.01' placeholder = 'largo en metros en metros del terreno*' required/>
                         </div>
                     </div>
                     <p></p>
 
                     <div className='row justify-content-center'>
-                        <div className = 'col-lg-3 text-center'>
-                            <p className =''>Número de cuartos</p>
+                        <div className = 'col-lg-3 col-md-4 col-sm-4 col-4 text-center'>
+                            <p className =''>N&uacute;mero de cuartos</p>
                             <select className= 'custom-select' id = 'habitaciones'>
                                 <option value = '1'>1</option>
                                 <option value = '2'>2</option>
                             </select>
                         </div>
-                        <div className='col-lg-3 text-center'>
-                            <p className = '' >Número de pisos</p>
+                        <div className='col-lg-3 col-md-4 col-sm-4 col-4 text-center'>
+                            <p className = '' >N&uacute;mero de pisos</p>
                             <select className= 'custom-select' id = 'pisos'>
                                 <option value = '1'>1</option>
                                 <option value = '2'>2</option>
                             </select>    
                         </div>
-                        <div className='col-lg-3 text-center'>
+                        <div className='col-lg-3 col-md-4 col-sm-4 col-4 text-center'>
                             <p className = '' >Tipo de ladrillo</p>
                             <select className= 'custom-select' id = 'tipoladrillo'>
                                 <option value = '1'>Rojo</option>
