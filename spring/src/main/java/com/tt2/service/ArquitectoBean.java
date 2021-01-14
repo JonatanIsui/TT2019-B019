@@ -93,14 +93,15 @@ public class ArquitectoBean extends UsuarioBean implements ArquitectoBeanInterfa
 		try {
 			consultaBean.varillasLozas(medidas.getAnchoterreno(), medidas.getLargoterreno(),medidas.getPisos());
 			consultaBean.coladoLozas(medidas.getAnchoterreno(), medidas.getLargoterreno(),medidas.getPisos());
-			consultaBean.castillos(medidas.getPisos());
+			//consultaBean.castillos(medidas.getPisos());
 			consultaBean.cadenas(medidas.getAnchoterreno(), medidas.getLargoterreno(),medidas.getPisos());
 			consultaBean.paredesPerimetro(medidas.getAnchoterreno(), medidas.getLargoterreno(),medidas.getPisos(),medidas.getTipoladrillo());
 			consultaBean.cuartos(medidas.getPisos(),medidas.getAnchoHabitacion1(),medidas.getLargoHabitacion1(),medidas.getAnchoHabitacion2(),medidas.getLargoHabitacion2(),
 								medidas.getAnchobano(),medidas.getLargobano(),medidas.getAnchococina(),medidas.getLargococina(),medidas.getAncholavado(),medidas.getLargolavado(),
 								medidas.getTipoladrillo()
 					);
-			consultaBean.escalera();
+			consultaBean.escalera(medidas.getPisos());
+			consultaBean.cimentacion(medidas.getAnchoterreno(), medidas.getLargoterreno());
 			consultaBean.imprimir();
 			ConsultaModel consulta = consultaBean.getConsulta();
 			consulta.setArquitecto(arquitectoOption.get());

@@ -28,3 +28,5 @@ src/components/Diccionario.js
 src/pages/Proveedor.js
 *.png
 *.xlsx
+*.class
+*.class

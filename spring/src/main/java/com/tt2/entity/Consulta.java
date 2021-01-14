@@ -77,7 +77,7 @@ public class Consulta implements Serializable{
 	@Column(name = "anchococina",nullable = false, columnDefinition = "FLOAT(3,2)")
 	private double anchococina;
 	
-	@Column(name = "anchoterreno",nullable = false, columnDefinition = "FLOAT(3,2)")
+	@Column(name = "anchoterreno",nullable = false, columnDefinition = "FLOAT(4,2)")
 	private double anchoterreno;
 	
 	@Column(name = "largoHabitacion1",nullable = false, columnDefinition = "FLOAT(3,2)")
@@ -92,7 +92,7 @@ public class Consulta implements Serializable{
 	@Column(name = "largococina",nullable = false, columnDefinition = "FLOAT(3,2)")
 	private double largococina;
 	
-	@Column(name = "largoterreno",nullable = false, columnDefinition = "FLOAT(3,2)")
+	@Column(name = "largoterreno",nullable = false, columnDefinition = "FLOAT(4,2)")
 	private double largoterreno;
 	
 	@Column(name = "pisos",nullable = false, columnDefinition = "int(1)")
@@ -140,7 +140,7 @@ public class Consulta implements Serializable{
 	@Column(name="correo_proveedor",nullable= false, columnDefinition="VARCHAR(300)")
 	private String correoProveedor;
 	
-	@Column(name="direccion_proveedor",nullable= false, columnDefinition="VARCHAR(10)")
+	@Column(name="direccion_proveedor",nullable= false, columnDefinition="VARCHAR(250)")
 	private String direccionProveedor;
 	
 	@Column(name="total_consulta",nullable= false, columnDefinition="FLOAT(8,2)")

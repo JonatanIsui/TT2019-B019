@@ -5,6 +5,7 @@ class MostartConsulta extends React.Component{
     ArquitectoService = new ArquitectoService()
     etiquetas = ['Botes de agua de 19L','Arena','Grava','Saco de cemento','Saco de Mortero','Varilla','Ladrillo Rojo','Ladrillo Block Ligero','Ladrillo Block Pesado','Alambre','Varilla armex']
     nombresObjeto=["",'arena','grava','saco','sacoMortero','varilla','ladrilloRojo','ladrilloBlockLigero','ladrilloBloackPesado','alambre','varillaArmex']
+    descripciones=["Botes de 19 L","arenaDesc","gravaDesc","sacoDesc","sacoMorteroDesc","varillaDesc","ladrilloRojoDesc","ladrilloBlockLigeroDesc","ladrilloBloackPesadoDesc","alambreDesc","varillaArmexDes"]
     nombresObjetoCosto=["",'arenaCosto','gravaCosto','sacoCosto','sacoMorteroCosto','varillaCosto','ladrilloRojoCosto','ladrilloBlockLigeroCosto','ladrilloBloackPesadoCosto','alambreCosto','varillaArmexCosto']
     handleEliminarConsulta=(consulta)=>async e=>{
         e.preventDefault()
@@ -53,6 +54,7 @@ class MostartConsulta extends React.Component{
                     <thead className = ''>
                         <tr className = ''>
                             <th className = ''>Material</th>
+                            <th className=''>Descripcion</th>
                             <th className = ''>Cantidad</th>
                             <th className = ''>Costo promedio</th>
                             <th className = ''>Total</th>
@@ -105,8 +107,10 @@ class MostartConsulta extends React.Component{
     }
 
     materia = async (consulta) =>{
+        console.log(consulta)
         document.getElementById('0').insertAdjacentHTML("beforebegin",
             "<td className = ''>"+this.etiquetas[0]+"</td>"+
+            "<td className = ''>"+this.descripciones[0]+"</td>"+
             "<td className = ''>"+consulta.agua+"</td>"+
             "<td className = ''> de 0 a 15 mil litros de agua son $44.94</td>"+
             "<td className = ''>$44.94</td>"  
@@ -114,6 +118,7 @@ class MostartConsulta extends React.Component{
         for(let i = 1;i<this.nombresObjeto.length;i++){
             document.getElementById(i.toString()).insertAdjacentHTML("beforebegin",
                 "<td className = ''>"+this.etiquetas[i]+"</td>"+
+                "<td className = ''>"+consulta[this.descripciones[i]]+"</td>" +
                 "<td className = ''>"+consulta[this.nombresObjeto[i]]+
                 "<td className = ''> $"+consulta[this.nombresObjetoCosto[i]]+"</td>"+
                 "<td className = ''>$"+consulta[this.nombresObjeto[i]]*consulta[this.nombresObjetoCosto[i]]+"</td>"

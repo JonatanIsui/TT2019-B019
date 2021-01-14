@@ -27,14 +27,14 @@ public class Email implements EmailInterfaz{
     public boolean sendEmail(Usuario usuario) {
     	boolean res = false;
     	String subject = "Solicitud recuperacion de contraseña";
-    	String urlBase = "Si deseas recuperar sigue el link de lo contrario ignora este correo http://localhost:3000/CambioPassword/ si no realizaste tu la solicitud ignora este mensaje.";
+    	String urlBase = "Si deseas recuperar sigue el link de lo contrario ignora este correo http://localhost:3000/CambioPassword/";
     	try {
     		SimpleMailMessage email = new SimpleMailMessage();
     		email.setTo(usuario.getCorreo());
     		email.setSubject(subject);
     		//Cifrar email
     		String encoded = new String(Base64.getEncoder().encode(usuario.getCorreo().getBytes()));
-    		email.setText(urlBase+encoded);
+    		email.setText(urlBase+encoded+"  si no realizaste tu la solicitud ignora este mensaje.");
     		mailSender.send(email);
     		res = true;
     	}catch(Exception e) {

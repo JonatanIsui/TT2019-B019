@@ -12,9 +12,9 @@ public class ConsultaBean {
     private double varillas=0;
     private double ladrillos=0;
     private double alambre=0;
-    private double blockligero=0;
-    private double blockpesado=0;
     private double varillaArmex=0;
+    private double ladrilloBlockLigero=0;
+    private double ladrilloBlockPesado=0;
     private ConsultaModel consulta=new ConsultaModel();
     
     public void varillasLozas(double ancho, double largo, int pisos){
@@ -92,8 +92,7 @@ public class ConsultaBean {
             arena = arena+(arenaC * m3Entrepiso);
             grava = grava+(gravaC * m3Entrepiso);
             saco = saco+(sacoC * m3Entrepiso);
-
-            agua = agua+(aguaC * m3Tapa);
+agua = agua+(aguaC * m3Tapa);
             arena = arena+(arenaC * m3Tapa);
             grava = grava+(gravaC * m3Tapa);
             saco = saco+(sacoC * m3Tapa);
@@ -121,10 +120,10 @@ public class ConsultaBean {
             arena = arena+((arenaC * mcubicos)*4);
             grava = grava+((gravaC * mcubicos)*4);
             saco = saco+((sacoC * mcubicos)*4);
-
+            //1 ya que en cada castillo hay una varilla de 12m
             varillas = varillas+(1*4);
             
-            numAlambre= altura/distanciaAnillo;
+            numAlambre= (altura/distanciaAnillo)*4;
             //se multiplica por .50 ya es el perimetro de los anillos, que son de 10x15
             alambreC=numAlambre*.50;
             
@@ -139,7 +138,8 @@ public class ConsultaBean {
             arena = arena+((arenaC * mcubicos)*4);
             grava = grava+((gravaC * mcubicos)*4);
             saco = saco+((sacoC * mcubicos)*4);
-
+            
+            //2 ya que en cada castillo hay una varilla de 12m
             varillas = varillas+(2*4);
             
             numAlambre= (altura/distanciaAnillo)*4;
@@ -217,7 +217,7 @@ public class ConsultaBean {
         double medidaVarilla = 12;
         double altura = 0;
         double largoCastillo = .30;
-        double anchoCastillo = .15;
+double anchoCastillo = .15;
         double m2Largo;
         double m2LadrilloMortero;
         double m2Ancho;
@@ -227,7 +227,8 @@ public class ConsultaBean {
         double m2Mortero, m2MorteroA;
         double largoLadrillo = 0, anchoLadrillo = 0, espesorLadrillo = 0;
         double numCastillosA,numCastillosL,numCastillosTotal,auxCastillos,m3Castillos;
-        double alambreC;
+        double espacioVentana,anchoVentana=1.2,largoVentana=1.5,mVarillaArmex;
+        double alambreC,auxVentanaLargo,auxVentanaAncho;
         
         if(pisos==1){
             altura=3;
@@ -241,16 +242,31 @@ public class ConsultaBean {
             espesorLadrillo = .12;
         }else{
             if(ladrillo==2){
-                largoLadrillo = .10;
-                anchoLadrillo = .24;
+                largoLadrillo = .20;
+                anchoLadrillo = .40;
                 espesorLadrillo = .12;
             }
         }
+        //calculo de espacio para ventanas y sus materiales
+        espacioVentana=(anchoVentana+(largoCastillo*2))*(largoVentana+(largoCastillo*2));
         
-        numCastillosL=(largo/2.5)*2;
+        mVarillaArmex=(((largoVentana*2)+(anchoVentana*2))*5)/6;
+        
+        varillaArmex = varillaArmex + mVarillaArmex;
+        
+        auxVentanaLargo=(largoCastillo*anchoCastillo*largoVentana)*2;
+        auxVentanaAncho=(largoCastillo*anchoCastillo*anchoVentana)*2;
+        
+        agua = agua + (aguaC * auxVentanaLargo) + (aguaC * auxVentanaAncho);
+        arena = arena + (arenaC * auxVentanaLargo) + (arenaC * auxVentanaAncho);
+        grava = grava + (gravaC * auxVentanaLargo) + (gravaC * auxVentanaAncho);
+        saco = saco + (sacoC * auxVentanaLargo) + (sacoC * auxVentanaAncho);
+        
+        //Calculo de numero de castillos en el perimetro
+        numCastillosL=(Math.floor(largo/2.5))*2;
         largo=largo-(numCastillosL*.30);
         
-        numCastillosA=(ancho/2.5)*2;
+        numCastillosA=(Math.floor(ancho/2.5))*2;
         ancho=ancho-(numCastillosA*.30);
         
         //calculo de varillas de los castillos del perimetro
@@ -260,7 +276,7 @@ public class ConsultaBean {
         varillas= varillas + auxCastillos;
         
         m3Castillos = (largoCastillo*anchoCastillo*altura)*numCastillosTotal;
-        
+
         agua = agua + (aguaC * m3Castillos);
         arena = arena + (arenaC * m3Castillos);
         grava = grava + (gravaC * m3Castillos);
@@ -272,407 +288,454 @@ public class ConsultaBean {
         alambre= alambre + alambreC;
         
         //Calculo de ladrillos con mortero del frente y detras de la casa
-        m2Largo=(altura-espesorMortero-(largoCastillo*4))*(largo-espesorMortero-(largoCastillo*3));
+        m2Largo=(((altura-largoCastillo)*(largo))-(espacioVentana*2));
         m2LadrilloMortero=(largoLadrillo+espesorMortero)*(anchoLadrillo+espesorMortero);
         numLadrillos=m2Largo/m2LadrilloMortero;
+        if(ladrillo==1){
+            ladrillos = ladrillos + (numLadrillos*2);
+        }else if(ladrillo==2){
+            if(pisos==2){
+                ladrilloBlockLigero = ladrilloBlockLigero +  numLadrillos;
+                ladrilloBlockPesado = ladrilloBlockPesado +  numLadrillos;
+            }else if(pisos==1){
+                ladrilloBlockPesado = ladrilloBlockPesado +  (numLadrillos*2);
+            }
+        }
         
-        ladrillos=numLadrillos*2;
        
         //Calculo solo de mortero del frente y detras de la casa
-        m2Mortero=((m2Largo-((largoLadrillo*anchoLadrillo)*numLadrillos))*2)*espesorLadrillo;
-        
-        agua = agua + (aguaC * m2Mortero);
+        m2Mortero=(((m2Largo)-((largoLadrillo*anchoLadrillo)*numLadrillos))*2)*espesorLadrillo;
+agua = agua + (aguaC * m2Mortero);
         arena = arena + (arenaC * m2Mortero);
         grava = grava + (gravaC * m2Mortero);
         sacoMortero = sacoMortero + (sacoMorteroC * m2Mortero);
         
         //Calculo de ladrillos con mortero de los lados izquierdo y derecho de la casa
-        m2Ancho=(altura-espesorMortero-(anchoCastillo*4))*(ancho-espesorMortero-(largoCastillo*3));
+        m2Ancho=(((altura-largoCastillo)*(ancho))-(espacioVentana*2));
         m2LadrilloMorteroA=(largoLadrillo+espesorMortero)*(anchoLadrillo+espesorMortero);
         numLadrillosA=m2Ancho/m2LadrilloMorteroA;
         
-        ladrillos = ladrillos + (numLadrillosA*2);
+        if(ladrillo==1){
+            ladrillos = ladrillos + (numLadrillos*2);
+        }else if(ladrillo==2){
+            if(pisos==2){
+                ladrilloBlockLigero = ladrilloBlockLigero +  numLadrillos;
+                ladrilloBlockPesado = ladrilloBlockPesado +  numLadrillos;
+            }else if(pisos==1){
+                ladrilloBlockPesado = ladrilloBlockPesado +  (numLadrillos*2);
+            }
+        }
         
         //Calculo solo de mortero de los lados izquierdo y derecho de la casa
-        m2MorteroA=((m2Ancho-((largoLadrillo*anchoLadrillo)*numLadrillos))*2)*espesorLadrillo;
-        
+        m2MorteroA=(((m2Ancho)-((largoLadrillo*anchoLadrillo)*numLadrillosA))*2)*espesorLadrillo;
+
         agua = agua + (aguaC * m2MorteroA);
         arena = arena + (arenaC * m2MorteroA);
         grava = grava + (gravaC * m2MorteroA);
         sacoMortero = sacoMortero + (sacoMorteroC * m2MorteroA);
         
     }
-    
     public void cuartos(int pisos,double anchoCuarto1,double largoCuarto1,double anchoCuarto2,
-               double largoCuarto2,double anchoBano,double largoBano,double anchoCocina,
-               double largoCocina,double anchoLavado,double largoLavado,int ladrillo){
-        
-        double alturaPisoTecho=2.7;
-        double largoVarilla=12;
-        double aguaC = 2.5;
-        double arenaC = 7;
-        double gravaC = 8;
-        double sacoC = 1;
-        double sacoMorteroC = 1;
-        double espesorMortero = .01;
-        double altura = 3;
-        double largoCastillo = .30;
-        double anchoCastillo = .15;
-        double largoLadrillo = .10;
-        double anchoLadrillo = .24;
-        double espesorLadrillo = .12;
-        double m2Cuarto1,m2LadrilloMortero,m2Sobrantes,numLadrillos,m2Cuarto2,m2ParedComp;
-        double m2Mortero, auxVarillas,m3Castillo,alambreC,alambreCa,auxCadena,m3Cadena,m2Bano;
-        ///////calcular el material de los castillos y restar la cadena del techo
-        if(ladrillo==1){
-            largoLadrillo = .10;
-            anchoLadrillo = .24;
-            espesorLadrillo = .12;
-        }else if(ladrillo==2){
-            largoLadrillo = .10;
-            anchoLadrillo = .24;
-            espesorLadrillo = .12;
-        }
-        if(pisos==2){
-                //pared por si es de dos pisos
-            m2Cuarto1=anchoCuarto1*alturaPisoTecho;
-            m2Sobrantes=m2Cuarto1-((.15*alturaPisoTecho)*3)-(.30*anchoCuarto1);
-            m2LadrilloMortero=(largoLadrillo+espesorMortero)*(anchoLadrillo+espesorMortero);
-            numLadrillos=m2Sobrantes/m2LadrilloMortero;
+            double largoCuarto2,double anchoBano,double largoBano,double anchoCocina,
+            double largoCocina,double anchoLavado,double largoLavado,int ladrillo){
+     
+     double alturaPisoTecho=2.7;
+     double largoVarilla=12;
+     double aguaC = 2.5;
+     double arenaC = 7;
+     double gravaC = 8;
+     double sacoC = 1;
+     double sacoMorteroC = 1;
+     double espesorMortero = .01;
+     double altura = 3;
+     double largoCastillo = .30;
+     double anchoCastillo = .15;
+     double largoLadrillo = .10;
+     double anchoLadrillo = .24;
+     double espesorLadrillo = .12;
+     double m2Cuarto1,m2LadrilloMortero,m2Sobrantes,numLadrillos,m2Cuarto2,m2ParedComp;
+     double m3Mortero, auxVarillas,m3Castillo,alambreC,alambreCa,auxCadena,m3Cadena,m2Bano;
+     ///////calcular el material de los castillos y restar la cadena del techo
+     if(ladrillo==1){
+         largoLadrillo = .10;
+         anchoLadrillo = .24;
+         espesorLadrillo = .12;
+     }else if(ladrillo==2){
+         largoLadrillo = .20;
+         anchoLadrillo = .40;
+         espesorLadrillo = .12;
+     }
+     if(pisos==2){
+             //pared por si es de dos pisos
+         m2Cuarto1=anchoCuarto1*alturaPisoTecho;
+         m2Sobrantes=m2Cuarto1-((.15*alturaPisoTecho)*3)-(.30*anchoCuarto1);
+         m2LadrilloMortero=(largoLadrillo+espesorMortero)*(anchoLadrillo+espesorMortero);
+         numLadrillos=m2Sobrantes/m2LadrilloMortero;
+         
+         if(ladrillo==1){
+             ladrillos = ladrillos + numLadrillos;
+         }else if(ladrillo==2){
+             //block ligero ya que esta en el segundo piso
+             ladrilloBlockLigero = ladrilloBlockLigero + (numLadrillos);
+         }
 
-            ladrillos = ladrillos + (numLadrillos);
+             //3 Castillos de la pared, uno a la mitad y dos a cada lado de la puerta
+         auxVarillas= (4*3*alturaPisoTecho)/largoVarilla;
 
-                //3 Castillos de la pared, uno a la mitad y dos a cada lado de la puerta
-            auxVarillas= (4*3*alturaPisoTecho)/largoVarilla;
+         varillas = varillas + auxVarillas;
 
-            varillas = varillas + auxVarillas;
+         m3Castillo=largoCastillo*anchoCastillo*alturaPisoTecho;
 
-            m3Castillo=largoCastillo*anchoCastillo*alturaPisoTecho;
+         agua = agua + (aguaC * m3Castillo);
+         arena = arena + (arenaC * m3Castillo);
+         grava = grava + (gravaC * m3Castillo);
+         saco = saco + (sacoC * m3Castillo);
+             //calculo de alambron en los castillos
+         alambreC=((3*alturaPisoTecho)/.20)*.50;
 
-            agua = agua + (aguaC * m3Castillo);
-            arena = arena + (arenaC * m3Castillo);
-            grava = grava + (gravaC * m3Castillo);
-            saco = saco + (sacoC * m3Castillo);
-                //calculo de alambron en los castillos
-            alambreC=((3*alturaPisoTecho)/.20)*.50;
+         alambre= alambre + alambreC;
+             //Cadena
+         auxCadena = (4*anchoCuarto1)/largoVarilla;
 
-            alambre= alambre + alambreC;
-                //Cadena
-            auxCadena = (4*anchoCuarto1)/largoVarilla;
+         varillas = varillas + auxCadena;
 
-            varillas = varillas + auxCadena;
+         m3Cadena = largoCastillo*anchoCastillo*anchoCuarto1;
 
-            m3Cadena = largoCastillo*anchoCastillo*anchoCuarto1;
+         agua = agua + (aguaC * m3Cadena);
+         arena = arena + (arenaC * m3Cadena);
+         grava = grava + (gravaC * m3Cadena);
+         saco = saco + (sacoC * m3Cadena);
 
-            agua = agua + (aguaC * m3Cadena);
-            arena = arena + (arenaC * m3Cadena);
-            grava = grava + (gravaC * m3Cadena);
-            saco = saco + (sacoC * m3Cadena);
+             //calculo de alambron en la cadena
+         alambreCa=((anchoCuarto1)/.20)*.50;
 
-                //calculo de alambron en la cadena
-            alambreCa=((anchoCuarto1)/.20)*.50;
+         alambre= alambre + alambreCa;
 
-            alambre= alambre + alambreCa;
+             //Calculo solo de mortero 
+         m3Mortero=(m2Sobrantes-((largoLadrillo*anchoLadrillo)*numLadrillos))*espesorLadrillo;
+agua = agua + (aguaC * m3Mortero);
+         arena = arena + (arenaC * m3Mortero);
+         grava = grava + (gravaC * m3Mortero);
+         sacoMortero = sacoMortero + (sacoMorteroC * m3Mortero);
+     }
+     
+     //pared cuarto 1 con puerta
+     m2Cuarto1=anchoCuarto1*alturaPisoTecho;
+     m2Sobrantes=m2Cuarto1-((.15*alturaPisoTecho)*3)-(.825*2.03)-(.30*anchoCuarto1);
+     m2LadrilloMortero=(largoLadrillo+espesorMortero)*(anchoLadrillo+espesorMortero);
+     numLadrillos=m2Sobrantes/m2LadrilloMortero;
+     
+     if(ladrillo==1){
+         ladrillos = ladrillos + (numLadrillos);
+     }else if(ladrillo==2){
+         ladrilloBlockLigero = ladrilloBlockLigero + (numLadrillos);
+     }
+     
+     
+         //3 Castillos de la pared, uno a la mitad y dos a cada lado de la puerta
+     auxVarillas= (4*3*alturaPisoTecho)/largoVarilla;
+     
+     varillas = varillas + auxVarillas;
+     
+     m3Castillo=largoCastillo*anchoCastillo*alturaPisoTecho;
+     
+     agua = agua + (aguaC * m3Castillo);
+     arena = arena + (arenaC * m3Castillo);
+     grava = grava + (gravaC * m3Castillo);
+     saco = saco + (sacoC * m3Castillo);
+         //calculo de alambron en los castillos
+     alambreC=((3*alturaPisoTecho)/.20)*.50;
+     
+     alambre= alambre + alambreC;
+         //Cadena
+     auxCadena = (4*anchoCuarto1)/largoVarilla;
+     
+     varillas = varillas + auxCadena;
+     
+     m3Cadena = largoCastillo*anchoCastillo*anchoCuarto1;
+     
+     agua = agua + (aguaC * m3Cadena);
+     arena = arena + (arenaC * m3Cadena);
+     grava = grava + (gravaC * m3Cadena);
+     saco = saco + (sacoC * m3Cadena);
+     
+         //calculo de alambron en la cadena
+     alambreCa=((anchoCuarto1)/.20)*.50;
+     
+     alambre= alambre + alambreCa;
+     
+         //Calculo solo de mortero 
+     m3Mortero=(m2Sobrantes-((largoLadrillo*anchoLadrillo)*numLadrillos))*espesorLadrillo;
+     
+     agua = agua + (aguaC * m3Mortero);
+     arena = arena + (arenaC * m3Mortero);
+     grava = grava + (gravaC * m3Mortero);
+     sacoMortero = sacoMortero + (sacoMorteroC * m3Mortero);
+     
+     //pared cuarto 2 con puerta
+     m2Cuarto2=anchoCuarto2*alturaPisoTecho;
+     m2Sobrantes=m2Cuarto2-((.15*alturaPisoTecho)*3)-(.825*2.03)-(.30*anchoCuarto2);
+     m2LadrilloMortero=(largoLadrillo+espesorMortero)*(anchoLadrillo+espesorMortero);
+     numLadrillos=m2Sobrantes/m2LadrilloMortero;
+     
+     if(ladrillo==1){
+         ladrillos = ladrillos + (numLadrillos);
+     }else if(ladrillo==2){
+         ladrilloBlockLigero = ladrilloBlockLigero + (numLadrillos);
+     }
+     
+         //3 Castillos de la pared, uno a la mitad y dos a cada lado de la puerta
+     auxVarillas= (4*3*alturaPisoTecho)/largoVarilla;
+     
+     varillas = varillas + auxVarillas;
+     
+     m3Castillo=largoCastillo*anchoCastillo*alturaPisoTecho;
+     
+     agua = agua + (aguaC * m3Castillo);
+     arena = arena + (arenaC * m3Castillo);
+     grava = grava + (gravaC * m3Castillo);
+     saco = saco + (sacoC * m3Castillo);
+         //calculo de alambron en los castillos
+     alambreC=((3*alturaPisoTecho)/.20)*.50;
+     
+     alambre= alambre + alambreC;
+         //Cadena
+     auxCadena = (4*anchoCuarto2)/largoVarilla;
+     
+     varillas = varillas + auxCadena;
+     
+     m3Cadena = largoCastillo*anchoCastillo*anchoCuarto2;
+     
+     agua = agua + (aguaC * m3Cadena);
+     arena = arena + (arenaC * m3Cadena);
+     grava = grava + (gravaC * m3Cadena);
+     saco = saco + (sacoC * m3Cadena);
+     
+         //calculo de alambron en la cadena
+     alambreCa=((anchoCuarto2)/.20)*.50;
+     
+     alambre= alambre + alambreCa;
+     
+         //Calculo solo de mortero 
+     m3Mortero=(m2Sobrantes-((largoLadrillo*anchoLadrillo)*numLadrillos))*espesorLadrillo;
+     
+     agua = agua + (aguaC * m3Mortero);
+arena = arena + (arenaC * m3Mortero);
+     grava = grava + (gravaC * m3Mortero);
+     sacoMortero = sacoMortero + (sacoMorteroC * m3Mortero);
+     
+     
+     //Pared compartida entre Cuarto1 y Cuarto2
+     m2ParedComp=alturaPisoTecho*largoCuarto2;
+     m2Sobrantes=m2ParedComp-(.15*alturaPisoTecho)-(.30*largoCuarto2);
+     m2LadrilloMortero=(largoLadrillo+espesorMortero)*(anchoLadrillo+espesorMortero);
+     numLadrillos=m2Sobrantes/m2LadrilloMortero;
+     
+     if(ladrillo==1){
+         ladrillos = ladrillos + (numLadrillos);
+     }else if(ladrillo==2){
+         ladrilloBlockLigero = ladrilloBlockLigero + (numLadrillos);
+     }
+     
+         //3 Castillos de la pared, uno a la mitad y dos a cada lado de la puerta
+     auxVarillas= (4*alturaPisoTecho)/largoVarilla;
+     
+     varillas = varillas + auxVarillas;
+     
+     m3Castillo=largoCastillo*anchoCastillo*alturaPisoTecho;
+     
+     agua = agua + (aguaC * m3Castillo);
+     arena = arena + (arenaC * m3Castillo);
+     grava = grava + (gravaC * m3Castillo);
+     saco = saco + (sacoC * m3Castillo);
+         //calculo de alambron en los castillos
+     alambreC=((alturaPisoTecho)/.20)*.50;
+     
+     alambre= alambre + alambreC;
+         //Cadena
+     auxCadena = (4*largoCuarto1)/largoVarilla;
+     
+     varillas = varillas + auxCadena;
+     
+     m3Cadena = largoCastillo*anchoCastillo*largoCuarto1;
+     
+     agua = agua + (aguaC * m3Cadena);
+     arena = arena + (arenaC * m3Cadena);
+     grava = grava + (gravaC * m3Cadena);
+     saco = saco + (sacoC * m3Cadena);
+     
+         //calculo de alambron en la cadena
+     alambreCa=((largoCuarto1)/.20)*.50;
+     
+     alambre= alambre + alambreCa;
 
-                //Calculo solo de mortero 
-            m2Mortero=(m2Sobrantes-((largoLadrillo*anchoLadrillo)*numLadrillos))*espesorLadrillo;
-
-            agua = agua + (aguaC * m2Mortero);
-            arena = arena + (arenaC * m2Mortero);
-            grava = grava + (gravaC * m2Mortero);
-            sacoMortero = sacoMortero + (sacoMorteroC * m2Mortero);
-        }
-        //pared cuarto 1 con puerta
-        m2Cuarto1=anchoCuarto1*alturaPisoTecho;
-        m2Sobrantes=m2Cuarto1-((.15*alturaPisoTecho)*3)-(.825*2.03)-(.30*anchoCuarto1);
-        m2LadrilloMortero=(largoLadrillo+espesorMortero)*(anchoLadrillo+espesorMortero);
-        numLadrillos=m2Sobrantes/m2LadrilloMortero;
-        
-        ladrillos = ladrillos + (numLadrillos);
-        
-            //3 Castillos de la pared, uno a la mitad y dos a cada lado de la puerta
-        auxVarillas= (4*3*alturaPisoTecho)/largoVarilla;
-        
-        varillas = varillas + auxVarillas;
-        
-        m3Castillo=largoCastillo*anchoCastillo*alturaPisoTecho;
-        
-        agua = agua + (aguaC * m3Castillo);
-        arena = arena + (arenaC * m3Castillo);
-        grava = grava + (gravaC * m3Castillo);
-        saco = saco + (sacoC * m3Castillo);
-            //calculo de alambron en los castillos
-        alambreC=((3*alturaPisoTecho)/.20)*.50;
-        
-        alambre= alambre + alambreC;
-            //Cadena
-        auxCadena = (4*anchoCuarto1)/largoVarilla;
-        
-        varillas = varillas + auxCadena;
-        
-        m3Cadena = largoCastillo*anchoCastillo*anchoCuarto1;
-        
-        agua = agua + (aguaC * m3Cadena);
-        arena = arena + (arenaC * m3Cadena);
-        grava = grava + (gravaC * m3Cadena);
-        saco = saco + (sacoC * m3Cadena);
-        
-            //calculo de alambron en la cadena
-        alambreCa=((anchoCuarto1)/.20)*.50;
-        
-        alambre= alambre + alambreCa;
-        
-            //Calculo solo de mortero 
-        m2Mortero=(m2Sobrantes-((largoLadrillo*anchoLadrillo)*numLadrillos))*espesorLadrillo;
-        
-        agua = agua + (aguaC * m2Mortero);
-        arena = arena + (arenaC * m2Mortero);
-        grava = grava + (gravaC * m2Mortero);
-        sacoMortero = sacoMortero + (sacoMorteroC * m2Mortero);
-        
-        //pared cuarto 2 con puerta
-        m2Cuarto2=anchoCuarto2*alturaPisoTecho;
-        m2Sobrantes=m2Cuarto2-((.15*alturaPisoTecho)*3)-(.825*2.03)-(.30*anchoCuarto2);
-        m2LadrilloMortero=(largoLadrillo+espesorMortero)*(anchoLadrillo+espesorMortero);
-        numLadrillos=m2Sobrantes/m2LadrilloMortero;
-        
-        ladrillos = ladrillos + (numLadrillos);
-        
-            //3 Castillos de la pared, uno a la mitad y dos a cada lado de la puerta
-        auxVarillas= (4*3*alturaPisoTecho)/largoVarilla;
-        
-        varillas = varillas + auxVarillas;
-        
-        m3Castillo=largoCastillo*anchoCastillo*alturaPisoTecho;
-        
-        agua = agua + (aguaC * m3Castillo);
-        arena = arena + (arenaC * m3Castillo);
-        grava = grava + (gravaC * m3Castillo);
-        saco = saco + (sacoC * m3Castillo);
-            //calculo de alambron en los castillos
-        alambreC=((3*alturaPisoTecho)/.20)*.50;
-        
-        alambre= alambre + alambreC;
-            //Cadena
-        auxCadena = (4*anchoCuarto2)/largoVarilla;
-        
-        varillas = varillas + auxCadena;
-        
-        m3Cadena = largoCastillo*anchoCastillo*anchoCuarto2;
-        
-        agua = agua + (aguaC * m3Cadena);
-        arena = arena + (arenaC * m3Cadena);
-        grava = grava + (gravaC * m3Cadena);
-        saco = saco + (sacoC * m3Cadena);
-        
-            //calculo de alambron en la cadena
-        alambreCa=((anchoCuarto2)/.20)*.50;
-        
-        alambre= alambre + alambreCa;
-        
-            //Calculo solo de mortero 
-        m2Mortero=(m2Sobrantes-((largoLadrillo*anchoLadrillo)*numLadrillos))*espesorLadrillo;
-        
-        agua = agua + (aguaC * m2Mortero);
-        arena = arena + (arenaC * m2Mortero);
-        grava = grava + (gravaC * m2Mortero);
-        sacoMortero = sacoMortero + (sacoMorteroC * m2Mortero);
-        
-        
-        //Pared compartida entre Cuarto1 y Cuarto2
-        m2ParedComp=alturaPisoTecho*largoCuarto2;
-        m2Sobrantes=m2ParedComp-(.15*alturaPisoTecho)-(.30*largoCuarto2);
-        m2LadrilloMortero=(largoLadrillo+espesorMortero)*(anchoLadrillo+espesorMortero);
-        numLadrillos=m2Sobrantes/m2LadrilloMortero;
-        
-        ladrillos = ladrillos + (numLadrillos);
-        
-            //3 Castillos de la pared, uno a la mitad y dos a cada lado de la puerta
-        auxVarillas= (4*alturaPisoTecho)/largoVarilla;
-        
-        varillas = varillas + auxVarillas;
-        
-        m3Castillo=largoCastillo*anchoCastillo*alturaPisoTecho;
-        
-        agua = agua + (aguaC * m3Castillo);
-        arena = arena + (arenaC * m3Castillo);
-        grava = grava + (gravaC * m3Castillo);
-        saco = saco + (sacoC * m3Castillo);
-            //calculo de alambron en los castillos
-        alambreC=((alturaPisoTecho)/.20)*.50;
-        
-        alambre= alambre + alambreC;
-            //Cadena
-        auxCadena = (4*largoCuarto1)/largoVarilla;
-        
-        varillas = varillas + auxCadena;
-        
-        m3Cadena = largoCastillo*anchoCastillo*largoCuarto1;
-        
-        agua = agua + (aguaC * m3Cadena);
-        arena = arena + (arenaC * m3Cadena);
-        grava = grava + (gravaC * m3Cadena);
-        saco = saco + (sacoC * m3Cadena);
-        
-            //calculo de alambron en la cadena
-        alambreCa=((largoCuarto1)/.20)*.50;
-        
-        alambre= alambre + alambreCa;
-
-            //Calculo solo de mortero 
-        m2Mortero=(m2Sobrantes-((largoLadrillo*anchoLadrillo)*numLadrillos))*espesorLadrillo;
-        
-        agua = agua + (aguaC * m2Mortero);
-        arena = arena + (arenaC * m2Mortero);
-        grava = grava + (gravaC * m2Mortero);
-        sacoMortero = sacoMortero + (sacoMorteroC * m2Mortero);
-        
-        //Pared bano con puerta
-        m2Bano=largoBano*alturaPisoTecho;
-        m2Sobrantes=m2Bano-(.15*alturaPisoTecho)-(.825*2.03)-(.30*largoBano);
-        m2LadrilloMortero=(largoLadrillo+espesorMortero)*(anchoLadrillo+espesorMortero);
-        numLadrillos=m2Sobrantes/m2LadrilloMortero;
-        
-        ladrillos = ladrillos + (numLadrillos);
-        
-            //3 Castillos de la pared, uno a la mitad y dos a cada lado de la puerta
-        auxVarillas= (4*2*alturaPisoTecho)/largoVarilla;
-        
-        varillas = varillas + auxVarillas;
-        
-        m3Castillo=largoCastillo*anchoCastillo*alturaPisoTecho;
-        
-        agua = agua + (aguaC * m3Castillo);
-        arena = arena + (arenaC * m3Castillo);
-        grava = grava + (gravaC * m3Castillo);
-        saco = saco + (sacoC * m3Castillo);
-            //calculo de alambron en los castillos
-        alambreC=((2*alturaPisoTecho)/.20)*.50;
-        
-        alambre= alambre + alambreC;
-            //Cadena
-        auxCadena = (4*largoBano)/largoVarilla;
-        
-        varillas = varillas + auxCadena;
-        
-        m3Cadena = largoCastillo*anchoCastillo*largoBano;
-        
-        agua = agua + (aguaC * m3Cadena);
-        arena = arena + (arenaC * m3Cadena);
-        grava = grava + (gravaC * m3Cadena);
-        saco = saco + (sacoC * m3Cadena);
-        
-            //calculo de alambron en la cadena
-        alambreCa=((largoBano)/.20)*.50;
-        
-        alambre= alambre + alambreCa;
-        
-            //Calculo solo de mortero 
-        m2Mortero=(m2Sobrantes-((largoLadrillo*anchoLadrillo)*numLadrillos))*espesorLadrillo;
-        
-        agua = agua + (aguaC * m2Mortero);
-        arena = arena + (arenaC * m2Mortero);
-        grava = grava + (gravaC * m2Mortero);
-        sacoMortero = sacoMortero + (sacoMorteroC * m2Mortero);
-        
-        //Pared bano atras
-        m2Bano=largoBano*alturaPisoTecho;
-        m2Sobrantes=m2Bano-(.15*alturaPisoTecho)-(.30*largoBano);
-        m2LadrilloMortero=(largoLadrillo+espesorMortero)*(anchoLadrillo+espesorMortero);
-        numLadrillos=m2Sobrantes/m2LadrilloMortero;
-        
-        ladrillos = ladrillos + (numLadrillos);
-        
-            //3 Castillos de la pared, uno a la mitad y dos a cada lado de la puerta
-        auxVarillas= (4*2*alturaPisoTecho)/largoVarilla;
-        
-        varillas = varillas + auxVarillas;
-        
-        m3Castillo=largoCastillo*anchoCastillo*alturaPisoTecho;
-        
-        agua = agua + (aguaC * m3Castillo);
-        arena = arena + (arenaC * m3Castillo);
-        grava = grava + (gravaC * m3Castillo);
-        saco = saco + (sacoC * m3Castillo);
-            //calculo de alambron en los castillos
-        alambreC=((2*alturaPisoTecho)/.20)*.50;
-        
-        alambre= alambre + alambreC;
-            //Cadena
-        auxCadena = (4*largoBano)/largoVarilla;
-        
-        varillas = varillas + auxCadena;
-        
-        m3Cadena = largoCastillo*anchoCastillo*largoBano;
-        
-        agua = agua + (aguaC * m3Cadena);
-        arena = arena + (arenaC * m3Cadena);
-        grava = grava + (gravaC * m3Cadena);
-        saco = saco + (sacoC * m3Cadena);
-        
-            //calculo de alambron en la cadena
-        alambreCa=((largoBano)/.20)*.50;
-        
-        alambre= alambre + alambreCa;
-        
-            //Calculo solo de mortero 
-        m2Mortero=(m2Sobrantes-((largoLadrillo*anchoLadrillo)*numLadrillos))*espesorLadrillo;
-        
-        agua = agua + (aguaC * m2Mortero);
-        arena = arena + (arenaC * m2Mortero);
-        grava = grava + (gravaC * m2Mortero);
-        sacoMortero = sacoMortero + (sacoMorteroC * m2Mortero);
-        
-        //Pared ancho bano
-        m2Bano=anchoBano*alturaPisoTecho;
-        m2Sobrantes=m2Bano-(.15*alturaPisoTecho)-(.30*anchoBano);
-        m2LadrilloMortero=(largoLadrillo+espesorMortero)*(anchoLadrillo+espesorMortero);
-        numLadrillos=m2Sobrantes/m2LadrilloMortero;
-        
-        ladrillos = ladrillos + (numLadrillos);
-        
-            //3 Castillos de la pared, uno a la mitad y dos a cada lado de la puerta
-        auxVarillas= (4*3*alturaPisoTecho)/largoVarilla;
-        
-        varillas = varillas + auxVarillas;
-        
-        m3Castillo=largoCastillo*anchoCastillo*alturaPisoTecho;
-        
-        agua = agua + (aguaC * m3Castillo);
-        arena = arena + (arenaC * m3Castillo);
-        grava = grava + (gravaC * m3Castillo);
-        saco = saco + (sacoC * m3Castillo);
-            //calculo de alambron en los castillos
-        alambreC=((3*alturaPisoTecho)/.20)*.50;
-        
-        alambre= alambre + alambreC;
-            //Cadena
-        auxCadena = (4*anchoBano)/largoVarilla;
-        
-        varillas = varillas + auxCadena;
-        
-        m3Cadena = largoCastillo*anchoCastillo*anchoBano;
-        
-        agua = agua + (aguaC * m3Cadena);
-        arena = arena + (arenaC * m3Cadena);
-        grava = grava + (gravaC * m3Cadena);
-        saco = saco + (sacoC * m3Cadena);
-        
-            //calculo de alambron en la cadena
-        alambreCa=((anchoBano)/.20)*.50;
-        
-        alambre= alambre + alambreCa;
-        
-            //Calculo solo de mortero 
-        m2Mortero=(m2Sobrantes-((largoLadrillo*anchoLadrillo)*numLadrillos))*espesorLadrillo;
-        
-        agua = agua + (aguaC * m2Mortero);
-        arena = arena + (arenaC * m2Mortero);
-        grava = grava + (gravaC * m2Mortero);
-        sacoMortero = sacoMortero + (sacoMorteroC * m2Mortero);
-    }
+         //Calculo solo de mortero 
+     m3Mortero=(m2Sobrantes-((largoLadrillo*anchoLadrillo)*numLadrillos))*espesorLadrillo;
+     
+     agua = agua + (aguaC * m3Mortero);
+     arena = arena + (arenaC * m3Mortero);
+     grava = grava + (gravaC * m3Mortero);
+     sacoMortero = sacoMortero + (sacoMorteroC * m3Mortero);
+     
+     //Pared bano con puerta
+     m2Bano=largoBano*alturaPisoTecho;
+     m2Sobrantes=m2Bano-(.15*alturaPisoTecho)-(.825*2.03)-(.30*largoBano);
+     m2LadrilloMortero=(largoLadrillo+espesorMortero)*(anchoLadrillo+espesorMortero);
+     numLadrillos=m2Sobrantes/m2LadrilloMortero;
+     
+     if(ladrillo==1){
+         ladrillos = ladrillos + (numLadrillos);
+     }else if(ladrillo==2){
+         ladrilloBlockPesado = ladrilloBlockPesado + (numLadrillos);
+     }
+     
+         //3 Castillos de la pared, uno a la mitad y dos a cada lado de la puerta
+     auxVarillas= (4*2*alturaPisoTecho)/largoVarilla;
+     
+     varillas = varillas + auxVarillas;
+     
+     m3Castillo=largoCastillo*anchoCastillo*alturaPisoTecho;
+     
+     agua = agua + (aguaC * m3Castillo);
+     arena = arena + (arenaC * m3Castillo);
+     grava = grava + (gravaC * m3Castillo);
+     saco = saco + (sacoC * m3Castillo);
+         //calculo de alambron en los castillos
+     alambreC=((2*alturaPisoTecho)/.20)*.50;
+     
+     alambre= alambre + alambreC;
+         //Cadena
+     auxCadena = (4*largoBano)/largoVarilla;
+     
+     varillas = varillas + auxCadena;
+     
+     m3Cadena = largoCastillo*anchoCastillo*largoBano;
+     
+     agua = agua + (aguaC * m3Cadena);
+     arena = arena + (arenaC * m3Cadena);
+     grava = grava + (gravaC * m3Cadena);
+     saco = saco + (sacoC * m3Cadena);
+     
+         //calculo de alambron en la cadena
+     alambreCa=((largoBano)/.20)*.50;
+     
+     alambre= alambre + alambreCa;
+     
+         //Calculo solo de mortero 
+     m3Mortero=(m2Sobrantes-((largoLadrillo*anchoLadrillo)*numLadrillos))*espesorLadrillo;
+     
+     agua = agua + (aguaC * m3Mortero);
+     arena = arena + (arenaC * m3Mortero);
+     grava = grava + (gravaC * m3Mortero);
+sacoMortero = sacoMortero + (sacoMorteroC * m3Mortero);
+     
+     //Pared bano atras
+     m2Bano=largoBano*alturaPisoTecho;
+     m2Sobrantes=m2Bano-(.15*alturaPisoTecho)-(.30*largoBano);
+     m2LadrilloMortero=(largoLadrillo+espesorMortero)*(anchoLadrillo+espesorMortero);
+     numLadrillos=m2Sobrantes/m2LadrilloMortero;
+     
+     if(ladrillo==1){
+         ladrillos = ladrillos + (numLadrillos);
+     }else if(ladrillo==2){
+         ladrilloBlockPesado = ladrilloBlockPesado + (numLadrillos);
+     }
+     
+         //3 Castillos de la pared, uno a la mitad y dos a cada lado de la puerta
+     auxVarillas= (4*2*alturaPisoTecho)/largoVarilla;
+     
+     varillas = varillas + auxVarillas;
+     
+     m3Castillo=largoCastillo*anchoCastillo*alturaPisoTecho;
+     
+     agua = agua + (aguaC * m3Castillo);
+     arena = arena + (arenaC * m3Castillo);
+     grava = grava + (gravaC * m3Castillo);
+     saco = saco + (sacoC * m3Castillo);
+         //calculo de alambron en los castillos
+     alambreC=((2*alturaPisoTecho)/.20)*.50;
+     
+     alambre= alambre + alambreC;
+         //Cadena
+     auxCadena = (4*largoBano)/largoVarilla;
+     
+     varillas = varillas + auxCadena;
+     
+     m3Cadena = largoCastillo*anchoCastillo*largoBano;
+     
+     agua = agua + (aguaC * m3Cadena);
+     arena = arena + (arenaC * m3Cadena);
+     grava = grava + (gravaC * m3Cadena);
+     saco = saco + (sacoC * m3Cadena);
+     
+         //calculo de alambron en la cadena
+     alambreCa=((largoBano)/.20)*.50;
+     
+     alambre= alambre + alambreCa;
+     
+         //Calculo solo de mortero 
+     m3Mortero=(m2Sobrantes-((largoLadrillo*anchoLadrillo)*numLadrillos))*espesorLadrillo;
+     
+     agua = agua + (aguaC * m3Mortero);
+     arena = arena + (arenaC * m3Mortero);
+     grava = grava + (gravaC * m3Mortero);
+     sacoMortero = sacoMortero + (sacoMorteroC * m3Mortero);
+     
+     //Pared ancho bano
+     m2Bano=anchoBano*alturaPisoTecho;
+     m2Sobrantes=m2Bano-(.15*alturaPisoTecho)-(.30*anchoBano);
+     m2LadrilloMortero=(largoLadrillo+espesorMortero)*(anchoLadrillo+espesorMortero);
+     numLadrillos=m2Sobrantes/m2LadrilloMortero;
+     
+     if(ladrillo==1){
+         ladrillos = ladrillos + (numLadrillos);
+     }else if(ladrillo==2){
+         ladrilloBlockPesado = ladrilloBlockPesado + (numLadrillos);
+     }
+     
+         //3 Castillos de la pared, uno a la mitad y dos a cada lado de la puerta
+     auxVarillas= (4*3*alturaPisoTecho)/largoVarilla;
+     
+     varillas = varillas + auxVarillas;
+     
+     m3Castillo=largoCastillo*anchoCastillo*alturaPisoTecho;
+     
+     agua = agua + (aguaC * m3Castillo);
+     arena = arena + (arenaC * m3Castillo);
+     grava = grava + (gravaC * m3Castillo);
+     saco = saco + (sacoC * m3Castillo);
+         //calculo de alambron en los castillos
+     alambreC=((3*alturaPisoTecho)/.20)*.50;
+     
+     alambre= alambre + alambreC;
+         //Cadena
+     auxCadena = (4*anchoBano)/largoVarilla;
+     
+     varillas = varillas + auxCadena;
+     
+     m3Cadena = largoCastillo*anchoCastillo*anchoBano;
+     
+     agua = agua + (aguaC * m3Cadena);
+     arena = arena + (arenaC * m3Cadena);
+     grava = grava + (gravaC * m3Cadena);
+     saco = saco + (sacoC * m3Cadena);
+     
+         //calculo de alambron en la cadena
+     alambreCa=((anchoBano)/.20)*.50;
+     
+     alambre= alambre + alambreCa;
+     
+         //Calculo solo de mortero 
+     m3Mortero=(m2Sobrantes-((largoLadrillo*anchoLadrillo)*numLadrillos))*espesorLadrillo;
+     
+     agua = agua + (aguaC * m3Mortero);
+     arena = arena + (arenaC * m3Mortero);
+     grava = grava + (gravaC * m3Mortero);
+     sacoMortero = sacoMortero + (sacoMorteroC * m3Mortero);
+ 
+ }
     
-    public void escalera(){
+    public void escalera(int pisos){
         double aguaC = 2.5;
         double arenaC = 7;
         double gravaC = 8;
@@ -690,34 +753,46 @@ public class ConsultaBean {
         double numEscalones = 15;
         double largoDescanso = .7;
         double anchoDescanso = 1.4;
-        double m2Subida8, m2Descanso, m2Subida7;
+        double m2Subida8, m2Descanso, m2Subida7, m3Mortero;
         double numVarillasSubida8, numVarillasDescanso, numVarillasSubida7, numVarillas;
         double m3Escalon;
         double m3LadrilloMortero;
         double numLadrillosMortero;
         
-        numVarillasSubida8 = (((anchoEscalera/espacioVarilla)*largoEscalera8) + ((largoEscalera8/espacioVarilla)*anchoEscalera))/12;
-        numVarillasDescanso = (((anchoDescanso/espacioVarilla)*largoDescanso) + ((largoDescanso/espacioVarilla)*anchoDescanso))/12;
-        numVarillasSubida7 = (((anchoEscalera/espacioVarilla)*largoEscalera7) + ((largoEscalera7/espacioVarilla)*anchoEscalera))/12;
+        if (pisos==2){
         
-        numVarillas  = numVarillasSubida8 + numVarillasDescanso + numVarillasSubida7;
-        
-        varillas = varillas + numVarillas;
-        
-        m2Subida8 = anchoEscalera * largoEscalera8;
-        m2Descanso = largoDescanso * anchoDescanso;
-        m2Subida7 = anchoEscalera * largoEscalera7;
-        
-        agua = agua + (aguaC*m2Subida8) + (aguaC*m2Descanso) + (aguaC*m2Subida7);
-        arena = arena + (arenaC*m2Subida8) + (arenaC*m2Descanso) + (arenaC*m2Subida7);
-        grava = grava + (gravaC*m2Subida8) + (gravaC*m2Descanso) + (gravaC*m2Subida7);
-        saco = saco + (sacoC*m2Subida8) + (sacoC*m2Descanso) + (sacoC*m2Subida7);
+            numVarillasSubida8 = (((anchoEscalera/espacioVarilla)*largoEscalera8) + ((largoEscalera8/espacioVarilla)*anchoEscalera))/12;
+            numVarillasDescanso = (((anchoDescanso/espacioVarilla)*largoDescanso) + ((largoDescanso/espacioVarilla)*anchoDescanso))/12;
+            numVarillasSubida7 = (((anchoEscalera/espacioVarilla)*largoEscalera7) + ((largoEscalera7/espacioVarilla)*anchoEscalera))/12;
 
-        //ladrillo de escaleras
-        m3Escalon = ((.18*.20)/2)*.70;
-        m3LadrilloMortero = (largoLadrillo+(espesorMortero*2))*(anchoLadrillo+(espesorMortero*2))*(espesorLadrillo+(espesorMortero*2));
-        numLadrillosMortero = m3Escalon/m3LadrilloMortero;
-        System.out.println(""+numLadrillosMortero);
+            numVarillas  = numVarillasSubida8 + numVarillasDescanso + numVarillasSubida7;
+
+            varillas = varillas + numVarillas;
+
+            m2Subida8 = anchoEscalera * largoEscalera8;
+            m2Descanso = largoDescanso * anchoDescanso;
+            m2Subida7 = anchoEscalera * largoEscalera7;
+agua = agua + (aguaC*m2Subida8) + (aguaC*m2Descanso) + (aguaC*m2Subida7);
+            arena = arena + (arenaC*m2Subida8) + (arenaC*m2Descanso) + (arenaC*m2Subida7);
+            grava = grava + (gravaC*m2Subida8) + (gravaC*m2Descanso) + (gravaC*m2Subida7);
+            saco = saco + (sacoC*m2Subida8) + (sacoC*m2Descanso) + (sacoC*m2Subida7);
+
+            //ladrillo de escaleras
+            m3Escalon = ((.18*.20)/2)*.70;
+            m3LadrilloMortero = (largoLadrillo+(espesorMortero*2))*(anchoLadrillo+(espesorMortero*2))*(espesorLadrillo+(espesorMortero*2));
+            numLadrillosMortero = m3Escalon/m3LadrilloMortero;
+
+            ladrillos = ladrillos + (numLadrillosMortero*15);
+
+            //Calculo solo de mortero 
+            m3Mortero=(((m3Escalon*15)-((largoLadrillo*anchoLadrillo)*numLadrillosMortero))*espesorLadrillo);
+
+            agua = agua + (aguaC * m3Mortero);
+            arena = arena + (arenaC * m3Mortero);
+            grava = grava + (gravaC * m3Mortero);
+            sacoMortero = sacoMortero + (sacoMorteroC * m3Mortero);
+            
+        }else if(pisos==1){}
     }
     
     public void cimentacion(double ancho, double largo){
@@ -738,11 +813,11 @@ public class ConsultaBean {
         
         m3Cimentacion=ancho*largo*concretoPobre;
         
-        agua= agua + (aguaC + m3Cimentacion);
-        arena= arena + (arenaC + m3Cimentacion);
-        grava= grava + (gravaC + m3Cimentacion);
-        saco= saco + (sacoC + m3Cimentacion);
-        
+        agua= agua + (aguaC * m3Cimentacion);
+        arena= arena + (arenaC * m3Cimentacion);
+        grava= grava + (gravaC * m3Cimentacion);
+        saco= saco + (sacoC * m3Cimentacion);
+
         varillasAncho = (ancho/espacio)+1;
         varillasLargo = (largo/espacio)+1;
         
@@ -751,8 +826,8 @@ public class ConsultaBean {
         
         varillas = varillas + numVarillasAncho + numVarillasLargo;
         
-        numCastillosL=(largo/2.5)*2;
-        numCastillosA=(ancho/2.5)*2;
+        numCastillosL=(Math.floor(largo/2.5))*2;
+        numCastillosA=(Math.floor(ancho/2.5))*2;
         numCastillosTotal=numCastillosL+numCastillosA;
         auxCastillos=(((numCastillosTotal)*altura)/largoVarilla)*4;
         
@@ -766,13 +841,14 @@ public class ConsultaBean {
         m3lozaCimentacionL=(.15*.30*largo)*2;
         
         m3Castillos= (.15*.30*.65)*numCastillosTotal;
-        
+
         agua= agua + (aguaC * m3lozaCimentacionA) + (aguaC * m3lozaCimentacionL) + (aguaC * m3Castillos);
         arena= arena + (arenaC * m3lozaCimentacionA) + (arenaC * m3lozaCimentacionL) + (arenaC * m3Castillos);
         grava= grava + (gravaC * m3lozaCimentacionA) + (gravaC * m3lozaCimentacionL) + (gravaC * m3Castillos);
         saco= saco + (sacoC * m3lozaCimentacionA) + (sacoC * m3lozaCimentacionL) + (sacoC * m3Castillos);
     }
-    	public void imprimir(){
+    
+    public void imprimir(){
     	consulta.setAgua(Math.ceil(agua));
     	consulta.setArena(Math.ceil(arena));
     	consulta.setGrava(Math.ceil(grava));
@@ -780,8 +856,8 @@ public class ConsultaBean {
     	consulta.setSacoMortero(Math.ceil(sacoMortero));
     	consulta.setVarilla(Math.ceil(varillas));
     	consulta.setLadrilloRojo(Math.ceil(ladrillos));
-    	consulta.setLadrilloBloackPesado(Math.ceil(blockpesado));
-    	consulta.setLadrilloBlockLigero(Math.ceil(blockligero));
+    	consulta.setLadrilloBloackPesado(Math.ceil(ladrilloBlockPesado));
+    	consulta.setLadrilloBlockLigero(Math.ceil(ladrilloBlockLigero));
         consulta.setAlambre(Math.ceil(alambre));
         consulta.setVarillaArmex(Math.ceil(varillaArmex));
         System.out.println("Materiales: \n"
@@ -792,7 +868,8 @@ public class ConsultaBean {
         + "\nSacos de mortero: "+Math.ceil(sacoMortero)
         + "\nVarillas: "+Math.ceil(varillas)
         + "\nAlambre: "+Math.ceil(alambre)
-        + "\nLadrillos: "+Math.ceil(ladrillos));
+        + "\nLadrillos: "+Math.ceil(ladrillos)
+        + "\nVarilla Armex"+Math.ceil(varillaArmex));
         agua = 0;
         arena=0;
         grava=0;
@@ -801,8 +878,10 @@ public class ConsultaBean {
         varillas=0;
         ladrillos=0;
         alambre=0;
-        blockligero=0;
-        blockpesado=0;
+        ladrilloBlockLigero=0;
+        ladrilloBlockPesado=0;
+        varillaArmex=0;
+        
     }
     
 	public ConsultaModel getConsulta() {

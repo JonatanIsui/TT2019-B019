@@ -13,8 +13,9 @@ class FormularioMedidas extends React.Component{
     arquitecto = 0
     ArquitectoService = new ArquitectoService()
     res={}
-    etiquetas = ['Botes de agua de 19L','Arena','Grava','Saco de cemento','Saco de Mortero','Varilla','Ladrillo Rojo','Ladrillo Block Ligero','Ladrillo Block Pesado','Alambre','Varilla armex']
+    etiquetas = ['agua','Arena','Grava','Saco de cemento','Saco de Mortero','Varilla','Ladrillo Rojo','Ladrillo Block Ligero','Ladrillo Block Pesado','Alambre','Varilla armex']
     nombresObjeto=["",'arena','grava','saco','sacoMortero','varilla','ladrilloRojo','ladrilloBlockLigero','ladrilloBloackPesado','alambre','varillaArmex']
+    descripciones=["Botes de 19 L","arenaDesc","gravaDesc","sacoDesc","sacoMorteroDesc","varillaDesc","ladrilloRojoDesc","ladrilloBlockLigeroDesc","ladrilloBloackPesadoDesc","alambreDesc","varillaArmexDesc"]
     nombresObjetoCosto=["",'arenaCosto','gravaCosto','sacoCosto','sacoMorteroCosto','varillaCosto','ladrilloRojoCosto','ladrilloBlockLigeroCosto','ladrilloBloackPesadoCosto','alambreCosto','varillaArmexCosto']
     numHabitaciones = e =>{
         this.div = document.getElementById('habitacion')
@@ -40,6 +41,7 @@ class FormularioMedidas extends React.Component{
     materia = (consulta) =>{
         document.getElementById('0').insertAdjacentHTML("beforebegin",
             "<td className = ''>"+this.etiquetas[0]+"</td>"+
+            "<td className = ''>"+this.descripciones[0]+"</td>"+
             "<td className = ''>"+consulta.agua+"</td>"+
             "<td className = ''> de 0 a 15 mil litros de agua son $44.94</td>"+
             "<td className = ''>$44.94</td>"  
@@ -47,6 +49,7 @@ class FormularioMedidas extends React.Component{
         for(let i = 1;i<this.nombresObjeto.length;i++){
             document.getElementById(i.toString()).insertAdjacentHTML("beforebegin",
                 "<td className = ''>"+this.etiquetas[i]+"</td>"+
+                "<td className = ''>"+consulta[this.descripciones[i]]+"</td>"+
                 "<td className = ''>"+consulta[this.nombresObjeto[i]]+
                 "<td className = ''> $"+(consulta[this.nombresObjetoCosto[i]]).toFixed(2)+"</td>"+
                 "<td className = ''>$"+(consulta[this.nombresObjeto[i]]*consulta[this.nombresObjetoCosto[i]]).toFixed(2)+"</td>"
@@ -66,6 +69,7 @@ class FormularioMedidas extends React.Component{
                     <thead className = ''>
                         <tr className = ''>
                             <th className = ''>Material</th>
+                            <th className = ''>Descripcion</th>
                             <th className = ''>Cantidad</th>
                             <th className = ''>Costo promedio</th>
                             <th className = ''>Total</th>
@@ -233,6 +237,7 @@ class FormularioMedidas extends React.Component{
                 if(confirmar.trim()!==""){
                     this.dim['nombre']=confirmar
                     this.res = await this.ArquitectoService.consulta(this.dim)
+                    console.log(this.res)
                     if(this.res.length!==0){
                         cancelar=false
                         ReactDOM.render(this.consulta(this.res.nombre),document.getElementById('div'))
