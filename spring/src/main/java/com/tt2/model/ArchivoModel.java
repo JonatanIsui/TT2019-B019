@@ -20,10 +20,6 @@ public class ArchivoModel implements Serializable{
 		return catalogo;
 	}
 
-	public void setCatalogo(String catalogo) {
-		this.catalogo = catalogo;
-	}
-
 	public void setArchivo(String catalogo) {
 		this.catalogo = catalogo;
 	}

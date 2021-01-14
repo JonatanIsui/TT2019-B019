@@ -67,6 +67,7 @@ class Material extends React.Component{
                                 <option value = 'arena'>Arena</option>
                                 <option value = 'varilla'>Varilla</option>
                                 <option value = 'alambre'>Alambre</option>
+                                <option value = 'varilla armex'>Varilla armex</option>
                             </select>
                         </div>
 
@@ -209,6 +210,7 @@ class Material extends React.Component{
                 this.res = await this.ProveedorService.eliminar(this.material)
                 if(Object.keys(this.res).length !== 0 ){
                     ReactDOM.render(this.actualizar(this.res),document.getElementById("div"))
+
                 }else{
                     ReactDOM.render(<p>En estos momentos no cuenta con un catalogo</p>,document.getElementById("div"))
                 }
@@ -218,12 +220,6 @@ class Material extends React.Component{
             console.log(e)
         }
     }
-
-    /*handleChage = (e) =>{
-        this.setState({
-            [e.target.name] : e.target.value
-        })
-    }*/
 
     handleSubmit = async (e) =>{
         try{
@@ -257,6 +253,7 @@ class Material extends React.Component{
             if(window.confirm("Esta seguro de eliminar su catalogo?")){
                 res = await this.ProveedorService.eliminarCatalogo(aux)
                 alert(res)
+                window.location.reload()
             }
         }catch(e){
             console.log(e)

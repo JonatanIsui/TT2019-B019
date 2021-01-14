@@ -34,7 +34,8 @@ public class ProveedorConsulta {
 			"arena",
 			"grava",
 			"varilla",
-			"alambre"};
+			"alambre",
+			"varilla armex"};
 	
 	public ConsultaModel selectProveedor(ConsultaModel consulta) {
 		boolean notNull=true;
@@ -43,6 +44,7 @@ public class ProveedorConsulta {
 		int provedorSugerido=0;
 		double totalConstrucion = 0;
 		try {
+			
 			consulta.setArenaCosto(materialDao.promedioCostoArena());
 			consulta.setGravaCosto(materialDao.promedioCostoGrava());
 			consulta.setSacoCosto(materialDao.promedioCostoCemento());
@@ -52,6 +54,7 @@ public class ProveedorConsulta {
 			consulta.setLadrilloBlockLigeroCosto(materialDao.promedioCostoladrilloLigero());
 			consulta.setLadrilloBloackPesadoCosto(materialDao.promedioCostoladrilloPesado());
 			consulta.setAlambreCosto(materialDao.promedioCostoAlambre());
+			consulta.setVarillaArmexCosto(materialDao.promedioCostoVarillaArmex());
 			double promedio = consulta.getArena()*consulta.getArenaCosto() 
 					+consulta.getGrava()*consulta.getGravaCosto()
 					+consulta.getSaco()*consulta.getSacoCosto()
@@ -61,6 +64,7 @@ public class ProveedorConsulta {
 					+consulta.getLadrilloBlockLigero()*consulta.getLadrilloBlockLigeroCosto()
 					+consulta.getLadrilloBloackPesado()*consulta.getLadrilloBloackPesadoCosto()
 					+consulta.getAlambre()*consulta.getAlambreCosto()
+					+consulta.getVarillaArmex()*consulta.getVarillaArmexCosto()
 					+44.94;
 			promedioaux=promedio;
 			List<Proveedor> proveedores = proveedorDao.findAll();
@@ -82,6 +86,7 @@ public class ProveedorConsulta {
 								+materialDao.findByProveedorAndNombre(proveedor, "ladrillo block ligero").getCosto()*consulta.getLadrilloBlockLigero()
 								+materialDao.findByProveedorAndNombre(proveedor, "ladrillo block pesado").getCosto()*consulta.getLadrilloBloackPesado()
 								+materialDao.findByProveedorAndNombre(proveedor, "alambre").getCosto()*consulta.getAlambre()
+								+materialDao.findByProveedorAndNombre(proveedor, "varilla armex").getCosto()*consulta.getVarillaArmex()
 								+44.94;
 					}
 					if(totalConstrucion-promedio==0){

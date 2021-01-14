@@ -1,7 +1,5 @@
 package com.tt2.service;
 import org.springframework.stereotype.Service;
-
-import com.tt2.entity.Consulta;
 import com.tt2.model.ConsultaModel;
 
 @Service("consultaBean")
@@ -16,6 +14,7 @@ public class ConsultaBean {
     private double alambre=0;
     private double blockligero=0;
     private double blockpesado=0;
+    private double varillaArmex=0;
     private ConsultaModel consulta=new ConsultaModel();
     
     public void varillasLozas(double ancho, double largo, int pisos){
@@ -784,6 +783,7 @@ public class ConsultaBean {
     	consulta.setLadrilloBloackPesado(Math.ceil(blockpesado));
     	consulta.setLadrilloBlockLigero(Math.ceil(blockligero));
         consulta.setAlambre(Math.ceil(alambre));
+        consulta.setVarillaArmex(Math.ceil(varillaArmex));
         System.out.println("Materiales: \n"
         + "Agua: "+Math.ceil(agua)
         + "\nArena: "+Math.ceil(arena)

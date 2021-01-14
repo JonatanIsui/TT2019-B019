@@ -27,10 +27,6 @@ public class Material implements Serializable{
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "S_material")
 	private int id;
 	
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	@Column(name = "nombre", nullable = false, columnDefinition = "VARCHAR(30)")
 	private String nombre;
 	

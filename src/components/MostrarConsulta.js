@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import ArquitectoService from '../service/ArquitectoService'
 class MostartConsulta extends React.Component{
     ArquitectoService = new ArquitectoService()
-    etiquetas = ['Botes de agua de 19L','Arena','Grava','Saco de cemento','Saco de Mortero','Varilla','Ladrillo Rojo','Ladrillo Block Ligero','Ladrillo Block Pesado','Alambre']
-    nombresObjeto=["",'arena','grava','saco','sacoMortero','varilla','ladrilloRojo','ladrilloBlockLigero','ladrilloBloackPesado','alambre']
-    nombresObjetoCosto=["",'arenaCosto','gravaCosto','sacoCosto','sacoMorteroCosto','varillaCosto','ladrilloRojoCosto','ladrilloBlockLigeroCosto','ladrilloBloackPesadoCosto','alambreCosto']
+    etiquetas = ['Botes de agua de 19L','Arena','Grava','Saco de cemento','Saco de Mortero','Varilla','Ladrillo Rojo','Ladrillo Block Ligero','Ladrillo Block Pesado','Alambre','Varilla armex']
+    nombresObjeto=["",'arena','grava','saco','sacoMortero','varilla','ladrilloRojo','ladrilloBlockLigero','ladrilloBloackPesado','alambre','varillaArmex']
+    nombresObjetoCosto=["",'arenaCosto','gravaCosto','sacoCosto','sacoMorteroCosto','varillaCosto','ladrilloRojoCosto','ladrilloBlockLigeroCosto','ladrilloBloackPesadoCosto','alambreCosto','varillaArmexCosto']
     handleEliminarConsulta=(consulta)=>async e=>{
         e.preventDefault()
         let delConsulta={}
@@ -79,6 +79,8 @@ class MostartConsulta extends React.Component{
                         </tr>
                         <tr className = '' id = '9'>
                         </tr>
+                        <tr className = '' id = '10'>
+                        </tr>
                         <tr className = '' id = 'total'>
                         </tr>
                     </tbody>
@@ -148,11 +150,6 @@ class MostartConsulta extends React.Component{
                                 <td>{consulta.largoHabitacion2}</td>
                             </tr>
                         }
-                        <tr>
-                            <td>Cocina</td>
-                            <td>{consulta.anchococina}</td>
-                            <td>{consulta.largococina}</td>
-                        </tr>
                         <tr>
                             <td>Cocina</td>
                             <td>{consulta.anchococina}</td>

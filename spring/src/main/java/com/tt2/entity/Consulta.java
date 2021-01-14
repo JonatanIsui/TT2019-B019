@@ -1,7 +1,6 @@
 package com.tt2.entity;
 
 import java.io.Serializable;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
 
 @Entity
 @Table(name = "consulta")
@@ -45,6 +45,9 @@ public class Consulta implements Serializable{
 	
 	@Column(name = "varilla",nullable = false, columnDefinition = "FLOAT(6,2)")
 	private double varilla;
+	
+	@Column(name = "varillaArmex",nullable=false,columnDefinition="FLOAT(6,2)")
+	private double varillaArmex;
 	
 	@Column(name = "ladrillo_rojo",nullable = false, columnDefinition = "FLOAT(8,2)")	
 	private double ladrilloRojo;
@@ -101,6 +104,9 @@ public class Consulta implements Serializable{
 	@Column(name = "costo_arena",nullable = false, columnDefinition = "FLOAT(6,2)")
 	private double arenaCosto;
 	
+	@Column(name = "costo_varillaArmex",nullable=false,columnDefinition="FLOAT(7,2)")
+	private double varillaArmexCosto;
+	
 	@Column(name = "costo_alambre",nullable = false, columnDefinition = "FLOAT(6,2)")
 	private double alambreCosto;
 	
@@ -149,6 +155,9 @@ public class Consulta implements Serializable{
 	@Column(name = "cemento_descripcion",nullable = false, columnDefinition = "VARCHAR(300)")
 	private String sacoDesc;
 	
+	@Column(name = "varillaArmex_descripcion",nullable=false,columnDefinition="VARCHAR(300)")
+	private String varillaArmexDes;
+	
 	@Column(name = "mortero_descripcion",nullable = false, columnDefinition = "VARCHAR(300)")
 	private String sacoMorteroDesc;
 	
@@ -176,6 +185,33 @@ public class Consulta implements Serializable{
 	@Column(name = "alambre",nullable = false, columnDefinition = "FLOAT(7,2)")
 	private double alambre;
 	
+	@Column(name = "fechaConsulta", columnDefinition = "VARCHAR(100)")
+	private String fechaConsulta;
+	
+	public double getVarillaArmex() {
+		return varillaArmex;
+	}
+	public void setVarillaArmex(double varillaArmex) {
+		this.varillaArmex = varillaArmex;
+	}
+	public double getVarillaArmexCosto() {
+		return varillaArmexCosto;
+	}
+	public void setVarillaArmexCosto(double varillaArmexCosto) {
+		this.varillaArmexCosto = varillaArmexCosto;
+	}
+	public String getVarillaArmexDes() {
+		return varillaArmexDes;
+	}
+	public void setVarillaArmexDes(String varillaArmexDes) {
+		this.varillaArmexDes = varillaArmexDes;
+	}
+	public String getFechaConsulta() {
+		return fechaConsulta;
+	}
+	public void setFechaConsulta(String fechaConsulta) {
+		this.fechaConsulta = fechaConsulta;
+	}
 	public double getAlambreCosto() {
 		return alambreCosto;
 	}

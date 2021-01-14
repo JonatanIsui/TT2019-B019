@@ -1,4 +1,5 @@
 package com.tt2.service;
+import java.io.File;
 import java.io.FileInputStream;
 import java.util.Arrays;
 import java.util.List;
@@ -47,7 +48,8 @@ public class ProveedorBean extends UsuarioBean implements ProveedorBeanInterfaz{
 			"arena",
 			"grava",
 			"varilla",
-			"alambre");
+			"alambre",
+			"varilla armex");
 	
 	@Override
 	public List<Material> modificarMaterial(Material material) {
@@ -123,15 +125,18 @@ public class ProveedorBean extends UsuarioBean implements ProveedorBeanInterfaz{
 	public boolean agregarArchiv(ArchivoModel archivoModel) {
 		boolean res= false;
 		boolean aux = true;
+		int numeroMateriales=10;
+		String archivo1="";
 		Optional<Proveedor> proveedorOpt = proveedorDao.findById(archivoModel.getId());
 		Proveedor proveedor = proveedorOpt.get();
 		try {
-			FileInputStream inputStream = new FileInputStream(archivo.toFile(archivoModel.getCatalogo(),proveedor.getNombreEmpresa()));
+			archivo1=archivo.toFile(archivoModel.getCatalogo(),proveedor.getNombreEmpresa());
+			FileInputStream inputStream = new FileInputStream(archivo1);
 			workbook = new XSSFWorkbook(inputStream);
 			//Hoja de excel
 			Sheet sheet = workbook.getSheetAt(0);
 			Row row;
-			for(int j=1;j<=sheet.getLastRowNum();j++ ){
+			for(int j=1;j<=numeroMateriales;j++ ){
 				row = (Row) sheet.getRow(j);
 				if(row.getCell(1) != null && nombreMaterial.contains(row.getCell(1).getStringCellValue().toLowerCase())) {
 					if(materialDao.findByProveedorAndNombre(proveedor,row.getCell(1).getStringCellValue().toLowerCase())!=null){
@@ -159,7 +164,7 @@ public class ProveedorBean extends UsuarioBean implements ProveedorBeanInterfaz{
 			}
 			
 			if(aux) {
-				for(int i=1;i<=sheet.getLastRowNum();i++) {
+				for(int i=1;i<=numeroMateriales;i++) {
 					row = (Row) sheet.getRow(i);
 					Material auxMaterial = new Material();
 					if(materialDao.findByClaveAndProveedor(row.getCell(0).getStringCellValue(),proveedor) != null) {

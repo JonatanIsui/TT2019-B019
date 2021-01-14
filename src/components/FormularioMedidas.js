@@ -13,9 +13,9 @@ class FormularioMedidas extends React.Component{
     arquitecto = 0
     ArquitectoService = new ArquitectoService()
     res={}
-    etiquetas = ['Botes de agua de 19L','Arena','Grava','Saco de cemento','Saco de Mortero','Varilla','Ladrillo Rojo','Ladrillo Block Ligero','Ladrillo Block Pesado','Alambre']
-    nombresObjeto=["",'arena','grava','saco','sacoMortero','varilla','ladrilloRojo','ladrilloBlockLigero','ladrilloBloackPesado','alambre']
-    nombresObjetoCosto=["",'arenaCosto','gravaCosto','sacoCosto','sacoMorteroCosto','varillaCosto','ladrilloRojoCosto','ladrilloBlockLigeroCosto','ladrilloBloackPesadoCosto','alambreCosto']
+    etiquetas = ['Botes de agua de 19L','Arena','Grava','Saco de cemento','Saco de Mortero','Varilla','Ladrillo Rojo','Ladrillo Block Ligero','Ladrillo Block Pesado','Alambre','Varilla armex']
+    nombresObjeto=["",'arena','grava','saco','sacoMortero','varilla','ladrilloRojo','ladrilloBlockLigero','ladrilloBloackPesado','alambre','varillaArmex']
+    nombresObjetoCosto=["",'arenaCosto','gravaCosto','sacoCosto','sacoMorteroCosto','varillaCosto','ladrilloRojoCosto','ladrilloBlockLigeroCosto','ladrilloBloackPesadoCosto','alambreCosto','varillaArmexCosto']
     numHabitaciones = e =>{
         this.div = document.getElementById('habitacion')
         for(let i = 0; i<e; i++){
@@ -28,10 +28,10 @@ class FormularioMedidas extends React.Component{
 
                 "<div class='row justify-content-center'>"+
                     "<div class = 'col-lg-4 col-md-6 col-sm-6 col-6 text-center'>"+
-                        "Ancho en metros de la habitaci&oacute;n*:<input name = 'anchoHabitaci&oacute;n"+(i+1)+"' type = 'number' min='2' max='4' placeholder = 'ancho en metros de la habitacion*' step = '0.01' required class = 'form-control'/>"+
+                        "Ancho en metros de la habitaci&oacute;n*:<input name = 'anchoHabitacion"+(i+1)+"' type = 'number' min='2' max='4' placeholder = 'ancho en metros de la habitacion*' step = '0.01' required class = 'form-control'/>"+
                     "</div>"+
                     "<div class = 'col-lg-4 col-md-6 col-sm-6 col-6 text-center'>"+
-                        "Largo en metros de la habitaci&oacute;n*:<input name = 'largoHabitaci&oacute;n"+(i+1)+"'  type = 'number' min='2' max='2.8' placeholder = 'largo en metros de la habitacion*' step = '0.01' required class = 'form-control'/>"+
+                        "Largo en metros de la habitaci&oacute;n*:<input name = 'largoHabitacion"+(i+1)+"'  type = 'number' min='2' max='2.8' placeholder = 'largo en metros de la habitacion*' step = '0.01' required class = 'form-control'/>"+
                     "</div>"+
                 "</div>"
            )
@@ -48,8 +48,8 @@ class FormularioMedidas extends React.Component{
             document.getElementById(i.toString()).insertAdjacentHTML("beforebegin",
                 "<td className = ''>"+this.etiquetas[i]+"</td>"+
                 "<td className = ''>"+consulta[this.nombresObjeto[i]]+
-                "<td className = ''> $"+consulta[this.nombresObjetoCosto[i]]+"</td>"+
-                "<td className = ''>$"+consulta[this.nombresObjeto[i]]*consulta[this.nombresObjetoCosto[i]]+"</td>"
+                "<td className = ''> $"+(consulta[this.nombresObjetoCosto[i]]).toFixed(2)+"</td>"+
+                "<td className = ''>$"+(consulta[this.nombresObjeto[i]]*consulta[this.nombresObjetoCosto[i]]).toFixed(2)+"</td>"
         )}
         let totalpromedio = consulta["total"]
         document.getElementById('total').insertAdjacentHTML("beforebegin",
@@ -91,6 +91,8 @@ class FormularioMedidas extends React.Component{
                         <tr className = '' id = '8'>
                         </tr>
                         <tr className = '' id = '9'>
+                        </tr>
+                        <tr className = '' id = '10'>
                         </tr>
                         <tr className = '' id = 'total'>
                         </tr>

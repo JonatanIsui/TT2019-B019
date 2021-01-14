@@ -27,7 +27,7 @@ public class Email implements EmailInterfaz{
     public boolean sendEmail(Usuario usuario) {
     	boolean res = false;
     	String subject = "Solicitud recuperacion de contraseña";
-    	String urlBase = "Si deseas recuperar sigue el link de lo contrario ignora este correo http://localhost:3000/CambioPassword/";
+    	String urlBase = "Si deseas recuperar sigue el link de lo contrario ignora este correo http://localhost:3000/CambioPassword/ si no realizaste tu la solicitud ignora este mensaje.";
     	try {
     		SimpleMailMessage email = new SimpleMailMessage();
     		email.setTo(usuario.getCorreo());
@@ -46,7 +46,7 @@ public class Email implements EmailInterfaz{
     public boolean aceptarProveedor(Usuario usuario) {
     	boolean res = false;
     	String subject = "Bienvenido";
-    	String urlBase = "A traves de este correo se le informa que su solicitud ha sido aprovada, por favor ingrese sesion en http://localhost:3000";
+    	String urlBase = "A través de este correo se le informa que su solicitud ha sido aprobada, por favor, inicie una sesión en estimatucasa.";
     	try {
     		SimpleMailMessage email = new SimpleMailMessage();
     		email.setTo(usuario.getCorreo());

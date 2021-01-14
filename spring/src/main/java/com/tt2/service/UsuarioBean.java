@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import com.tt2.dao.UsuarioDao;
 import com.tt2.entity.Usuario;
 import com.tt2.service.interfaz.UsuarioBeanInterfaz;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Service("usuarioBean")
 public class UsuarioBean implements UsuarioBeanInterfaz{
@@ -19,7 +21,15 @@ public class UsuarioBean implements UsuarioBeanInterfaz{
 	@Override
 	public Usuario iniciarSesion(String correo,String password) {
 		try {
-			return usuarioDao.findByCorreoAndPassword(correo, password);
+			Usuario aux = usuarioDao.findByCorreoAndPassword(correo, password);
+			if(aux!=null) {
+				SimpleDateFormat fecha = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+				aux.setFechaLogin(fecha.format(new Date()));
+				usuarioDao.save(aux);
+				return aux;
+			}else {
+				return null;
+			}
 		}catch(Exception e) {
 			e.printStackTrace();
 			return null;
@@ -57,8 +67,10 @@ public class UsuarioBean implements UsuarioBeanInterfaz{
 	@Override
 	public Usuario cambioPassword(Usuario usuario) {
 		try {
+			SimpleDateFormat fecha = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
 			Usuario aux = usuarioDao.findByCorreo(usuario.getCorreo());
 			aux.setPassword(usuario.getPassword());
+			aux.setFechaLogin(fecha.format(new Date()));
 			return usuarioDao.save(aux);
 		}catch(Exception e) {
 			e.printStackTrace();

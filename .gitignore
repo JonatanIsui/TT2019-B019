@@ -27,3 +27,4 @@ yarn-error.log*
 src/components/Diccionario.js
 src/pages/Proveedor.js
 *.png
+*.xlsx

@@ -11,13 +11,17 @@ import com.tt2.service.interfaz.ImagenesInterfaz;
 
 @Service("imagenesBean") 
 public class Imagenes implements ImagenesInterfaz{
-	private String url = System.getProperty("user.dir")+"\\Imagenes";
+	private String url = System.getProperty("user.dir")+"\\Archivos\\Imagenes\\";
 	@Override
 	public String toFile(String imagen,String empresa){
 		String tipo = imagen.split(";")[0].split("/")[1];
 		imagen = imagen.split (",") [1];
-		File file = new File(url,empresa+"."+tipo);
+		File file = new File(url+empresa+"\\"+empresa+"."+tipo);
 		byte [] data = Base64.decodeBase64 (imagen);
+		File carpeta=new File(url+empresa);
+		if(!carpeta.exists()) {
+			carpeta.mkdir();
+		}
 		try { 
             OutputStream os = new FileOutputStream(file); 
             os.write(data); 

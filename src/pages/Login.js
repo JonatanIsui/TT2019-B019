@@ -21,7 +21,7 @@ class Login extends React.Component{
                         <a href="/RegistroProveedor"><button type="button" className='btn btn-light'>Registrarse como proveedor</button></a>
                     </div>
                     <div className = 'col-lg-4 col-md-4 col-sm-4 col-4'>
-                        <a href="/RecuperarContra"><button type="button" className='btn btn-light'>Olvidaste tu contraseña?</button></a>
+                        <a href="/RecuperarContra"><button type="button" className='btn btn-light'>¿Olvidaste tu contraseña?</button></a>
                     </div>
                 </div>
             </div>

@@ -21,10 +21,6 @@ public class Proveedor implements Serializable{
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="S_proveedor")
 	private int id;
 	
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	@Column(name = "nombre_empresa", nullable = false, unique = true, columnDefinition="VARCHAR(30)" )
 	private String nombreEmpresa;
 	
@@ -39,7 +35,7 @@ public class Proveedor implements Serializable{
 	
 	@Column(name = "direccion", nullable = false, columnDefinition = "VARCHAR(100)")
 	private String direccion;
-
+	
 	public String getNombreEmpresa() {
 		return nombreEmpresa;
 	}

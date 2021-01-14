@@ -1,6 +1,5 @@
 package com.tt2.entity;
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,8 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 /*Indica a que tabla de la base de datos ingresar hibernate
@@ -27,10 +24,6 @@ public class Usuario implements Serializable{
 	@Column(name = "id_usuario")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "S_usuario")
 	private int id;
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	/*
 	 * nullabel indica que el campo no puede ser nulo
 	 * unique indica que el campo no se puede repetir en la base
@@ -42,9 +35,8 @@ public class Usuario implements Serializable{
 	@Column(name = "password", nullable = false,columnDefinition = "VARCHAR(16)")
 	private String password;
 	
-	@Column(name = "fechaLogin", columnDefinition = "DATETIME")
-	@Temporal(TemporalType.DATE)
-	private Date fechaLogin;
+	@Column(name = "fechaLogin", columnDefinition = "VARCHAR(100)")
+	private String fechaLogin;
 	
 	@OneToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "fk_id_arquitecto")
@@ -79,11 +71,11 @@ public class Usuario implements Serializable{
 		this.password = password;
 	}
 
-	public Date getFechaLogin() {
+	public String getFechaLogin() {
 		return fechaLogin;
 	}
 
-	public void setFechaLogin(Date fechaLogin) {
+	public void setFechaLogin(String fechaLogin) {
 		this.fechaLogin = fechaLogin;
 	}
 

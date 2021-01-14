@@ -15,6 +15,7 @@ private static final long serialVersionUID = 1L;
 	private double ladrilloRojo;
 	private double ladrilloBlockLigero;
 	private double ladrilloBloackPesado;
+	private double varillaArmex;
 	private String excel;
 	private Arquitecto arquitecto;
 	private double anchoHabitacion1;
@@ -34,6 +35,7 @@ private static final long serialVersionUID = 1L;
 	private double arenaCosto;
 	private double gravaCosto;
 	private double sacoCosto;
+	private double varillaArmexCosto;
 	private double sacoMorteroCosto;
 	private double varillaCosto;
 	private double ladrilloRojoCosto;
@@ -47,6 +49,7 @@ private static final long serialVersionUID = 1L;
 	private String sacoMorteroDesc;
 	private String varillaDesc;
 	private String alambreDesc;
+	private String varillaArmexDesc;
 	private String ladrilloRojoDesc;
 	private String ladrilloBlockLigeroDesc;
 	private String ladrilloBloackPesadoDesc;
@@ -56,7 +59,25 @@ private static final long serialVersionUID = 1L;
 	private String direccionProveedor;
 	private int idProveedor;
 	private double total;
-	
+
+	public double getVarillaArmex() {
+		return varillaArmex;
+	}
+	public void setVarillaArmex(double varillaArmex) {
+		this.varillaArmex = varillaArmex;
+	}
+	public double getVarillaArmexCosto() {
+		return varillaArmexCosto;
+	}
+	public void setVarillaArmexCosto(double varillaArmexCosto) {
+		this.varillaArmexCosto = varillaArmexCosto;
+	}
+	public String getVarillaArmexDesc() {
+		return varillaArmexDesc;
+	}
+	public void setVarillaArmexDesc(String varillaArmexDesc) {
+		this.varillaArmexDesc = varillaArmexDesc;
+	}
 	public double getAlambreCosto() {
 		return alambreCosto;
 	}

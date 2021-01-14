@@ -3,7 +3,6 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
-
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -27,10 +26,6 @@ public class Arquitecto implements Serializable{
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "S_arquitecto")
 	private int id;
 	
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	@Column(name = "nombre",nullable = false, columnDefinition = "VARCHAR(20)")
 	private String nombre;
 	
@@ -42,7 +37,7 @@ public class Arquitecto implements Serializable{
 	
 	@Column(name = "telefono", columnDefinition = "VARCHAR(10)")
 	private String telefono;
-	
+
 	public String getNombre() {
 		return nombre;
 	}

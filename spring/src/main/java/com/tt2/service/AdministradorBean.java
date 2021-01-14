@@ -1,5 +1,8 @@
 package com.tt2.service;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -76,6 +79,8 @@ public class AdministradorBean extends UsuarioBean implements AdministradorBeanI
 			proveedor.setNombreEncargado(solicitudProveedor.getNombreEncargado());
 			proveedor.setTelefono(solicitudProveedor.getTelefono());
 			usuario.setProveedor(proveedor);
+			SimpleDateFormat fecha = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+			usuario.setFechaLogin(fecha.format(new Date()));
 			usuarioDao.save(usuario);
 			email.aceptarProveedor(usuario);
 			solicitudProveedorDao.delete(solicitudProveedor);
@@ -109,6 +114,8 @@ public class AdministradorBean extends UsuarioBean implements AdministradorBeanI
 			}else {
 				List<Consulta> consultas=consultaDao.findByArquitecto(usuario.get().getArquitecto());
 				for(Consulta consulta:consultas) {
+					File consultasExcel=new File(consulta.getExcel());
+					consultasExcel.delete();
 					consultaDao.delete(consulta);
 				}
 			}

@@ -1,5 +1,8 @@
 package com.tt2.service;
+import java.io.File;
 import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,6 +69,8 @@ public class ArquitectoBean extends UsuarioBean implements ArquitectoBeanInterfa
 	public Usuario registroArquitecto(Usuario usuario) {
 		Usuario aux = usuarioDao.findByCorreo(usuario.getCorreo());
 		if(aux == null) {
+			SimpleDateFormat fecha = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+			usuario.setFechaLogin(fecha.format(new Date()));
 			aux = usuarioDao.save(usuario);
 		}else {
 			aux=null;
@@ -126,6 +131,7 @@ public class ArquitectoBean extends UsuarioBean implements ArquitectoBeanInterfa
 			consulta.setSacoMorteroDesc(materialDao.findByProveedorAndNombre(proveedor.get(),"mortero").getDescripcion());
 			consulta.setVarillaDesc(materialDao.findByProveedorAndNombre(proveedor.get(),"varilla").getDescripcion());
 			consulta.setAlambreDesc(materialDao.findByProveedorAndNombre(proveedor.get(),"alambre").getDescripcion());
+			consulta.setVarillaArmexDesc(materialDao.findByProveedorAndNombre(proveedor.get(),"varilla armex").getDescripcion());
 			return consulta;
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -147,6 +153,7 @@ public class ArquitectoBean extends UsuarioBean implements ArquitectoBeanInterfa
 			consulta.setLadrilloRojo(consultaModel.getLadrilloRojo());
 			consulta.setLadrilloBlockLigero(consultaModel.getLadrilloBlockLigero());
 			consulta.setLadrilloBloackPesado(consultaModel.getLadrilloBloackPesado());
+			consulta.setVarillaArmex(consultaModel.getVarillaArmex());
 			consulta.setArquitecto(consultaModel.getArquitecto());
 			consulta.setAnchoHabitacion1(consultaModel.getAnchoHabitacion1());
 			consulta.setAnchoHabitacion2(consultaModel.getAnchoHabitacion2());
@@ -170,6 +177,7 @@ public class ArquitectoBean extends UsuarioBean implements ArquitectoBeanInterfa
 			consulta.setArenaCosto(consultaModel.getArenaCosto());
 			consulta.setGravaCosto(consultaModel.getGravaCosto());
 			consulta.setSacoCosto(consultaModel.getSacoCosto());
+			consulta.setVarillaArmexCosto(consultaModel.getVarillaArmexCosto());
 			consulta.setSacoMorteroCosto(consultaModel.getSacoMorteroCosto());
 			consulta.setVarillaCosto(consultaModel.getVarillaCosto());
 			consulta.setLadrilloRojoCosto(consultaModel.getLadrilloRojoCosto());
@@ -186,10 +194,13 @@ public class ArquitectoBean extends UsuarioBean implements ArquitectoBeanInterfa
 			consulta.setLadrilloBloackPesadoDesc(consultaModel.getLadrilloBloackPesadoDesc());
 			consulta.setLadrilloBlockLigeroDesc(consultaModel.getLadrilloBlockLigeroDesc());
 			consulta.setLadrilloRojoDesc(consultaModel.getLadrilloRojoDesc());
+			consulta.setVarillaArmexDes(consultaModel.getVarillaArmexDesc());
 			consulta.setSacoDesc(consultaModel.getSacoDesc());
 			consulta.setSacoMorteroDesc(consultaModel.getSacoMorteroDesc());
 			consulta.setVarillaDesc(consultaModel.getVarillaDesc());
 			consulta.setAlambreDesc(consultaModel.getAlambreDesc());
+			SimpleDateFormat fecha = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+			consulta.setFechaConsulta(fecha.format(new Date()));
 			consulta.setExcel(generarExcel(consulta));
 			consultaDao.save(consulta);
 			return true;
@@ -211,13 +222,16 @@ public class ArquitectoBean extends UsuarioBean implements ArquitectoBeanInterfa
 				"grava",
 				"varilla",
 				"agua",
-				"alambre"
+				"alambre",
+				"varilla armex"
 				};
 		try {
 			Workbook workbook = new HSSFWorkbook();
 			Sheet sheet =workbook.createSheet(consulta.getNombre());
 			Row row = sheet.createRow(0);
 			row.createCell(0).setCellValue(consulta.getNombre());
+			row.createCell(2).setCellValue("Fecha de consulta:");
+			row.createCell(3).setCellValue(consulta.getFechaConsulta());
 			
 			row = sheet.createRow(1);
 			for(int i=0;i<columnas.length;i++){
@@ -295,38 +309,44 @@ public class ArquitectoBean extends UsuarioBean implements ArquitectoBeanInterfa
 			row.createCell(3).setCellValue(consulta.getAlambreCosto());
 			row.createCell(4).setCellValue(consulta.getAlambre()*consulta.getAlambreCosto());
 			
+			row = sheet.createRow(12);
+			row.createCell(0).setCellValue(nombreMaterial[10]);
+			row.createCell(1).setCellValue(consulta.getVarillaArmexDes());
+			row.createCell(2).setCellValue(consulta.getVarillaArmex());
+			row.createCell(3).setCellValue(consulta.getVarillaArmexCosto());
+			row.createCell(4).setCellValue(consulta.getVarillaArmexCosto()*consulta.getVarillaArmex());
 			
 			
-			row=sheet.createRow(12);
+			row=sheet.createRow(13);
 			row.createCell(0).setCellValue("Total de la estimacion");
 			row.createCell(4).setCellValue(consulta.getTotalConsulta());
 			
-			row=sheet.createRow(14);
+			row=sheet.createRow(15);
 			row.createCell(0).setCellValue("Datos de la construccion");
 			row.createCell(4).setCellValue("Datos de las habitaciones");
 			
-			row=sheet.createRow(15);
+			row=sheet.createRow(16);
 			row.createCell(0).setCellValue("Ancho del terreno");
 			row.createCell(1).setCellValue(consulta.getAnchoterreno());
 			row.createCell(4).setCellValue("Nombre de la habitacion");
 			row.createCell(5).setCellValue("Ancho de la habitacion");
 			row.createCell(6).setCellValue("Largo de la habitacion");
 			
-			row=sheet.createRow(16);
+			row=sheet.createRow(17);
 			row.createCell(0).setCellValue("Largo del terreno");
 			row.createCell(1).setCellValue(consulta.getLargoterreno());
 			row.createCell(4).setCellValue("Baño");
 			row.createCell(5).setCellValue(consulta.getAnchobano());
 			row.createCell(6).setCellValue(consulta.getLargobano());
 
-			row= sheet.createRow(17);
+			row= sheet.createRow(18);
 			row.createCell(0).setCellValue("Número de pisos");
 			row.createCell(1).setCellValue(consulta.getPisos());
 			row.createCell(4).setCellValue("Cuarto de lavado");
 			row.createCell(5).setCellValue(consulta.getAnchoLavado());
 			row.createCell(6).setCellValue(consulta.getLargoLavado());
 			
-			row=sheet.createRow(18);
+			row=sheet.createRow(19);
 			row.createCell(0).setCellValue("Tipo de ladrillo");
 			if(consulta.getTipoladrillo()=="1") {
 				row.createCell(1).setCellValue("Ladrillo rojo");
@@ -337,44 +357,49 @@ public class ArquitectoBean extends UsuarioBean implements ArquitectoBeanInterfa
 			row.createCell(5).setCellValue(consulta.getAnchococina());
 			row.createCell(6).setCellValue(consulta.getLargococina());
 			
-			row= sheet.createRow(19);
+			row= sheet.createRow(20);
 			row.createCell(4).setCellValue("Sala comedor");
 			row.createCell(5).setCellValue("Ancho en metros");
 			row.createCell(6).setCellValue("Largo en metros");
 		
 			
-			row= sheet.createRow(20);
+			row= sheet.createRow(21);
 			row.createCell(4).setCellValue("Habitacion 1");
 			row.createCell(5).setCellValue(consulta.getAnchoHabitacion1());
 			row.createCell(6).setCellValue(consulta.getLargoHabitacion1());
 			
 			if(consulta.getAnchoHabitacion2()!=0.0) {
-				row= sheet.createRow(21);
+				row= sheet.createRow(22);
 				row.createCell(4).setCellValue("Habitacion 2");
 				row.createCell(5).setCellValue(consulta.getAnchoHabitacion2());
 				row.createCell(6).setCellValue(consulta.getLargoHabitacion2());
 			}
 			
-			row=sheet.createRow(23);
+			row=sheet.createRow(24);
 			row.createCell(0).setCellValue("Datos del proveedor");
 			
-			row=sheet.createRow(24);
+			row=sheet.createRow(25);
 			row.createCell(0).setCellValue("Nombre del proveedor");
 			row.createCell(1).setCellValue(consulta.getNombreProveedor());
 			
-			row=sheet.createRow(25);
+			row=sheet.createRow(26);
 			row.createCell(0).setCellValue("Telefono");
 			row.createCell(1).setCellValue(consulta.getTelefonoProveedor());
 			
-			row=sheet.createRow(26);
+			row=sheet.createRow(27);
 			row.createCell(0).setCellValue("Correo electronico");
 			row.createCell(1).setCellValue(consulta.getCorreoProveedor());
 			
-			row=sheet.createRow(27);
+			row=sheet.createRow(28);
 			row.createCell(0).setCellValue("Direccion del proveedor");
 			row.createCell(1).setCellValue(consulta.getDireccionProveedor());
 			
-			String url = System.getProperty("user.dir")+"\\Archivos\\"+consulta.getNombre()+".xls";
+			String url = System.getProperty("user.dir")+"\\Archivos\\Consultas\\"+consulta.getArquitecto().getId()+"\\"+consulta.getNombre()+".xls";
+			String urlCarpeta=System.getProperty("user.dir")+"\\Archivos\\Consultas\\"+consulta.getArquitecto().getId();
+			File carpeta = new File(urlCarpeta);
+			if(!carpeta.exists()){
+				carpeta.mkdirs();
+			}
 			FileOutputStream out = new FileOutputStream(url);
 			workbook.write(out);
 			workbook.close();
@@ -390,7 +415,10 @@ public class ArquitectoBean extends UsuarioBean implements ArquitectoBeanInterfa
 	public boolean eliminarConsulta(ConsultaAux consulta) {
 		try {
 			Optional<Arquitecto> arquitecto=arquitectoDao.findById(consulta.getArquitecto());
-			consultaDao.delete(consultaDao.findByNombreAndArquitecto(consulta.getNombre(), arquitecto.get()));
+			Consulta consulta1 = consultaDao.findByNombreAndArquitecto(consulta.getNombre(), arquitecto.get());
+			File consultasExcel=new File(consulta1.getExcel());
+			consultasExcel.delete();
+			consultaDao.delete(consulta1);
 			return true;
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -438,6 +466,8 @@ public class ArquitectoBean extends UsuarioBean implements ArquitectoBeanInterfa
 		try {
 			List<Consulta> consultas=consultaDao.findByArquitecto(arquitecto.getArquitecto());
 			for(Consulta consulta:consultas) {
+				File consultasExcel=new File(consulta.getExcel());
+				consultasExcel.delete();
 				consultaDao.delete(consulta);
 			}
 			usuarioDao.delete(arquitecto);
