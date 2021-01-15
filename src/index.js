@@ -8,7 +8,6 @@ import CambioPassword from './pages/CambioPassword'
 import Arquitecto from './pages/Arquitecto'
 import Proveedor from './pages/Proveedor'
 import Administrador from './pages/Administrador'
-import EspecificacionUsuario from './pages/EspecificacionUsuarios'
 import 'bootstrap/dist/css/bootstrap.css'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
@@ -29,7 +28,6 @@ ReactDOM.render(
                 <Route component = {Arquitecto} exact path = '/Arquitecto/:id' />
                 <Route component = {Proveedor} exact path = '/Proveedor/:id' />
                 <Route component = {Administrador} exact path = '/Administrador/:id'/>
-                <Route component = {EspecificacionUsuario} exact path = '/masInformacion/:id' />
             </Switch> 
         </div>
       </BrowserRouter>

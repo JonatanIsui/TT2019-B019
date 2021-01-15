@@ -1,13 +1,12 @@
 import React from 'react'
 import AdmService from '../service/AdmService'
-import { withRouter } from "react-router";
 
 class InformacionUsuario extends React.Component{
     state = {
         errors : {},
         sending : false
     }
-    id = JSON.parse(atob(this.props.match.params.id))
+    id = this.props.info
     AdmService = new AdmService()
     res = []
     paramatros
@@ -23,12 +22,6 @@ class InformacionUsuario extends React.Component{
             console.log(e)
         }
     }
-
-    handleRegresar = async (e) =>{
-        e.preventDefault()
-        window.history.back()
-    }
-
     render(){
         if(this.id.proveedor === null){
             this.parametros = (<div>
@@ -53,11 +46,10 @@ class InformacionUsuario extends React.Component{
             {this.parametros}
             <p className = ''>Correo: {this.id.correo}</p>
             <p className = ''>Ultima conexion: {this.id.fechaLogin}</p>
-            <button className = 'btn btn-light' onClick = {this.handleRegresar}>Cancelar</button>
             <button id ={this.id.id} className = 'btn btn-dark' onClick = {this.handleEliminarUsuario}>Eliminar</button>
         </div>
         )
     }
 }
 
-export default withRouter(InformacionUsuario)
+export default InformacionUsuario

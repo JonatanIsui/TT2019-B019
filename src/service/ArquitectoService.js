@@ -1,6 +1,6 @@
 import axios from 'axios'
 class ArquitectoService{
-    baseUrl = 'http://localhost:8080/arquitecto/'
+    baseUrl = 'https://b70ca74c4e1e.ngrok.io/arquitecto/'
     constructor(){
         this.res = []
     }

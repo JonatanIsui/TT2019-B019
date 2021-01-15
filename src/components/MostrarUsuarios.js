@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
 import AdmService from '../service/AdmService'
 import ReactDOM from 'react-dom';
+import InformacionUsuario from '../components/InformacionUsuario'
 
 class MostrarUsuarios extends React.Component{
     AdmService = new AdmService()
@@ -33,7 +34,7 @@ class MostrarUsuarios extends React.Component{
                                 <td className = '' >{item.correo}</td>
                                 <td className = ''>{item.fechaLogin}</td>
                                 <td className = ''><button className = 'btn btn-light' onClick = {this.handleEliminar} id = {item.id}>Eliminar</button></td>
-                                <td className = ''><a href = {this.urlUsuarios+btoa(JSON.stringify(item))} >Mas informacion</a></td>
+                                <td className = ''><button className = 'btn btn-light' onClick = {this.handleMasIndormacion(item)} >Mas informacion</button></td>
                             </tr>
                         )                        
                     })
@@ -66,7 +67,7 @@ class MostrarUsuarios extends React.Component{
                                 <td className = '' >{item.correo}</td>
                                 <td className = ''>{item.fechaLogin}</td>
                                 <td className = ''><button className = 'btn btn-light' onClick = {this.handleEliminar} id = {item.id}>Eliminar</button></td>
-                                <td className = ''><a href = {this.urlUsuarios+btoa(JSON.stringify(item))} >Mas informacion</a></td>
+                                <td className = ''><button className = 'btn btn-light' onClick = {this.handleMasIndormacion(item)} >Mas informacion</button></td>
                             </tr>
                         )                        
                     })
@@ -74,6 +75,12 @@ class MostrarUsuarios extends React.Component{
                 </tbody>
             </table>                             
         )
+    }
+    handleMasIndormacion=(item)=>(e)=>{
+        e.preventDefault()
+        ReactDOM.render(<InformacionUsuario
+            info={item}
+        />,document.getElementById("div"))
     }
 
     //Este metodo elimina a un arquitecto o proveedor

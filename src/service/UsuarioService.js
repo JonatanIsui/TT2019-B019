@@ -1,6 +1,6 @@
 import axios from 'axios'
 export class UsuarioService{
-    baseUrl = 'http://localhost:8080/index/'
+    baseUrl = 'https://b70ca74c4e1e.ngrok.io/index/'
     constructor(){
         this.res = [];
     }
