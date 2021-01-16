@@ -65,7 +65,7 @@ public class AdministradorRest implements ErrorController{
 	public ResponseEntity<String> eliminarUsuario(@PathVariable("id") Integer id) {
 		String res = "El usuario no se pudo eliminar";
 		if(administradorBean.eliminarUsuario(id)) 
-			res = "Usuario eliminado con exito";
+			res = "Usuario eliminado con éxito";
 		return ResponseEntity.ok(res);
 	}
 	
@@ -97,25 +97,25 @@ public class AdministradorRest implements ErrorController{
 	
 	@DeleteMapping("/eliminarDefinicion/{id}")
 	public ResponseEntity<String> eliminarDefinicion(@PathVariable("id") Integer id) {
-		String res = "En este momento estamos presentando problema para resolver su peticion";
+		String res = "En este momento estamos presentando problema para resolver su petición";
 		if(administradorBean.eliminarDefinicion(id))
-			res = "Definicion eliminada";
+			res = "Definición eliminada";
 		return ResponseEntity.ok(res);
 	}
 	
 	@PostMapping("/modeficarDefinicion")
 	public ResponseEntity<String> modificarDefinicion(@RequestBody Diccionario definicion) {
-		String res = "No se pudo modificar la definicion";
+		String res = "No se pudo modificar la definición";
 		if(administradorBean.modificarDefinicion(definicion))
-			res = "Definicion modificada";
+			res = "Definición modificada";
 		return ResponseEntity.ok(res);
 	}
 	
 	@PostMapping("/agregarDefinicion")
 	public ResponseEntity<String> agregarDefinicion(@RequestBody Diccionario definicion) {
-		String res = "En estos momentos no se pudo agregar la definicion o ya exite";
+		String res = "En estos momentos no se pudo agregar la definición o ya exite";
 		if(administradorBean.agregarDefinicion(definicion))
-			res = "Definicion agregada con exito";
+			res = "Definición agregada con éxito";
 		return ResponseEntity.ok(res);
 	}
 	

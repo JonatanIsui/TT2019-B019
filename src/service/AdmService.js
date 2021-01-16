@@ -1,6 +1,6 @@
 import axios from 'axios'
 class AdmService{
-    baseUrl = 'https://b70ca74c4e1e.ngrok.io/administrador/'
+    baseUrl = 'http://localhost:8080/administrador/'
     constructor (){
         this.res = []
     }

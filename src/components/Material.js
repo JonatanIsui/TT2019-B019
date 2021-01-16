@@ -79,7 +79,7 @@ class Material extends React.Component{
                 </div>
                 <div className="row justify-content-center">
                         <div className="col-lg-6 col-md-6 col-sm-6 col-6">
-                            Descripcion:<input className = 'form-control' type = 'text' name = 'descripcion' id='descripcionAddMaterial' placeholder = 'descripcion' required/>
+                            Descripci&oacute;n:<input className = 'form-control' type = 'text' name = 'descripcion' id='descripcionAddMaterial' placeholder = 'descripción' required/>
                         </div>
                         <div className="col-lg-6 col-md-6 col-sm-6 col-6">
                             Costo:<input className = 'form-control' type = 'text' name = 'costo' id='costoAddMaterial' placeholder = 'costo' required/>
@@ -116,7 +116,7 @@ class Material extends React.Component{
                     </div>
                     <div className="row">
                             <div className="col-lg-6 text-center">
-                                Descripcion:<input className = 'form-control' type = 'text' name = 'descripcion' placeholder = {material.descripcion}/>
+                                Descripci&oacute;n:<input className = 'form-control' type = 'text' name = 'descripcion' placeholder = {material.descripcion}/>
                             </div>
                             <div className="col-lg-6 text-center">
                                 Costo:<input className = 'form-control' type = 'text' name = 'costo' placeholder = {material.costo}/>
@@ -156,7 +156,7 @@ class Material extends React.Component{
             if(Object.keys(this.res).length !== 0){
                 ReactDOM.render(this.actualizar(this.res),document.getElementById("div"))
             }else{
-                ReactDOM.render(<p>En este momento no cuenta con un catalogo</p>,document.getElementById("div"))
+                ReactDOM.render(<div className="col text=center"><h4><p>En este momento no cuenta con un cat&aacute;logo</p></h4></div>,document.getElementById("div"))
             }
         }catch(e){
             console.log(e)
@@ -172,7 +172,7 @@ class Material extends React.Component{
             if(Object.keys(this.res).length !== 0){
                 ReactDOM.render(this.actualizar(this.res),document.getElementById("div"))
             }else{
-                ReactDOM.render(<p>En este momento no cuenta con un catalogo</p>,document.getElementById("div"))
+                ReactDOM.render(<div className="text-center"><h4><p>En este momento no cuenta con un cat&aacute;logo</p></h4></div>,document.getElementById("div"))
             }
         }catch(e){
             console.log(e)
@@ -263,9 +263,9 @@ class Material extends React.Component{
         const {id} = this.props
         return(
             <Fragment>
-                <button onClick ={this.handleCatalogo(id)} className = 'btn btn-light'>Ver catalogo</button>
+                <button onClick ={this.handleCatalogo(id)} className = 'btn btn-light'>Ver cat&aacute;logo</button>
                 <button onClick ={this.handleAddMaterial(id)} className = 'btn btn-light'>Agregar material</button>
-                <button onClick ={this.handleEliminarCatalogo(id)} className = 'btn btn-light'>Eliminar catalogo</button>
+                <button onClick ={this.handleEliminarCatalogo(id)} className = 'btn btn-light'>Eliminar cat&aacute;logo</button>
             </Fragment>
         )
     }

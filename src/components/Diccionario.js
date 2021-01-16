@@ -14,8 +14,8 @@ class Diccionario extends React.Component{
             <table className = 'table table-hover table-dark'>
                 <thead className = ''>
                     <tr className = ''>
-                        <th className = ''>Articulo</th>
-                        <th className = ' '>Definicion</th>
+                        <th className = ''>Art&iacute;culo</th>
+                        <th className = ' '>Definici&oacute;n</th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -66,13 +66,13 @@ class Diccionario extends React.Component{
                     <p></p>
                     <div className = 'row justify-content-center'>
                         <div className = 'col-lg-8 text-center'>
-                            Definición:<input type = 'text' placeholder = 'Definicion*' className = 'form-control' id = 'definicionDiccionario' name = 'definicion' required/>
+                            Definici&oacute;n:<input type = 'text' placeholder = 'Definici&oacute;n*' className = 'form-control' id = 'definicionDiccionario' name = 'definicion' required/>
                         </div>
                     </div>
                     <p></p>
                     <div className = 'row justify-content-center'>
                         <div className = 'col-lg-8 text-center'>
-                            <input type = 'submit' value = 'Agregar definicion' className = 'btn btn-light'/>
+                            <input type = 'submit' value = 'Agregar definici&oacute;n' className = 'btn btn-light'/>
                             <p></p>
                         </div>
                     </div>

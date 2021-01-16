@@ -97,5 +97,10 @@ public class Material implements Serializable{
 	public int getId() {
 		return id;
 	}
+
+	public void setId(int i) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

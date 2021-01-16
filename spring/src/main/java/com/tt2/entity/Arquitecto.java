@@ -26,6 +26,10 @@ public class Arquitecto implements Serializable{
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "S_arquitecto")
 	private int id;
 	
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	@Column(name = "nombre",nullable = false, columnDefinition = "VARCHAR(20)")
 	private String nombre;
 	

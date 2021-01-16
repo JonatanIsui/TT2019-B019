@@ -131,7 +131,7 @@ class PruebaIntegracionArquitecto {
 				).collect(Collectors.toList());
 		
 		ResponseEntity<List<Usuario>> responseEntity=
-				this.restTemplate.exchange(baseUrl + port + "/administrador/proveedores",
+				this.restTemplate.exchange(baseUrl + port + "/arquitecto/proveedores",
 						HttpMethod.POST, null,
 						new ParameterizedTypeReference<List<Usuario>>() {
 						});

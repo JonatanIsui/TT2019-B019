@@ -34,7 +34,7 @@ class MostrarUsuarios extends React.Component{
                                 <td className = '' >{item.correo}</td>
                                 <td className = ''>{item.fechaLogin}</td>
                                 <td className = ''><button className = 'btn btn-light' onClick = {this.handleEliminar} id = {item.id}>Eliminar</button></td>
-                                <td className = ''><button className = 'btn btn-light' onClick = {this.handleMasIndormacion(item)} >Mas informacion</button></td>
+                                <td className = ''><button className = 'btn btn-light' onClick = {this.handleMasIndormacion(item)} >Mas informaci&oacute;n</button></td>
                             </tr>
                         )                        
                     })
@@ -67,7 +67,7 @@ class MostrarUsuarios extends React.Component{
                                 <td className = '' >{item.correo}</td>
                                 <td className = ''>{item.fechaLogin}</td>
                                 <td className = ''><button className = 'btn btn-light' onClick = {this.handleEliminar} id = {item.id}>Eliminar</button></td>
-                                <td className = ''><button className = 'btn btn-light' onClick = {this.handleMasIndormacion(item)} >Mas informacion</button></td>
+                                <td className = ''><button className = 'btn btn-light' onClick = {this.handleMasIndormacion(item)} >Mas informaci&oacute;n</button></td>
                             </tr>
                         )                        
                     })
@@ -168,7 +168,7 @@ class MostrarUsuarios extends React.Component{
                                             <td className = 'align-middle text-center' >{item.apellidoEncargado}</td>
                                             <td className = 'align-middle text-center' >{item.direccion}</td>
                                             <td className = 'align-middle text-center' >{item.telefono}</td>
-                                            <td className = 'align-middle text-center' ><a href={"data:application/png;base64,"+item.identificacion} download={item.nombreEmpresa+".png"} className="text-white">Descargar identificacion</a></td>
+                                            <td className = 'align-middle text-center' ><a href={"data:application/png;base64,"+item.identificacion} download={item.nombreEmpresa+".png"} className="text-white">Descargar identificaci&oacute;n</a></td>
                                             <td><button className = 'btn btn-light' id = {item.id} onClick = {this.handleRechazar}>Rechazar</button></td>
                                             <td><button className = 'btn btn-light' id = {item.id} onClick = {this.handleAceptar}>Aceptar</button></td>
                                         </tr>

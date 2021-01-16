@@ -36,7 +36,7 @@ class Proveedor extends React.Component{
                 id : e.target.id
             })
             this.res = await this.proveedorService.archivo(this.state)
-            alert(this.res+'. Puedes ver tu catalogo actual dando clic en ver catalogo')
+            alert(this.res+'. Puedes ver tu catálogo actual dando clic en ver catálogo')
         }catch(e){
             console.log(e)
         }
@@ -93,14 +93,14 @@ class Proveedor extends React.Component{
                         <button className = 'btn btn-light' onClick={this.perfilProveedor(id)}>Mi perfil</button>
                     </div>
                     <div className='col-lg-4 text-center'>
-                        <button className = 'btn btn-light' onClick={this.logetOut}>Cerrar sesion</button>
+                        <button className = 'btn btn-light' onClick={this.logetOut}>Cerrar sesi&oacute;n</button>
                     </div>
                 </div>
                 <div id = 'div'></div>
                 <form  id = {id.id} className = '' onSubmit={this.handleSubmit}>
                     <div className="row justify-content-center text-center">
                         
-                            <h1 className = ''>Subir catalogo, solo formato .xlsx</h1>
+                            <h1 className = ''>Subir cat&aacute;logo, solo formato .xlsx</h1>
                         
                     </div>
                     <div className="row justify-content-center">

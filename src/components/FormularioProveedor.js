@@ -63,7 +63,7 @@ class FormularioProveedor extends React.Component{
                 this.usua = this.state;
                 this.usuario = await this.SolicitudProveedorService.addSolicitudProveedor(this.usua)
                 if(Object.keys(this.usuario).length !== 0){
-                    alert('Solicitud enviada con exito, espere respuesta al correo : '+this.usuario)
+                    alert('Solicitud enviada con éxito, espere respuesta al correo : '+this.usuario)
                     window.history.back()
                 }else{
                     alert('Lo sentimos los datos porporcionados no son correctos o hay una solicitud pendiente')

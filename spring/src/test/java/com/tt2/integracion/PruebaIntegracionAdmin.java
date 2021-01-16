@@ -140,7 +140,6 @@ class PruebaIntegracionAdmin {
 				.exchange(baseUrl + port + "/administrador/eliminar/57", HttpMethod.DELETE, null,String.class);
 		
 		assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-		
 		assertTrue(responseEntity.getBody().contains(resultadoEsperado));
 		
 
@@ -154,7 +153,6 @@ class PruebaIntegracionAdmin {
 				.exchange(baseUrl + port + "/administrador/rechazarProveedor/53", HttpMethod.DELETE, null,String.class);
 		
 		assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-		assertTrue(responseEntity.equals(responseEntity));
 		assertTrue(responseEntity.getBody().contains(resultadoEsperado));
 	}
 	
