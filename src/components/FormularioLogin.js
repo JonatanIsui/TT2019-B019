@@ -56,7 +56,7 @@ la vida de un componente. El estado cambia con el tiempo*/
                     const red = btoa(JSON.stringify(sinpassword.administrador))
                     window.location = '/Administrador/'+red+''
                 }else{
-                    ReactDOM.render(<p className = ''>contraseña o correo incorrecto</p>,document.getElementById('usuario'))
+                    ReactDOM.render(<div className="row justify-content-center"><h4><p className = ''>Contraseña o correo incorrecto</p></h4></div>,document.getElementById('usuario'))
                 }
             }catch(errors){
                 console.log(e)

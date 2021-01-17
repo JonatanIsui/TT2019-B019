@@ -45,7 +45,7 @@ class Diccionario extends React.Component{
                 ,document.getElementById("div")
                 )
             }else{
-                ReactDOM.render(<p>En este momento no hay definiciones agregadas</p>,document.getElementById("div"))
+                ReactDOM.render(<div className="row justify-content-center"><h4><p>En este momento no hay definiciones agregadas</p></h4></div>,document.getElementById("div"))
             }
         }catch(e){
             console.log(e)
