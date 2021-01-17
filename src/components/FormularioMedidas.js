@@ -17,6 +17,9 @@ class FormularioMedidas extends React.Component{
     nombresObjeto=["",'arena','grava','saco','sacoMortero','varilla','ladrilloRojo','ladrilloBlockLigero','ladrilloBloackPesado','alambre','varillaArmex']
     descripciones=["Botes de 19 L","arenaDesc","gravaDesc","sacoDesc","sacoMorteroDesc","varillaDesc","ladrilloRojoDesc","ladrilloBlockLigeroDesc","ladrilloBloackPesadoDesc","alambreDesc","varillaArmexDesc"]
     nombresObjetoCosto=["",'arenaCosto','gravaCosto','sacoCosto','sacoMorteroCosto','varillaCosto','ladrilloRojoCosto','ladrilloBlockLigeroCosto','ladrilloBloackPesadoCosto','alambreCosto','varillaArmexCosto']
+    enviar=false
+    totalTerreno=0
+    metros2=0
     numHabitaciones = e =>{
         this.div = document.getElementById('habitacion')
         for(let i = 0; i<e; i++){
@@ -60,6 +63,65 @@ class FormularioMedidas extends React.Component{
             "<td className = ''>$"+totalpromedio.toFixed(2)+"</td>"
         )
         ReactDOM.render(this.mostrarProveedor(consulta),document.getElementById('datosProveedor'))
+        ReactDOM.render(this.herramientas(),document.getElementById('11'))
+    }
+
+    herramientas=()=>{
+        return(
+            <Fragment>
+                <div className='row justify-content-center'>  
+                <div className = 'col-lg-10 text-center'>
+                <table className = 'table table-hover table-dark'>
+                    <thead className = ''>
+                        <tr className = ''>
+                            <th className = ''>Herramientas recomendadas</th>
+                            <th className = ''>Maquinaria recomendada</th>
+                            </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Pala</td>
+                            <td>Apisonadores para compactación o bailarinas</td>
+                        </tr>
+                        <tr>
+                            <td>Pico</td>
+                            <td>Excavadora</td>
+                        </tr>
+                        <tr>
+                            <td>Marro o  mazo</td>
+                            <td>Retroexcavadora</td>
+                        </tr>
+                        <tr>
+                            <td>Cizallas</td>
+                            <td>Mezcladora de Cemento</td>
+                        </tr>
+                        <tr>
+                            <td>Cincel</td>
+                        </tr>
+                        <tr>
+                            <td>Maceta</td>
+                        </tr>
+                        <tr>
+                            <td>Paleta</td>
+                        </tr>
+                        <tr>
+                            <td>Llana</td>
+                        </tr>
+                        <tr>
+                            <td>Nivel</td>
+                        </tr>
+                        <tr>
+                            <td>Flex&oacute;metro</td>
+                        </tr>
+                        <tr>
+                            <td>Carretilla</td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+                </div>
+            </Fragment>
+        )
     }
     consulta = (nombre) =>{
         return(
@@ -103,6 +165,8 @@ class FormularioMedidas extends React.Component{
                     </tbody>
                 </table>
                 </div>
+                <div className = 'col-lg-10 text-center' id='11'>
+                </div>
                 <div className = 'col-lg-10 text-center' id='datosProveedor'>
                 </div>
                 <div className='container-fluid'>
@@ -128,12 +192,18 @@ class FormularioMedidas extends React.Component{
                     </tr>
                 </thead>
                 <tbody className = '' >
-                    <tr className = ''>
-                        <td>{proveedor.nombreProveedor}</td>
-                        <td>{proveedor.correoProveedor}</td>
-                        <td>{proveedor.telefonoProveedor}</td>
-                        <td>{proveedor.direccionProveedor}</td>
-                    </tr>
+                    { 
+                        proveedor.proveedorConsulta.map((item)=>{   
+                        return(
+                            <tr className = '' key = {item.nombreProveedor}>
+                                <td>{item.nombreProveedor}</td>
+                                <td>{item.correoProveedor}</td>
+                                <td>{item.telefonoProveedor}</td>
+                                <td>{item.direccionProveedor}</td>
+                            </tr>
+                            )
+                        })
+                    }
                 </tbody>
             </table>
         </Fragment>)
@@ -230,13 +300,45 @@ class FormularioMedidas extends React.Component{
         this.dim['pisos'] = this.pisos
         this.dim['tipoladrillo'] = this.ladrillo
         this.dim['idArquitecto'] = this.arquitecto
+        this.totalTerreno = (this.dim['anchoterreno'])*(this.dim['largoterreno'])
+        this.metros2 = ((this.dim['anchobano'])*(this.dim['largobano']))+((this.dim['ancholavado'])*(this.dim['largolavado']))+
+                        ((this.dim['anchococina'])*(this.dim['largococina']))+((this.dim['anchoHabitacion1'])*(this.dim['largoHabitacion1']))
+        if(this.dim['anchoHabitacion2']!=null)
+        this.metros2= this.metros2+(this.dim['anchoHabitacion2']*this.dim['largoHabitacion2'])
+        console.log(this.totalTerreno)
+        if(this.totalTerreno>=40 && this.totalTerreno<=71){
+            console.log(this.metros2)
+            let resto = this.totalTerreno-this.metros2
+            console.log(resto)
+            this.dim['anchoSala']=Math.floor(Math.sqrt(resto))
+            this.dim['largoSala']=Math.floor(Math.sqrt(resto))
+            if((this.dim['anchoSala']*this.dim['largoSala'])>=(this.dim['anchoHabitacion1']*this.dim['largoHabitacion1'])){
+                this.metros2=this.metros2 + (this.dim['largoSala']*this.dim['anchoSala'])
+                if(this.totalTerreno>=this.metros2){
+                    this.enviar=true
+                    console.log(this.dim['largoSala'])
+                }else{
+                    console.log(this.metros2)
+                    alert('La suma de las medidas ingresadas de las habitaciones sobrepasa los metros cuadrados del terreno, favor de ingresar las medidas correctas.')
+                    this.enviar=false   
+                }
+            }else{
+                alert('Las medidas de la Sala comedor son deben ser de al menos el tama\u00f1o de una habitaci\u00F3n')
+                this.enviar=false
+            }
+        }else{
+            alert('Las metros cuadrados del terreno sobrepasan las medidas de una casa habitaci\u00f3n de inter\u00e9s  social, por favor ingresa medidas de entre  40 y 71 metros cuadrados.')
+            this.enviar=false
+        }
+        console.log(this.enviar)
         let cancelar = true
         do{
             let confirmar = prompt("Por favor ingrese el nombre de la consulta");
             if(confirmar != null){
                 if(confirmar.trim()!==""){
                     this.dim['nombre']=confirmar
-                    this.res = await this.ArquitectoService.consulta(this.dim)
+                    if(this.enviar)
+                        this.res = await this.ArquitectoService.consulta(this.dim)
                     console.log(this.res)
                     if(this.res.length!==0){
                         cancelar=false
@@ -252,8 +354,7 @@ class FormularioMedidas extends React.Component{
                 cancelar = false
                 window.location.reload()
             }
-        }while(cancelar)
-    }
+        }while(cancelar)    }
     handleEliminarConsulta= async (e)=>{
         e.preventDefault()
         let delConsulta={}

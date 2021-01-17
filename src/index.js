@@ -10,6 +10,7 @@ import Proveedor from './pages/Proveedor'
 import Administrador from './pages/Administrador'
 import 'bootstrap/dist/css/bootstrap.css'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import PreguntasFrecuentes from './pages/PreguntasFrecuentes'
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 
@@ -28,6 +29,7 @@ ReactDOM.render(
                 <Route component = {Arquitecto} exact path = '/Arquitecto/:id' />
                 <Route component = {Proveedor} exact path = '/Proveedor/:id' />
                 <Route component = {Administrador} exact path = '/Administrador/:id'/>
+                <Route component = {PreguntasFrecuentes} exact path = '/preguntasfrecuentes'/>
             </Switch> 
         </div>
       </BrowserRouter>

@@ -45,7 +45,63 @@ class MostartConsulta extends React.Component{
             ReactDOM.render(<p>No se a encontrado ninguna consulta</p>,document.getElementById("div"))
         }
     }
-
+    herramientas=()=>{
+        return(
+            <Fragment>
+                <div className='row justify-content-center'>  
+                <div className = 'col-lg-10 text-center'>
+                <table className = 'table table-hover table-dark'>
+                    <thead className = ''>
+                        <tr className = ''>
+                            <th className = ''>Herramientas recomendadas</th>
+                            <th className = ''>Maquinaria recomendada</th>
+                            </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Pala</td>
+                            <td>Apisonadores para compactación o bailarinas</td>
+                        </tr>
+                        <tr>
+                            <td>Pico</td>
+                            <td>Excavadora</td>
+                        </tr>
+                        <tr>
+                            <td>Marro o  mazo</td>
+                            <td>Retroexcavadora</td>
+                        </tr>
+                        <tr>
+                            <td>Cizallas</td>
+                            <td>Mezcladora de Cemento</td>
+                        </tr>
+                        <tr>
+                            <td>Cincel</td>
+                        </tr>
+                        <tr>
+                            <td>Maceta</td>
+                        </tr>
+                        <tr>
+                            <td>Paleta</td>
+                        </tr>
+                        <tr>
+                            <td>Llana</td>
+                        </tr>
+                        <tr>
+                            <td>Nivel</td>
+                        </tr>
+                        <tr>
+                            <td>Flex&oacute;metro</td>
+                        </tr>
+                        <tr>
+                            <td>Carretilla</td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+                </div>
+            </Fragment>
+        )
+    }
     consulta = (consulta) =>{
         return(
             <div className='row justify-content-center'>  
@@ -88,9 +144,13 @@ class MostartConsulta extends React.Component{
                     </tbody>
                 </table>
                 </div>
+                <div className = 'col-lg-10 text-center' id='11'>
+                </div>
                 <div className = 'col-lg-10 text-center' id='medidasTerreno'>
                 </div>
                 <div className = 'col-lg-10 text-center' id='medidasHabitacion'>
+                </div>
+                <div className = 'col-lg-10 text-center' id='proveedoresSugeridos'>
                 </div>
                 <div className='container-fluid'>
                     <div className='row justify-content-center'>
@@ -107,21 +167,20 @@ class MostartConsulta extends React.Component{
     }
 
     materia = async (consulta) =>{
-        console.log(consulta)
         document.getElementById('0').insertAdjacentHTML("beforebegin",
             "<td className = ''>"+this.etiquetas[0]+"</td>"+
             "<td className = ''>"+this.descripciones[0]+"</td>"+
-            "<td className = ''>"+consulta.agua+"</td>"+
+            "<td className = ''>"+consulta.materialConsulta.agua+"</td>"+
             "<td className = ''> de 0 a 15 mil litros de agua son $44.94</td>"+
             "<td className = ''>$44.94</td>"  
         )
         for(let i = 1;i<this.nombresObjeto.length;i++){
             document.getElementById(i.toString()).insertAdjacentHTML("beforebegin",
                 "<td className = ''>"+this.etiquetas[i]+"</td>"+
-                "<td className = ''>"+consulta[this.descripciones[i]]+"</td>" +
-                "<td className = ''>"+consulta[this.nombresObjeto[i]]+
-                "<td className = ''> $"+consulta[this.nombresObjetoCosto[i]]+"</td>"+
-                "<td className = ''>$"+consulta[this.nombresObjeto[i]]*consulta[this.nombresObjetoCosto[i]]+"</td>"
+                "<td className = ''>"+consulta.materialConsulta[this.descripciones[i]]+"</td>" +
+                "<td className = ''>"+consulta.materialConsulta[this.nombresObjeto[i]]+
+                "<td className = ''> $"+consulta.materialConsulta[this.nombresObjetoCosto[i]]+"</td>"+
+                "<td className = ''>$"+consulta.materialConsulta[this.nombresObjeto[i]]*consulta.materialConsulta[this.nombresObjetoCosto[i]]+"</td>"
         )}
         let totalpromedio = consulta.totalConsulta
         document.getElementById('total').insertAdjacentHTML("beforebegin",
@@ -130,8 +189,40 @@ class MostartConsulta extends React.Component{
         )
         await ReactDOM.render(this.datosHabitaciones(consulta),document.getElementById("medidasHabitacion"))
         await ReactDOM.render(this.datosTerreno(consulta),document.getElementById("medidasTerreno"))
+        await ReactDOM.render(this.datosProveedor(consulta.proveedorConsulta),document.getElementById("proveedoresSugeridos"))
+        ReactDOM.render(this.herramientas(),document.getElementById('11'))
+    }
+
+    datosProveedor=(datosProveedor)=>{
+        return(<Fragment>
+            <table className = 'table table-hover table-dark'>
+                <thead className = ''>
+                    <tr className = ''>
+                        <th className = ''>Proveedor recomendado</th>
+                        <th className = ''>Correo</th>
+                        <th className = ''>Telefono</th>
+                        <th className = ''>Direccion</th>
+                    </tr>
+                </thead>
+                <tbody className = '' >
+                    { 
+                        datosProveedor.map((item)=>{   
+                        return(
+                            <tr className = '' key = {item.nombreProveedor}>
+                                <td>{item.nombreProveedor}</td>
+                                <td>{item.correoProveedor}</td>
+                                <td>{item.telefonoProveedor}</td>
+                                <td>{item.direccionProveedor}</td>
+                            </tr>
+                            )
+                        })
+                    }
+                </tbody>
+            </table>
+            </Fragment>)
     }
     datosHabitaciones=(consulta)=>{
+        console.log(consulta)
         return(
            <Fragment>
                <table className = 'table table-hover table-dark'>
@@ -172,8 +263,8 @@ class MostartConsulta extends React.Component{
                         </tr>
                         <tr>
                             <td>Sala comedor</td>
-                            <td>{consulta.anchobano}</td>
-                            <td>{consulta.largobano}</td>
+                            <td>{consulta.anchoSala}</td>
+                            <td>{consulta.largoSala}</td>
                         </tr>
                     </tbody>
                </table>
@@ -229,38 +320,30 @@ class MostartConsulta extends React.Component{
     
     render(){
         return(<Fragment>
-            <table className = 'table table-hover table-dark table-responsive'>
-                <thead className = ''>
-                    <tr className = ''>
-                        <th className = 'text-center align-middle'>Fecha de la consulta</th>
-                        <th className = 'text-center align-middle'>Nombre de la consulta</th>
-                        <th className = 'text-center align-middle'>Proveedor recomendado</th>
-                        <th className = 'text-center align-middle'>Tel&eacute;fono del proveedor</th>
-                        <th className = 'text-center align-middle'>Correo electronico del proveedor</th>
-                        <th className = 'text-center align-middle'>Direcci&oacute;n del proveedor</th>
-                        <th className = 'text-center align-middle'></th>
-                        <th className = 'text-center align-middle'></th>
-                    </tr>
-                </thead>
-                <tbody className = '' >
-                    {
-                        this.props.consultas.map((consulta)=>{
-                            return(
-                                <tr className = 'text-center' key = {consulta.id}>
-                                    <td className = 'text-center align-middle' >{consulta.fechaConsulta}</td>
-                                    <td className = 'text-center align-middle' >{consulta.nombre}</td>
-                                    <td className = 'text-center align-middle'>{consulta.nombreProveedor}</td>
-                                    <td className = 'text-center align-middle'>{consulta.telefonoProveedor}</td>
-                                    <td className = 'text-center align-middle'>{consulta.correoProveedor}</td>
-                                    <td className = 'text-center align-middle'>{consulta.direccionProveedor}</td>
-                                    <td className = 'text-center align-middle'><button className = 'btn btn-light' onClick = {this.handleEliminarConsulta(consulta)} >Eliminar</button></td>
-                                    <td className = 'text-center align-middle'><button className = 'btn btn-light' onClick = {this.handleMostarConsulta(consulta)} >Mas informaci&oacute;n</button></td>
-                                </tr>
-                            )
-                        })
-                    }
-                </tbody>
-            </table> 
+                <table className = 'table table-hover table-dark table-responsive align-middle'>
+                    <thead className = ''>
+                        <tr className = ''>
+                            <th className = 'text-center align-middle'>Fecha de la consulta</th>
+                            <th className = 'text-center align-middle'>Nombre de la consulta</th>
+                            <th className = 'text-center align-middle'></th>
+                            <th className = 'text-center align-middle'></th>
+                        </tr>
+                    </thead>
+                    <tbody className = '' >
+                        {
+                            this.props.consultas.map((consulta)=>{
+                                return(
+                                    <tr className = 'text-center' key = {consulta.id}>
+                                        <td className = 'text-center align-middle' >{consulta.fechaConsulta}</td>
+                                        <td className = 'text-center align-middle' >{consulta.nombre}</td>
+                                        <td className = 'text-center align-middle'><button className = 'btn btn-light' onClick = {this.handleEliminarConsulta(consulta)} >Eliminar</button></td>
+                                        <td className = 'text-center align-middle'><button className = 'btn btn-light' onClick = {this.handleMostarConsulta(consulta)} >Mas informaci&oacute;n</button></td>
+                                    </tr>
+                                )
+                            })
+                        }
+                   </tbody>
+                </table>
         </Fragment>)
     }
 }

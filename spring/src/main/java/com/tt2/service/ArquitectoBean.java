@@ -16,8 +16,9 @@ import com.tt2.dao.ProveedorDao;
 import com.tt2.dao.UsuarioDao;
 import com.tt2.entity.Arquitecto;
 import com.tt2.entity.Consulta;
+import com.tt2.entity.ConsultaProveedor;
 import com.tt2.entity.Diccionario;
-import com.tt2.entity.Proveedor;
+import com.tt2.entity.MaterialConsulta;
 import com.tt2.entity.Usuario;
 import com.tt2.model.ConsultaModel;
 import com.tt2.model.ConsultaAux;
@@ -116,23 +117,24 @@ public class ArquitectoBean extends UsuarioBean implements ArquitectoBeanInterfa
 			consulta.setLargobano(medidas.getLargobano());
 			consulta.setLargococina(medidas.getLargococina());
 			consulta.setLargoLavado(medidas.getLargolavado());
+			consulta.setLargoSala(medidas.getLargoSala());
+			consulta.setAnchoSala(medidas.getLargoSala());
 			consulta.setLargoterreno(medidas.getLargoterreno());
 			consulta.setPisos(medidas.getPisos());
 			consulta.setTipoLadrillo(medidas.getTipoladrillo());
 			consulta.setNombre(medidas.getNombre());
 			consulta.setExcel("false");
 			consulta=proveedorConsulta.selectProveedor(consulta);
-			Optional<Proveedor> proveedor=proveedorDao.findById(consulta.getIdProveedor());
-			consulta.setArenaDesc(materialDao.findByProveedorAndNombre(proveedor.get(),"arena").getDescripcion());
-			consulta.setGravaDesc(materialDao.findByProveedorAndNombre(proveedor.get(),"grava").getDescripcion());
-			consulta.setLadrilloBloackPesadoDesc(materialDao.findByProveedorAndNombre(proveedor.get(),"ladrillo block pesado").getDescripcion());
-			consulta.setLadrilloBlockLigeroDesc(materialDao.findByProveedorAndNombre(proveedor.get(),"ladrillo block ligero").getDescripcion());
-			consulta.setLadrilloRojoDesc(materialDao.findByProveedorAndNombre(proveedor.get(),"ladrillo rojo").getDescripcion());
-			consulta.setSacoDesc(materialDao.findByProveedorAndNombre(proveedor.get(),"cemento").getDescripcion());
-			consulta.setSacoMorteroDesc(materialDao.findByProveedorAndNombre(proveedor.get(),"mortero").getDescripcion());
-			consulta.setVarillaDesc(materialDao.findByProveedorAndNombre(proveedor.get(),"varilla").getDescripcion());
-			consulta.setAlambreDesc(materialDao.findByProveedorAndNombre(proveedor.get(),"alambre").getDescripcion());
-			consulta.setVarillaArmexDesc(materialDao.findByProveedorAndNombre(proveedor.get(),"varilla armex").getDescripcion());
+			consulta.setArenaDesc("Bote de arena de 19 L");
+			consulta.setGravaDesc("Bote de 19 L de grava de 3/4");
+			consulta.setLadrilloBloackPesadoDesc("Block pesado 12x20x40 cm");
+			consulta.setLadrilloBlockLigeroDesc("Block ligero 12x20x40 cm");
+			consulta.setLadrilloRojoDesc("Ladrillo recocido de 12x10x24 cm");
+			consulta.setSacoDesc("Saco de cemento 50K");
+			consulta.setSacoMorteroDesc("Saco de mortero 50k");
+			consulta.setVarillaDesc("Varilla de 3/8 de 12 m de largo");
+			consulta.setAlambreDesc("Metros de alambre recocido");
+			consulta.setVarillaArmexDesc("Tramo de 6 m");
 			return consulta;
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -143,18 +145,40 @@ public class ArquitectoBean extends UsuarioBean implements ArquitectoBeanInterfa
 	@Override
 	public boolean saveConsulta(ConsultaModel consultaModel) {
 		Consulta consulta = new Consulta();
+		MaterialConsulta materialConsulta = new MaterialConsulta();
 		try {
 			consulta.setNombre(consultaModel.getNombre());
-			consulta.setAgua(consultaModel.getAgua());
-			consulta.setArena(consultaModel.getArena());
-			consulta.setGrava(consultaModel.getGrava());
-			consulta.setSaco(consultaModel.getSaco());
-			consulta.setSacoMortero(consultaModel.getSacoMortero());
-			consulta.setVarilla(consultaModel.getVarilla());
-			consulta.setLadrilloRojo(consultaModel.getLadrilloRojo());
-			consulta.setLadrilloBlockLigero(consultaModel.getLadrilloBlockLigero());
-			consulta.setLadrilloBloackPesado(consultaModel.getLadrilloBloackPesado());
-			consulta.setVarillaArmex(consultaModel.getVarillaArmex());
+			materialConsulta.setAgua(consultaModel.getAgua());
+			materialConsulta.setArena(consultaModel.getArena());
+			materialConsulta.setGrava(consultaModel.getGrava());
+			materialConsulta.setSaco(consultaModel.getSaco());
+			materialConsulta.setSacoMortero(consultaModel.getSacoMortero());
+			materialConsulta.setVarilla(consultaModel.getVarilla());
+			materialConsulta.setLadrilloRojo(consultaModel.getLadrilloRojo());
+			materialConsulta.setLadrilloBlockLigero(consultaModel.getLadrilloBlockLigero());
+			materialConsulta.setLadrilloBloackPesado(consultaModel.getLadrilloBloackPesado());
+			materialConsulta.setVarillaArmex(consultaModel.getVarillaArmex());
+			materialConsulta.setAlambre(consultaModel.getAlambre());
+			materialConsulta.setArenaDesc(consultaModel.getArenaDesc());
+			materialConsulta.setGravaDesc(consultaModel.getGravaDesc());
+			materialConsulta.setLadrilloBloackPesadoDesc(consultaModel.getLadrilloBloackPesadoDesc());
+			materialConsulta.setLadrilloBlockLigeroDesc(consultaModel.getLadrilloBlockLigeroDesc());
+			materialConsulta.setLadrilloRojoDesc(consultaModel.getLadrilloRojoDesc());
+			materialConsulta.setVarillaArmexDes(consultaModel.getVarillaArmexDesc());
+			materialConsulta.setSacoDesc(consultaModel.getSacoDesc());
+			materialConsulta.setSacoMorteroDesc(consultaModel.getSacoMorteroDesc());
+			materialConsulta.setVarillaDesc(consultaModel.getVarillaDesc());
+			materialConsulta.setAlambreDesc(consultaModel.getAlambreDesc());
+			materialConsulta.setArenaCosto(consultaModel.getArenaCosto());
+			materialConsulta.setGravaCosto(consultaModel.getGravaCosto());
+			materialConsulta.setSacoCosto(consultaModel.getSacoCosto());
+			materialConsulta.setVarillaArmexCosto(consultaModel.getVarillaArmexCosto());
+			materialConsulta.setSacoMorteroCosto(consultaModel.getSacoMorteroCosto());
+			materialConsulta.setVarillaCosto(consultaModel.getVarillaCosto());
+			materialConsulta.setLadrilloRojoCosto(consultaModel.getLadrilloRojoCosto());
+			materialConsulta.setLadrilloBlockLigeroCosto(consultaModel.getLadrilloBlockLigeroCosto());
+			materialConsulta.setLadrilloBloackPesadoCosto(consultaModel.getLadrilloBloackPesadoCosto());
+			materialConsulta.setAlambreCosto(consultaModel.getAlambreCosto());
 			consulta.setArquitecto(consultaModel.getArquitecto());
 			consulta.setAnchoHabitacion1(consultaModel.getAnchoHabitacion1());
 			consulta.setAnchoHabitacion2(consultaModel.getAnchoHabitacion2());
@@ -162,46 +186,25 @@ public class ArquitectoBean extends UsuarioBean implements ArquitectoBeanInterfa
 			consulta.setAnchococina(consultaModel.getAnchococina());
 			consulta.setAnchoLavado(consultaModel.getAnchoLavado());
 			consulta.setAnchoterreno(consultaModel.getAnchoterreno());
+			consulta.setAnchoSala(consultaModel.getAnchoSala());
+			consulta.setLargoSala(consultaModel.getLargoSala());
 			consulta.setLargoHabitacion1(consultaModel.getLargoHabitacion1());
 			consulta.setLargoHabitacion2(consultaModel.getLargoHabitacion2());
 			consulta.setLargobano(consultaModel.getLargobano());
 			consulta.setLargococina(consultaModel.getLargococina());
 			consulta.setLargoLavado(consultaModel.getLargoLavado());
 			consulta.setLargoterreno(consultaModel.getLargoterreno());
-			consulta.setAlambre(consultaModel.getAlambre());
 			consulta.setPisos(consultaModel.getPisos());
 			if(consultaModel.getTipoladrillo()==1) {
 				consulta.setTipoladrillo("Ladrillo rojo");
 			}else {
 				consulta.setTipoladrillo("Ladrillo de block");
 			}
-			consulta.setArenaCosto(consultaModel.getArenaCosto());
-			consulta.setGravaCosto(consultaModel.getGravaCosto());
-			consulta.setSacoCosto(consultaModel.getSacoCosto());
-			consulta.setVarillaArmexCosto(consultaModel.getVarillaArmexCosto());
-			consulta.setSacoMorteroCosto(consultaModel.getSacoMorteroCosto());
-			consulta.setVarillaCosto(consultaModel.getVarillaCosto());
-			consulta.setLadrilloRojoCosto(consultaModel.getLadrilloRojoCosto());
-			consulta.setLadrilloBlockLigeroCosto(consultaModel.getLadrilloBlockLigeroCosto());
-			consulta.setLadrilloBloackPesadoCosto(consultaModel.getLadrilloBloackPesadoCosto());
-			consulta.setAlambreCosto(consultaModel.getAlambreCosto());
-			consulta.setNombreProveedor(consultaModel.getNombreProveedor());
-			consulta.setTelefonoProveedor(consultaModel.getTelefonoProveedor());
-			consulta.setCorreoProveedor(consultaModel.getCorreoProveedor());
-			consulta.setDireccionProveedor(consultaModel.getDireccionProveedor());
+			consulta.setProveedorConsulta(consultaModel.getProveedorConsulta());
 			consulta.setTotalConsulta(consultaModel.getTotal());
-			consulta.setArenaDesc(consultaModel.getArenaDesc());
-			consulta.setGravaDesc(consultaModel.getGravaDesc());
-			consulta.setLadrilloBloackPesadoDesc(consultaModel.getLadrilloBloackPesadoDesc());
-			consulta.setLadrilloBlockLigeroDesc(consultaModel.getLadrilloBlockLigeroDesc());
-			consulta.setLadrilloRojoDesc(consultaModel.getLadrilloRojoDesc());
-			consulta.setVarillaArmexDes(consultaModel.getVarillaArmexDesc());
-			consulta.setSacoDesc(consultaModel.getSacoDesc());
-			consulta.setSacoMorteroDesc(consultaModel.getSacoMorteroDesc());
-			consulta.setVarillaDesc(consultaModel.getVarillaDesc());
-			consulta.setAlambreDesc(consultaModel.getAlambreDesc());
 			SimpleDateFormat fecha = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
 			consulta.setFechaConsulta(fecha.format(new Date()));
+			consulta.setMaterialConsulta(materialConsulta);
 			consulta.setExcel(generarExcel(consulta));
 			consultaDao.save(consulta);
 			return true;
@@ -213,19 +216,10 @@ public class ArquitectoBean extends UsuarioBean implements ArquitectoBeanInterfa
 	
 	public String generarExcel(Consulta consulta){
 		String[] columnas= {"Nombre","Descripcion","Cantidad","Precio promedio por pieza","Sub total"};
-		String[] nombreMaterial = {
-				"ladrillo rojo",
-				"ladrillo block ligero",
-				"ladrillo block pesado",
-				"cemento",
-				"mortero",
-				"arena",
-				"grava",
-				"varilla",
-				"agua",
-				"alambre",
-				"varilla armex"
-				};
+		String[] nombreMaterial = {"ladrillo rojo","ladrillo block ligero","ladrillo block pesado","cemento","mortero","arena","grava","varilla","agua","alambre","varilla armex"};
+		String[] nombreHerramienta= {"Pala","Pico","Marro o  mazo","Cizallas","Cincel","Maceta","Paleta", "Llana","Nivel", "Flexómetro","Carretilla"};
+		String[] nombreMaquinaria= {"Apisonadores para compactación o bailarinas","Excavadora","Retroexcavadora","Mezcladora de Cemento"};
+
 		try {
 			Workbook workbook = new HSSFWorkbook();
 			Sheet sheet =workbook.createSheet(consulta.getNombre());
@@ -242,80 +236,80 @@ public class ArquitectoBean extends UsuarioBean implements ArquitectoBeanInterfa
 			
 			row = sheet.createRow(2);
 			row.createCell(0).setCellValue(nombreMaterial[0]);
-			row.createCell(1).setCellValue(consulta.getLadrilloRojoDesc());
-			row.createCell(2).setCellValue(consulta.getLadrilloRojo());
-			row.createCell(3).setCellValue(consulta.getLadrilloRojoCosto());
-			row.createCell(4).setCellValue(consulta.getLadrilloRojo()*consulta.getLadrilloRojoCosto());
+			row.createCell(1).setCellValue(consulta.getMaterialConsulta().getLadrilloRojoDesc());
+			row.createCell(2).setCellValue(consulta.getMaterialConsulta().getLadrilloRojo());
+			row.createCell(3).setCellValue(consulta.getMaterialConsulta().getLadrilloRojoCosto());
+			row.createCell(4).setCellValue(consulta.getMaterialConsulta().getLadrilloRojo()*consulta.getMaterialConsulta().getLadrilloRojoCosto());
 			
 			row = sheet.createRow(3);
 			row.createCell(0).setCellValue(nombreMaterial[1]);
-			row.createCell(1).setCellValue(consulta.getLadrilloBlockLigeroDesc());
-			row.createCell(2).setCellValue(consulta.getLadrilloBlockLigero());
-			row.createCell(3).setCellValue(consulta.getLadrilloBlockLigeroCosto());
-			row.createCell(4).setCellValue(consulta.getLadrilloBlockLigero()*consulta.getLadrilloBlockLigeroCosto());
+			row.createCell(1).setCellValue(consulta.getMaterialConsulta().getLadrilloBlockLigeroDesc());
+			row.createCell(2).setCellValue(consulta.getMaterialConsulta().getLadrilloBlockLigero());
+			row.createCell(3).setCellValue(consulta.getMaterialConsulta().getLadrilloBlockLigeroCosto());
+			row.createCell(4).setCellValue(consulta.getMaterialConsulta().getLadrilloBlockLigero()*consulta.getMaterialConsulta().getLadrilloBlockLigeroCosto());
 			
 			row = sheet.createRow(4);
 			row.createCell(0).setCellValue(nombreMaterial[2]);
-			row.createCell(1).setCellValue(consulta.getLadrilloBloackPesadoDesc());
-			row.createCell(2).setCellValue(consulta.getLadrilloBloackPesado());
-			row.createCell(3).setCellValue(consulta.getLadrilloBloackPesadoCosto());
-			row.createCell(4).setCellValue(consulta.getLadrilloBloackPesado()*consulta.getLadrilloBloackPesadoCosto());
+			row.createCell(1).setCellValue(consulta.getMaterialConsulta().getLadrilloBloackPesadoDesc());
+			row.createCell(2).setCellValue(consulta.getMaterialConsulta().getLadrilloBloackPesado());
+			row.createCell(3).setCellValue(consulta.getMaterialConsulta().getLadrilloBloackPesadoCosto());
+			row.createCell(4).setCellValue(consulta.getMaterialConsulta().getLadrilloBloackPesado()*consulta.getMaterialConsulta().getLadrilloBloackPesadoCosto());
 			
 			row = sheet.createRow(5);
 			row.createCell(0).setCellValue(nombreMaterial[3]);
-			row.createCell(1).setCellValue(consulta.getSacoDesc());
-			row.createCell(2).setCellValue(consulta.getSaco());
-			row.createCell(3).setCellValue(consulta.getSacoCosto());
-			row.createCell(4).setCellValue(consulta.getSaco()*consulta.getSacoCosto());
+			row.createCell(1).setCellValue(consulta.getMaterialConsulta().getSacoDesc());
+			row.createCell(2).setCellValue(consulta.getMaterialConsulta().getSaco());
+			row.createCell(3).setCellValue(consulta.getMaterialConsulta().getSacoCosto());
+			row.createCell(4).setCellValue(consulta.getMaterialConsulta().getSaco()*consulta.getMaterialConsulta().getSacoCosto());
 			
 			row = sheet.createRow(6);
 			row.createCell(0).setCellValue(nombreMaterial[4]);
-			row.createCell(1).setCellValue(consulta.getSacoMorteroDesc());
-			row.createCell(2).setCellValue(consulta.getSacoMortero());
-			row.createCell(3).setCellValue(consulta.getSacoMorteroCosto());
-			row.createCell(4).setCellValue(consulta.getSacoMortero()*consulta.getSacoMorteroCosto());
+			row.createCell(1).setCellValue(consulta.getMaterialConsulta().getSacoMorteroDesc());
+			row.createCell(2).setCellValue(consulta.getMaterialConsulta().getSacoMortero());
+			row.createCell(3).setCellValue(consulta.getMaterialConsulta().getSacoMorteroCosto());
+			row.createCell(4).setCellValue(consulta.getMaterialConsulta().getSacoMortero()*consulta.getMaterialConsulta().getSacoMorteroCosto());
 			
 			row = sheet.createRow(7);
 			row.createCell(0).setCellValue(nombreMaterial[5]);
-			row.createCell(1).setCellValue(consulta.getArenaDesc());
-			row.createCell(2).setCellValue(consulta.getArena());
-			row.createCell(3).setCellValue(consulta.getArenaCosto());
-			row.createCell(4).setCellValue(consulta.getArena()*consulta.getArenaCosto());
+			row.createCell(1).setCellValue(consulta.getMaterialConsulta().getArenaDesc());
+			row.createCell(2).setCellValue(consulta.getMaterialConsulta().getArena());
+			row.createCell(3).setCellValue(consulta.getMaterialConsulta().getArenaCosto());
+			row.createCell(4).setCellValue(consulta.getMaterialConsulta().getArena()*consulta.getMaterialConsulta().getArenaCosto());
 			
 			row = sheet.createRow(8);
 			row.createCell(0).setCellValue(nombreMaterial[6]);
-			row.createCell(1).setCellValue(consulta.getGravaDesc());
-			row.createCell(2).setCellValue(consulta.getGrava());
-			row.createCell(3).setCellValue(consulta.getGravaCosto());
-			row.createCell(4).setCellValue(consulta.getGrava()*consulta.getGravaCosto());
+			row.createCell(1).setCellValue(consulta.getMaterialConsulta().getGravaDesc());
+			row.createCell(2).setCellValue(consulta.getMaterialConsulta().getGrava());
+			row.createCell(3).setCellValue(consulta.getMaterialConsulta().getGravaCosto());
+			row.createCell(4).setCellValue(consulta.getMaterialConsulta().getGrava()*consulta.getMaterialConsulta().getGravaCosto());
 			
 			row = sheet.createRow(9);
 			row.createCell(0).setCellValue(nombreMaterial[7]);
-			row.createCell(1).setCellValue(consulta.getVarillaDesc());
-			row.createCell(2).setCellValue(consulta.getVarilla());
-			row.createCell(3).setCellValue(consulta.getVarillaCosto());
-			row.createCell(4).setCellValue(consulta.getVarilla()*consulta.getVarillaCosto());
+			row.createCell(1).setCellValue(consulta.getMaterialConsulta().getVarillaDesc());
+			row.createCell(2).setCellValue(consulta.getMaterialConsulta().getVarilla());
+			row.createCell(3).setCellValue(consulta.getMaterialConsulta().getVarillaCosto());
+			row.createCell(4).setCellValue(consulta.getMaterialConsulta().getVarilla()*consulta.getMaterialConsulta().getVarillaCosto());
 			
 			row = sheet.createRow(10);
 			row.createCell(0).setCellValue(nombreMaterial[8]);
 			row.createCell(1).setCellValue("Botes de agua de 19L");
-			row.createCell(2).setCellValue(consulta.getAgua());
+			row.createCell(2).setCellValue(consulta.getMaterialConsulta().getAgua());
 			row.createCell(3).setCellValue(44.94);
 			row.createCell(4).setCellValue(44.94);
 			
 			row = sheet.createRow(11);
 			row.createCell(0).setCellValue(nombreMaterial[9]);
-			row.createCell(1).setCellValue(consulta.getAlambreDesc());
-			row.createCell(2).setCellValue(consulta.getAlambre());
-			row.createCell(3).setCellValue(consulta.getAlambreCosto());
-			row.createCell(4).setCellValue(consulta.getAlambre()*consulta.getAlambreCosto());
+			row.createCell(1).setCellValue(consulta.getMaterialConsulta().getAlambreDesc());
+			row.createCell(2).setCellValue(consulta.getMaterialConsulta().getAlambre());
+			row.createCell(3).setCellValue(consulta.getMaterialConsulta().getAlambreCosto());
+			row.createCell(4).setCellValue(consulta.getMaterialConsulta().getAlambre()*consulta.getMaterialConsulta().getAlambreCosto());
 			
 			row = sheet.createRow(12);
 			row.createCell(0).setCellValue(nombreMaterial[10]);
-			row.createCell(1).setCellValue(consulta.getVarillaArmexDes());
-			row.createCell(2).setCellValue(consulta.getVarillaArmex());
-			row.createCell(3).setCellValue(consulta.getVarillaArmexCosto());
-			row.createCell(4).setCellValue(consulta.getVarillaArmexCosto()*consulta.getVarillaArmex());
+			row.createCell(1).setCellValue(consulta.getMaterialConsulta().getVarillaArmexDes());
+			row.createCell(2).setCellValue(consulta.getMaterialConsulta().getVarillaArmex());
+			row.createCell(3).setCellValue(consulta.getMaterialConsulta().getVarillaArmexCosto());
+			row.createCell(4).setCellValue(consulta.getMaterialConsulta().getVarillaArmexCosto()*consulta.getMaterialConsulta().getVarillaArmex());
 			
 			
 			row=sheet.createRow(13);
@@ -360,8 +354,8 @@ public class ArquitectoBean extends UsuarioBean implements ArquitectoBeanInterfa
 			
 			row= sheet.createRow(20);
 			row.createCell(4).setCellValue("Sala comedor");
-			row.createCell(5).setCellValue("Ancho en metros");
-			row.createCell(6).setCellValue("Largo en metros");
+			row.createCell(5).setCellValue(consulta.getAnchoSala());
+			row.createCell(6).setCellValue(consulta.getLargoSala());
 		
 			
 			row= sheet.createRow(21);
@@ -377,23 +371,44 @@ public class ArquitectoBean extends UsuarioBean implements ArquitectoBeanInterfa
 			}
 			
 			row=sheet.createRow(24);
-			row.createCell(0).setCellValue("Datos del proveedor");
+			row.createCell(0).setCellValue("Datos de los proveedor");
 			
 			row=sheet.createRow(25);
 			row.createCell(0).setCellValue("Nombre del proveedor");
-			row.createCell(1).setCellValue(consulta.getNombreProveedor());
+			row.createCell(1).setCellValue("Telefono");
+			row.createCell(2).setCellValue("Correo electronico");
+			row.createCell(3).setCellValue("Direccion del proveedor");
 			
-			row=sheet.createRow(26);
-			row.createCell(0).setCellValue("Telefono");
-			row.createCell(1).setCellValue(consulta.getTelefonoProveedor());
+			List<ConsultaProveedor> consultaProveedores=consulta.getProveedorConsulta();
+			int i=26;
+			for(ConsultaProveedor consultaProveedor:consultaProveedores) {
+				row=sheet.createRow(i);
+				row.createCell(0).setCellValue(consultaProveedor.getNombreProveedor());
+				row.createCell(1).setCellValue(consultaProveedor.getTelefonoProveedor());
+				row.createCell(2).setCellValue(consultaProveedor.getCorreoProveedor());
+				row.createCell(3).setCellValue(consultaProveedor.getDireccionProveedor());
+				i++;
+			}
 			
-			row=sheet.createRow(27);
-			row.createCell(0).setCellValue("Correo electronico");
-			row.createCell(1).setCellValue(consulta.getCorreoProveedor());
-			
-			row=sheet.createRow(28);
-			row.createCell(0).setCellValue("Direccion del proveedor");
-			row.createCell(1).setCellValue(consulta.getDireccionProveedor());
+			i=i+2;
+			row = sheet.createRow(i);
+			row.createCell(0).setCellValue("Herramientas y maquinaria recomendadas");
+			i=i+2;
+			row = sheet.createRow(i);
+			row.createCell(0).setCellValue("Herramientas");
+			i=i+1;
+			row = sheet.createRow(i);
+			for(int j=0;j<nombreHerramienta.length;j++) {
+				row.createCell(j).setCellValue(nombreHerramienta[j]);
+			}
+			i=i+2;
+			row = sheet.createRow(i);
+			row.createCell(0).setCellValue("Maquinaria");
+			i=i+1;
+			row = sheet.createRow(i);
+			for(int j=0;j<nombreMaquinaria.length;j++) {
+				row.createCell(j).setCellValue(nombreMaquinaria[j]);
+			}
 			
 			String url = System.getProperty("user.dir")+"\\Archivos\\Consultas\\"+consulta.getArquitecto().getId()+"\\"+consulta.getNombre()+".xls";
 			String urlCarpeta=System.getProperty("user.dir")+"\\Archivos\\Consultas\\"+consulta.getArquitecto().getId();

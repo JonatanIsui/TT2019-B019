@@ -6,7 +6,6 @@ class Login extends React.Component{
         super(props)
         this.state = {}
     }
-    
     render(){
         return(
             <div className = 'container p-3 my-3 bg-dark text-white'>
@@ -22,6 +21,12 @@ class Login extends React.Component{
                     </div>
                     <div className = 'col-lg-4 col-md-4 col-sm-4 col-4'>
                         <a href="/RecuperarContra"><button type="button" className='btn btn-light'>¿Olvidaste tu contraseña?</button></a>
+                    </div>
+                </div>
+                <br></br>
+                <div className ='row justify-content-center text-center'>
+                    <div className = 'col-lg-4 col-md-4 col-sm-4 col-4'>
+                        <a href="/preguntasfrecuentes"><button type="button" className='btn btn-light' onClick={this.preguntas}>Preguntas frecuentes</button></a>
                     </div>
                 </div>
             </div>

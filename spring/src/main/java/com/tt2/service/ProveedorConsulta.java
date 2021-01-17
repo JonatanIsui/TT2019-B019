@@ -1,15 +1,19 @@
 package com.tt2.service;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
-import java.lang.Math;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import com.tt2.dao.MaterialDao;
 import com.tt2.dao.ProveedorDao;
 import com.tt2.dao.UsuarioDao;
+import com.tt2.entity.ConsultaProveedor;
 import com.tt2.entity.Proveedor;
 import com.tt2.model.ConsultaModel;
+import com.tt2.model.ConsultaProveedorModel;
 
 @Service("proveedorConsulta")
 public class ProveedorConsulta {
@@ -39,10 +43,9 @@ public class ProveedorConsulta {
 	
 	public ConsultaModel selectProveedor(ConsultaModel consulta) {
 		boolean notNull=true;
-		double promedioaux=1000000;
-		double totalConstrucionaux=1000000;
-		int provedorSugerido=0;
 		double totalConstrucion = 0;
+		List<ConsultaProveedorModel> listaProveedores = new ArrayList<>();
+		List<ConsultaProveedor> proveedoresSugeridos = new ArrayList<>();
 		try {
 			
 			consulta.setArenaCosto(materialDao.promedioCostoArena());
@@ -66,7 +69,7 @@ public class ProveedorConsulta {
 					+consulta.getAlambre()*consulta.getAlambreCosto()
 					+consulta.getVarillaArmex()*consulta.getVarillaArmexCosto()
 					+44.94;
-			promedioaux=promedio;
+
 			List<Proveedor> proveedores = proveedorDao.findAll();
 			for(Proveedor proveedor:proveedores) {
 				notNull= true;
@@ -76,7 +79,7 @@ public class ProveedorConsulta {
 					}
 				}
 				if(notNull) {
-					for(int j = 0;j<nombreMaterial.length;j++) {
+						ConsultaProveedorModel proveedoresConsulta= new ConsultaProveedorModel();
 						totalConstrucion=materialDao.findByProveedorAndNombre(proveedor, "grava").getCosto()*consulta.getGravaCosto()
 								+materialDao.findByProveedorAndNombre(proveedor, "arena").getCosto()*consulta.getArena()
 								+materialDao.findByProveedorAndNombre(proveedor, "cemento").getCosto()*consulta.getSaco()
@@ -86,9 +89,13 @@ public class ProveedorConsulta {
 								+materialDao.findByProveedorAndNombre(proveedor, "ladrillo block ligero").getCosto()*consulta.getLadrilloBlockLigero()
 								+materialDao.findByProveedorAndNombre(proveedor, "ladrillo block pesado").getCosto()*consulta.getLadrilloBloackPesado()
 								+materialDao.findByProveedorAndNombre(proveedor, "alambre").getCosto()*consulta.getAlambre()
-								+materialDao.findByProveedorAndNombre(proveedor, "varilla armex").getCosto()*consulta.getVarillaArmex()
-								+44.94;
-					}
+								+materialDao.findByProveedorAndNombre(proveedor, "varilla armex").getCosto()*consulta.getVarillaArmex();
+						
+						proveedoresConsulta.setProveedor(proveedor.getId());
+						proveedoresConsulta.setTotal(String.valueOf(totalConstrucion));
+						listaProveedores.add(proveedoresConsulta);
+				}
+					/*
 					if(totalConstrucion-promedio==0){
 						provedorSugerido=proveedor.getId();
 					}else {
@@ -99,9 +106,33 @@ public class ProveedorConsulta {
 								totalConstrucionaux=Math.abs(totalConstrucion-promedio);
 							}
 						}
-					}
-				}
+					}*/
 			}
+			Collections.sort(listaProveedores, new Comparator<ConsultaProveedorModel>(){
+	            @Override
+	            public int compare(ConsultaProveedorModel o1, ConsultaProveedorModel o2) {
+	                return o1.getTotal().compareToIgnoreCase(o2.getTotal());
+	            }
+	        });
+			
+			int i= 0;
+			for(ConsultaProveedorModel l:listaProveedores) {
+				if(i>=3) {
+					break;
+				}else {
+					ConsultaProveedor proveedorSugerido=new ConsultaProveedor();
+					Optional<Proveedor> proveedor=proveedorDao.findById(l.getProveedor());
+					proveedorSugerido.setNombreProveedor(proveedor.get().getNombreEmpresa());
+					proveedorSugerido.setTelefonoProveedor(proveedor.get().getTelefono());
+					proveedorSugerido.setCorreoProveedor(usuarioDao.findByProveedor(proveedor.get()).getCorreo());
+					proveedorSugerido.setDireccionProveedor(proveedor.get().getDireccion());
+					proveedoresSugeridos.add(proveedorSugerido);
+				}
+				i++;
+			}
+			consulta.setProveedorConsulta(proveedoresSugeridos);
+			consulta.setTotal(promedio);
+			/*
 			Optional<Proveedor> proveedorSugerido=proveedorDao.findById(provedorSugerido);
 			consulta.setNombreProveedor(proveedorSugerido.get().getNombreEmpresa());
 			consulta.setTelefonoProveedor(proveedorSugerido.get().getTelefono());
@@ -111,8 +142,9 @@ public class ProveedorConsulta {
 			consulta.setTelefonoProveedor(proveedorSugerido.get().getTelefono());
 			consulta.setCorreoProveedor(usuarioDao.findByProveedor(proveedorSugerido.get()).getCorreo());
 			consulta.setDireccionProveedor(proveedorSugerido.get().getDireccion());
-			consulta.setTotal(promedio);
 			consulta.setIdProveedor(proveedorSugerido.get().getId());
+			consulta.setTotal(promedio);
+			*/
 			return consulta;
 		}catch(Exception e){
 			e.printStackTrace();

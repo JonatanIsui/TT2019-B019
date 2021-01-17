@@ -1,8 +1,10 @@
 package com.tt2.model;
 
 import java.io.Serializable;
-import com.tt2.entity.Arquitecto;
+import java.util.List;
 
+import com.tt2.entity.Arquitecto;
+import com.tt2.entity.ConsultaProveedor;
 public class ConsultaModel implements Serializable{
 private static final long serialVersionUID = 1L;
 	private String nombre;
@@ -24,6 +26,8 @@ private static final long serialVersionUID = 1L;
 	private double anchococina;
 	private double anchoLavado;
 	private double anchoterreno;
+	private double anchoSala;
+	private double largoSala;
 	private double largoHabitacion1;
 	private double largoHabitacion2;
 	private double largoLavado;
@@ -53,13 +57,27 @@ private static final long serialVersionUID = 1L;
 	private String ladrilloRojoDesc;
 	private String ladrilloBlockLigeroDesc;
 	private String ladrilloBloackPesadoDesc;
-	private String nombreProveedor;
-	private String telefonoProveedor;
-	private String correoProveedor;
-	private String direccionProveedor;
-	private int idProveedor;
 	private double total;
-
+	private List<ConsultaProveedor> proveedorConsulta;
+		
+	public double getAnchoSala() {
+		return anchoSala;
+	}
+	public void setAnchoSala(double anchoSala) {
+		this.anchoSala = anchoSala;
+	}
+	public double getLargoSala() {
+		return largoSala;
+	}
+	public void setLargoSala(double largoSala) {
+		this.largoSala = largoSala;
+	}
+	public List<ConsultaProveedor> getProveedorConsulta() {
+		return proveedorConsulta;
+	}
+	public void setProveedorConsulta(List<ConsultaProveedor> proveedorConsulta) {
+		this.proveedorConsulta = proveedorConsulta;
+	}
 	public double getVarillaArmex() {
 		return varillaArmex;
 	}
@@ -155,12 +173,6 @@ private static final long serialVersionUID = 1L;
 	}
 	public void setLadrilloBloackPesadoDesc(String ladrilloBloackPesadoDesc) {
 		this.ladrilloBloackPesadoDesc = ladrilloBloackPesadoDesc;
-	}
-	public int getIdProveedor() {
-		return idProveedor;
-	}
-	public void setIdProveedor(int idProveedor) {
-		this.idProveedor = idProveedor;
 	}
 	public int getTipoladrillo() {
 		return tipoladrillo;
@@ -359,30 +371,6 @@ private static final long serialVersionUID = 1L;
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-	public String getNombreProveedor() {
-		return nombreProveedor;
-	}
-	public void setNombreProveedor(String nombreProveedor) {
-		this.nombreProveedor = nombreProveedor;
-	}
-	public String getTelefonoProveedor() {
-		return telefonoProveedor;
-	}
-	public void setTelefonoProveedor(String telefonoProveedor) {
-		this.telefonoProveedor = telefonoProveedor;
-	}
-	public String getCorreoProveedor() {
-		return correoProveedor;
-	}
-	public void setCorreoProveedor(String correoProveedor) {
-		this.correoProveedor = correoProveedor;
-	}
-	public String getDireccionProveedor() {
-		return direccionProveedor;
-	}
-	public void setDireccionProveedor(String direccionProveedor) {
-		this.direccionProveedor = direccionProveedor;
 	}
 	public double getTotal() {
 		return total;

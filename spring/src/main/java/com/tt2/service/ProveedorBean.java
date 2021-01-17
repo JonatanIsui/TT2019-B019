@@ -49,6 +49,17 @@ public class ProveedorBean extends UsuarioBean implements ProveedorBeanInterfaz{
 			"varilla",
 			"alambre",
 			"varilla armex");
+	List<String> descripcionMaterial=Arrays.asList(
+			"bote de 19 l de grava de 3/4",
+			"bote de arena de 19 l",
+			"saco de cemento 50k",
+			"saco de mortero 50k",
+			"varilla de 3/8 de 12 m de largo",
+			"ladrillo recocido de 12x10x24 cm",
+			"block ligero 12x20x40 cm",
+			"block pesado 12x20x40 cm",
+			"metros de alambre recocido",
+			"tramo de 6 m");
 	
 	@Override
 	public List<Material> modificarMaterial(Material material) {
@@ -153,7 +164,7 @@ public class ProveedorBean extends UsuarioBean implements ProveedorBeanInterfaz{
 				}else if(row.getCell(2) ==null){
 					aux = false;
 					break;
-				}else if(row.getCell(3) ==null){
+				}else if(!descripcionMaterial.contains(row.getCell(3).getStringCellValue().toLowerCase())){
 					aux = false;
 					break;
 				}else if(row.getCell(4) ==null){

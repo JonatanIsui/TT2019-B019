@@ -56,8 +56,8 @@ class Material extends React.Component{
                 <div className="row justify-content-center">
                     <div className="col-lg-6 col-md-6 col-sm-6 col-6">
                         Nombre:
-                        <div class="input-group mb-3 ">
-                            <select class="custom-select" name = 'nombre' id="nombre">
+                        <div className="input-group mb-3 ">
+                            <select className="custom-select" name = 'nombre' id="nombre">
                             <option value = 'ladrillo rojo'>Ladrillo rojo</option>
                                 <option value = 'ladrillo block ligero'>Ladrillo block ligero</option>
                                 <option value = 'ladrillo block pesado'>Ladrillo block pesado</option>
@@ -79,7 +79,21 @@ class Material extends React.Component{
                 </div>
                 <div className="row justify-content-center">
                         <div className="col-lg-6 col-md-6 col-sm-6 col-6">
-                            Descripci&oacute;n:<input className = 'form-control' type = 'text' name = 'descripcion' id='descripcionAddMaterial' placeholder = 'descripción' required/>
+                            Descripci&oacute;n:
+                            <div className="input-group mb-3 ">
+                                <select className="custom-select" name = 'descripcion' id="descripcion">
+                                    <option value = 'Ladrillo recocido de 12x10x24 cm'>Ladrillo recocido de 12x10x24 cm</option>
+                                    <option value = 'Block ligero 12x20x40 cm'>Block ligero 12x20x40 cm</option>
+                                    <option value = 'Block pesado 12x20x40 cm'>Block pesado 12x20x40 cm</option>
+                                    <option value = 'Saco de cemento 50k'>Saco de cemento 50k</option>
+                                    <option value = 'Saco de mortero 50k'>Saco de mortero 50k</option>
+                                    <option value = 'Bote de 19 L de grava de 3/4'>Bote de 19 L de grava de 3/4</option>
+                                    <option value = 'Bote de arena de 19 L'>Bote de arena de 19 L</option>
+                                    <option value = 'Varilla de 3/8 de 12 m de largo'>Varilla de 3/8 de 12 m de largo</option>
+                                    <option value = 'Metros de alambre recocido'>Metros de alambre recocido</option>
+                                    <option value = 'Tramo de 6 m'>Tramo de 6 m</option>
+                                </select>
+                            </div>
                         </div>
                         <div className="col-lg-6 col-md-6 col-sm-6 col-6">
                             Costo:<input className = 'form-control' type = 'text' name = 'costo' id='costoAddMaterial' placeholder = 'costo' required/>
@@ -116,7 +130,21 @@ class Material extends React.Component{
                     </div>
                     <div className="row">
                             <div className="col-lg-6 text-center">
-                                Descripci&oacute;n:<input className = 'form-control' type = 'text' name = 'descripcion' placeholder = {material.descripcion}/>
+                                Descripci&oacute;n:
+                                    <div className="input-group mb-3 ">
+                                        <select className="custom-select" name = 'descripcion' id="descripcion">
+                                            <option value = 'Ladrillo recocido de 12x10x24 cm'>Ladrillo recocido de 12x10x24 cm</option>
+                                            <option value = 'Block ligero 12x20x40 cm'>Block ligero 12x20x40 cm</option>
+                                            <option value = 'Block pesado 12x20x40 cm'>Block pesado 12x20x40 cm</option>
+                                            <option value = 'Saco de cemento 50k'>Saco de cemento 50k</option>
+                                            <option value = 'Saco de mortero 50k'>Saco de mortero 50k</option>
+                                            <option value = 'Bote de 19 L de grava de 3/4'>Bote de 19 L de grava de 3/4</option>
+                                            <option value = 'Bote de arena de 19 L'>Bote de arena de 19 L</option>
+                                            <option value = 'Varilla de 3/8 de 12 m de largo'>Varilla de 3/8 de 12 m de largo</option>
+                                            <option value = 'Metros de alambre recocido'>Metros de alambre recocido</option>
+                                            <option value = 'Tramo de 6 m'>Tramo de 6 m</option>
+                                        </select>
+                                    </div>
                             </div>
                             <div className="col-lg-6 text-center">
                                 Costo:<input className = 'form-control' type = 'text' name = 'costo' placeholder = {material.costo}/>
@@ -139,7 +167,8 @@ class Material extends React.Component{
             this.aux = document.getElementById('nombreMaterial').innerHTML.split(':')[1]
             await this.setState({
                 id : e.target.id,
-                nombre: this.aux.substr(1,this.aux.length)
+                nombre: this.aux.substr(1,this.aux.length),
+                descripcion: document.getElementById('descripcion').value,
             })
             for(this.i=0;this.i<(this.elements.length)-1;this.i++){
                 if(this.elements[this.i].value.replace(/\s/g,'').length === 0){
@@ -231,7 +260,7 @@ class Material extends React.Component{
                 proveedor : this.proveedor,
                 nombre: document.getElementById('nombre').value,
                 categoria: document.getElementById('categoriaAddMaterial').value,
-                descripcion: document.getElementById('descripcionAddMaterial').value,
+                descripcion: document.getElementById('descripcion').value,
                 costo: document.getElementById('costoAddMaterial').value,
                 clave: document.getElementById('claveAddMaterial').value
             })

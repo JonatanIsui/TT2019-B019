@@ -347,7 +347,6 @@ agua = agua + (aguaC * m2Mortero);
      double sacoC = 1;
      double sacoMorteroC = 1;
      double espesorMortero = .01;
-     double altura = 3;
      double largoCastillo = .30;
      double anchoCastillo = .15;
      double largoLadrillo = .10;
@@ -746,11 +745,9 @@ sacoMortero = sacoMortero + (sacoMorteroC * m3Mortero);
         double espesorLadrillo = .12;
         double espesorMortero = .01;
         double espacioVarilla = .10;
-        double largoVarilla = 12;
         double largoEscalera8 = 1.6;
         double largoEscalera7 = 1.4;
         double anchoEscalera = .7;
-        double numEscalones = 15;
         double largoDescanso = .7;
         double anchoDescanso = 1.4;
         double m2Subida8, m2Descanso, m2Subida7, m3Mortero;
@@ -796,7 +793,7 @@ agua = agua + (aguaC*m2Subida8) + (aguaC*m2Descanso) + (aguaC*m2Subida7);
     }
     
     public void cimentacion(double ancho, double largo){
-        double varillasAncho, varillasLargo, res=0;
+        double varillasAncho, varillasLargo;
         double espacio=.20;
         double largoVarilla=12;
         double altura = .80;
