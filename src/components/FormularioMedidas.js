@@ -305,33 +305,40 @@ class FormularioMedidas extends React.Component{
                         ((this.dim['anchococina'])*(this.dim['largococina']))+((this.dim['anchoHabitacion1'])*(this.dim['largoHabitacion1']))
         if(this.dim['anchoHabitacion2']!=null)
         this.metros2= this.metros2+(this.dim['anchoHabitacion2']*this.dim['largoHabitacion2'])
-        console.log(this.totalTerreno)
         if(this.totalTerreno>=40 && this.totalTerreno<=71){
-            console.log(this.metros2)
             let resto = this.totalTerreno-this.metros2
-            console.log(resto)
             this.dim['anchoSala']=Math.floor(Math.sqrt(resto))
             this.dim['largoSala']=Math.floor(Math.sqrt(resto))
             if((this.dim['anchoSala']*this.dim['largoSala'])>=(this.dim['anchoHabitacion1']*this.dim['largoHabitacion1'])){
                 this.metros2=this.metros2 + (this.dim['largoSala']*this.dim['anchoSala'])
                 if(this.totalTerreno>=this.metros2){
                     this.enviar=true
-                    console.log(this.dim['largoSala'])
+                    ReactDOM.render(<FormularioMedidas
+                        arquitecto = {this.dim.idArquitecto}
+                    />,document.getElementById("div"))
                 }else{
-                    console.log(this.metros2)
                     alert('La suma de las medidas ingresadas de las habitaciones sobrepasa los metros cuadrados del terreno, favor de ingresar las medidas correctas.')
                     this.enviar=false   
+                    ReactDOM.render(<FormularioMedidas
+                        arquitecto = {this.dim.idArquitecto}
+                    />,document.getElementById("div"))
                 }
             }else{
                 alert('Las medidas de la Sala comedor son deben ser de al menos el tama\u00f1o de una habitaci\u00F3n')
                 this.enviar=false
+                ReactDOM.render(<FormularioMedidas
+                    arquitecto = {this.dim.idArquitecto}
+                />,document.getElementById("div"))
             }
         }else{
             alert('Las metros cuadrados del terreno sobrepasan las medidas de una casa habitaci\u00f3n de inter\u00e9s  social, por favor ingresa medidas de entre  40 y 71 metros cuadrados.')
             this.enviar=false
+            ReactDOM.render(<FormularioMedidas
+                arquitecto = {this.dim.idArquitecto}
+            />,document.getElementById("div"))
         }
-        console.log(this.enviar)
-        let cancelar = true
+        if(this.enviar){
+        let cancelar
         do{
             let confirmar = prompt("Por favor ingrese el nombre de la consulta");
             if(confirmar != null){
@@ -339,7 +346,6 @@ class FormularioMedidas extends React.Component{
                     this.dim['nombre']=confirmar
                     if(this.enviar)
                         this.res = await this.ArquitectoService.consulta(this.dim)
-                    console.log(this.res)
                     if(this.res.length!==0){
                         cancelar=false
                         ReactDOM.render(this.consulta(this.res.nombre),document.getElementById('div'))
@@ -354,7 +360,8 @@ class FormularioMedidas extends React.Component{
                 cancelar = false
                 window.location.reload()
             }
-        }while(cancelar)    }
+        }while(cancelar) }
+    }
     handleEliminarConsulta= async (e)=>{
         e.preventDefault()
         let delConsulta={}
@@ -377,10 +384,10 @@ class FormularioMedidas extends React.Component{
                 <form className = '' onSubmit = {this.handleSubmit}>
                     <div className='row justify-content-center'>
                         <div className = 'col-lg-4 col-md-6 col-sm-6 col-6 text-center'>
-                            Ancho en metros en metros del terreno*:<input id = 'ancho' className = 'form-control' type = 'number' min='4' max='18' step = '0.01' placeholder = 'ancho en metros en metros del terreno*' required/>
+                            Ancho en metros de construción del terreno*:<input id = 'ancho' className = 'form-control' type = 'number' min='4' max='18' step = '0.01' placeholder = 'Ancho en metros de construción del terreno*' required/>
                         </div>
                         <div className = 'col-lg-4 col-md-6 col-sm-6 col-6 text-center'>
-                            Largo en metros en metros del terreno*<input id = 'largo' className = 'form-control' type = 'number' min='4' max='18' step = '0.01' placeholder = 'largo en metros en metros del terreno*' required/>
+                            Largo en metros de construción del terreno*<input id = 'largo' className = 'form-control' type = 'number' min='4' max='18' step = '0.01' placeholder = 'Largo en metros de construción del terreno*' required/>
                         </div>
                     </div>
                     <p></p>

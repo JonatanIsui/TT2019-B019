@@ -222,7 +222,6 @@ class MostartConsulta extends React.Component{
             </Fragment>)
     }
     datosHabitaciones=(consulta)=>{
-        console.log(consulta)
         return(
            <Fragment>
                <table className = 'table table-hover table-dark'>

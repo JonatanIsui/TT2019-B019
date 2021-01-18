@@ -34,7 +34,7 @@ class Material extends React.Component{
                                         <td className = '' >{item.nombre}</td>
                                         <td className = ''>{item.categoria}</td>
                                         <td className = ''>{item.descripcion}</td>
-                                        <td className = ''>{item.costo}</td>
+                                        <td className = ''>${item.costo}</td>
                                         <td className = ''>{item.clave}</td>
                                         <td className = 'btn btn-light'><button className = '' onClick = {this.handleEliminarMaterial} name = {item.id}>Eliminar</button></td>
                                         <td className = 'btn btn-light'><button className = '' onClick ={this.handleChageMaterial}  name = {item.id} >Modificar material</button></td>
