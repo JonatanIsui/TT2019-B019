@@ -1,6 +1,7 @@
 import axios from 'axios'
 class SolicitudProveedorService{
-    baseUrl = 'https://26759a8a53c5.ngrok.io/solicitudProveedor/'
+    baseUrl = 'http://localhost:8080/solicitudProveedor/'
+    //baseUrl = 'https://26759a8a53c5.ngrok.io/solicitudProveedor/'
     constructor(){
         this.res = []
     }

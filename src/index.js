@@ -13,6 +13,34 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import PreguntasFrecuentes from './pages/PreguntasFrecuentes'
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
+const footerStyle = {
+  backgroundColor: "#343A40",
+  fontSize: "20px",
+  color: "white",
+  borderTop: "1px solid #E7E7E7",
+  textAlign: "center",
+  padding: "20px",
+  position: "fixed",
+  left: "0",
+  bottom: "10px",
+  height: "60px",
+  width: "100%"
+};
+
+const phantomStyle = {
+  display: "block",
+  padding: "20px",
+  height: "60px",
+  width: "100%"
+};
+function Footer({ children }) {
+  return (
+    <div>
+      <div style={phantomStyle} />
+      <div style={footerStyle}>{children}</div>
+    </div>
+  );
+}
 
 //const container = document.getElementById('root')
 //Como es un componente se llama desde etiquetas
@@ -31,6 +59,17 @@ ReactDOM.render(
                 <Route component = {Administrador} exact path = '/Administrador/:id'/>
                 <Route component = {PreguntasFrecuentes} exact path = '/preguntasfrecuentes'/>
             </Switch> 
+            
+            <Footer>
+              <div className="row text-white justify-content-center">
+                <div className ="col-6">
+                  TT2019-B019
+                </div>
+                <div className ="col-6">
+                <a href="/preguntasfrecuentes"><button type="button" className='btn btn-light'>Preguntas frecuentes</button></a>
+                </div>
+              </div>
+            </Footer>
         </div>
       </BrowserRouter>
   </React.StrictMode>,document.getElementById('root')
