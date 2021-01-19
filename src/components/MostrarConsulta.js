@@ -200,8 +200,8 @@ class MostartConsulta extends React.Component{
                     <tr className = ''>
                         <th className = ''>Proveedor recomendado</th>
                         <th className = ''>Correo</th>
-                        <th className = ''>Telefono</th>
-                        <th className = ''>Direccion</th>
+                        <th className = ''>Teléfono</th>
+                        <th className = ''>Dirección</th>
                     </tr>
                 </thead>
                 <tbody className = '' >

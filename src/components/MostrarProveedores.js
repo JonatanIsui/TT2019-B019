@@ -12,7 +12,7 @@ class MostrarProveedores extends React.Component{
                                     <th className = ''>Proveedor</th>
                                     <th className = ''>Tel&eacute;fono</th>
                                     <th className = ''>Correo electr&oacute;nico</th>
-                                    <th className = ''>Direccion</th>
+                                    <th className = ''>Direcci&oacute;n</th>
                                 </tr>
                             </thead>
                             <tbody className = '' >
