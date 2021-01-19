@@ -27,8 +27,8 @@ class InformacionUsuario extends React.Component{
             this.parametros = (<div>
                     <p className = ''>Nombre: {this.id.arquitecto.nombre}</p>
                     <p className = ''>Apellido: {this.id.arquitecto.apellido}</p>
-                    <p className = ''>Direccion: {this.id.arquitecto.direccion}</p>
-                    <p className = ''>Telefono: {this.id.arquitecto.telefono}</p>
+                    <p className = ''>Dirección: {this.id.arquitecto.direccion}</p>
+                    <p className = ''>Teléfono: {this.id.arquitecto.telefono}</p>
                 </div>
             )
         } else{
@@ -36,8 +36,8 @@ class InformacionUsuario extends React.Component{
                     <p className = ''>Nombre de la empresa: {this.id.proveedor.nombreEmpresa}</p>
                     <p className = ''>Nombre del encargado: {this.id.proveedor.nombreEncargado}</p>
                     <p className = ''>Apellido del encargado: {this.id.proveedor.apellidoEncargado}</p>
-                    <p className = ''>Direccion: {this.id.proveedor.direccion}</p>
-                    <p className = ''>Telefono: {this.id.proveedor.telefono}</p>
+                    <p className = ''>Dirección: {this.id.proveedor.direccion}</p>
+                    <p className = ''>Teléfono: {this.id.proveedor.telefono}</p>
                 </div>
             )
         }
@@ -45,7 +45,7 @@ class InformacionUsuario extends React.Component{
         <div className = ''>
             {this.parametros}
             <p className = ''>Correo: {this.id.correo}</p>
-            <p className = ''>Ultima conexion: {this.id.fechaLogin}</p>
+            <p className = ''>Última conexión: {this.id.fechaLogin}</p>
             <button id ={this.id.id} className = 'btn btn-dark' onClick = {this.handleEliminarUsuario}>Eliminar</button>
         </div>
         )
