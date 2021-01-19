@@ -127,7 +127,7 @@ class FormularioProveedor extends React.Component{
                         <p></p>
                         <div className='row justify-content-center'>
                             <div className='col-lg-4 col-md-6 col-sm-6 col-6'>
-                	        Tel&eacute;fono de la empresa:
+                	        Tel&eacute;fono de la empresa a 10 dígitos:
                             </div>
                             <div className='col-lg-4 col-md-6 col-sm-6 col-6'>
                             Email de la empresa:
@@ -138,7 +138,7 @@ class FormularioProveedor extends React.Component{
 
                         <div className='row justify-content-center'>
                             <div className = 'col-lg-4 col-md-6 col-sm-6 col-6'>
-                                <input type = 'tel' placeholder = 'tel&eacute;fono de la empresa' className = 'form-control' name = 'telefono' id='telefonoProveedor' required/>
+                                <input type = 'tel' placeholder = 'Ejemplo 5567893456' className = 'form-control' name = 'telefono' id='telefonoProveedor' pattern="[0-9]{10}" required/>
                             </div>
                             <div className = 'col-lg-4 col-md-6 col-sm-6 col-6'>
                                 <input type = 'email' placeholder = 'Email de la empresa' className = 'form-control' name = 'correo' id='correoProveedor' required/>
@@ -158,7 +158,7 @@ class FormularioProveedor extends React.Component{
                 	        Contrase&ntilde;a:
                             </div>
                             <div className='col-lg-4'>
-                            <span className='text-nowrap'>Repita la contrase&ntilde;a</span>
+                            <span className='text-nowrap'>Repita la contrase&ntilde;a:</span>
                             </div>
                         </div>
 

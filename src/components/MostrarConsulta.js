@@ -179,8 +179,8 @@ class MostartConsulta extends React.Component{
                 "<td className = ''>"+this.etiquetas[i]+"</td>"+
                 "<td className = ''>"+consulta.materialConsulta[this.descripciones[i]]+"</td>" +
                 "<td className = ''>"+consulta.materialConsulta[this.nombresObjeto[i]]+
-                "<td className = ''> $"+consulta.materialConsulta[this.nombresObjetoCosto[i]]+"</td>"+
-                "<td className = ''>$"+consulta.materialConsulta[this.nombresObjeto[i]]*consulta.materialConsulta[this.nombresObjetoCosto[i]]+"</td>"
+                "<td className = ''> $"+(consulta.materialConsulta[this.nombresObjetoCosto[i]]).toFixed(2)+"</td>"+
+                "<td className = ''>$"+(consulta.materialConsulta[this.nombresObjeto[i]]*consulta.materialConsulta[this.nombresObjetoCosto[i]]).toFixed(2)+"</td>"
         )}
         let totalpromedio = consulta.totalConsulta
         document.getElementById('total').insertAdjacentHTML("beforebegin",

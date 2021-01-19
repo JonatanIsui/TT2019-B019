@@ -32,10 +32,10 @@ class FormularioMedidas extends React.Component{
 
                 "<div class='row justify-content-center'>"+
                     "<div class = 'col-lg-4 col-md-6 col-sm-6 col-6 text-center'>"+
-                        "Ancho en metros de la habitaci&oacute;n*:<input name = 'anchoHabitacion"+(i+1)+"' type = 'number' min='2' max='4' placeholder = 'ancho en metros de la habitacion*' step = '0.01' required class = 'form-control'/>"+
+                        "Ancho en metros de la habitaci&oacute;n*:<input name = 'anchoHabitacion"+(i+1)+"' type = 'number' min='2.5' max='4' placeholder = 'ancho en metros de la habitacion*' step = '0.1' required class = 'form-control'/>"+
                     "</div>"+
                     "<div class = 'col-lg-4 col-md-6 col-sm-6 col-6 text-center'>"+
-                        "Largo en metros de la habitaci&oacute;n*:<input name = 'largoHabitacion"+(i+1)+"'  type = 'number' min='2' max='2.8' placeholder = 'largo en metros de la habitacion*' step = '0.01' required class = 'form-control'/>"+
+                        "Largo en metros de la habitaci&oacute;n*:<input name = 'largoHabitacion"+(i+1)+"'  type = 'number' min='2.5' max='4' placeholder = 'largo en metros de la habitacion*' step = '0.1' required class = 'form-control'/>"+
                     "</div>"+
                 "</div>"
            )
@@ -224,10 +224,10 @@ class FormularioMedidas extends React.Component{
                         </div>
                         <div className='row justify-content-center'>
             	            <div className = 'col-lg-4 col-md-6 col-sm-6 col-6 text-center'>
-                                Ancho en metros de la cocina*:<input name = 'anchococina' className = 'form-control' type = 'number' min='2' max='4' placeholder = 'ancho en metros de la cocina*' step = '0.01' required />
+                                Ancho en metros de la cocina*:<input name = 'anchococina' className = 'form-control' type = 'number' min='1.5' max='4' placeholder = 'ancho en metros de la cocina*' step = '0.1' required />
                             </div>
                             <div className = 'col-lg-4 col-md-6 col-sm-6 col-6 text-center'>
-                                Largo en metros de la cocina*:<input name = 'largococina' className = 'form-control' type = 'number' min='2' max='4' placeholder = 'largo en metros de la cocina*' step = '0.1' required/>
+                                Largo en metros de la cocina*:<input name = 'largococina' className = 'form-control' type = 'number' min='1.5' max='4' placeholder = 'largo en metros de la cocina*' step = '0.1' required/>
                             </div>
                         </div>
 
@@ -240,10 +240,10 @@ class FormularioMedidas extends React.Component{
 
                         <div className = 'row justify-content-center'>
                             <div className = 'col-lg-4 col-md-6 col-sm-6 col-6 text-center'>
-                                Ancho en metros del cuarto del lavado*:<input name = 'ancholavado' className = 'form-control' type = 'number' min='1' max='3' placeholder = 'ancho en metros del cuarto del lavado*' step = '0.01' required/>
+                                Ancho en metros del cuarto del lavado*:<input name = 'ancholavado' className = 'form-control' type = 'number' min='1' max='3' placeholder = 'ancho en metros del cuarto del lavado*' step = '0.1' required/>
                             </div>
                             <div className = 'col-lg-4 col-md-6 col-sm-6 col-6 text-center'>
-                                Largo en metros del cuarto del lavado*:<input name = 'largolavado' className = 'form-control' type = 'number' min='1' max='3' placeholder = 'largo en metros del cuarto del lavado*' step = '0.01' required/>
+                                Largo en metros del cuarto del lavado*:<input name = 'largolavado' className = 'form-control' type = 'number' min='1' max='3' placeholder = 'largo en metros del cuarto del lavado*' step = '0.1' required/>
                             </div>
                         </div>
 
@@ -256,10 +256,10 @@ class FormularioMedidas extends React.Component{
 
                         <div className = 'row justify-content-center'>
                             <div className = 'col-lg-4 col-md-6 col-sm-6 col-6 text-center'>
-                                Ancho en metros del ba&ntilde;o*:<input name = 'anchobano' className = 'form-control' type = 'number' min='2' max='2.5' placeholder = 'ancho en metros del baño*' step = '0.01' required/>
+                                Ancho en metros del ba&ntilde;o*:<input name = 'anchobano' className = 'form-control' type = 'number' min='1' max='3' placeholder = 'ancho en metros del baño*' step = '0.1' required/>
                             </div>
                             <div className = 'col-lg-4 col-md-6 col-sm-6 col-6 text-center'>
-                                Largo en metros del ba&ntilde;o*:<input name = 'largobano' className = 'form-control' type = 'number' min='2' max='2.5' placeholder = 'largo en metros del baño*' step = '0.01' required/>
+                                Largo en metros del ba&ntilde;o*:<input name = 'largobano' className = 'form-control' type = 'number' min='1' max='3' placeholder = 'largo en metros del baño*' step = '0.1' required/>
                             </div>
                         </div>
                     
@@ -384,10 +384,10 @@ class FormularioMedidas extends React.Component{
                 <form className = '' onSubmit = {this.handleSubmit}>
                     <div className='row justify-content-center'>
                         <div className = 'col-lg-4 col-md-6 col-sm-6 col-6 text-center'>
-                            Ancho en metros de construción del terreno*:<input id = 'ancho' className = 'form-control' type = 'number' min='4' max='18' step = '0.01' placeholder = 'Ancho en metros de construción del terreno*' required/>
+                            Ancho en metros de construción del terreno*:<input id = 'ancho' className = 'form-control' type = 'number' min='4' max='18' step = '0.1' placeholder = 'Ancho en metros de construción del terreno*' required/>
                         </div>
                         <div className = 'col-lg-4 col-md-6 col-sm-6 col-6 text-center'>
-                            Largo en metros de construción del terreno*<input id = 'largo' className = 'form-control' type = 'number' min='4' max='18' step = '0.01' placeholder = 'Largo en metros de construción del terreno*' required/>
+                            Largo en metros de construción del terreno*<input id = 'largo' className = 'form-control' type = 'number' min='4' max='18' step = '0.1' placeholder = 'Largo en metros de construción del terreno*' required/>
                         </div>
                     </div>
                     <p></p>

@@ -15,7 +15,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 const footerStyle = {
   backgroundColor: "#343A40",
-  fontSize: "20px",
+  fontSize: "15px",
   color: "white",
   borderTop: "1px solid #E7E7E7",
   textAlign: "center",
@@ -23,14 +23,14 @@ const footerStyle = {
   position: "fixed",
   left: "0",
   bottom: "0",
-  height: "60px",
+  height: "120px",
   width: "100%"
 };
 
 const phantomStyle = {
   display: "block",
   padding: "10px",
-  height: "60px",
+  height: "130px",
   width: "100%"
 };
 function Footer({ children }) {
@@ -64,6 +64,13 @@ ReactDOM.render(
               <div className="row text-white justify-content-center">
                 <div className ="col-6">
                   TT2019-B019
+                </div>
+                <div>
+                  Para quejas y sugerencias, envíanos un correo a calculatucasa@gmail.com
+                </div>
+                <br></br>
+                <div>
+                  Los datos personales que obtenga estimatucasa, serán utilizados según la Ley Federal de Transparencia y Acceso a la Información Pública Gubernamental.
                 </div>
                 <div className ="col-6">
                 <a href="/preguntasfrecuentes"><button type="button" className='btn btn-light'>Preguntas frecuentes</button></a>
