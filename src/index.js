@@ -8,6 +8,7 @@ import CambioPassword from './pages/CambioPassword'
 import Arquitecto from './pages/Arquitecto'
 import Proveedor from './pages/Proveedor'
 import Administrador from './pages/Administrador'
+import Terminos from './pages/Terminos'
 import 'bootstrap/dist/css/bootstrap.css'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import PreguntasFrecuentes from './pages/PreguntasFrecuentes'
@@ -58,6 +59,7 @@ ReactDOM.render(
                 <Route component = {Proveedor} exact path = '/Proveedor/:id' />
                 <Route component = {Administrador} exact path = '/Administrador/:id'/>
                 <Route component = {PreguntasFrecuentes} exact path = '/preguntasfrecuentes'/>
+                <Route component ={Terminos} exact path='/terminos'/>
             </Switch> 
             
             <Footer>
@@ -66,14 +68,13 @@ ReactDOM.render(
                   TT2019-B019
                 </div>
                 <div>
-                  Para quejas y sugerencias, envíanos un correo a calculatucasa@gmail.com
-                </div>
-                <br></br>
-                <div>
-                  Los datos personales que obtenga estimatucasa, serán utilizados según la Ley Federal de Transparencia y Acceso a la Información Pública Gubernamental.
+                  Para quejas y sugerencias, envíanos un correo a estimatucasa@gmail.com
                 </div>
                 <div className ="col-6">
                 <a href="/preguntasfrecuentes"><button type="button" className='btn btn-light'>Preguntas frecuentes</button></a>
+                </div>
+                <div>
+                <a href="/terminos"><button type="button" className='btn btn-light'>Términos y condiciones</button></a>
                 </div>
               </div>
             </Footer>
